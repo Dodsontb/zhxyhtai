@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.dao.WhetherAccomplishMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.WhetherAccomplish">
+    <id column="Ljx_Wid" jdbcType="INTEGER" property="ljxWid" />
+    <result column="Ljx_Tid" jdbcType="INTEGER" property="ljxTid" />
+    <result column="Ljx_Yesno" jdbcType="CHAR" property="ljxYesno" />
+    <result column="Ljx_Uid" jdbcType="INTEGER" property="ljxUid" />
+    <result column="Ljx_Date" jdbcType="TIMESTAMP" property="ljxDate" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Ljx_Wid, Ljx_Tid, Ljx_Yesno, Ljx_Uid, Ljx_Date, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from whether_accomplish
+    where Ljx_Wid = #{ljxWid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from whether_accomplish
+    where Ljx_Wid = #{ljxWid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.WhetherAccomplish">
+    insert into whether_accomplish (Ljx_Wid, Ljx_Tid, Ljx_Yesno, 
+      Ljx_Uid, Ljx_Date, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{ljxWid,jdbcType=INTEGER}, #{ljxTid,jdbcType=INTEGER}, #{ljxYesno,jdbcType=CHAR}, 
+      #{ljxUid,jdbcType=INTEGER}, #{ljxDate,jdbcType=TIMESTAMP}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.WhetherAccomplish">
+    insert into whether_accomplish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ljxWid != null">
+        Ljx_Wid,
+      </if>
+      <if test="ljxTid != null">
+        Ljx_Tid,
+      </if>
+      <if test="ljxYesno != null">
+        Ljx_Yesno,
+      </if>
+      <if test="ljxUid != null">
+        Ljx_Uid,
+      </if>
+      <if test="ljxDate != null">
+        Ljx_Date,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ljxWid != null">
+        #{ljxWid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxTid != null">
+        #{ljxTid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxYesno != null">
+        #{ljxYesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxUid != null">
+        #{ljxUid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxDate != null">
+        #{ljxDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.WhetherAccomplish">
+    update whether_accomplish
+    <set>
+      <if test="ljxTid != null">
+        Ljx_Tid = #{ljxTid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxYesno != null">
+        Ljx_Yesno = #{ljxYesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxUid != null">
+        Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxDate != null">
+        Ljx_Date = #{ljxDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Ljx_Wid = #{ljxWid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.WhetherAccomplish">
+    update whether_accomplish
+    set Ljx_Tid = #{ljxTid,jdbcType=INTEGER},
+      Ljx_Yesno = #{ljxYesno,jdbcType=CHAR},
+      Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
+      Ljx_Date = #{ljxDate,jdbcType=TIMESTAMP},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where Ljx_Wid = #{ljxWid,jdbcType=INTEGER}
+  </update>
+</mapper>

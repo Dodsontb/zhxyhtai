@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.dao.CpUserMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.CpUser">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="roleid" jdbcType="INTEGER" property="roleid" />
+    <result column="usertypeid" jdbcType="INTEGER" property="usertypeid" />
+    <result column="usertypenub" jdbcType="INTEGER" property="usertypenub" />
+    <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="modificationtime" jdbcType="TIMESTAMP" property="modificationtime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, password, roleid, usertypeid, usertypenub, creationtime, modificationtime, 
+    status, uid, remark, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cp_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cp_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.CpUser">
+    insert into cp_user (userid, username, password, 
+      roleid, usertypeid, usertypenub, 
+      creationtime, modificationtime, status, 
+      uid, remark, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{roleid,jdbcType=INTEGER}, #{usertypeid,jdbcType=INTEGER}, #{usertypenub,jdbcType=INTEGER}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{modificationtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.CpUser">
+    insert into cp_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="usertypeid != null">
+        usertypeid,
+      </if>
+      <if test="usertypenub != null">
+        usertypenub,
+      </if>
+      <if test="creationtime != null">
+        creationtime,
+      </if>
+      <if test="modificationtime != null">
+        modificationtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="usertypeid != null">
+        #{usertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="usertypenub != null">
+        #{usertypenub,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modificationtime != null">
+        #{modificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.CpUser">
+    update cp_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        roleid = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="usertypeid != null">
+        usertypeid = #{usertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="usertypenub != null">
+        usertypenub = #{usertypenub,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null">
+        creationtime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modificationtime != null">
+        modificationtime = #{modificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.CpUser">
+    update cp_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      roleid = #{roleid,jdbcType=INTEGER},
+      usertypeid = #{usertypeid,jdbcType=INTEGER},
+      usertypenub = #{usertypenub,jdbcType=INTEGER},
+      creationtime = #{creationtime,jdbcType=TIMESTAMP},
+      modificationtime = #{modificationtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

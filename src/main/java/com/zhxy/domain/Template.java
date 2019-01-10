@@ -1,0 +1,165 @@
+package com.zhxy.domain;
+
+import java.util.Date;
+
+public class Template {
+    private Integer id;
+
+    private String name;
+
+    private Integer total;
+
+    private Integer softtypeid;
+
+    private Integer cquestionid;
+
+    private Integer yquestionid;
+
+    private Integer tquestionid;
+
+    private Date start;
+
+    private Integer uid;
+
+    private Date end;
+
+    private Date creation;
+
+    private String name1;
+
+    private String name2;
+
+    private String name3;
+
+    private String name4;
+
+    private String name5;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getSofttypeid() {
+        return softtypeid;
+    }
+
+    public void setSofttypeid(Integer softtypeid) {
+        this.softtypeid = softtypeid;
+    }
+
+    public Integer getCquestionid() {
+        return cquestionid;
+    }
+
+    public void setCquestionid(Integer cquestionid) {
+        this.cquestionid = cquestionid;
+    }
+
+    public Integer getYquestionid() {
+        return yquestionid;
+    }
+
+    public void setYquestionid(Integer yquestionid) {
+        this.yquestionid = yquestionid;
+    }
+
+    public Integer getTquestionid() {
+        return tquestionid;
+    }
+
+    public void setTquestionid(Integer tquestionid) {
+        this.tquestionid = tquestionid;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Date getCreation() {
+        return creation;
+    }
+
+    public void setCreation(Date creation) {
+        this.creation = creation;
+    }
+
+    public String getName1() {
+        return name1;
+    }
+
+    public void setName1(String name1) {
+        this.name1 = name1;
+    }
+
+    public String getName2() {
+        return name2;
+    }
+
+    public void setName2(String name2) {
+        this.name2 = name2;
+    }
+
+    public String getName3() {
+        return name3;
+    }
+
+    public void setName3(String name3) {
+        this.name3 = name3;
+    }
+
+    public String getName4() {
+        return name4;
+    }
+
+    public void setName4(String name4) {
+        this.name4 = name4;
+    }
+
+    public String getName5() {
+        return name5;
+    }
+
+    public void setName5(String name5) {
+        this.name5 = name5;
+    }
+}

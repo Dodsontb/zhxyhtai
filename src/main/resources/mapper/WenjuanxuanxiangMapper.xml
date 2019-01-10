@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.dao.WenjuanxuanxiangMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.Wenjuanxuanxiang">
+    <result column="wenjuanID" jdbcType="INTEGER" property="wenjuanid" />
+    <result column="Xuanxiang" jdbcType="VARCHAR" property="xuanxiang" />
+    <result column="wenjuanTimuID" jdbcType="INTEGER" property="wenjuantimuid" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zhxy.domain.Wenjuanxuanxiang">
+    insert into wenjuanxuanxiang (wenjuanID, Xuanxiang, wenjuanTimuID, 
+      score, name1, name2, 
+      name3, name4, name5
+      )
+    values (#{wenjuanid,jdbcType=INTEGER}, #{xuanxiang,jdbcType=VARCHAR}, #{wenjuantimuid,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.Wenjuanxuanxiang">
+    insert into wenjuanxuanxiang
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wenjuanid != null">
+        wenjuanID,
+      </if>
+      <if test="xuanxiang != null">
+        Xuanxiang,
+      </if>
+      <if test="wenjuantimuid != null">
+        wenjuanTimuID,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wenjuanid != null">
+        #{wenjuanid,jdbcType=INTEGER},
+      </if>
+      <if test="xuanxiang != null">
+        #{xuanxiang,jdbcType=VARCHAR},
+      </if>
+      <if test="wenjuantimuid != null">
+        #{wenjuantimuid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
