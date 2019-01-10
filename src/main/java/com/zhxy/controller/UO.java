@@ -17,5 +17,7 @@ public class UO {
 	@ResponseBody
 	public String bbb() {
 		return "{'a':'123'}";
+		
+		
 	}
 }
