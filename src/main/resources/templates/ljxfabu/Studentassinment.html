@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content=""
+        />
+        <meta name="keywords" content=""
+        />
+        <meta name="application-name" content="sprFlat admin template" />
+        <!-- Import google fonts - Heading first/ text second -->
+        <link rel='stylesheet' type='text/css' 
+        <!--[if lt IE 9]>
+
+<![endif]-->
+        <!-- Css files -->
+        <!-- Icons -->
+        <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+        <meta name="msapplication-TileColor" content="#3399cc" />
+		<style type="text/css">
+			.ljxul{
+				list-style: none;
+				margin-left: 400px;
+			}
+			.ljxul li{
+				float: left;
+				margin-left: 30px;
+			}
+			
+		</style>
+    </head>
+    <body>
+       
+        <div id="content">
+        	<!-- Start .content-wrapper -->
+        	<div class="content-wrapper">
+        		<div class="row">
+        			<!-- Start .row -->
+        			<!-- Start .page-header -->
+        			<div class="col-lg-12 heading">
+        					<h1 class="page-header"><i class="ec-archive"></i> 我的任务</h1>
+        					<!-- Start .bredcrumb -->
+        					<ul  class="breadcrumb">
+        					</ul>
+        					<!-- End .breadcrumb -->
+        					<!-- Start .option-buttons -->
+        					<div class="option-buttons">
+        							<div class="btn-toolbar" role="toolbar">
+        							</div>
+        					</div>
+        					<!-- End .option-buttons -->
+        			</div>
+        			<!-- End .page-header -->
+        		</div>
+        		<!-- End .row -->
+        		<div class="outlet">
+        			<!-- Start .outlet -->
+        			<!-- Page start here -->
+        			<div id="email-sidebar">
+        				<!-- Start #email-sidebar -->
+        				<div class="p15">
+        						<a id="write-email"  class="btn btn-danger btn-block uppercase"><i class="im-quill"></i>今日任务</a>
+        						
+        				</div>
+        				<ul id="sideNav" class="nav nav-pills nav-stacked">
+							<li class="top-search">
+								
+							</li>
+							<li><a href="#" class="zhi">执行任务</a>
+							</li>
+							<li><a href="#" class="zhi">已完成任务</a>
+							</li>
+							<li><a href="#" class="zhi">未完成任务</a>
+							</li>
+							<li><a href="#" class="zhi">推迟任务</a>
+							</li>
+						</ul>
+        			</div>
+        			<!--End #email-sidebar -->
+        			<div id="email-content" style="">
+						<!-- Start #email-content -->
+						<div class="email-wrapper">
+							<div class="btn-group" data-toggle="buttons" style="margin-left: 420px;">
+							  <label class="btn btn-primary active">
+								<input type="radio" name="options" id="option1" autocomplete="off" value="1" checked="true"> 考试任务
+							  </label>
+							  <label class="btn btn-primary">
+								<input type="radio" name="options" id="option2" autocomplete="off"> 作业任务
+							  </label>
+							  <label class="btn btn-primary">
+								<input type="radio" name="options" id="option3" autocomplete="off"> 机试任务
+							  </label>
+							</div>
+							
+							<div class="email-toolbar-search col-lg-12" id ="b" style="border: 1px gainsboro solid;height: 500px;margin-top: 30px;">
+								<div v-for="(b,index) in list"><!-- th:each="list:${list}"  -->
+									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;">
+										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">{{b.ljxTitle}}</div><!-- th:text="${list.Ljx_Title}" -->
+										<div style="margin-left: 450px;">
+											<a >立即执行</a>
+											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal">推迟任务</a>
+										</div>
+									</div>
+								</div>
+								
+								<div>
+									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;">
+										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">标题accp8.0,S1综合测试</div>
+										<div style="margin-left: 450px;">
+											<a >立即执行</a>
+											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal">推迟任务</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+        			</div>
+        			<!--End #email-content -->
+        			<!-- Page End here -->
+        		</div>
+        		<!-- End .outlet -->
+        	</div>
+        	<!-- End .content-wrapper -->
+        	<div class="clearfix"></div>
+        </div>
+		</div>
+		</div>
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">任务推迟</h4>
+				</div>
+				<div class="modal-body">
+					<div style="width: 280px;margin-left: 150px;">
+						任务标题：<input type="text" class="ljxtow"/></br>
+						
+						<h5>推迟理由：</h5><textarea style="width: 250px; height: 100px;"></textarea>
+						<input type="date" name="" id="" value="" /><span style="margin-left: 50px;">(结束时间)</span><input type="date" name="" id="" value="" style="margin-top: 20px;"/><span style="margin-left: 50px;">(推迟时间)<span>
+					</div>
+					
+				</div>
+				
+				<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">提交</button>
+				</div>
+			</div>
+			</div>
+		</div>
+        
+        <!-- End #content -->
+        <!-- Javascripts -->
+        <!-- Load pace first -->
+        <script src="assets/plugins/core/pace/pace.min.js"></script>
+        <!-- Important javascript libs(put in all pages) -->
+        <script src="assets/js/jquery-1.8.3.min.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        <script src="assets/js/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>
+        <!--[if lt IE 9]>
+		  <script type="text/javascript" src="assets/js/libs/excanvas.min.js"></script>
+		  <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		  <script type="text/javascript" src="assets/js/libs/respond.min.js"></script>
+		<![endif]-->
+        <!-- Bootstrap plugins -->
+        <script src="assets/js/bootstrap/bootstrap.js"></script>
+        <!-- Core plugins ( not remove ever) -->
+        <!-- Handle responsive view functions -->
+        <script src="assets/js/jRespond.min.js"></script>
+        <!-- Custom scroll for sidebars,tables and etc. -->
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+        <!-- Resize text area in most pages -->
+        <script src="assets/plugins/forms/autosize/jquery.autosize.js"></script>
+        <!-- Proivde quick search for many widgets -->
+        <script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+        <!-- Bootbox confirm dialog for reset postion on panels -->
+        <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
+        <!-- Other plugins ( load only nessesary plugins for every page) -->
+        <script src="assets/plugins/charts/flot/jquery.flot.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.pie.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.resize.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.time.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.growraf.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.categories.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.stack.js"></script>
+        <script src="assets/plugins/charts/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="assets/plugins/charts/flot/date.js"></script>
+        <script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
+        <script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
+        <script src="assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
+        <script src="assets/plugins/forms/tinymce/tinymce.min.js"></script>
+        <script src="assets/plugins/misc/highlight/highlight.pack.js"></script>
+        <script src="assets/plugins/misc/countTo/jquery.countTo.js"></script>
+        <script src="assets/plugins/ui/weather/skyicons.js"></script>
+        <script src="assets/plugins/ui/notify/jquery.gritter.js"></script>
+        <script src="assets/plugins/ui/calendar/fullcalendar.js"></script>
+        <script src="assets/js/jquery.sprFlat.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/pages/dashboard.js"></script>
+        <script src="assets/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+			var v = new Vue({
+				el:"#b",
+				data:{
+					list:null
+				}
+			});
+			$.ajax({
+				url:"query",
+				type:"get",
+				async:true,
+				success:function(date){
+					alert(JSON.stringify(date))
+					v.list = date;
+				}
+			})
+		})
+		
+		
+		$("#option1").click(function(){
+		   
+		    alert(yy);
+		});
+		$(".zhi").click(function(){
+			var sum = 0;
+			var j = $(this).html();
+			if(j=="已完成任务"){
+				sum=1;
+			}
+			if(j=="未完成任务"){
+				sum=2;
+			}
+			if(j=="推迟任务"){
+				sum=3;
+			}
+			alert("来了老弟！！！！！！"+j);
+			alert(sum)
+			$.ajax({
+				url:"query",
+				type:"get",
+				date:"",
+				async:true,
+				success:function(date){
+					alert(JSON.stringify(date))
+					v.list = date;
+				}
+			})
+		})
+		</script>
+    </body>
+</html>
