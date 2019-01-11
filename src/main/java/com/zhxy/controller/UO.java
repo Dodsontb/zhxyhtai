@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("UO")
+@RequestMapping("/UO")
 public class UO {
 
 	@RequestMapping("/aaa")
 	public String aaa() {
-		return "index";
+		return "write";
 	}
 	
 	@RequestMapping("/bbb")
