@@ -14,4 +14,5 @@ public interface StudentassignmentMapper {
     int updateByPrimaryKeySelective(Studentassignment record);
 
     int updateByPrimaryKey(Studentassignment record);
+    
 }
