@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.dao.MessageReceptionMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.MessageReception">
+    <id column="reception_Id" jdbcType="INTEGER" property="receptionId" />
+    <result column="Uid" jdbcType="INTEGER" property="uid" />
+    <result column="Reading" jdbcType="INTEGER" property="reading" />
+    <result column="Read-time" jdbcType="TIMESTAMP" property="readTime" />
+    <result column="Message_Id" jdbcType="INTEGER" property="messageId" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    reception_Id, Uid, Reading, Read-time, Message_Id, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from message_reception
+    where reception_Id = #{receptionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message_reception
+    where reception_Id = #{receptionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.MessageReception">
+    insert into message_reception (reception_Id, Uid, Reading, 
+      Read-time, Message_Id, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{receptionId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{reading,jdbcType=INTEGER}, 
+      #{readTime,jdbcType=TIMESTAMP}, #{messageId,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.MessageReception">
+    insert into message_reception
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="receptionId != null">
+        reception_Id,
+      </if>
+      <if test="uid != null">
+        Uid,
+      </if>
+      <if test="reading != null">
+        Reading,
+      </if>
+      <if test="readTime != null">
+        Read-time,
+      </if>
+      <if test="messageId != null">
+        Message_Id,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="receptionId != null">
+        #{receptionId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="reading != null">
+        #{reading,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        #{readTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.MessageReception">
+    update message_reception
+    <set>
+      <if test="uid != null">
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="reading != null">
+        Reading = #{reading,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        Read-time = #{readTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageId != null">
+        Message_Id = #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where reception_Id = #{receptionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.MessageReception">
+    update message_reception
+    set Uid = #{uid,jdbcType=INTEGER},
+      Reading = #{reading,jdbcType=INTEGER},
+      Read-time = #{readTime,jdbcType=TIMESTAMP},
+      Message_Id = #{messageId,jdbcType=INTEGER},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where reception_Id = #{receptionId,jdbcType=INTEGER}
+  </update>
+</mapper>

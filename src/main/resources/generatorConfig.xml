@@ -38,15 +38,15 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		<table schema="classs" tableName="classs" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-		</table>
 		<table schema="class_calendar" tableName="class_calendar" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 		<table schema="classroom" tableName="classroom" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="classs" tableName="classs" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
@@ -118,11 +118,11 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		<table schema="event" tableName="event" enableCountByExample="false"
+		<table schema="event_teacher" tableName="event_teacher" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		<table schema="event_teacher" tableName="event_teacher" enableCountByExample="false"
+		<table schema="events" tableName="events" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
@@ -143,6 +143,42 @@
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 		<table schema="major" tableName="major" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="message" tableName="message" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="message_reception" tableName="message_reception" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="message_type" tableName="message_type" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="messageimg" tableName="messageimg" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="notice" tableName="notice" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="notice _relation" tableName="notice _relation" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="notice_ affix" tableName="notice_ affix" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="noticeimg" tableName="noticeimg" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="noticetype" tableName="noticetype" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
@@ -234,6 +270,10 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
+		<table schema="version_info" tableName="version_info" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
 		<table schema="versions" tableName="versions" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
@@ -282,10 +322,6 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		<table schema="version_info" tableName="version_info" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-		</table>
-
+		
 	</context>
 </generatorConfiguration>

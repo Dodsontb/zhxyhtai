@@ -1,13 +1,17 @@
 package com.zhxy.domain;
 
-public class Event {
-    private Integer id;
+import java.util.Date;
 
-    private String content;
+public class MessageReception {
+    private Integer receptionId;
 
-    private Integer rid;
+    private Integer uid;
 
-    private Boolean great;
+    private Integer reading;
+
+    private Date readTime;
+
+    private Integer messageId;
 
     private String name1;
 
@@ -19,36 +23,44 @@ public class Event {
 
     private String name5;
 
-    public Integer getId() {
-        return id;
+    public Integer getReceptionId() {
+        return receptionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setReceptionId(Integer receptionId) {
+        this.receptionId = receptionId;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public Integer getRid() {
-        return rid;
+    public Integer getReading() {
+        return reading;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setReading(Integer reading) {
+        this.reading = reading;
     }
 
-    public Boolean getGreat() {
-        return great;
+    public Date getReadTime() {
+        return readTime;
     }
 
-    public void setGreat(Boolean great) {
-        this.great = great;
+    public void setReadTime(Date readTime) {
+        this.readTime = readTime;
+    }
+
+    public Integer getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
     }
 
     public String getName1() {
