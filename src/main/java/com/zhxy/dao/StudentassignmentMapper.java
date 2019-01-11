@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Studentassignment;
 
 public interface StudentassignmentMapper {
@@ -15,4 +17,5 @@ public interface StudentassignmentMapper {
 
     int updateByPrimaryKey(Studentassignment record);
     
+    List<Studentassignment> stuquery();
 }
