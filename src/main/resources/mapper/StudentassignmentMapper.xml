@@ -220,4 +220,8 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where Ljx_Tid = #{ljxTid,jdbcType=INTEGER}
   </update>
+  
+  <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
+		select * from studentassignment
+  </select>
 </mapper>

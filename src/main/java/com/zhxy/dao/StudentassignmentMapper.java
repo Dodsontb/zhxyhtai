@@ -2,8 +2,11 @@ package com.zhxy.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.zhxy.domain.Studentassignment;
 
+@Mapper
 public interface StudentassignmentMapper {
     int deleteByPrimaryKey(Integer ljxTid);
 

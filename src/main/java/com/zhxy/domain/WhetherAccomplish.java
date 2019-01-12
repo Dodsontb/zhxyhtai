@@ -1,6 +1,7 @@
 package com.zhxy.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class WhetherAccomplish {
     private Integer ljxWid;
@@ -22,6 +23,8 @@ public class WhetherAccomplish {
     private String name4;
 
     private String name5;
+    
+    private List<Studentassignment> stulist;
 
     public Integer getLjxWid() {
         return ljxWid;
@@ -102,4 +105,12 @@ public class WhetherAccomplish {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+	public List<Studentassignment> getStulist() {
+		return stulist;
+	}
+
+	public void setStulist(List<Studentassignment> stulist) {
+		this.stulist = stulist;
+	}
 }

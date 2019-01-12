@@ -149,4 +149,19 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where Ljx_Wid = #{ljxWid,jdbcType=INTEGER}
   </update>
+  
+  <select id="whether" resultMap="whetherone">
+  		SELECT * FROM whether_accomplish where ljxUid=1 AND ljxYesno='否'
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone">
+  		<id property="ljxWid" column="ljxWid"/>
+  		<result property="ljxTid" column="ljxTid"/>
+  		<result property="ljxYesno" column="ljxYesno"/>
+  		<result property="ljxUid" column="ljxUid"/>
+  		<result property="ljxDate" column="ljxDate"/>
+  		
+  		<collection property="stulist" column="ljxTid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.dao.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>
 </mapper>
