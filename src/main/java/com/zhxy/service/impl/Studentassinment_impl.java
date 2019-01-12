@@ -17,7 +17,7 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	@Override
 	public List<Studentassignment> stuquery() {
 		
-		return mapper.stuquery();
+		return null;
 	}
 
 }
