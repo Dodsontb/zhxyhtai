@@ -28,7 +28,7 @@ public class StudentassinmentController {
 		return "ljxfabu/Studentassinment";
 	}
 	
-	@RequestMapping("/query")
+	/*@RequestMapping("/query")
 	@ResponseBody
 	public List<Studentassignment> stuquery() {
 		List<Studentassignment> list = ser.stuquery();
@@ -37,5 +37,5 @@ public class StudentassinmentController {
 		}
 		System.out.println(list);
 		return list;
-	}
+	}*/
 }
