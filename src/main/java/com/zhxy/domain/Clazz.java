@@ -41,6 +41,8 @@ public class Clazz {
 
     private String name5;
 
+    private Grade grades;
+    
     public Integer getId() {
         return id;
     }
@@ -192,4 +194,14 @@ public class Clazz {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+	public Grade getGrades() {
+		return grades;
+	}
+
+	public void setGrades(Grade grades) {
+		this.grades = grades;
+	}
+    
+    
 }
