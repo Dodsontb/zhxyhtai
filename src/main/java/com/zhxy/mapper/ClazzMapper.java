@@ -9,6 +9,11 @@ import org.apache.ibatis.annotations.Param;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.People;
 
+/**
+ * 
+ * @author 晨曦
+ *
+ */
 @Mapper
 public interface ClazzMapper {
 
@@ -23,4 +28,12 @@ public interface ClazzMapper {
 	List<Clazz> queryClazz(People people);
 	
 	List<Clazz> clazz(@Param("ids")List<Integer> id,@Param("grade")Integer grade);
+	
+	/**
+	 *  根据消息ID查询有哪些班级
+	 * @param id
+	 * @return 班级集合
+	 */
+	List<Clazz> queryClazzByNotice(int id);
+	
 }

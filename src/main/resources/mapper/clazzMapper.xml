@@ -74,4 +74,9 @@
 			</if>
 		</where>
 	</select>
+	<select id="queryClazzByNotice" resultMap="clazz">
+		select *
+		from clazz
+		where id in (select cid from notice_relation where Notice_Id=#{id})		
+	</select>
 </mapper>
