@@ -6,9 +6,9 @@
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="total" jdbcType="INTEGER" property="total" />
     <result column="softtypeid" jdbcType="INTEGER" property="softtypeid" />
-    <result column="cquestionid" jdbcType="INTEGER" property="cquestionid" />
-    <result column="yquestionid" jdbcType="INTEGER" property="yquestionid" />
-    <result column="tquestionid" jdbcType="INTEGER" property="tquestionid" />
+    <result column="cquestionid" jdbcType="VARCHAR" property="cquestionid" />
+    <result column="yquestionid" jdbcType="VARCHAR" property="yquestionid" />
+    <result column="tquestionid" jdbcType="VARCHAR" property="tquestionid" />
     <result column="start" jdbcType="TIMESTAMP" property="start" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="end" jdbcType="TIMESTAMP" property="end" />
@@ -41,8 +41,8 @@
       name2, name3, name4, 
       name5)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, 
-      #{softtypeid,jdbcType=INTEGER}, #{cquestionid,jdbcType=INTEGER}, #{yquestionid,jdbcType=INTEGER}, 
-      #{tquestionid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, 
+      #{softtypeid,jdbcType=INTEGER}, #{cquestionid,jdbcType=VARCHAR}, #{yquestionid,jdbcType=VARCHAR}, 
+      #{tquestionid,jdbcType=VARCHAR}, #{start,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, 
       #{end,jdbcType=TIMESTAMP}, #{creation,jdbcType=TIMESTAMP}, #{name1,jdbcType=VARCHAR}, 
       #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
       #{name5,jdbcType=VARCHAR})
@@ -113,13 +113,13 @@
         #{softtypeid,jdbcType=INTEGER},
       </if>
       <if test="cquestionid != null">
-        #{cquestionid,jdbcType=INTEGER},
+        #{cquestionid,jdbcType=VARCHAR},
       </if>
       <if test="yquestionid != null">
-        #{yquestionid,jdbcType=INTEGER},
+        #{yquestionid,jdbcType=VARCHAR},
       </if>
       <if test="tquestionid != null">
-        #{tquestionid,jdbcType=INTEGER},
+        #{tquestionid,jdbcType=VARCHAR},
       </if>
       <if test="start != null">
         #{start,jdbcType=TIMESTAMP},
@@ -163,13 +163,13 @@
         softtypeid = #{softtypeid,jdbcType=INTEGER},
       </if>
       <if test="cquestionid != null">
-        cquestionid = #{cquestionid,jdbcType=INTEGER},
+        cquestionid = #{cquestionid,jdbcType=VARCHAR},
       </if>
       <if test="yquestionid != null">
-        yquestionid = #{yquestionid,jdbcType=INTEGER},
+        yquestionid = #{yquestionid,jdbcType=VARCHAR},
       </if>
       <if test="tquestionid != null">
-        tquestionid = #{tquestionid,jdbcType=INTEGER},
+        tquestionid = #{tquestionid,jdbcType=VARCHAR},
       </if>
       <if test="start != null">
         start = #{start,jdbcType=TIMESTAMP},
@@ -206,9 +206,9 @@
     set Name = #{name,jdbcType=VARCHAR},
       total = #{total,jdbcType=INTEGER},
       softtypeid = #{softtypeid,jdbcType=INTEGER},
-      cquestionid = #{cquestionid,jdbcType=INTEGER},
-      yquestionid = #{yquestionid,jdbcType=INTEGER},
-      tquestionid = #{tquestionid,jdbcType=INTEGER},
+      cquestionid = #{cquestionid,jdbcType=VARCHAR},
+      yquestionid = #{yquestionid,jdbcType=VARCHAR},
+      tquestionid = #{tquestionid,jdbcType=VARCHAR},
       start = #{start,jdbcType=TIMESTAMP},
       uid = #{uid,jdbcType=INTEGER},
       end = #{end,jdbcType=TIMESTAMP},

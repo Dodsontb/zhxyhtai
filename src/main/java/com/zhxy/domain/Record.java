@@ -11,8 +11,6 @@ public class Record {
 
     private Integer tid;
 
-    private Integer yid;
-
     private String result;
 
     private Integer score;
@@ -67,14 +65,6 @@ public class Record {
 
     public void setTid(Integer tid) {
         this.tid = tid;
-    }
-
-    public Integer getYid() {
-        return yid;
-    }
-
-    public void setYid(Integer yid) {
-        this.yid = yid;
     }
 
     public String getResult() {
