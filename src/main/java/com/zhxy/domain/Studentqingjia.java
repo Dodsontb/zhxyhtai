@@ -15,7 +15,7 @@ public class Studentqingjia {
 
     private Integer qingjiastatus;
 
-    private String yuangongname;
+    private Integer staffid;
 
     private Date date;
 
@@ -77,12 +77,12 @@ public class Studentqingjia {
         this.qingjiastatus = qingjiastatus;
     }
 
-    public String getYuangongname() {
-        return yuangongname;
+    public Integer getStaffid() {
+        return staffid;
     }
 
-    public void setYuangongname(String yuangongname) {
-        this.yuangongname = yuangongname;
+    public void setStaffid(Integer staffid) {
+        this.staffid = staffid;
     }
 
     public Date getDate() {

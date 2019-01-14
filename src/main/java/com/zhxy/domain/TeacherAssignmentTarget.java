@@ -1,11 +1,11 @@
 package com.zhxy.domain;
 
 public class TeacherAssignmentTarget {
-    private Integer ljxId;
+    private Integer ljxid;
 
-    private Integer ljxRid;
+    private Integer ljxrid;
 
-    private Integer ljxUid;
+    private Integer ljxuid;
 
     private String name1;
 
@@ -17,28 +17,28 @@ public class TeacherAssignmentTarget {
 
     private String name5;
 
-    public Integer getLjxId() {
-        return ljxId;
+    public Integer getLjxid() {
+        return ljxid;
     }
 
-    public void setLjxId(Integer ljxId) {
-        this.ljxId = ljxId;
+    public void setLjxid(Integer ljxid) {
+        this.ljxid = ljxid;
     }
 
-    public Integer getLjxRid() {
-        return ljxRid;
+    public Integer getLjxrid() {
+        return ljxrid;
     }
 
-    public void setLjxRid(Integer ljxRid) {
-        this.ljxRid = ljxRid;
+    public void setLjxrid(Integer ljxrid) {
+        this.ljxrid = ljxrid;
     }
 
-    public Integer getLjxUid() {
-        return ljxUid;
+    public Integer getLjxuid() {
+        return ljxuid;
     }
 
-    public void setLjxUid(Integer ljxUid) {
-        this.ljxUid = ljxUid;
+    public void setLjxuid(Integer ljxuid) {
+        this.ljxuid = ljxuid;
     }
 
     public String getName1() {

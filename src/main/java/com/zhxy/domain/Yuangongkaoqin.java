@@ -5,15 +5,13 @@ import java.util.Date;
 public class Yuangongkaoqin {
     private Integer id;
 
-    private Integer yuangongid;
+    private Integer staffid;
 
     private Integer kaoqinstatus;
 
     private Date date;
 
-    private String name1;
-
-    private String name2;
+    private Integer positionid;
 
     private String name3;
 
@@ -29,12 +27,12 @@ public class Yuangongkaoqin {
         this.id = id;
     }
 
-    public Integer getYuangongid() {
-        return yuangongid;
+    public Integer getStaffid() {
+        return staffid;
     }
 
-    public void setYuangongid(Integer yuangongid) {
-        this.yuangongid = yuangongid;
+    public void setStaffid(Integer staffid) {
+        this.staffid = staffid;
     }
 
     public Integer getKaoqinstatus() {
@@ -53,20 +51,12 @@ public class Yuangongkaoqin {
         this.date = date;
     }
 
-    public String getName1() {
-        return name1;
+    public Integer getPositionid() {
+        return positionid;
     }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
+    public void setPositionid(Integer positionid) {
+        this.positionid = positionid;
     }
 
     public String getName3() {

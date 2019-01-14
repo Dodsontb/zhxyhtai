@@ -11,11 +11,9 @@ public class Studentkaoqin {
 
     private Date date;
 
-    private String studentclass;
+    private Integer classid;
 
-    private String name1;
-
-    private String name2;
+    private String staffname;
 
     private String name3;
 
@@ -55,28 +53,20 @@ public class Studentkaoqin {
         this.date = date;
     }
 
-    public String getStudentclass() {
-        return studentclass;
+    public Integer getClassid() {
+        return classid;
     }
 
-    public void setStudentclass(String studentclass) {
-        this.studentclass = studentclass;
+    public void setClassid(Integer classid) {
+        this.classid = classid;
     }
 
-    public String getName1() {
-        return name1;
+    public String getStaffname() {
+        return staffname;
     }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
+    public void setStaffname(String staffname) {
+        this.staffname = staffname;
     }
 
     public String getName3() {

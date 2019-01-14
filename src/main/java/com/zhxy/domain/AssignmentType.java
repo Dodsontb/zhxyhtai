@@ -1,9 +1,9 @@
 package com.zhxy.domain;
 
 public class AssignmentType {
-    private Integer ljxTid;
+    private Integer ljxtid;
 
-    private String ljxTname;
+    private String ljxtname;
 
     private String name1;
 
@@ -15,20 +15,20 @@ public class AssignmentType {
 
     private String name5;
 
-    public Integer getLjxTid() {
-        return ljxTid;
+    public Integer getLjxtid() {
+        return ljxtid;
     }
 
-    public void setLjxTid(Integer ljxTid) {
-        this.ljxTid = ljxTid;
+    public void setLjxtid(Integer ljxtid) {
+        this.ljxtid = ljxtid;
     }
 
-    public String getLjxTname() {
-        return ljxTname;
+    public String getLjxtname() {
+        return ljxtname;
     }
 
-    public void setLjxTname(String ljxTname) {
-        this.ljxTname = ljxTname;
+    public void setLjxtname(String ljxtname) {
+        this.ljxtname = ljxtname;
     }
 
     public String getName1() {

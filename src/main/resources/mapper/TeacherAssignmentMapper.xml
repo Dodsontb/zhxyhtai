@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhxy.dao.TeacherAssignmentMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.TeacherAssignment">
-    <id column="Ljx_Rid" jdbcType="INTEGER" property="ljxRid" />
-    <result column="Ljx_Ttile" jdbcType="VARCHAR" property="ljxTtile" />
-    <result column="Ljx_Content" jdbcType="VARCHAR" property="ljxContent" />
-    <result column="Ljx_Datetime" jdbcType="TIMESTAMP" property="ljxDatetime" />
-    <result column="Ljx_Ftime" jdbcType="TIMESTAMP" property="ljxFtime" />
+    <id column="ljxRid" jdbcType="INTEGER" property="ljxrid" />
+    <result column="ljxTtile" jdbcType="VARCHAR" property="ljxttile" />
+    <result column="ljxContent" jdbcType="VARCHAR" property="ljxcontent" />
+    <result column="ljxDatetime" jdbcType="TIMESTAMP" property="ljxdatetime" />
+    <result column="ljxFtime" jdbcType="TIMESTAMP" property="ljxftime" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
@@ -14,46 +14,46 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Ljx_Rid, Ljx_Ttile, Ljx_Content, Ljx_Datetime, Ljx_Ftime, name1, name2, name3, name4, 
+    ljxRid, ljxTtile, ljxContent, ljxDatetime, ljxFtime, name1, name2, name3, name4, 
     name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from teacher_assignment
-    where Ljx_Rid = #{ljxRid,jdbcType=INTEGER}
+    where ljxRid = #{ljxrid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from teacher_assignment
-    where Ljx_Rid = #{ljxRid,jdbcType=INTEGER}
+    where ljxRid = #{ljxrid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.TeacherAssignment">
-    insert into teacher_assignment (Ljx_Rid, Ljx_Ttile, Ljx_Content, 
-      Ljx_Datetime, Ljx_Ftime, name1, 
+    insert into teacher_assignment (ljxRid, ljxTtile, ljxContent, 
+      ljxDatetime, ljxFtime, name1, 
       name2, name3, name4, 
       name5)
-    values (#{ljxRid,jdbcType=INTEGER}, #{ljxTtile,jdbcType=VARCHAR}, #{ljxContent,jdbcType=VARCHAR}, 
-      #{ljxDatetime,jdbcType=TIMESTAMP}, #{ljxFtime,jdbcType=TIMESTAMP}, #{name1,jdbcType=VARCHAR}, 
+    values (#{ljxrid,jdbcType=INTEGER}, #{ljxttile,jdbcType=VARCHAR}, #{ljxcontent,jdbcType=VARCHAR}, 
+      #{ljxdatetime,jdbcType=TIMESTAMP}, #{ljxftime,jdbcType=TIMESTAMP}, #{name1,jdbcType=VARCHAR}, 
       #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
       #{name5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.TeacherAssignment">
     insert into teacher_assignment
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ljxRid != null">
-        Ljx_Rid,
+      <if test="ljxrid != null">
+        ljxRid,
       </if>
-      <if test="ljxTtile != null">
-        Ljx_Ttile,
+      <if test="ljxttile != null">
+        ljxTtile,
       </if>
-      <if test="ljxContent != null">
-        Ljx_Content,
+      <if test="ljxcontent != null">
+        ljxContent,
       </if>
-      <if test="ljxDatetime != null">
-        Ljx_Datetime,
+      <if test="ljxdatetime != null">
+        ljxDatetime,
       </if>
-      <if test="ljxFtime != null">
-        Ljx_Ftime,
+      <if test="ljxftime != null">
+        ljxFtime,
       </if>
       <if test="name1 != null">
         name1,
@@ -72,20 +72,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ljxRid != null">
-        #{ljxRid,jdbcType=INTEGER},
+      <if test="ljxrid != null">
+        #{ljxrid,jdbcType=INTEGER},
       </if>
-      <if test="ljxTtile != null">
-        #{ljxTtile,jdbcType=VARCHAR},
+      <if test="ljxttile != null">
+        #{ljxttile,jdbcType=VARCHAR},
       </if>
-      <if test="ljxContent != null">
-        #{ljxContent,jdbcType=VARCHAR},
+      <if test="ljxcontent != null">
+        #{ljxcontent,jdbcType=VARCHAR},
       </if>
-      <if test="ljxDatetime != null">
-        #{ljxDatetime,jdbcType=TIMESTAMP},
+      <if test="ljxdatetime != null">
+        #{ljxdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="ljxFtime != null">
-        #{ljxFtime,jdbcType=TIMESTAMP},
+      <if test="ljxftime != null">
+        #{ljxftime,jdbcType=TIMESTAMP},
       </if>
       <if test="name1 != null">
         #{name1,jdbcType=VARCHAR},
@@ -107,17 +107,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.TeacherAssignment">
     update teacher_assignment
     <set>
-      <if test="ljxTtile != null">
-        Ljx_Ttile = #{ljxTtile,jdbcType=VARCHAR},
+      <if test="ljxttile != null">
+        ljxTtile = #{ljxttile,jdbcType=VARCHAR},
       </if>
-      <if test="ljxContent != null">
-        Ljx_Content = #{ljxContent,jdbcType=VARCHAR},
+      <if test="ljxcontent != null">
+        ljxContent = #{ljxcontent,jdbcType=VARCHAR},
       </if>
-      <if test="ljxDatetime != null">
-        Ljx_Datetime = #{ljxDatetime,jdbcType=TIMESTAMP},
+      <if test="ljxdatetime != null">
+        ljxDatetime = #{ljxdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="ljxFtime != null">
-        Ljx_Ftime = #{ljxFtime,jdbcType=TIMESTAMP},
+      <if test="ljxftime != null">
+        ljxFtime = #{ljxftime,jdbcType=TIMESTAMP},
       </if>
       <if test="name1 != null">
         name1 = #{name1,jdbcType=VARCHAR},
@@ -135,19 +135,19 @@
         name5 = #{name5,jdbcType=VARCHAR},
       </if>
     </set>
-    where Ljx_Rid = #{ljxRid,jdbcType=INTEGER}
+    where ljxRid = #{ljxrid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.TeacherAssignment">
     update teacher_assignment
-    set Ljx_Ttile = #{ljxTtile,jdbcType=VARCHAR},
-      Ljx_Content = #{ljxContent,jdbcType=VARCHAR},
-      Ljx_Datetime = #{ljxDatetime,jdbcType=TIMESTAMP},
-      Ljx_Ftime = #{ljxFtime,jdbcType=TIMESTAMP},
+    set ljxTtile = #{ljxttile,jdbcType=VARCHAR},
+      ljxContent = #{ljxcontent,jdbcType=VARCHAR},
+      ljxDatetime = #{ljxdatetime,jdbcType=TIMESTAMP},
+      ljxFtime = #{ljxftime,jdbcType=TIMESTAMP},
       name1 = #{name1,jdbcType=VARCHAR},
       name2 = #{name2,jdbcType=VARCHAR},
       name3 = #{name3,jdbcType=VARCHAR},
       name4 = #{name4,jdbcType=VARCHAR},
       name5 = #{name5,jdbcType=VARCHAR}
-    where Ljx_Rid = #{ljxRid,jdbcType=INTEGER}
+    where ljxRid = #{ljxrid,jdbcType=INTEGER}
   </update>
 </mapper>
