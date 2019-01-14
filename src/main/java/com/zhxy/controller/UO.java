@@ -5,12 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/UO")
 public class UO {
 
-	@RequestMapping("/aaa")
-	public String aaa() {
-		return "write";
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
 	
 	@RequestMapping("/bbb")
