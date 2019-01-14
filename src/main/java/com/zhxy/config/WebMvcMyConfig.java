@@ -35,23 +35,6 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		//.addResourceLocations("file:d:/xx/");
 	}
 	
-	/**
-	 * 普通字符串乱码
-	 * @return
-	 */
-	@Bean
-	public StringHttpMessageConverter stringMessageConverter() {
-		StringHttpMessageConverter msg = new StringHttpMessageConverter(StandardCharsets.UTF_8);
-		return msg;
-	}
-	
-	
-	@Override
-	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(stringMessageConverter());
-		super.configureMessageConverters(converters);
-	}
-	
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 	}	
