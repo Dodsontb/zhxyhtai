@@ -7,7 +7,6 @@
     <result column="templateid" jdbcType="INTEGER" property="templateid" />
     <result column="Sid" jdbcType="INTEGER" property="sid" />
     <result column="tid" jdbcType="INTEGER" property="tid" />
-    <result column="yid" jdbcType="INTEGER" property="yid" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
     <result column="Score" jdbcType="INTEGER" property="score" />
     <result column="Status" jdbcType="INTEGER" property="status" />
@@ -18,7 +17,7 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, cid, templateid, Sid, tid, yid, Result, Score, Status, name1, name2, name3, name4, 
+    id, cid, templateid, Sid, tid, Result, Score, Status, name1, name2, name3, name4, 
     name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -33,15 +32,15 @@
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.Record">
     insert into record (id, cid, templateid, 
-      Sid, tid, yid, Result, 
-      Score, Status, name1, 
-      name2, name3, name4, 
-      name5)
+      Sid, tid, Result, Score, 
+      Status, name1, name2, 
+      name3, name4, name5
+      )
     values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{templateid,jdbcType=INTEGER}, 
-      #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{yid,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, 
-      #{score,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
-      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
-      #{name5,jdbcType=VARCHAR})
+      #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.Record">
     insert into record
@@ -60,9 +59,6 @@
       </if>
       <if test="tid != null">
         tid,
-      </if>
-      <if test="yid != null">
-        yid,
       </if>
       <if test="result != null">
         Result,
@@ -105,9 +101,6 @@
       <if test="tid != null">
         #{tid,jdbcType=INTEGER},
       </if>
-      <if test="yid != null">
-        #{yid,jdbcType=INTEGER},
-      </if>
       <if test="result != null">
         #{result,jdbcType=VARCHAR},
       </if>
@@ -149,9 +142,6 @@
       <if test="tid != null">
         tid = #{tid,jdbcType=INTEGER},
       </if>
-      <if test="yid != null">
-        yid = #{yid,jdbcType=INTEGER},
-      </if>
       <if test="result != null">
         Result = #{result,jdbcType=VARCHAR},
       </if>
@@ -185,7 +175,6 @@
       templateid = #{templateid,jdbcType=INTEGER},
       Sid = #{sid,jdbcType=INTEGER},
       tid = #{tid,jdbcType=INTEGER},
-      yid = #{yid,jdbcType=INTEGER},
       Result = #{result,jdbcType=VARCHAR},
       Score = #{score,jdbcType=INTEGER},
       Status = #{status,jdbcType=INTEGER},

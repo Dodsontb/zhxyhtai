@@ -11,11 +11,11 @@ public class Template {
 
     private Integer softtypeid;
 
-    private Integer cquestionid;
+    private String cquestionid;
 
-    private Integer yquestionid;
+    private String yquestionid;
 
-    private Integer tquestionid;
+    private String tquestionid;
 
     private Date start;
 
@@ -67,27 +67,27 @@ public class Template {
         this.softtypeid = softtypeid;
     }
 
-    public Integer getCquestionid() {
+    public String getCquestionid() {
         return cquestionid;
     }
 
-    public void setCquestionid(Integer cquestionid) {
+    public void setCquestionid(String cquestionid) {
         this.cquestionid = cquestionid;
     }
 
-    public Integer getYquestionid() {
+    public String getYquestionid() {
         return yquestionid;
     }
 
-    public void setYquestionid(Integer yquestionid) {
+    public void setYquestionid(String yquestionid) {
         this.yquestionid = yquestionid;
     }
 
-    public Integer getTquestionid() {
+    public String getTquestionid() {
         return tquestionid;
     }
 
-    public void setTquestionid(Integer tquestionid) {
+    public void setTquestionid(String tquestionid) {
         this.tquestionid = tquestionid;
     }
 
