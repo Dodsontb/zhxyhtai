@@ -3,27 +3,27 @@ package com.zhxy.domain;
 import java.util.Date;
 
 public class Studentassignment {
-    private Integer ljxTid;
+    private Integer ljxtid;
 
-    private String ljxTitle;
+    private String ljxtitle;
 
-    private String ljxClass;
+    private String ljxclass;
 
-    private String ljxClasses;
+    private String ljxclasses;
 
-    private Date ljxDatetime;
+    private Date ljxdatetime;
 
-    private Date ljxDate;
+    private Date ljxdate;
 
-    private Date ljxTime;
+    private Date ljxtime;
 
-    private Integer ljxUid;
+    private Integer ljxuid;
 
-    private Integer ljxType;
+    private Integer ljxtype;
 
-    private String ljxWenjid;
+    private String ljxwenjid;
 
-    private Integer ljxJid;
+    private Integer ljxjid;
 
     private String name1;
 
@@ -35,92 +35,92 @@ public class Studentassignment {
 
     private String name5;
 
-    public Integer getLjxTid() {
-        return ljxTid;
+    public Integer getLjxtid() {
+        return ljxtid;
     }
 
-    public void setLjxTid(Integer ljxTid) {
-        this.ljxTid = ljxTid;
+    public void setLjxtid(Integer ljxtid) {
+        this.ljxtid = ljxtid;
     }
 
-    public String getLjxTitle() {
-        return ljxTitle;
+    public String getLjxtitle() {
+        return ljxtitle;
     }
 
-    public void setLjxTitle(String ljxTitle) {
-        this.ljxTitle = ljxTitle;
+    public void setLjxtitle(String ljxtitle) {
+        this.ljxtitle = ljxtitle;
     }
 
-    public String getLjxClass() {
-        return ljxClass;
+    public String getLjxclass() {
+        return ljxclass;
     }
 
-    public void setLjxClass(String ljxClass) {
-        this.ljxClass = ljxClass;
+    public void setLjxclass(String ljxclass) {
+        this.ljxclass = ljxclass;
     }
 
-    public String getLjxClasses() {
-        return ljxClasses;
+    public String getLjxclasses() {
+        return ljxclasses;
     }
 
-    public void setLjxClasses(String ljxClasses) {
-        this.ljxClasses = ljxClasses;
+    public void setLjxclasses(String ljxclasses) {
+        this.ljxclasses = ljxclasses;
     }
 
-    public Date getLjxDatetime() {
-        return ljxDatetime;
+    public Date getLjxdatetime() {
+        return ljxdatetime;
     }
 
-    public void setLjxDatetime(Date ljxDatetime) {
-        this.ljxDatetime = ljxDatetime;
+    public void setLjxdatetime(Date ljxdatetime) {
+        this.ljxdatetime = ljxdatetime;
     }
 
-    public Date getLjxDate() {
-        return ljxDate;
+    public Date getLjxdate() {
+        return ljxdate;
     }
 
-    public void setLjxDate(Date ljxDate) {
-        this.ljxDate = ljxDate;
+    public void setLjxdate(Date ljxdate) {
+        this.ljxdate = ljxdate;
     }
 
-    public Date getLjxTime() {
-        return ljxTime;
+    public Date getLjxtime() {
+        return ljxtime;
     }
 
-    public void setLjxTime(Date ljxTime) {
-        this.ljxTime = ljxTime;
+    public void setLjxtime(Date ljxtime) {
+        this.ljxtime = ljxtime;
     }
 
-    public Integer getLjxUid() {
-        return ljxUid;
+    public Integer getLjxuid() {
+        return ljxuid;
     }
 
-    public void setLjxUid(Integer ljxUid) {
-        this.ljxUid = ljxUid;
+    public void setLjxuid(Integer ljxuid) {
+        this.ljxuid = ljxuid;
     }
 
-    public Integer getLjxType() {
-        return ljxType;
+    public Integer getLjxtype() {
+        return ljxtype;
     }
 
-    public void setLjxType(Integer ljxType) {
-        this.ljxType = ljxType;
+    public void setLjxtype(Integer ljxtype) {
+        this.ljxtype = ljxtype;
     }
 
-    public String getLjxWenjid() {
-        return ljxWenjid;
+    public String getLjxwenjid() {
+        return ljxwenjid;
     }
 
-    public void setLjxWenjid(String ljxWenjid) {
-        this.ljxWenjid = ljxWenjid;
+    public void setLjxwenjid(String ljxwenjid) {
+        this.ljxwenjid = ljxwenjid;
     }
 
-    public Integer getLjxJid() {
-        return ljxJid;
+    public Integer getLjxjid() {
+        return ljxjid;
     }
 
-    public void setLjxJid(Integer ljxJid) {
-        this.ljxJid = ljxJid;
+    public void setLjxjid(Integer ljxjid) {
+        this.ljxjid = ljxjid;
     }
 
     public String getName1() {

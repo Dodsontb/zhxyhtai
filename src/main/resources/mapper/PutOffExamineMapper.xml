@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhxy.dao.PutOffExamineMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.PutOffExamine">
-    <id column="Ljx_Sid" jdbcType="INTEGER" property="ljxSid" />
-    <result column="Ljx_Tuid" jdbcType="INTEGER" property="ljxTuid" />
-    <result column="Ljx_Yesno" jdbcType="CHAR" property="ljxYesno" />
-    <result column="Ljx_Uname" jdbcType="VARCHAR" property="ljxUname" />
-    <result column="Ljx_Uid" jdbcType="INTEGER" property="ljxUid" />
+    <id column="ljxSid" jdbcType="INTEGER" property="ljxsid" />
+    <result column="ljxTuid" jdbcType="INTEGER" property="ljxtuid" />
+    <result column="ljxYesno" jdbcType="CHAR" property="ljxyesno" />
+    <result column="ljxUname" jdbcType="VARCHAR" property="ljxuname" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
@@ -14,45 +14,45 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Ljx_Sid, Ljx_Tuid, Ljx_Yesno, Ljx_Uname, Ljx_Uid, name1, name2, name3, name4, name5
+    ljxSid, ljxTuid, ljxYesno, ljxUname, ljxUid, name1, name2, name3, name4, name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from put_off_examine
-    where Ljx_Sid = #{ljxSid,jdbcType=INTEGER}
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from put_off_examine
-    where Ljx_Sid = #{ljxSid,jdbcType=INTEGER}
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.PutOffExamine">
-    insert into put_off_examine (Ljx_Sid, Ljx_Tuid, Ljx_Yesno, 
-      Ljx_Uname, Ljx_Uid, name1, 
+    insert into put_off_examine (ljxSid, ljxTuid, ljxYesno, 
+      ljxUname, ljxUid, name1, 
       name2, name3, name4, 
       name5)
-    values (#{ljxSid,jdbcType=INTEGER}, #{ljxTuid,jdbcType=INTEGER}, #{ljxYesno,jdbcType=CHAR}, 
-      #{ljxUname,jdbcType=VARCHAR}, #{ljxUid,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
+    values (#{ljxsid,jdbcType=INTEGER}, #{ljxtuid,jdbcType=INTEGER}, #{ljxyesno,jdbcType=CHAR}, 
+      #{ljxuname,jdbcType=VARCHAR}, #{ljxuid,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
       #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
       #{name5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.PutOffExamine">
     insert into put_off_examine
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ljxSid != null">
-        Ljx_Sid,
+      <if test="ljxsid != null">
+        ljxSid,
       </if>
-      <if test="ljxTuid != null">
-        Ljx_Tuid,
+      <if test="ljxtuid != null">
+        ljxTuid,
       </if>
-      <if test="ljxYesno != null">
-        Ljx_Yesno,
+      <if test="ljxyesno != null">
+        ljxYesno,
       </if>
-      <if test="ljxUname != null">
-        Ljx_Uname,
+      <if test="ljxuname != null">
+        ljxUname,
       </if>
-      <if test="ljxUid != null">
-        Ljx_Uid,
+      <if test="ljxuid != null">
+        ljxUid,
       </if>
       <if test="name1 != null">
         name1,
@@ -71,20 +71,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ljxSid != null">
-        #{ljxSid,jdbcType=INTEGER},
+      <if test="ljxsid != null">
+        #{ljxsid,jdbcType=INTEGER},
       </if>
-      <if test="ljxTuid != null">
-        #{ljxTuid,jdbcType=INTEGER},
+      <if test="ljxtuid != null">
+        #{ljxtuid,jdbcType=INTEGER},
       </if>
-      <if test="ljxYesno != null">
-        #{ljxYesno,jdbcType=CHAR},
+      <if test="ljxyesno != null">
+        #{ljxyesno,jdbcType=CHAR},
       </if>
-      <if test="ljxUname != null">
-        #{ljxUname,jdbcType=VARCHAR},
+      <if test="ljxuname != null">
+        #{ljxuname,jdbcType=VARCHAR},
       </if>
-      <if test="ljxUid != null">
-        #{ljxUid,jdbcType=INTEGER},
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
       </if>
       <if test="name1 != null">
         #{name1,jdbcType=VARCHAR},
@@ -106,17 +106,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.PutOffExamine">
     update put_off_examine
     <set>
-      <if test="ljxTuid != null">
-        Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER},
+      <if test="ljxtuid != null">
+        ljxTuid = #{ljxtuid,jdbcType=INTEGER},
       </if>
-      <if test="ljxYesno != null">
-        Ljx_Yesno = #{ljxYesno,jdbcType=CHAR},
+      <if test="ljxyesno != null">
+        ljxYesno = #{ljxyesno,jdbcType=CHAR},
       </if>
-      <if test="ljxUname != null">
-        Ljx_Uname = #{ljxUname,jdbcType=VARCHAR},
+      <if test="ljxuname != null">
+        ljxUname = #{ljxuname,jdbcType=VARCHAR},
       </if>
-      <if test="ljxUid != null">
-        Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
       </if>
       <if test="name1 != null">
         name1 = #{name1,jdbcType=VARCHAR},
@@ -134,19 +134,19 @@
         name5 = #{name5,jdbcType=VARCHAR},
       </if>
     </set>
-    where Ljx_Sid = #{ljxSid,jdbcType=INTEGER}
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.PutOffExamine">
     update put_off_examine
-    set Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER},
-      Ljx_Yesno = #{ljxYesno,jdbcType=CHAR},
-      Ljx_Uname = #{ljxUname,jdbcType=VARCHAR},
-      Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
+    set ljxTuid = #{ljxtuid,jdbcType=INTEGER},
+      ljxYesno = #{ljxyesno,jdbcType=CHAR},
+      ljxUname = #{ljxuname,jdbcType=VARCHAR},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
       name1 = #{name1,jdbcType=VARCHAR},
       name2 = #{name2,jdbcType=VARCHAR},
       name3 = #{name3,jdbcType=VARCHAR},
       name4 = #{name4,jdbcType=VARCHAR},
       name5 = #{name5,jdbcType=VARCHAR}
-    where Ljx_Sid = #{ljxSid,jdbcType=INTEGER}
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
   </update>
 </mapper>

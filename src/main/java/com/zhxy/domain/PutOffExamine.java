@@ -1,15 +1,15 @@
 package com.zhxy.domain;
 
 public class PutOffExamine {
-    private Integer ljxSid;
+    private Integer ljxsid;
 
-    private Integer ljxTuid;
+    private Integer ljxtuid;
 
-    private String ljxYesno;
+    private String ljxyesno;
 
-    private String ljxUname;
+    private String ljxuname;
 
-    private Integer ljxUid;
+    private Integer ljxuid;
 
     private String name1;
 
@@ -21,44 +21,44 @@ public class PutOffExamine {
 
     private String name5;
 
-    public Integer getLjxSid() {
-        return ljxSid;
+    public Integer getLjxsid() {
+        return ljxsid;
     }
 
-    public void setLjxSid(Integer ljxSid) {
-        this.ljxSid = ljxSid;
+    public void setLjxsid(Integer ljxsid) {
+        this.ljxsid = ljxsid;
     }
 
-    public Integer getLjxTuid() {
-        return ljxTuid;
+    public Integer getLjxtuid() {
+        return ljxtuid;
     }
 
-    public void setLjxTuid(Integer ljxTuid) {
-        this.ljxTuid = ljxTuid;
+    public void setLjxtuid(Integer ljxtuid) {
+        this.ljxtuid = ljxtuid;
     }
 
-    public String getLjxYesno() {
-        return ljxYesno;
+    public String getLjxyesno() {
+        return ljxyesno;
     }
 
-    public void setLjxYesno(String ljxYesno) {
-        this.ljxYesno = ljxYesno;
+    public void setLjxyesno(String ljxyesno) {
+        this.ljxyesno = ljxyesno;
     }
 
-    public String getLjxUname() {
-        return ljxUname;
+    public String getLjxuname() {
+        return ljxuname;
     }
 
-    public void setLjxUname(String ljxUname) {
-        this.ljxUname = ljxUname;
+    public void setLjxuname(String ljxuname) {
+        this.ljxuname = ljxuname;
     }
 
-    public Integer getLjxUid() {
-        return ljxUid;
+    public Integer getLjxuid() {
+        return ljxuid;
     }
 
-    public void setLjxUid(Integer ljxUid) {
-        this.ljxUid = ljxUid;
+    public void setLjxuid(Integer ljxuid) {
+        this.ljxuid = ljxuid;
     }
 
     public String getName1() {

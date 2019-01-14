@@ -5,9 +5,9 @@ import java.util.Date;
 public class Yuangongqingjia {
     private Integer id;
 
-    private Integer yuangongid;
+    private Integer staffid;
 
-    private String yuangongname;
+    private String staffname;
 
     private String qingjiareason;
 
@@ -35,20 +35,20 @@ public class Yuangongqingjia {
         this.id = id;
     }
 
-    public Integer getYuangongid() {
-        return yuangongid;
+    public Integer getStaffid() {
+        return staffid;
     }
 
-    public void setYuangongid(Integer yuangongid) {
-        this.yuangongid = yuangongid;
+    public void setStaffid(Integer staffid) {
+        this.staffid = staffid;
     }
 
-    public String getYuangongname() {
-        return yuangongname;
+    public String getStaffname() {
+        return staffname;
     }
 
-    public void setYuangongname(String yuangongname) {
-        this.yuangongname = yuangongname;
+    public void setStaffname(String staffname) {
+        this.staffname = staffname;
     }
 
     public String getQingjiareason() {

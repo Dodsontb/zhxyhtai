@@ -3,19 +3,19 @@ package com.zhxy.domain;
 import java.util.Date;
 
 public class AssignmentPutOff {
-    private Integer ljxTuid;
+    private Integer ljxtuid;
 
-    private Integer ljxTid;
+    private Integer ljxtid;
 
-    private Integer ljxUid;
+    private Integer ljxuid;
 
-    private String ljxClass;
+    private String ljxclass;
 
-    private String ljxClasses;
+    private String ljxclasses;
 
-    private Date ljxTitme;
+    private Date ljxtitme;
 
-    private String ljxContent;
+    private String ljxcontent;
 
     private String name1;
 
@@ -27,60 +27,60 @@ public class AssignmentPutOff {
 
     private String name5;
 
-    public Integer getLjxTuid() {
-        return ljxTuid;
+    public Integer getLjxtuid() {
+        return ljxtuid;
     }
 
-    public void setLjxTuid(Integer ljxTuid) {
-        this.ljxTuid = ljxTuid;
+    public void setLjxtuid(Integer ljxtuid) {
+        this.ljxtuid = ljxtuid;
     }
 
-    public Integer getLjxTid() {
-        return ljxTid;
+    public Integer getLjxtid() {
+        return ljxtid;
     }
 
-    public void setLjxTid(Integer ljxTid) {
-        this.ljxTid = ljxTid;
+    public void setLjxtid(Integer ljxtid) {
+        this.ljxtid = ljxtid;
     }
 
-    public Integer getLjxUid() {
-        return ljxUid;
+    public Integer getLjxuid() {
+        return ljxuid;
     }
 
-    public void setLjxUid(Integer ljxUid) {
-        this.ljxUid = ljxUid;
+    public void setLjxuid(Integer ljxuid) {
+        this.ljxuid = ljxuid;
     }
 
-    public String getLjxClass() {
-        return ljxClass;
+    public String getLjxclass() {
+        return ljxclass;
     }
 
-    public void setLjxClass(String ljxClass) {
-        this.ljxClass = ljxClass;
+    public void setLjxclass(String ljxclass) {
+        this.ljxclass = ljxclass;
     }
 
-    public String getLjxClasses() {
-        return ljxClasses;
+    public String getLjxclasses() {
+        return ljxclasses;
     }
 
-    public void setLjxClasses(String ljxClasses) {
-        this.ljxClasses = ljxClasses;
+    public void setLjxclasses(String ljxclasses) {
+        this.ljxclasses = ljxclasses;
     }
 
-    public Date getLjxTitme() {
-        return ljxTitme;
+    public Date getLjxtitme() {
+        return ljxtitme;
     }
 
-    public void setLjxTitme(Date ljxTitme) {
-        this.ljxTitme = ljxTitme;
+    public void setLjxtitme(Date ljxtitme) {
+        this.ljxtitme = ljxtitme;
     }
 
-    public String getLjxContent() {
-        return ljxContent;
+    public String getLjxcontent() {
+        return ljxcontent;
     }
 
-    public void setLjxContent(String ljxContent) {
-        this.ljxContent = ljxContent;
+    public void setLjxcontent(String ljxcontent) {
+        this.ljxcontent = ljxcontent;
     }
 
     public String getName1() {

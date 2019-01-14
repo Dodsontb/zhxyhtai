@@ -13,7 +13,7 @@ public class Studentfangtan {
 
     private Date date;
 
-    private String name1;
+    private Integer staffid;
 
     private String name2;
 
@@ -63,12 +63,12 @@ public class Studentfangtan {
         this.date = date;
     }
 
-    public String getName1() {
-        return name1;
+    public Integer getStaffid() {
+        return staffid;
     }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
+    public void setStaffid(Integer staffid) {
+        this.staffid = staffid;
     }
 
     public String getName2() {

@@ -3,17 +3,16 @@
 <mapper namespace="com.zhxy.dao.YuangongkaoqinMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Yuangongkaoqin">
     <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="yuangongID" jdbcType="INTEGER" property="yuangongid" />
+    <result column="staffid" jdbcType="INTEGER" property="staffid" />
     <result column="kaoqinstatus" jdbcType="INTEGER" property="kaoqinstatus" />
     <result column="Date" jdbcType="DATE" property="date" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="positionid" jdbcType="INTEGER" property="positionid" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, yuangongID, kaoqinstatus, Date, name1, name2, name3, name4, name5
+    ID, staffid, kaoqinstatus, Date, positionid, name3, name4, name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,11 +25,11 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.Yuangongkaoqin">
-    insert into yuangongkaoqin (ID, yuangongID, kaoqinstatus, 
-      Date, name1, name2, name3, 
+    insert into yuangongkaoqin (ID, staffid, kaoqinstatus, 
+      Date, positionid, name3, 
       name4, name5)
-    values (#{id,jdbcType=INTEGER}, #{yuangongid,jdbcType=INTEGER}, #{kaoqinstatus,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{staffid,jdbcType=INTEGER}, #{kaoqinstatus,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE}, #{positionid,jdbcType=INTEGER}, #{name3,jdbcType=VARCHAR}, 
       #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.Yuangongkaoqin">
@@ -39,8 +38,8 @@
       <if test="id != null">
         ID,
       </if>
-      <if test="yuangongid != null">
-        yuangongID,
+      <if test="staffid != null">
+        staffid,
       </if>
       <if test="kaoqinstatus != null">
         kaoqinstatus,
@@ -48,11 +47,8 @@
       <if test="date != null">
         Date,
       </if>
-      <if test="name1 != null">
-        name1,
-      </if>
-      <if test="name2 != null">
-        name2,
+      <if test="positionid != null">
+        positionid,
       </if>
       <if test="name3 != null">
         name3,
@@ -68,8 +64,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="yuangongid != null">
-        #{yuangongid,jdbcType=INTEGER},
+      <if test="staffid != null">
+        #{staffid,jdbcType=INTEGER},
       </if>
       <if test="kaoqinstatus != null">
         #{kaoqinstatus,jdbcType=INTEGER},
@@ -77,11 +73,8 @@
       <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
-      <if test="name1 != null">
-        #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        #{name2,jdbcType=VARCHAR},
+      <if test="positionid != null">
+        #{positionid,jdbcType=INTEGER},
       </if>
       <if test="name3 != null">
         #{name3,jdbcType=VARCHAR},
@@ -97,8 +90,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Yuangongkaoqin">
     update yuangongkaoqin
     <set>
-      <if test="yuangongid != null">
-        yuangongID = #{yuangongid,jdbcType=INTEGER},
+      <if test="staffid != null">
+        staffid = #{staffid,jdbcType=INTEGER},
       </if>
       <if test="kaoqinstatus != null">
         kaoqinstatus = #{kaoqinstatus,jdbcType=INTEGER},
@@ -106,11 +99,8 @@
       <if test="date != null">
         Date = #{date,jdbcType=DATE},
       </if>
-      <if test="name1 != null">
-        name1 = #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        name2 = #{name2,jdbcType=VARCHAR},
+      <if test="positionid != null">
+        positionid = #{positionid,jdbcType=INTEGER},
       </if>
       <if test="name3 != null">
         name3 = #{name3,jdbcType=VARCHAR},
@@ -126,11 +116,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Yuangongkaoqin">
     update yuangongkaoqin
-    set yuangongID = #{yuangongid,jdbcType=INTEGER},
+    set staffid = #{staffid,jdbcType=INTEGER},
       kaoqinstatus = #{kaoqinstatus,jdbcType=INTEGER},
       Date = #{date,jdbcType=DATE},
-      name1 = #{name1,jdbcType=VARCHAR},
-      name2 = #{name2,jdbcType=VARCHAR},
+      positionid = #{positionid,jdbcType=INTEGER},
       name3 = #{name3,jdbcType=VARCHAR},
       name4 = #{name4,jdbcType=VARCHAR},
       name5 = #{name5,jdbcType=VARCHAR}
