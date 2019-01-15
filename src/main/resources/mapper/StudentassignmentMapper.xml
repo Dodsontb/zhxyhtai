@@ -222,6 +222,6 @@
   </update>
   
   <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
-		select * from studentassignment
+		select * from studentassignment where ljxTid = #{ljxTid}
   </select>
 </mapper>

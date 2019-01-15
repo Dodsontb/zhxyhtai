@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>Dashboard</title>
@@ -116,24 +116,56 @@
 							
 							<div class="email-toolbar-search col-lg-12" id ="b" style="border: 1px gainsboro solid;height: 500px;margin-top: 30px;">
 								<div v-for="(b,index) in list" ><!-- th:each="list:${list}"  -->
-									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;">
-										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">{{b.ljxUid}}</div><!-- th:text="${list.Ljx_Title}" -->
-										<div style="margin-left: 450px;">
-											<a >立即执行</a>
-											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal">推迟任务</a>
+									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;" v-for="(t,index) in b.stulist">
+										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">{{t.ljxTitle}}</div><!-- th:text="${list.Ljx_Title}" -->
+										<div style="margin-left: 300px;" v-if="b.ljxYesno=='0'">
+											<span>{{t.ljxTime}}</span>
+											<a style="margin-left: 50px;">立即执行</a>
+											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal" class="tui" v-on:click="tuiClick(t.ljxTid)" v-bind:value="t.ljxTid">推迟任务{{t.ljxTid}}</a>
+										</div>
+										<div style="margin-left: 300px;" v-if="b.ljxYesno=='是'">
+											<span>{{t.ljxTime}}</span>
+											<a style="margin-left: 50px;">查看错题</a>
+											<a style="margin-left: 50px;">再来一套</a>
+										</div>
+										<div style="margin-left: 300px;" v-if="b.ljxYesno=='否'">
+											<span>{{t.ljxTime}}</span>
+											<a style="margin-left: 50px;">现在执行</a>
+											<a style="margin-left: 50px;">再来一套</a>
+										</div>
+										<div style="margin-left: 300px;" v-if="b.ljxContent !=null">
+											<span>{{t.ljxTime}}</span>
+											<a style="margin-left: 50px;">开始执行</a>
+											<a style="margin-left: 50px;">已审核过</a><!--v-if="b.ljxYesno =='是' -->
 										</div>
 									</div>
 								</div>
 								
-								<div>
-									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;">
-										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">标题accp8.0,S1综合测试</div>
-										<div style="margin-left: 450px;">
-											<a >立即执行</a>
-											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal">推迟任务</a>
+								<!-- Modal -->
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+									<div class="modal-content" v-for="(b,index) in list">
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">任务推迟</h4>
+										</div>
+										<div class="modal-body">
+											<div style="width: 280px;margin-left: 150px;">
+												任务标题：<input type="text" class="ljxtow"  v-model="b.ljxTitle"/></br>
+												
+												<h5>推迟理由：</h5><textarea style="width: 250px; height: 100px;" class="liyou"></textarea>
+												<input type="text" name="" id="" v-model="b.ljxTime" style="width: 143.61px;height: 39.6px;" /><span style="margin-left: 50px;">(结束时间)</span><input type="date" name="time" id="" value="" style="margin-top: 20px;"/><span style="margin-left: 50px;">(推迟时间)<span>
+											</div>
+											
+										</div>
+										
+										<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary putoff" v-on:click="putoff(b.ljxTid,b.ljxClass,b.ljxClasses)">提交</button>
 										</div>
 									</div>
-								</div>
+									</div>
+								</div><!--modal  -->
 							</div>
 						</div>
         			</div>
@@ -149,31 +181,7 @@
 		</div>
 		
 		
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">任务推迟</h4>
-				</div>
-				<div class="modal-body">
-					<div style="width: 280px;margin-left: 150px;">
-						任务标题：<input type="text" class="ljxtow"/></br>
-						
-						<h5>推迟理由：</h5><textarea style="width: 250px; height: 100px;"></textarea>
-						<input type="date" name="" id="" value="" /><span style="margin-left: 50px;">(结束时间)</span><input type="date" name="" id="" value="" style="margin-top: 20px;"/><span style="margin-left: 50px;">(推迟时间)<span>
-					</div>
-					
-				</div>
-				
-				<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">提交</button>
-				</div>
-			</div>
-			</div>
-		</div>
+		
         
         <!-- End #content -->
         <!-- Javascripts -->
@@ -208,15 +216,6 @@
         <!-- Bootbox confirm dialog for reset postion on panels -->
         <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
         <!-- Other plugins ( load only nessesary plugins for every page) -->
-        <script src="assets/plugins/charts/flot/jquery.flot.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.pie.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.resize.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.time.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.growraf.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.categories.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.stack.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="assets/plugins/charts/flot/date.js"></script>
         <script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
         <script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
         <script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
@@ -229,16 +228,26 @@
         <script src="assets/plugins/ui/calendar/fullcalendar.js"></script>
         <script src="assets/js/jquery.sprFlat.js"></script>
         <script src="assets/js/app.js"></script>
-        <script src="assets/js/pages/dashboard.js"></script>
+      	<!--   <script src="assets/js/pages/dashboard.js"></script> -->
         <script src="assets/js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 		$(function(){
-			var v = new Vue({
-				el:"#b",
-				data:{
-					list:null
-				}
-			});
+				var v = new Vue({
+					el:"#b",
+					data:{
+						list:null,
+					},
+					methods:{
+						tuiClick:function(id){
+							tuiC(id);
+						},
+						putoff:function(tid,clas,classes){
+							var liyou = $(".liyou").val();
+							var datetime = $("input[name=time]").val();
+							putoffT(tid,clas,classes,liyou,datetime);
+						}
+					}
+				});
 			/* $.ajax({
 				url:"/query",
 				type:"post",
@@ -247,39 +256,96 @@
 					v.list = date;
 				}
 			}) */
-		})
-		
-		$(".zhi").click(function(){
-			var j = $(this).html();
-			if(j=="已完成任务"){
-				alert("来了老弟！！！！！！"+j);
-				bb();
+			
+				$(".zhi").click(function(){
+					var j = $(this).html();
+					if(j=="执行任务"){
+						bb("0");
+					}
+					if(j=="已完成任务"){
+						/* alert("来了老弟！！！！！！"+j); */
+						bb("是");
+					}
+					if(j=="未完成任务"){
+						/* alert("来了老弟！！！！！！"+j); */
+						bb("否");
+					}
+					if(j=="推迟任务"){
+						/* alert("来了老弟！！！！！！"+j); */
+						bbT();
+					}
+				})
 				
-			}
-			if(j=="未完成任务"){
-				alert("来了老弟！！！！！！"+j);
-				bb();
-			}
-			if(j=="推迟任务"){
-				alert("来了老弟！！！！！！"+j);
-				bb();
-			}
-		})
-		
-		
-		function bb(){
-			/* 123 */
-			$.ajax({
-				url:"/whetherstu",
-				type:"get",
-				date:"",
-				async:true,
-				success:function(date){
-					alert(JSON.stringify(date))
-					v.list = date;
+			
+				function bb(ljxYesno){
+					/* alert(ljxYesno) */
+					$.ajax({
+						url:"/whetherstu",
+						type:"post",
+						data:"ljxYesno="+ljxYesno,
+						async:true,
+						success:function(date){
+							/* alert(JSON.stringify(date)) */
+							v.list = date;
+						}
+					})
+				}
+			
+				function bbT(){
+					/* alert("tui>>>>>>>") */
+					$.ajax({
+						url:"/putoff",
+						type:"post",
+						data:"",
+						async:true,
+						success:function(date){
+							/* alert(JSON.stringify(date)) */
+							v.list = date;
+						}
+					})
+				}
+			
+			/*
+				单选框	
+			*/
+				$("input[type=radio]").click(function(){  
+					 alert("你被选中了"); 
+				 });  
+			
+				function tuiC(id){
+					/* alert("tui is clicked" + id); */
+					$.ajax({
+						url:"/query",
+						data:"ljxTid="+id,
+						type:"post",
+						success:function(date){
+							/* alert(JSON.stringify(date)) */
+							v.list = date;
+						}
+					})
+				}
+				
+				function putoffT(tid,clas,classes,liyou,datetime){
+					/* alert("提交任务推迟");
+					alert(tid+">>"+clas+">>"+classes+">>"+liyou+">>"+datetime); */
+					$.ajax({
+						url:"/putoffinsert",
+						type:"post",
+						data:"ljxTid="+tid+"&ljxUid=1&ljxClass="+clas+"&ljxClasses="+classes+"&ljxContent="+liyou+"&ljxTitme="+datetime,
+						async:true,
+						success:function(date){
+							alert(date);
+							if(date>0){
+								alert("正在审核.....");
+							}else{
+								alert("已超时.....");
+							}
+						}
+					})
 				}
 			})
-		}
+		
+		
 		</script>
     </body>
 </html>

@@ -1,7 +1,12 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
 import com.zhxy.domain.AssignmentPutOff;
 
+@Mapper
 public interface AssignmentPutOffMapper {
     int deleteByPrimaryKey(Integer ljxTuid);
 
@@ -14,4 +19,8 @@ public interface AssignmentPutOffMapper {
     int updateByPrimaryKeySelective(AssignmentPutOff record);
 
     int updateByPrimaryKey(AssignmentPutOff record);
+    
+    List<AssignmentPutOff> putoff(Integer ljxUid);
+    
+    int putoffinsert(AssignmentPutOff assignmentputoff);
 }

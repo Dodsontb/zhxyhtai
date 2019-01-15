@@ -151,7 +151,7 @@
   </update>
   
   <select id="whether" resultMap="whetherone">
-  		SELECT * FROM whether_accomplish where ljxUid=1 AND ljxYesno='否'
+  		SELECT * FROM whether_accomplish where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
   </select>
   <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone">
   		<id property="ljxWid" column="ljxWid"/>

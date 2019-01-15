@@ -2,6 +2,7 @@ package com.zhxy.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class WhetherAccomplish_impl implements Service_WhetherAccomplish{
 	@Autowired
 	WhetherAccomplishMapper mapper;
 	
-	public List<WhetherAccomplish> whether(){
-		return mapper.whether();
+	public List<WhetherAccomplish> whether(@Param("ljxUid")Integer ljxUid,@Param("ljxYesno")String ljxYesno){
+		return mapper.whether(ljxUid,ljxYesno);
 	}
 }

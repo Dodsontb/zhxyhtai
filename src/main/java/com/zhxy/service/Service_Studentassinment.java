@@ -6,5 +6,5 @@ import com.zhxy.domain.Studentassignment;
 
 public interface Service_Studentassinment {
 
-	public List<Studentassignment> stuquery();
+	public List<Studentassignment> stuquery(Integer ljxTid);
 }

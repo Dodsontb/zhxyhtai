@@ -1,6 +1,7 @@
 package com.zhxy.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class AssignmentPutOff {
     private Integer ljxTuid;
@@ -13,7 +14,7 @@ public class AssignmentPutOff {
 
     private String ljxClasses;
 
-    private Date ljxTitme;
+    private String ljxTitme;
 
     private String ljxContent;
 
@@ -26,6 +27,8 @@ public class AssignmentPutOff {
     private String name4;
 
     private String name5;
+    
+    private List<Studentassignment> stulist;
 
     public Integer getLjxTuid() {
         return ljxTuid;
@@ -67,11 +70,11 @@ public class AssignmentPutOff {
         this.ljxClasses = ljxClasses;
     }
 
-    public Date getLjxTitme() {
+    public String getLjxTitme() {
         return ljxTitme;
     }
 
-    public void setLjxTitme(Date ljxTitme) {
+    public void setLjxTitme(String ljxTitme) {
         this.ljxTitme = ljxTitme;
     }
 
@@ -122,4 +125,13 @@ public class AssignmentPutOff {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+	public List<Studentassignment> getStulist() {
+		return stulist;
+	}
+
+	public void setStulist(List<Studentassignment> stulist) {
+		this.stulist = stulist;
+	}
+    
 }

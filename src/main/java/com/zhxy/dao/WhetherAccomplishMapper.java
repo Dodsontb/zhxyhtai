@@ -3,6 +3,7 @@ package com.zhxy.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.zhxy.domain.WhetherAccomplish;
 
@@ -20,5 +21,5 @@ public interface WhetherAccomplishMapper {
 
     int updateByPrimaryKey(WhetherAccomplish record);
     
-    List<WhetherAccomplish>whether();
+    List<WhetherAccomplish>whether(@Param("ljxUid")Integer ljxUid,@Param("ljxYesno")String ljxYesno);
 }

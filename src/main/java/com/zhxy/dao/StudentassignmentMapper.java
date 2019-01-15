@@ -20,5 +20,5 @@ public interface StudentassignmentMapper {
 
     int updateByPrimaryKey(Studentassignment record);
     
-    List<Studentassignment> stuquery();
+    List<Studentassignment> stuquery(Integer ljxTid);
 }

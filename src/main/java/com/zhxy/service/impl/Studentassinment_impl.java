@@ -15,9 +15,9 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	StudentassignmentMapper mapper;
 	
 	@Override
-	public List<Studentassignment> stuquery() {
+	public List<Studentassignment> stuquery(Integer ljxTid) {
 		
-		return mapper.stuquery();
+		return mapper.stuquery(ljxTid);
 	}
 
 }

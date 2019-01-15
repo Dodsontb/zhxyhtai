@@ -1,5 +1,6 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Studentassignment {
@@ -83,8 +84,8 @@ public class Studentassignment {
         this.ljxDate = ljxDate;
     }
 
-    public Date getLjxTime() {
-        return ljxTime;
+    public String getLjxTime() {
+    	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxTime);
     }
 
     public void setLjxTime(Date ljxTime) {
