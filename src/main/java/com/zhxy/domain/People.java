@@ -1,83 +1,60 @@
 package com.zhxy.domain;
 
-public class People {
-    private Integer id;
+import java.io.Serializable;
+import java.util.List;
 
-    private String name;
+public class People implements Serializable{
 
-    private Integer rid;
-
-    private String name1;
-
-    private String name2;
-
-    private String name3;
-
-    private String name4;
-
-    private String name5;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRid() {
-        return rid;
-    }
-
-    public void setRid(Integer rid) {
-        this.rid = rid;
-    }
-
-    public String getName1() {
-        return name1;
-    }
-
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-    public String getName3() {
-        return name3;
-    }
-
-    public void setName3(String name3) {
-        this.name3 = name3;
-    }
-
-    public String getName4() {
-        return name4;
-    }
-
-    public void setName4(String name4) {
-        this.name4 = name4;
-    }
-
-    public String getName5() {
-        return name5;
-    }
-
-    public void setName5(String name5) {
-        this.name5 = name5;
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private String name;
+	private int rid;
+	private String role;
+	private int position;
+	private List<People> peoples;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public int getRid() {
+		return rid;
+	}
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+	
+	public People() {
+		this.name="";
+		this.id=-1;
+	}
+	public List<People> getPeoples() {
+		return peoples;
+	}
+	public void setPeoples(List<People> peoples) {
+		this.peoples = peoples;
+	}
+	public int getPosition() {
+		return position;
+	}
+	public void setPosition(int position) {
+		this.position = position;
+	}
 }

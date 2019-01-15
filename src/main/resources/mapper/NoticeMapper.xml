@@ -20,7 +20,7 @@
    	<association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="plqueryNoticeType"></association>
    	<association property="imgs" column="Notice_Id" javaType="list" select="queryNoticeimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
-   	<association property="Clazzs" column="Notice_Id" javaType="com.zhxy.domain.Clazz" select="queryUser"></association>
+   	<association property="Clazzs" column="Notice_Id" javaType="com.zhxy.domain.Clazz" select="com.zhxy.mapper.ClazzMapper.queryClazzByNotice"></association>
   </resultMap>
   
   <select id="queryNoticeAll" resultMap="BaseResultMap">

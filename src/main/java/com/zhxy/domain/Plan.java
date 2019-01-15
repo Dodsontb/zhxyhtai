@@ -1,125 +1,104 @@
 package com.zhxy.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Plan {
-    private Integer id;
+public class Plan implements Serializable{
 
-    private Integer cid;
-
-    private Integer roomid;
-
-    private Boolean ap;
-
-    private Boolean study;
-
-    private Boolean active;
-
-    private String name1;
-
-    private String name2;
-
-    private String name3;
-
-    private String name4;
-
-    private String name5;
-
-    private Date date;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
-
-    public Integer getRoomid() {
-        return roomid;
-    }
-
-    public void setRoomid(Integer roomid) {
-        this.roomid = roomid;
-    }
-
-    public Boolean getAp() {
-        return ap;
-    }
-
-    public void setAp(Boolean ap) {
-        this.ap = ap;
-    }
-
-    public Boolean getStudy() {
-        return study;
-    }
-
-    public void setStudy(Boolean study) {
-        this.study = study;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getName1() {
-        return name1;
-    }
-
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-    public String getName3() {
-        return name3;
-    }
-
-    public void setName3(String name3) {
-        this.name3 = name3;
-    }
-
-    public String getName4() {
-        return name4;
-    }
-
-    public void setName4(String name4) {
-        this.name4 = name4;
-    }
-
-    public String getName5() {
-        return name5;
-    }
-
-    public void setName5(String name5) {
-        this.name5 = name5;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	/**
+	 * 
+	 */
+	public static boolean AM=false;
+	public static boolean PM=true;
+	
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private boolean ap; // 上午/下午
+	private int rid;
+	private Clazz clazz;
+	private boolean active; //是否活动
+	private boolean study; //是否上课
+	private Event event;
+	private Date date;
+	private Room room;
+	private boolean advance;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public boolean isAp() {
+		return ap;
+	}
+	public void setAp(boolean ap) {
+		this.ap = ap;
+	}
+	public Clazz getClazz() {
+		return clazz;
+	}
+	public void setClazz(Clazz clazz) {
+		this.clazz = clazz;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+		if(active) {
+			this.clazz.getCurr().setName("班级活动");
+		}
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public boolean isStudy() {
+		return study;
+	}
+	public void setStudy(boolean study) {
+		this.study = study;
+	}
+	
+	public Plan() {
+		this.advance=false;
+		this.room=new Room();
+	}
+	public Plan(Clazz clazz, Room room, Date tempDate, boolean ap, boolean study, boolean active) {
+		// TODO Auto-generated constructor stub
+		this.clazz=clazz;
+		this.rid=room.getId();
+		this.date=tempDate;
+		this.ap=ap;
+		this.study=study;
+		this.active=active;
+	}
+	public int getRid() {
+		return rid;
+	}
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+	public Event getEvent() {
+		return event;
+	}
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room==null?new Room():room;
+	}
+	public boolean isAdvance() {
+		return advance;
+	}
+	public void setAdvance(boolean advance) {
+		this.advance = advance;
+	}
+	
 }

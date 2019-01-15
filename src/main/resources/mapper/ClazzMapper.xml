@@ -1,258 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.ClazzMapper">
-  <resultMap id="BaseResultMap" type="com.zhxy.domain.Clazz">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gradeId" jdbcType="INTEGER" property="gradeid" />
-    <result column="teacherId" jdbcType="INTEGER" property="teacherid" />
-    <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="start" jdbcType="TIMESTAMP" property="start" />
-    <result column="begin" jdbcType="TIMESTAMP" property="begin" />
-    <result column="end" jdbcType="TIMESTAMP" property="end" />
-    <result column="dissolve" jdbcType="BIT" property="dissolve" />
-    <result column="vid" jdbcType="INTEGER" property="vid" />
-    <result column="currId" jdbcType="INTEGER" property="currid" />
-    <result column="way" jdbcType="INTEGER" property="way" />
-    <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="people" jdbcType="INTEGER" property="people" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
-    <result column="name3" jdbcType="VARCHAR" property="name3" />
-    <result column="name4" jdbcType="VARCHAR" property="name4" />
-    <result column="name5" jdbcType="VARCHAR" property="name5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, gradeId, teacherId, bid, start, begin, end, dissolve, vid, currId, way, 
-    num, people, name1, name2, name3, name4, name5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from clazz
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from clazz
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.zhxy.domain.Clazz">
-    insert into clazz (id, name, gradeId, 
-      teacherId, bid, start, 
-      begin, end, dissolve, 
-      vid, currId, way, num, 
-      people, name1, name2, 
-      name3, name4, name5
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gradeid,jdbcType=INTEGER}, 
-      #{teacherid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{start,jdbcType=TIMESTAMP}, 
-      #{begin,jdbcType=TIMESTAMP}, #{end,jdbcType=TIMESTAMP}, #{dissolve,jdbcType=BIT}, 
-      #{vid,jdbcType=INTEGER}, #{currid,jdbcType=INTEGER}, #{way,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
-      #{people,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
-      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.zhxy.domain.Clazz">
-    insert into clazz
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="gradeid != null">
-        gradeId,
-      </if>
-      <if test="teacherid != null">
-        teacherId,
-      </if>
-      <if test="bid != null">
-        bid,
-      </if>
-      <if test="start != null">
-        start,
-      </if>
-      <if test="begin != null">
-        begin,
-      </if>
-      <if test="end != null">
-        end,
-      </if>
-      <if test="dissolve != null">
-        dissolve,
-      </if>
-      <if test="vid != null">
-        vid,
-      </if>
-      <if test="currid != null">
-        currId,
-      </if>
-      <if test="way != null">
-        way,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="people != null">
-        people,
-      </if>
-      <if test="name1 != null">
-        name1,
-      </if>
-      <if test="name2 != null">
-        name2,
-      </if>
-      <if test="name3 != null">
-        name3,
-      </if>
-      <if test="name4 != null">
-        name4,
-      </if>
-      <if test="name5 != null">
-        name5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gradeid != null">
-        #{gradeid,jdbcType=INTEGER},
-      </if>
-      <if test="teacherid != null">
-        #{teacherid,jdbcType=INTEGER},
-      </if>
-      <if test="bid != null">
-        #{bid,jdbcType=INTEGER},
-      </if>
-      <if test="start != null">
-        #{start,jdbcType=TIMESTAMP},
-      </if>
-      <if test="begin != null">
-        #{begin,jdbcType=TIMESTAMP},
-      </if>
-      <if test="end != null">
-        #{end,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dissolve != null">
-        #{dissolve,jdbcType=BIT},
-      </if>
-      <if test="vid != null">
-        #{vid,jdbcType=INTEGER},
-      </if>
-      <if test="currid != null">
-        #{currid,jdbcType=INTEGER},
-      </if>
-      <if test="way != null">
-        #{way,jdbcType=INTEGER},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="people != null">
-        #{people,jdbcType=INTEGER},
-      </if>
-      <if test="name1 != null">
-        #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        #{name5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Clazz">
-    update clazz
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gradeid != null">
-        gradeId = #{gradeid,jdbcType=INTEGER},
-      </if>
-      <if test="teacherid != null">
-        teacherId = #{teacherid,jdbcType=INTEGER},
-      </if>
-      <if test="bid != null">
-        bid = #{bid,jdbcType=INTEGER},
-      </if>
-      <if test="start != null">
-        start = #{start,jdbcType=TIMESTAMP},
-      </if>
-      <if test="begin != null">
-        begin = #{begin,jdbcType=TIMESTAMP},
-      </if>
-      <if test="end != null">
-        end = #{end,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dissolve != null">
-        dissolve = #{dissolve,jdbcType=BIT},
-      </if>
-      <if test="vid != null">
-        vid = #{vid,jdbcType=INTEGER},
-      </if>
-      <if test="currid != null">
-        currId = #{currid,jdbcType=INTEGER},
-      </if>
-      <if test="way != null">
-        way = #{way,jdbcType=INTEGER},
-      </if>
-      <if test="num != null">
-        num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="people != null">
-        people = #{people,jdbcType=INTEGER},
-      </if>
-      <if test="name1 != null">
-        name1 = #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        name2 = #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        name3 = #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        name4 = #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        name5 = #{name5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Clazz">
-    update clazz
-    set name = #{name,jdbcType=VARCHAR},
-      gradeId = #{gradeid,jdbcType=INTEGER},
-      teacherId = #{teacherid,jdbcType=INTEGER},
-      bid = #{bid,jdbcType=INTEGER},
-      start = #{start,jdbcType=TIMESTAMP},
-      begin = #{begin,jdbcType=TIMESTAMP},
-      end = #{end,jdbcType=TIMESTAMP},
-      dissolve = #{dissolve,jdbcType=BIT},
-      vid = #{vid,jdbcType=INTEGER},
-      currId = #{currid,jdbcType=INTEGER},
-      way = #{way,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-      people = #{people,jdbcType=INTEGER},
-      name1 = #{name1,jdbcType=VARCHAR},
-      name2 = #{name2,jdbcType=VARCHAR},
-      name3 = #{name3,jdbcType=VARCHAR},
-      name4 = #{name4,jdbcType=VARCHAR},
-      name5 = #{name5,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.zhxy.mapper.ClazzMapper">
+	<!-- <cache></cache> -->
+	<resultMap type="com.zhxy.domain.Clazz" id="clazz">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="num" column="num" />
+		<result property="people" column="people" />
+		<association property="grade" column="gradeId"
+			select="com.zhxy.mapper.GradeMapper.queryById"
+			javaType="com.zhxy.domain.Grade"></association>
+		<association property="teacher"
+			javaType="com.zhxy.domain.People" column="teacherId"
+			select="com.zhxy.mapper.PeopleMapper.queryById"></association>
+		<association property="curr"
+			javaType="com.zhxy.domain.Curriculum" column="currId"
+			select="com.zhxy.mapper.CurriculumMapper.queryById"></association>
+	</resultMap>
+	<resultMap type="com.zhxy.domain.Clazz" id="clazzNum"
+		extends="clazz">
+		<result property="planNum" column="planNum" />
+		<result property="weekNum" column="weekNum" />
+	</resultMap>
+	<resultMap type="com.zhxy.domain.Clazz" extends="clazz"
+		id="planClazz">
+		<association property="plans" column="{date=date,id=id}"
+			javaType="list" select="com.zhxy.mapper.PlanMapper.classPlan"></association>
+	</resultMap>
+	<select id="queryById" resultMap="clazz">
+		select *
+		from clazz
+		where
+		id=#{id}
+	</select>
+	<select id="allClazz" resultMap="clazz">
+		select *
+		from clazz
+	</select>
+	<select id="findClazz" resultMap="clazzNum">
+		select *,(select count(0) from plan where cid=clazz.id and `date`
+		between date(#{begin}) and date(#{end}) and active=false and
+		study=true) weekNum,(select count(0) from plan where cid=clazz.id and `date`
+		<![CDATA[<=]]> date(#{before}) and active=false and
+		study=true) planNum
+		from clazz
+		where teacherId=#{teacher.id} and `start` <![CDATA[<]]>
+		date(#{end})
+		order by planNum,`start`
+	</select>
+	<select id="clazzPlan" resultMap="planClazz">
+		select *,#{date} `date`
+		from
+		clazz
+		where dissolve=false
+		order by `begin`
+	</select>
+	<select id="isStudyByOnself" resultType="int">
+		select count(*)
+		from plan
+		where cid=#{clazz.id} and `date` between date(#{begin}) and
+		date(#{end}) and study=false
+		group by `date`
+		having count(*)=2
+		limit 1
+	</select>
+	<select id="clazz" resultMap="clazz">
+		select *
+		from clazz
+		<where>
+			teacherId in <foreach collection="ids" item="id" open="(" close=")" separator=",">#{id}</foreach>
+			<if test="grade">
+				and gradeId=#{grade}
+			</if>
+		</where>
+	</select>
+	<select id="queryClazzByNotice" resultMap="clazz">
+		select *
+		from clazz
+		where id in (select cid from notice_relation where Notice_Id=#{id})		
+	</select>
 </mapper>
