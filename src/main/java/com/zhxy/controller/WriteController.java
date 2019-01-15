@@ -13,13 +13,14 @@ import com.zhxy.domain.Clazz;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
-import com.zhxy.service.History_hxk;
+
+import com.zhxy.service.hxk_history;
 
 @Controller
 public class WriteController {
 
 			@Autowired
-			History_hxk service;
+			hxk_history service;
 			@Autowired
 			NoticeMapper noticeMapper;
 			
@@ -33,10 +34,10 @@ public class WriteController {
 				return "hxk_history";
 			}
 			
-			@RequestMapping("/hxk_details")
+			/*@RequestMapping("/hxk_details")
 			public String hxk_details() {
 				return "hxk_details";
-			}
+			}*/
 			
 			@RequestMapping("/hxk_write")
 			public String hxk_write() {
@@ -77,11 +78,11 @@ public class WriteController {
 				
 			
 			@RequestMapping("/queryNoticeById")
-			@ResponseBody
-			public Notice queryNoticeById(Model model, int Notice_Id) {
+			
+			public String queryNoticeById(Model model, int Notice_Id) {
 				Notice list=service.queryNoticeById(Notice_Id);
 				model.addAttribute("list", list);
-				return list;
+				return "hxk_details";
 			}
 			
 			
