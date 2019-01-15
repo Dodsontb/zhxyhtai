@@ -1,9 +1,12 @@
 package com.zhxy.domain;
 
+
 import java.io.Serializable;
+
 import java.util.List;
 
 public class Grade implements Serializable{
+
 
 	/**
 	 * 
@@ -32,3 +35,4 @@ public class Grade implements Serializable{
 		this.clazzs = clazzs;
 	}
 }
+

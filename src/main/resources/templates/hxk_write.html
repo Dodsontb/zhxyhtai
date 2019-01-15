@@ -510,26 +510,24 @@
                                     <!-- End .form-group  -->
                                     <div class="form-group">
                                         <div class="col-lg-12">
+                                        	
                                         	<span>公告类型：</span>
-                                          <select>
+                                          <select id="type">
 												<option>---请选择---</option>
-												<option>班级公告</option>
+												<option v-for="item in list">{{item.typename}}</option>
 												<option>年级公告</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											
 											<span>选择年级：</span>
-                                          <select>
+                                          <select id="grade">
 												<option>---请选择---</option>
-												<option>s1</option>
-												<option>s2</option>
-												<option>Y2</option>
+												<option v-for="item in list" class="gg">{{item.grades.name}}</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											
 											<span>选择班级：</span>
-                                          <select>
+                                          <select id="clazz">
 												<option>---请选择---</option>
-												<option>1717</option>
-												<option>1718</option>
+												<option v-for="item in list">{{item.name}}</option>
 											</select>
                                         </div>
                                     </div>
@@ -576,40 +574,101 @@
         <!-- End #content -->
         <!-- Javascripts -->
         <!-- Load pace first -->
-        <script src="statics/assets/plugins/core/pace/pace.min.js"></script>
+        <script src="assets/plugins/core/pace/pace.min.js"></script>
         <!-- Important javascript libs(put in all pages) -->
-        <script src="statics/assets/js/jquery-1.8.3.min.js"></script>
+        <script src="assets/js/jquery-1.8.3.min.js"></script>
         <script>
-        window.jQuery || document.write('<script src="statics/assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
         </script>
         <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script>
-        window.jQuery || document.write('<script src="statics/assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
         </script>
-        <script src="statics/assets/js/bootstrap/bootstrap.js"></script>
+        <script src="assets/js/bootstrap/bootstrap.js"></script>
         <!-- Core plugins ( not remove ever) -->
         <!-- Handle responsive view functions -->
-        <script src="statics/assets/js/jRespond.min.js"></script>
+        <script src="assets/js/jRespond.min.js"></script>
         <!-- Custom scroll for sidebars,tables and etc. -->
-        <script src="statics/assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="statics/assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
         <!-- Resize text area in most pages -->
-        <script src="statics/assets/plugins/forms/autosize/jquery.autosize.js"></script>
+        <script src="assets/plugins/forms/autosize/jquery.autosize.js"></script>
         <!-- Proivde quick search for many widgets -->
-        <script src="statics/assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+        <script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
         <!-- Bootbox confirm dialog for reset postion on panels -->
-        <script src="statics/assets/plugins/ui/bootbox/bootbox.js"></script>
+        <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
         <!-- Other plugins ( load only nessesary plugins for every page) -->
-        <script src="statics/assets/plugins/core/moment/moment.min.js"></script>
-        <script src="statics/assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
-        <script src="statics/assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
-        <script src="statics/assets/plugins/forms/icheck/jquery.icheck.js"></script>
-        <script src="statics/assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
-        <script src="statics/assets/plugins/forms/tinymce/tinymce.min.js"></script>
-        <script src="statics/assets/plugins/misc/highlight/highlight.pack.js"></script>
-        <script src="statics/assets/plugins/misc/countTo/jquery.countTo.js"></script>
-        <script src="statics/assets/js/jquery.sprFlat.js"></script>
-        <script src="statics/assets/js/app.js"></script>
-        <script src="statics/assets/js/pages/email.js"></script>
+        <script src="assets/plugins/core/moment/moment.min.js"></script>
+        <script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
+        <script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
+        <script src="assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
+        <script src="assets/plugins/forms/tinymce/tinymce.min.js"></script>
+        <script src="assets/plugins/misc/highlight/highlight.pack.js"></script>
+        <script src="assets/plugins/misc/countTo/jquery.countTo.js"></script>
+        <script src="assets/js/jquery.sprFlat.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/pages/email.js"></script>
+        
+        
+        <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+		<script type="text/javascript">
+			var v=new Vue({
+				el:"#type",
+				data:{
+					list:null
+				}
+			});
+			
+			var g=new Vue({
+				el:"#grade",
+				data:{
+					list:null
+				}
+			});
+			var c=new Vue({
+				el:"#clazz",
+				data:{
+					list:null
+				}
+			})
+			$(function(){
+				$.ajax({
+					url:"/plqueryNoticeType",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						v.list=result;
+					}
+				});
+				$.ajax({
+					url:"/queryGrade",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						g.list=result;
+					}
+				});
+			})
+        	$(".gg").change(function(){
+        		alert(111)
+        		var name=$(this).val();
+        		alert(name);
+        		$.ajax({
+        			url:"/queryClazz",
+        			dataType:"json",
+        			type:"post",
+        			data:"name="+name,
+        			success:function(result){
+        				c.list=result;
+        			}
+        		})
+        	})
+        
+        
+        
     </body>
 </html>

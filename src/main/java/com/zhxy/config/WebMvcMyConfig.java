@@ -60,6 +60,7 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		super.configureMessageConverters(converters);
 	}
 	
+
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		

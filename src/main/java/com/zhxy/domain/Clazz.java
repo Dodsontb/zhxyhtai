@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Clazz implements Serializable {
 
+
 	/**
 	 * 
 	 */
@@ -108,3 +109,4 @@ public class Clazz implements Serializable {
 		this.weekNum = weekNum;
 	}
 }
+
