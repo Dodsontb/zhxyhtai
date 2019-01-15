@@ -3,13 +3,13 @@ package com.zhxy.dao;
 import com.zhxy.domain.TeacherAssignmentTarget;
 
 public interface TeacherAssignmentTargetMapper {
-    int deleteByPrimaryKey(Integer ljxId);
+    int deleteByPrimaryKey(Integer ljxid);
 
     int insert(TeacherAssignmentTarget record);
 
     int insertSelective(TeacherAssignmentTarget record);
 
-    TeacherAssignmentTarget selectByPrimaryKey(Integer ljxId);
+    TeacherAssignmentTarget selectByPrimaryKey(Integer ljxid);
 
     int updateByPrimaryKeySelective(TeacherAssignmentTarget record);
 

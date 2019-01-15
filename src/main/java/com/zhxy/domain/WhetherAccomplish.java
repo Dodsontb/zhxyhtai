@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 public class WhetherAccomplish {
-    private Integer ljxWid;
+    private Integer ljxwid;
 
-    private Integer ljxTid;
+    private Integer ljxtid;
 
-    private String ljxYesno;
+    private String ljxyesno;
 
-    private Integer ljxUid;
+    private Integer ljxuid;
 
-    private Date ljxDate;
+    private Date ljxdate;
 
     private String name1;
 
@@ -26,44 +26,44 @@ public class WhetherAccomplish {
     
     private List<Studentassignment> stulist;
 
-    public Integer getLjxWid() {
-        return ljxWid;
+    public Integer getLjxwid() {
+        return ljxwid;
     }
 
-    public void setLjxWid(Integer ljxWid) {
-        this.ljxWid = ljxWid;
+    public void setLjxwid(Integer ljxwid) {
+        this.ljxwid = ljxwid;
     }
 
-    public Integer getLjxTid() {
-        return ljxTid;
+    public Integer getLjxtid() {
+        return ljxtid;
     }
 
-    public void setLjxTid(Integer ljxTid) {
-        this.ljxTid = ljxTid;
+    public void setLjxtid(Integer ljxtid) {
+        this.ljxtid = ljxtid;
     }
 
-    public String getLjxYesno() {
-        return ljxYesno;
+    public String getLjxyesno() {
+        return ljxyesno;
     }
 
-    public void setLjxYesno(String ljxYesno) {
-        this.ljxYesno = ljxYesno;
+    public void setLjxyesno(String ljxyesno) {
+        this.ljxyesno = ljxyesno;
     }
 
-    public Integer getLjxUid() {
-        return ljxUid;
+    public Integer getLjxuid() {
+        return ljxuid;
     }
 
-    public void setLjxUid(Integer ljxUid) {
-        this.ljxUid = ljxUid;
+    public void setLjxuid(Integer ljxuid) {
+        this.ljxuid = ljxuid;
     }
 
-    public Date getLjxDate() {
-        return ljxDate;
+    public Date getLjxdate() {
+        return ljxdate;
     }
 
-    public void setLjxDate(Date ljxDate) {
-        this.ljxDate = ljxDate;
+    public void setLjxdate(Date ljxdate) {
+        this.ljxdate = ljxdate;
     }
 
     public String getName1() {

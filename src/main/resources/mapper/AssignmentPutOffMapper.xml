@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhxy.dao.AssignmentPutOffMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.AssignmentPutOff">
-    <id column="Ljx_Tuid" jdbcType="INTEGER" property="ljxTuid" />
-    <result column="Ljx_Tid" jdbcType="INTEGER" property="ljxTid" />
-    <result column="Ljx_Uid" jdbcType="INTEGER" property="ljxUid" />
-    <result column="Ljx_Class" jdbcType="VARCHAR" property="ljxClass" />
-    <result column="Ljx_Classes" jdbcType="VARCHAR" property="ljxClasses" />
-    <result column="Ljx_Titme" jdbcType="TIMESTAMP" property="ljxTitme" />
-    <result column="Ljx_Content" jdbcType="VARCHAR" property="ljxContent" />
+    <id column="ljxTuid" jdbcType="INTEGER" property="ljxtuid" />
+    <result column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
+    <result column="ljxClass" jdbcType="VARCHAR" property="ljxclass" />
+    <result column="ljxClasses" jdbcType="VARCHAR" property="ljxclasses" />
+    <result column="ljxTitme" jdbcType="TIMESTAMP" property="ljxtitme" />
+    <result column="ljxContent" jdbcType="VARCHAR" property="ljxcontent" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
@@ -16,54 +16,54 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    Ljx_Tuid, Ljx_Tid, Ljx_Uid, Ljx_Class, Ljx_Classes, Ljx_Titme, Ljx_Content, name1, 
-    name2, name3, name4, name5
+    ljxTuid, ljxTid, ljxUid, ljxClass, ljxClasses, ljxTitme, ljxContent, name1, name2, 
+    name3, name4, name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from assignment_put_off
-    where Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER}
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from assignment_put_off
-    where Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER}
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.AssignmentPutOff">
-    insert into assignment_put_off (Ljx_Tuid, Ljx_Tid, Ljx_Uid, 
-      Ljx_Class, Ljx_Classes, Ljx_Titme, 
-      Ljx_Content, name1, name2, 
+    insert into assignment_put_off (ljxTuid, ljxTid, ljxUid, 
+      ljxClass, ljxClasses, ljxTitme, 
+      ljxContent, name1, name2, 
       name3, name4, name5
       )
-    values (#{ljxTuid,jdbcType=INTEGER}, #{ljxTid,jdbcType=INTEGER}, #{ljxUid,jdbcType=INTEGER}, 
-      #{ljxClass,jdbcType=VARCHAR}, #{ljxClasses,jdbcType=VARCHAR}, #{ljxTitme,jdbcType=TIMESTAMP}, 
-      #{ljxContent,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+    values (#{ljxtuid,jdbcType=INTEGER}, #{ljxtid,jdbcType=INTEGER}, #{ljxuid,jdbcType=INTEGER}, 
+      #{ljxclass,jdbcType=VARCHAR}, #{ljxclasses,jdbcType=VARCHAR}, #{ljxtitme,jdbcType=TIMESTAMP}, 
+      #{ljxcontent,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
       #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.AssignmentPutOff">
     insert into assignment_put_off
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ljxTuid != null">
-        Ljx_Tuid,
+      <if test="ljxtuid != null">
+        ljxTuid,
       </if>
-      <if test="ljxTid != null">
-        Ljx_Tid,
+      <if test="ljxtid != null">
+        ljxTid,
       </if>
-      <if test="ljxUid != null">
-        Ljx_Uid,
+      <if test="ljxuid != null">
+        ljxUid,
       </if>
-      <if test="ljxClass != null">
-        Ljx_Class,
+      <if test="ljxclass != null">
+        ljxClass,
       </if>
-      <if test="ljxClasses != null">
-        Ljx_Classes,
+      <if test="ljxclasses != null">
+        ljxClasses,
       </if>
-      <if test="ljxTitme != null">
-        Ljx_Titme,
+      <if test="ljxtitme != null">
+        ljxTitme,
       </if>
-      <if test="ljxContent != null">
-        Ljx_Content,
+      <if test="ljxcontent != null">
+        ljxContent,
       </if>
       <if test="name1 != null">
         name1,
@@ -82,26 +82,26 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ljxTuid != null">
-        #{ljxTuid,jdbcType=INTEGER},
+      <if test="ljxtuid != null">
+        #{ljxtuid,jdbcType=INTEGER},
       </if>
-      <if test="ljxTid != null">
-        #{ljxTid,jdbcType=INTEGER},
+      <if test="ljxtid != null">
+        #{ljxtid,jdbcType=INTEGER},
       </if>
-      <if test="ljxUid != null">
-        #{ljxUid,jdbcType=INTEGER},
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
       </if>
-      <if test="ljxClass != null">
-        #{ljxClass,jdbcType=VARCHAR},
+      <if test="ljxclass != null">
+        #{ljxclass,jdbcType=VARCHAR},
       </if>
-      <if test="ljxClasses != null">
-        #{ljxClasses,jdbcType=VARCHAR},
+      <if test="ljxclasses != null">
+        #{ljxclasses,jdbcType=VARCHAR},
       </if>
-      <if test="ljxTitme != null">
-        #{ljxTitme,jdbcType=TIMESTAMP},
+      <if test="ljxtitme != null">
+        #{ljxtitme,jdbcType=TIMESTAMP},
       </if>
-      <if test="ljxContent != null">
-        #{ljxContent,jdbcType=VARCHAR},
+      <if test="ljxcontent != null">
+        #{ljxcontent,jdbcType=VARCHAR},
       </if>
       <if test="name1 != null">
         #{name1,jdbcType=VARCHAR},
@@ -123,23 +123,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.AssignmentPutOff">
     update assignment_put_off
     <set>
-      <if test="ljxTid != null">
-        Ljx_Tid = #{ljxTid,jdbcType=INTEGER},
+      <if test="ljxtid != null">
+        ljxTid = #{ljxtid,jdbcType=INTEGER},
       </if>
-      <if test="ljxUid != null">
-        Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
       </if>
-      <if test="ljxClass != null">
-        Ljx_Class = #{ljxClass,jdbcType=VARCHAR},
+      <if test="ljxclass != null">
+        ljxClass = #{ljxclass,jdbcType=VARCHAR},
       </if>
-      <if test="ljxClasses != null">
-        Ljx_Classes = #{ljxClasses,jdbcType=VARCHAR},
+      <if test="ljxclasses != null">
+        ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
       </if>
-      <if test="ljxTitme != null">
-        Ljx_Titme = #{ljxTitme,jdbcType=TIMESTAMP},
+      <if test="ljxtitme != null">
+        ljxTitme = #{ljxtitme,jdbcType=TIMESTAMP},
       </if>
-      <if test="ljxContent != null">
-        Ljx_Content = #{ljxContent,jdbcType=VARCHAR},
+      <if test="ljxcontent != null">
+        ljxContent = #{ljxcontent,jdbcType=VARCHAR},
       </if>
       <if test="name1 != null">
         name1 = #{name1,jdbcType=VARCHAR},
@@ -157,22 +157,22 @@
         name5 = #{name5,jdbcType=VARCHAR},
       </if>
     </set>
-    where Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER}
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.AssignmentPutOff">
     update assignment_put_off
-    set Ljx_Tid = #{ljxTid,jdbcType=INTEGER},
-      Ljx_Uid = #{ljxUid,jdbcType=INTEGER},
-      Ljx_Class = #{ljxClass,jdbcType=VARCHAR},
-      Ljx_Classes = #{ljxClasses,jdbcType=VARCHAR},
-      Ljx_Titme = #{ljxTitme,jdbcType=TIMESTAMP},
-      Ljx_Content = #{ljxContent,jdbcType=VARCHAR},
+    set ljxTid = #{ljxtid,jdbcType=INTEGER},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
+      ljxClass = #{ljxclass,jdbcType=VARCHAR},
+      ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
+      ljxTitme = #{ljxtitme,jdbcType=TIMESTAMP},
+      ljxContent = #{ljxcontent,jdbcType=VARCHAR},
       name1 = #{name1,jdbcType=VARCHAR},
       name2 = #{name2,jdbcType=VARCHAR},
       name3 = #{name3,jdbcType=VARCHAR},
       name4 = #{name4,jdbcType=VARCHAR},
       name5 = #{name5,jdbcType=VARCHAR}
-    where Ljx_Tuid = #{ljxTuid,jdbcType=INTEGER}
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
   </update>
   
   <select id="putoff" resultMap="putoffone">

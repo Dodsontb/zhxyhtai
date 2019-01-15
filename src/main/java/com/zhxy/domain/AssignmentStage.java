@@ -1,9 +1,9 @@
 package com.zhxy.domain;
 
 public class AssignmentStage {
-    private Integer ljxJid;
+    private Integer ljxjid;
 
-    private String ljxJname;
+    private String ljxjname;
 
     private String name1;
 
@@ -15,20 +15,20 @@ public class AssignmentStage {
 
     private String name5;
 
-    public Integer getLjxJid() {
-        return ljxJid;
+    public Integer getLjxjid() {
+        return ljxjid;
     }
 
-    public void setLjxJid(Integer ljxJid) {
-        this.ljxJid = ljxJid;
+    public void setLjxjid(Integer ljxjid) {
+        this.ljxjid = ljxjid;
     }
 
-    public String getLjxJname() {
-        return ljxJname;
+    public String getLjxjname() {
+        return ljxjname;
     }
 
-    public void setLjxJname(String ljxJname) {
-        this.ljxJname = ljxJname;
+    public void setLjxjname(String ljxjname) {
+        this.ljxjname = ljxjname;
     }
 
     public String getName1() {

@@ -8,7 +8,7 @@
     <result column="qingjiaReason" jdbcType="VARCHAR" property="qingjiareason" />
     <result column="qingjiaTime" jdbcType="VARCHAR" property="qingjiatime" />
     <result column="qingjiaStatus" jdbcType="INTEGER" property="qingjiastatus" />
-    <result column="yuangongName" jdbcType="VARCHAR" property="yuangongname" />
+    <result column="staffid" jdbcType="INTEGER" property="staffid" />
     <result column="Date" jdbcType="DATE" property="date" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
@@ -17,8 +17,8 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, StudentID, StudentName, qingjiaReason, qingjiaTime, qingjiaStatus, yuangongName, 
-    Date, name1, name2, name3, name4, name5
+    ID, StudentID, StudentName, qingjiaReason, qingjiaTime, qingjiaStatus, staffid, Date, 
+    name1, name2, name3, name4, name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,12 +33,12 @@
   <insert id="insert" parameterType="com.zhxy.domain.Studentqingjia">
     insert into studentqingjia (ID, StudentID, StudentName, 
       qingjiaReason, qingjiaTime, qingjiaStatus, 
-      yuangongName, Date, name1, 
+      staffid, Date, name1, 
       name2, name3, name4, 
       name5)
     values (#{id,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, 
       #{qingjiareason,jdbcType=VARCHAR}, #{qingjiatime,jdbcType=VARCHAR}, #{qingjiastatus,jdbcType=INTEGER}, 
-      #{yuangongname,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{name1,jdbcType=VARCHAR}, 
+      #{staffid,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{name1,jdbcType=VARCHAR}, 
       #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
       #{name5,jdbcType=VARCHAR})
   </insert>
@@ -63,8 +63,8 @@
       <if test="qingjiastatus != null">
         qingjiaStatus,
       </if>
-      <if test="yuangongname != null">
-        yuangongName,
+      <if test="staffid != null">
+        staffid,
       </if>
       <if test="date != null">
         Date,
@@ -104,8 +104,8 @@
       <if test="qingjiastatus != null">
         #{qingjiastatus,jdbcType=INTEGER},
       </if>
-      <if test="yuangongname != null">
-        #{yuangongname,jdbcType=VARCHAR},
+      <if test="staffid != null">
+        #{staffid,jdbcType=INTEGER},
       </if>
       <if test="date != null">
         #{date,jdbcType=DATE},
@@ -145,8 +145,8 @@
       <if test="qingjiastatus != null">
         qingjiaStatus = #{qingjiastatus,jdbcType=INTEGER},
       </if>
-      <if test="yuangongname != null">
-        yuangongName = #{yuangongname,jdbcType=VARCHAR},
+      <if test="staffid != null">
+        staffid = #{staffid,jdbcType=INTEGER},
       </if>
       <if test="date != null">
         Date = #{date,jdbcType=DATE},
@@ -176,7 +176,7 @@
       qingjiaReason = #{qingjiareason,jdbcType=VARCHAR},
       qingjiaTime = #{qingjiatime,jdbcType=VARCHAR},
       qingjiaStatus = #{qingjiastatus,jdbcType=INTEGER},
-      yuangongName = #{yuangongname,jdbcType=VARCHAR},
+      staffid = #{staffid,jdbcType=INTEGER},
       Date = #{date,jdbcType=DATE},
       name1 = #{name1,jdbcType=VARCHAR},
       name2 = #{name2,jdbcType=VARCHAR},

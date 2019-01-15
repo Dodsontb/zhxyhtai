@@ -8,13 +8,13 @@ import com.zhxy.domain.AssignmentPutOff;
 
 @Mapper
 public interface AssignmentPutOffMapper {
-    int deleteByPrimaryKey(Integer ljxTuid);
+    int deleteByPrimaryKey(Integer ljxtuid);
 
     int insert(AssignmentPutOff record);
 
     int insertSelective(AssignmentPutOff record);
 
-    AssignmentPutOff selectByPrimaryKey(Integer ljxTuid);
+    AssignmentPutOff selectByPrimaryKey(Integer ljxtuid);
 
     int updateByPrimaryKeySelective(AssignmentPutOff record);
 

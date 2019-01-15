@@ -6,15 +6,14 @@
     <result column="studentID" jdbcType="INTEGER" property="studentid" />
     <result column="kaoqinStatus" jdbcType="INTEGER" property="kaoqinstatus" />
     <result column="date" jdbcType="DATE" property="date" />
-    <result column="studentClass" jdbcType="VARCHAR" property="studentclass" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="classID" jdbcType="INTEGER" property="classid" />
+    <result column="staffname" jdbcType="VARCHAR" property="staffname" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, studentID, kaoqinStatus, date, studentClass, name1, name2, name3, name4, name5
+    ID, studentID, kaoqinStatus, date, classID, staffname, name3, name4, name5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,13 +27,13 @@
   </delete>
   <insert id="insert" parameterType="com.zhxy.domain.Studentkaoqin">
     insert into studentkaoqin (ID, studentID, kaoqinStatus, 
-      date, studentClass, name1, 
-      name2, name3, name4, 
-      name5)
+      date, classID, staffname, 
+      name3, name4, name5
+      )
     values (#{id,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{kaoqinstatus,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE}, #{studentclass,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, 
-      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
-      #{name5,jdbcType=VARCHAR})
+      #{date,jdbcType=DATE}, #{classid,jdbcType=INTEGER}, #{staffname,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhxy.domain.Studentkaoqin">
     insert into studentkaoqin
@@ -51,14 +50,11 @@
       <if test="date != null">
         date,
       </if>
-      <if test="studentclass != null">
-        studentClass,
+      <if test="classid != null">
+        classID,
       </if>
-      <if test="name1 != null">
-        name1,
-      </if>
-      <if test="name2 != null">
-        name2,
+      <if test="staffname != null">
+        staffname,
       </if>
       <if test="name3 != null">
         name3,
@@ -83,14 +79,11 @@
       <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
-      <if test="studentclass != null">
-        #{studentclass,jdbcType=VARCHAR},
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
       </if>
-      <if test="name1 != null">
-        #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        #{name2,jdbcType=VARCHAR},
+      <if test="staffname != null">
+        #{staffname,jdbcType=VARCHAR},
       </if>
       <if test="name3 != null">
         #{name3,jdbcType=VARCHAR},
@@ -115,14 +108,11 @@
       <if test="date != null">
         date = #{date,jdbcType=DATE},
       </if>
-      <if test="studentclass != null">
-        studentClass = #{studentclass,jdbcType=VARCHAR},
+      <if test="classid != null">
+        classID = #{classid,jdbcType=INTEGER},
       </if>
-      <if test="name1 != null">
-        name1 = #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        name2 = #{name2,jdbcType=VARCHAR},
+      <if test="staffname != null">
+        staffname = #{staffname,jdbcType=VARCHAR},
       </if>
       <if test="name3 != null">
         name3 = #{name3,jdbcType=VARCHAR},
@@ -141,9 +131,8 @@
     set studentID = #{studentid,jdbcType=INTEGER},
       kaoqinStatus = #{kaoqinstatus,jdbcType=INTEGER},
       date = #{date,jdbcType=DATE},
-      studentClass = #{studentclass,jdbcType=VARCHAR},
-      name1 = #{name1,jdbcType=VARCHAR},
-      name2 = #{name2,jdbcType=VARCHAR},
+      classID = #{classid,jdbcType=INTEGER},
+      staffname = #{staffname,jdbcType=VARCHAR},
       name3 = #{name3,jdbcType=VARCHAR},
       name4 = #{name4,jdbcType=VARCHAR},
       name5 = #{name5,jdbcType=VARCHAR}

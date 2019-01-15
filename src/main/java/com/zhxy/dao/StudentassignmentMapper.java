@@ -8,13 +8,13 @@ import com.zhxy.domain.Studentassignment;
 
 @Mapper
 public interface StudentassignmentMapper {
-    int deleteByPrimaryKey(Integer ljxTid);
+    int deleteByPrimaryKey(Integer ljxtid);
 
     int insert(Studentassignment record);
 
     int insertSelective(Studentassignment record);
 
-    Studentassignment selectByPrimaryKey(Integer ljxTid);
+    Studentassignment selectByPrimaryKey(Integer ljxtid);
 
     int updateByPrimaryKeySelective(Studentassignment record);
 

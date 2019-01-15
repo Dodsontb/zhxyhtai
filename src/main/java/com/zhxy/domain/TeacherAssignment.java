@@ -3,15 +3,15 @@ package com.zhxy.domain;
 import java.util.Date;
 
 public class TeacherAssignment {
-    private Integer ljxRid;
+    private Integer ljxrid;
 
-    private String ljxTtile;
+    private String ljxttile;
 
-    private String ljxContent;
+    private String ljxcontent;
 
-    private Date ljxDatetime;
+    private Date ljxdatetime;
 
-    private Date ljxFtime;
+    private Date ljxftime;
 
     private String name1;
 
@@ -23,44 +23,44 @@ public class TeacherAssignment {
 
     private String name5;
 
-    public Integer getLjxRid() {
-        return ljxRid;
+    public Integer getLjxrid() {
+        return ljxrid;
     }
 
-    public void setLjxRid(Integer ljxRid) {
-        this.ljxRid = ljxRid;
+    public void setLjxrid(Integer ljxrid) {
+        this.ljxrid = ljxrid;
     }
 
-    public String getLjxTtile() {
-        return ljxTtile;
+    public String getLjxttile() {
+        return ljxttile;
     }
 
-    public void setLjxTtile(String ljxTtile) {
-        this.ljxTtile = ljxTtile;
+    public void setLjxttile(String ljxttile) {
+        this.ljxttile = ljxttile;
     }
 
-    public String getLjxContent() {
-        return ljxContent;
+    public String getLjxcontent() {
+        return ljxcontent;
     }
 
-    public void setLjxContent(String ljxContent) {
-        this.ljxContent = ljxContent;
+    public void setLjxcontent(String ljxcontent) {
+        this.ljxcontent = ljxcontent;
     }
 
-    public Date getLjxDatetime() {
-        return ljxDatetime;
+    public Date getLjxdatetime() {
+        return ljxdatetime;
     }
 
-    public void setLjxDatetime(Date ljxDatetime) {
-        this.ljxDatetime = ljxDatetime;
+    public void setLjxdatetime(Date ljxdatetime) {
+        this.ljxdatetime = ljxdatetime;
     }
 
-    public Date getLjxFtime() {
-        return ljxFtime;
+    public Date getLjxftime() {
+        return ljxftime;
     }
 
-    public void setLjxFtime(Date ljxFtime) {
-        this.ljxFtime = ljxFtime;
+    public void setLjxftime(Date ljxftime) {
+        this.ljxftime = ljxftime;
     }
 
     public String getName1() {
