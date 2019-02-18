@@ -1,6 +1,9 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 
 public class Notice {
     private Integer noticeId;
@@ -15,9 +18,21 @@ public class Notice {
 
     private String headline;
 
-    private Date ntime;
+    /*private Date ntime;*/
+    
+    private String ntime;
+    
+    public String getNtime() {
+		return ntime;
+	}
 
-    private Integer nstate;
+	public void setNtime(String ntime) {
+		this.ntime = ntime;
+	}
+
+	private String time;
+
+	private Integer nstate;
 
     private Integer target;
 
@@ -30,6 +45,56 @@ public class Notice {
     private String name4;
 
     private String name5;
+    
+    private Noticetype type;
+    
+    private CpUser cp_user;
+    
+    private List<Clazz> clazzs;
+    
+    public List<Clazz> getClazzs() {
+		return clazzs;
+	}
+
+	public void setClazzs(List<Clazz> clazzs) {
+		this.clazzs = clazzs;
+	}
+
+	public List<NoticeRelation> getNoticerelation() {
+		return noticerelation;
+	}
+
+	public void setNoticerelation(List<NoticeRelation> noticerelation) {
+		this.noticerelation = noticerelation;
+	}
+
+	private List<NoticeRelation> noticerelation;
+    
+    public CpUser getCp_user() {
+		return cp_user;
+	}
+
+	public void setCp_user(CpUser cp_user) {
+		this.cp_user = cp_user;
+	}
+
+	public Noticetype getType() {
+		return type;
+	}
+
+	public void setType(Noticetype type) {
+		this.type = type;
+	}
+
+	public List<Noticeimg> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<Noticeimg> imgs) {
+		this.imgs = imgs;
+	}
+
+	private List<Noticeimg> imgs;
 
     public Integer getNoticeId() {
         return noticeId;
@@ -79,13 +144,15 @@ public class Notice {
         this.headline = headline;
     }
 
-    public Date getNtime() {
+   /* public Date getNtime() {
         return ntime;
     }
 
     public void setNtime(Date ntime) {
+    	SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm");
         this.ntime = ntime;
-    }
+        this.time=simpleDateFormat.format(ntime);
+    }*/
 
     public Integer getNstate() {
         return nstate;
@@ -142,4 +209,12 @@ public class Notice {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 }
