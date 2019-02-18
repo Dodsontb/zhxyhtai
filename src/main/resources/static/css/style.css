@@ -265,7 +265,7 @@ h1 {
     -webkit-flex-basis: 100%;
     margin-bottom: 1.5em;
 }
-.w3ls-login input[type="email"], .w3ls-login input[type="password"] {
+.w3ls-login input[type="text"], .w3ls-login input[type="password"] {
     width: 100%;
     color: #fff;
     outline: none;
@@ -334,11 +334,7 @@ label.check {
     -ms-transition: 0.5s all ease;
 }
 
-.w3ls-login input[type=submit]:hover {
-    color: #fff;
-    box-shadow: 0 20px 5px -10px rgba(0, 0, 0, 0.4);
-    transform: translateY(5px);
-}
+
 
 .w3ls-bot {
     margin-top: 1em;

@@ -46,7 +46,7 @@
             <div class="container-fluid">
                 <div class="navbar">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="cp_index.html">
                             <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-logo">智慧</span><span class="text-slogan">校园</span> 
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                         <ul class="nav navbar-nav pull-left">
                             <li id="toggle-sidebar-li">
                                 <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
-                        </a>
+                        		</a>
                             </li>
                             <li>
                                 <a href="#" class="full-screen"><i class="fa-fullscreen"></i></a>
@@ -236,9 +236,9 @@
                             </button>
                         </form>
                     </li>
-                    <li><a href="index.html">首页<i class="im-screen"></i></a>
+                    <li><a href="cp_index.html">首页<i class="im-screen"></i></a>
                     </li>
-                    <li><a href="charts.html">数据统计<i class="st-chart"></i></a>
+                    <li><a href="cp_charts.html">数据统计<i class="st-chart"></i></a>
                     </li>
                     <!--班级管理-->
                     <li><a href="#"> 班级管理 <i class="im-table2"></i></a>
@@ -258,6 +258,48 @@
                             <li><a href="tiles.html"><i class="im-windows8"></i> 校工考勤</a>
                             </li>
                         </ul>
+                    </li>
+                    <li><a href="#">任务管理 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i> 任务发布</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i> 接收任务</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 查看任务</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">任务管理 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i> 班级考勤</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i> 教员考勤</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 校工考勤</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">题库管理 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i> 新增题库</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i> 出题</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 发布考试</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 发布作业</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">班级管理 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i> 查看班级</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i> 新增班级</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 调度班级</a>
+                            </li>
+                        </ul><iframe src="" width="" height=""></iframe>
                     </li>
                 </ul>
             </div>
@@ -367,140 +409,10 @@
         <!-- End #right-sidebar -->
         <!-- Start #content -->
         <div id="content">
-            <!-- Start .content-wrapper -->
-            <div class="content-wrapper">
-                <div class="row">
-                    <!-- Start .row -->
-                    <!-- Start .page-header -->
-                    <div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="im-screen"></i> 首页</h1>
-                        <!-- Start .bredcrumb -->
-                        <ul id="crumb" class="breadcrumb">
-                        </ul>
-                        <div class="option-buttons">
-                            <div class="btn-toolbar" role="toolbar">
-                                <div class="btn-group">
-                                    <a id="clear-localstorage" class="btn tip" title="刷新">
-                                        <i class="ec-refresh color-red s24"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!--主体部分-->
-                <div class="outlet">
-                    <div class="row">
-                        <!-- Start .row -->
-                        <div class="col-lg-6 col-md-6 sortable-layout">
-                            <!-- Start col-lg-6 -->
-                            <div class="panel panel-teal toggle panelMove panelClose panelRefresh">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><i class="im-bars"></i>考试统计</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="stats-pageviews" style="width: 100%; height:250px;"></div>
-                                </div>
-                                <div class="panel-footer teal-bg">
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="tile teal m0">
-                                            <div class="tile-content text-center pl0 pr0">
-                                                <div id="countToday" class="number">65</div>
-                                                <h3>最低</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="tile teal m0">
-                                            <div class="tile-content text-center pl0 pr0">
-                                                <div id="countYesterday" class="number">80</div>
-                                                <h3>最高</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="tile teal m0">
-                                            <div class="tile-content text-center pl0 pr0">
-                                                <div id="countWeek" class="number">10</div>
-                                                <h3>考试次数</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="tile teal m0">
-                                            <div class="tile-content text-center pl0 pr0">
-                                                <div id="countTotal" class="number">88</div>
-                                                <h3>平均</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--功能模块-->
-                            <!--<div class="panel panel-default panelMove plain">
-                                <div class="panel-heading white-bg"></div>
-                                <div class="panel-body p0">
-                                    <div id="calendar"></div>
-                                </div>
-                            </div>-->
-                        </div>
-                        <!-- End col-lg-6 -->
-                        <div class="col-lg-6 col-md-6 sortable-layout">
-                            <!-- Start col-lg-6 -->
-                            <div class="panel panel-default toggle panelMove panelClose panelRefresh">
-                                <!-- Start .panel -->
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><i class="fa-list"></i> 任务</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="todo-widget">
-                                        <div class="todo-header">
-                                            <div class="todo-search">
-                                                <form>
-                                                    <input type="text" class="form-control" name="search" placeholder="搜索">
-                                                </form>
-                                            </div>
-                                            <div class="todo-add">
-                                                <a href="#" class="btn btn-primary tip" title="Add new todo"><i class="im-plus"></i></a>
-                                            </div>
-                                        </div>
-                                        <h4 class="todo-period">已完成任务</h4>
-                                        <ul class="todo-list" id="today">
-                                            <li class="todo-task-item">
-                                            	 <div class="todo-priority tip">
-                                                    <i class="im-radio-checked"></i>
-                                                </div>
-                                                <div class="todo-task-text">第一次</div>
-                                                <button type="button" class="close todo-close">&times;</button>
-                                            </li>
-                                            <li class="todo-task-item">
-                                            	 <div class="todo-priority tip">
-                                                    <i class="im-radio-checked"></i>
-                                                </div>
-                                                <div class="todo-task-text">第二次</div>
-                                                <button type="button" class="close todo-close">&times;</button>
-                                            </li>
-                                        </ul>
-                                        <h4 class="todo-period">未完成任务</h4>
-                                        <ul class="todo-list" id="tomorrow">
-                                            <li class="todo-task-item">
-                                                <div class="todo-priority tip">
-                                                    <i class="im-radio-checked"></i>
-                                                </div>
-                                                <div class="todo-task-text">第三章测试</div>
-                                                <button type="button" class="close todo-close">&times;</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End .panel -->
-                        </div>
-                        <!-- End col-lg-6 -->
-                    </div>
-                    <!-- End .row -->
-                    <!-- Page End here -->
-                </div>
+                <div id="iframeSec">
+					<iframe src="login.html" frameborder="0" align="left" width="100%" height="1500px" scrolling="no"></iframe>
+				</div>
                 <!-- End .outlet -->
             </div>
             <!-- End .content-wrapper -->

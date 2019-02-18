@@ -220,4 +220,7 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
+  <select id="login" resultMap="BaseResultMap">
+    SELECT * FROM cp_user WHERE `username`=#{username} AND `password`=#{password}
+  </select>
 </mapper>
