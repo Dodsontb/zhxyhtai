@@ -9,7 +9,7 @@
     <result column="TypeId" jdbcType="INTEGER" property="typeid" />
     <result column="read" jdbcType="VARCHAR" property="read" />
     <result column="headline" jdbcType="VARCHAR" property="headline" />
-    <result column="Ntime" jdbcType="TIMESTAMP" property="ntime" />
+    <result column="Ntime" jdbcType="VARCHAR" property="ntime" />
     <result column="nstate" jdbcType="INTEGER" property="nstate" />
     <result column="target" jdbcType="INTEGER" property="target" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
@@ -17,10 +17,11 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
-   	<association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="plqueryNoticeType"></association>
+   	<association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="queryNoticeType"></association>
    	<association property="imgs" column="Notice_Id" javaType="list" select="queryNoticeimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
-   	<association property="Clazzs" column="Notice_Id" javaType="com.zhxy.domain.Clazz" select="com.zhxy.mapper.ClazzMapper.queryClazzByNotice"></association>
+   	<association property="clazzs" column="Notice_Id" javaType="list" select="queryClazzlist"></association>
+   	
   </resultMap>
   
   <select id="queryNoticeAll" resultMap="BaseResultMap">
@@ -33,8 +34,12 @@
   		select * from `Notice` where Notice_Id=#{Notice_Id}
   </select>
   
-  <select id="plqueryNoticeType" resultType="com.zhxy.domain.Noticetype">
+  <select id="queryNoticeType" resultType="com.zhxy.domain.Noticetype">
   		select * from `Noticetype` where typeid=#{typeid}
+  </select>  
+  
+  <select id="plqueryNoticeType" resultType="com.zhxy.domain.Noticetype">
+  		select * from `Noticetype`
   </select>  
   
   <select id="queryNoticeimgs" resultType="com.zhxy.domain.Noticeimg">
@@ -45,21 +50,44 @@
   		select * from cp_user where `userid`=#{uid}
   </select>
   
-  <select id="queryByHead" resultMap="BaseResultMap">
-  		select * from `Notice`
+  
+   <select id="queryByHeadCount" resultType="int">
+  		select count(0) from `Notice`
   		<where>
-  		<if test="headline">
-  		and headline like concat ("%",#{headline},"%")
-  		</if>
-  		<if test="typeid">	
-  		and TypeId like concat ("%",#{typeid},"%")
-  		 </if>
+	  		<if test="name">
+		  		and headline like concat ("%",#{name},"%")
+	  		</if>
+	  		<if test="typeid>=0">
+	  			and TypeId =#{typeid}
+	  		 </if>
   		</where>
   </select>
   
-  <!--  <select id="queryByType" resultMap="BaseResultMap">
-  		select * from `Notice` where TypeId like concat ("%",#{TypeId},"%")
-  </select>  -->
+  <select id="queryByHead" resultMap="BaseResultMap">
+  		select * from `Notice`
+  		<where>
+	  		<if test="name">
+		  		and headline like concat ("%",#{name},"%")
+	  		</if>
+	  		<if test="typeid>=0">	
+	  			and TypeId =#{typeid}
+	  		 </if>
+  		</where>
+  		limit #{start},#{pagesize}
+  </select>
+  
+  	 <insert id="insertNotice" useGeneratedKeys="true" keyProperty="noticeId">
+	  		insert into `Notice`(headline,ncontent,typeid,uid,ntime)
+	  		value(#{headline},#{ncontent},#{typeid},#{uid},#{ntime})
+	  </insert> 
+  
+ 	<insert id="insertRelation">
+ 			insert into  notice_relation(cid,Notice_Id)value(#{cid},#{Notice_Id})
+ 	</insert> 
+ 	
+ 	<insert id="insertImg">
+ 			insert into  noticeimg(nurl,Notice_Id)value(#{nurl},#{Notice_Id})
+ 	</insert>
   
 	  <update id="deleteNotice">
 	  		update  `Notice` set nstate=0 where Notice_Id=#{Notice_Id}
@@ -67,27 +95,12 @@
 	  
 	  
 	 <resultMap id="Clazz" type="com.zhxy.domain.Clazz">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gradeId" jdbcType="INTEGER" property="gradeid" />
-    <result column="teacherId" jdbcType="INTEGER" property="teacherid" />
-    <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="start" jdbcType="TIMESTAMP" property="start" />
-    <result column="begin" jdbcType="TIMESTAMP" property="begin" />
-    <result column="end" jdbcType="TIMESTAMP" property="end" />
-    <result column="dissolve" jdbcType="BIT" property="dissolve" />
-    <result column="vid" jdbcType="INTEGER" property="vid" />
-    <result column="currId" jdbcType="INTEGER" property="currid" />
-    <result column="way" jdbcType="INTEGER" property="way" />
-    <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="people" jdbcType="INTEGER" property="people" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
-    <result column="name3" jdbcType="VARCHAR" property="name3" />
-    <result column="name4" jdbcType="VARCHAR" property="name4" />
-    <result column="name5" jdbcType="VARCHAR" property="name5" />
-    <association property="grades" column="gradeId" javaType="com.zhxy.domain.Grade" select="queryGrades"></association>
-  </resultMap>
+	 	<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="num" column="num" />
+		<result property="people" column="people" />
+		 <association property="grades" column="gradeId" javaType="com.zhxy.domain.Grade" select="queryGrades"></association>
+	 </resultMap>
 	   
 	  <select id="queryGrades" resultType="com.zhxy.domain.Grade">
 	  select * from grade where id=#{gradeId}
@@ -98,17 +111,27 @@
 	  </select>
 	  
 	  
+	 <!--  <select id="queryClazz" resultMap="Clazz">
+		  select * from clazz as c inner join grade as g
+		  on c.gradeId=g.id
+		  where g.name=#{name}
+	  </select> -->
+	  
 	  <select id="queryClazz" resultMap="Clazz">
-	  select * from clazz as c inner join grade as g
-	  on c.gradeId=g.id
-	  where g.name=#{name}
+		  select * from clazz 
+	  </select>
+	  
+	  <select id="queryClazzlist" resultMap="Clazz">
+	 	select *
+		from clazz
+		where id in (select cid from notice_relation where Notice_Id=#{id})	
 	  </select>
 	  
 	  
-	  
-	 <!--  <insert>
-	  		insert into `Notice`(headline,ncontent,TypeId,Ntime)
-	  </insert> -->
+	  <update id="updataNotice">
+	  		UPDATE `notice` SET nstate = 1 WHERE DATE(Ntime) = DATE(NOW()) AND nstate=0
+	  </update>
+	
   
   
   

@@ -1,6 +1,12 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Message {
     private Integer messageId;
@@ -14,6 +20,49 @@ public class Message {
     private Integer mstate;
 
     private Integer typeid;
+    
+    private String time;
+    
+  //接收者数组
+    private int[] receiver; 
+    
+    public int[] getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(int[] receiver) {
+		this.receiver = receiver;
+	}
+
+	public MessageType getType() {
+		return type;
+	}
+
+	public void setType(MessageType type) {
+		this.type = type;
+	}
+
+	public List<Messageimg> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<Messageimg> imgs) {
+		this.imgs = imgs;
+	}
+
+	public CpUser getCp_user() {
+		return cp_user;
+	}
+
+	public void setCp_user(CpUser cp_user) {
+		this.cp_user = cp_user;
+	}
+
+	private MessageType type;
+    
+    private List<Messageimg> imgs;
+    
+    private CpUser cp_user;
 
     private String name1;
 
@@ -54,7 +103,9 @@ public class Message {
     }
 
     public void setMtime(Date mtime) {
-        this.mtime = mtime;
+    	SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+    	this.mtime = mtime;
+        this.time=simpleDateFormat.format(mtime);
     }
 
     public Integer getMstate() {
@@ -112,4 +163,12 @@ public class Message {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+    
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 }
