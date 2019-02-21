@@ -5,6 +5,7 @@
 		<result property="id" column="id" />
 		<result property="content" column="content" />
 		<result property="great" column="great" />
+		<result property="roomid" column="rid"/>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Event" extends="event"
 		id="detailEvent">
@@ -22,13 +23,18 @@
 		`date`=date(#{date}) and cid=#{id} and c.eid=e.id
 	</select>
 	<select id="peoples" resultMap="com.zhxy.mapper.PeopleMapper.staff">
-		select *,(select name from role where roleid=rid) role
+		select *,(select rolename from cp_role where roleid=rid) role
 		from cp_staff
-		where id in (select pid from calendar_teacher where cid=#{id})
+		where staffid in (select pid from calendar_teacher where cid=#{id})
 	</select>
 	<insert id="addEvent">
-		<foreach collection="idList" item="cid" separator=";">
-			insert into
-		</foreach>
+		insert into class_calendar(cid,rid,eid,date,ap,study)
+		values <foreach collection="idList" item="cid" separator=",">
+				 (#{cid},#{roomid},#{id},#{eventStr},#{time},#{study})
+			  </foreach>
 	</insert>
+	<select id="allEvent" resultMap="event">
+		select *
+		from event
+	</select>
 </mapper>

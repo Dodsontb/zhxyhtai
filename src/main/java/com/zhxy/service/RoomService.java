@@ -1,5 +1,9 @@
 package com.zhxy.service;
 
+import java.util.List;
+
+import com.zhxy.domain.Room;
+
 public interface RoomService {
 
 	/**
@@ -12,4 +16,8 @@ public interface RoomService {
 	int roomnumByFun(int type);
 	
 	int roomBigNum();
+	
+	List<Room> spare(String date,int id,boolean study,boolean ap);
+	
+	Room queryById(int id);
 }

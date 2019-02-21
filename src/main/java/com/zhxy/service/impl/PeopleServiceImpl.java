@@ -1,7 +1,9 @@
 package com.zhxy.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,18 +23,29 @@ public class PeopleServiceImpl implements PeopleService{
 	@Override
 	public List<Integer> position(People people) {
 		// TODO Auto-generated method stub
-		List<Integer> ids=new ArrayList<Integer>();
-		ids.add(people.getId());
+		Map<Integer, String> maps=new HashMap<Integer, String>();
+		maps.put(people.getId(), null);
 		List<People> list=peopleMapper.position(people.getId());
 		for (People temp : list) {
-			ids.add(temp.getId());
-			for (People tempPeople : temp.getPeoples()) {
-				ids.add(tempPeople.getId());
-			}
+			on(maps, temp);
+		}
+		List<Integer> ids=new ArrayList<>();
+		for (int integer : maps.keySet()) {
+			ids.add(integer);
 		}
 		return ids;
 	}
 
+	public void on(Map<Integer, String> maps,People people) {
+		maps.put(people.getId(), null);
+		for (People item : people.getPeoples()) {
+			maps.put(item.getId(), null);
+			if(item.getPeoples().size()>0) {
+				on(maps, item);
+			}
+		}
+	}
+	
 	@Override
 	public People queryById(int id) {
 		// TODO Auto-generated method stub

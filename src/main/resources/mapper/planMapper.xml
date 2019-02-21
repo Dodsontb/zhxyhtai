@@ -8,10 +8,7 @@
 		<result property="active" column="active" />
 		<result property="date" column="date" />
 		<result property="study" column="study" />
-		<association property="clazz"
-			javaType="com.zhxy.domain.Clazz"
-			select="com.zhxy.mapper.ClazzMapper.queryById" column="cid"></association>
-		<association property="event" column="{date=date,id=cid}" javaType="com.zhxy.domain.Event" select="com.zhxy.mapper.EventMapper.dateEvent"></association>
+		<result property="rid" column="roomid"/>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Plan" id="clazzplan" extends="plan">
 		<association property="room" column="roomid" javaType="com.zhxy.domain.Room" select="com.zhxy.mapper.RoomMapper.queryById"></association>
@@ -80,6 +77,11 @@
 		from plan
 		where `date`=date(#{date}) and cid=#{id}
 	</select>
+	<select id="classadvPlan" resultMap="clazzplan">
+		select *
+		from plan
+		where `date`=date(#{date}) and cid=#{id} and advance=true		
+	</select>
 	<update id="updateDate">
 		update plan
 		set `date`=date(#{date})
@@ -95,4 +97,18 @@
 		set advance=false
 		where advance=true
 	</update>
+	<select id="maxDate" resultType="date">
+		select Max(`date`)
+		from plan
+	</select>
+	<select id="maxdate" resultType="date">
+		select Max(`date`)
+		from plan
+		where advance=true
+	</select>
+	<select id="mindate" resultType="date">
+		select min(`date`)
+		from plan
+		where advance=true
+	</select>
 </mapper>

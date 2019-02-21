@@ -1,5 +1,6 @@
 package com.zhxy.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,32 @@ public class GradeServiceImpl implements GradeService{
 	ClazzService clazzService;
 	
 	@Override
-	public List<Grade> grade(People people) {
+	public List<Grade> grade(People people,String date) {
 		// TODO Auto-generated method stub
 		List<Integer> ids=peopleService.position(people);
 		List<Grade> grades=gradeMapper.findGrade(ids);
+		List<Grade> needGrades=new ArrayList<Grade>();
 		for (Grade grade : grades) {
-			grade.setClazzs(clazzService.clazz(ids, grade.getId()));
+			grade.setClazzs(clazzService.clazz(ids, grade.getId() ,date));			
 		}
-		return gradeMapper.findGrade(ids);
+		for (Grade grade : grades) {
+			if(grade.getClazzs().size()>0) {
+				needGrades.add(grade);
+			}
+		}
+		return needGrades;
+	}
+
+	@Override
+	public List<Grade> queryGrades(int mid) {
+		// TODO Auto-generated method stub
+		return gradeMapper.grades(mid);
+	}
+
+	@Override
+	public List<Grade> allGrade() {
+		// TODO Auto-generated method stub
+		return gradeMapper.allGrade();
 	}
 
 }

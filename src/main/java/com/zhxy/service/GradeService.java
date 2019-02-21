@@ -7,5 +7,9 @@ import com.zhxy.domain.People;
 
 public interface GradeService {
 
-	List<Grade> grade(People people);
+	List<Grade> grade(People people,String date);
+	
+	List<Grade> queryGrades(int mid);
+	
+	List<Grade> allGrade();
 }

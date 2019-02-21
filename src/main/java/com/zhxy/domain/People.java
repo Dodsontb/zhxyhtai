@@ -11,6 +11,7 @@ public class People implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
+	private String allname;
 	private int rid;
 	private String role;
 	private int position;
@@ -26,7 +27,8 @@ public class People implements Serializable{
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.allname=name;
+		this.name = name.length()>4?name.substring(0, 4)+".. ":name+" ";
 	}
 	public String getRole() {
 		return role;
@@ -56,5 +58,11 @@ public class People implements Serializable{
 	}
 	public void setPosition(int position) {
 		this.position = position;
+	}
+	public String getAllname() {
+		return allname;
+	}
+	public void setAllname(String allname) {
+		this.allname = allname;
 	}
 }

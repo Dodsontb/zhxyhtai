@@ -7,7 +7,9 @@ public class InsertEvent extends Event {
 	private int time;
 	
 	private boolean study;
-
+	
+	private String eventStr;
+	
 	private List<Integer> idList;
 
 	public int getTime() {
@@ -32,6 +34,14 @@ public class InsertEvent extends Event {
 
 	public void setIdList(List<Integer> idList) {
 		this.idList = idList;
+	}
+
+	public String getEventStr() {
+		return eventStr;
+	}
+
+	public void setEventStr(String eventStr) {
+		this.eventStr = eventStr;
 	}
 
 }

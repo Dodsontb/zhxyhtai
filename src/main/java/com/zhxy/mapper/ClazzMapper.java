@@ -21,6 +21,8 @@ public interface ClazzMapper {
 	
 	List<Clazz> allClazz();
 
+	List<Clazz> teacherClazz(List<Integer> ids);
+	
 	List<Clazz> findClazz(@Param("teacher")People people,@Param("begin")Date begin,@Param("end")Date end,@Param("before")Date before);
 
 	Integer isStudyByOnself(@Param("clazz")Clazz clazz,@Param("begin")Date date,@Param("end")Date end);
@@ -28,6 +30,8 @@ public interface ClazzMapper {
 	List<Clazz> queryClazz(People people);
 	
 	List<Clazz> clazz(@Param("ids")List<Integer> id,@Param("grade")Integer grade);
+	
+	List<Clazz> notIndateClazz(@Param("ids")List<Integer> id,@Param("grade")Integer grade,@Param("date") String date);
 	
 	/**
 	 *  根据消息ID查询有哪些班级

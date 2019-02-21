@@ -29,4 +29,5 @@ public interface RoomMapper {
 	
 	List<Room> remainRoom(@Param("day")Date day,@Param("clazz")Clazz clazz,@Param("study")boolean study);
 
+	List<Room> spare(@Param("day")String day,@Param("cid")int id,@Param("study")boolean study,@Param("ap")boolean ap);
 }

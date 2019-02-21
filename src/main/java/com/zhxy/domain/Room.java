@@ -71,6 +71,11 @@ public class Room implements Serializable{
 		this.plans=new ArrayList<Plan>();
 		this.id=-1;
 	}
+	
+	public Room(int id) {
+		this.id=id;
+	}
+	
 	public Boolean getEnable() {
 		return enable;
 	}

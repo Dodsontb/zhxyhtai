@@ -7,6 +7,7 @@ import java.util.Map;
 import com.zhxy.domain.Calendar;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.DatePlan;
+import com.zhxy.domain.People;
 import com.zhxy.domain.Plan;
 import com.zhxy.domain.Room;
 
@@ -20,11 +21,11 @@ public interface PlanService {
 
 	DatePlan datePlan(Date date);
 	
-	List<DatePlan> weekPlan(Date date);
-	
-	List<DatePlan> week(Date date);
+	DatePlan advPlan(Date date,People people);
 
 	Map<String, List<DatePlan>> months(Date date);
+	
+	Date maxDate();
 	
 	Plan existPlan(Date date,Room room,boolean ap);
 	
@@ -32,13 +33,15 @@ public interface PlanService {
 	 * 自动排课接口
 	 * @param date
 	 */
-	void autoPlan(Date date);
+	Date autoPlan();
 	
 	int addPlan(Plan plan);
 	
 	int deleteAdv();	
 	
 	Calendar calendar(int type,Date date);
+	
+	Map<String, List<DatePlan>> switching(People people);
 	
 	void updateDate(Date date,int id);
 	

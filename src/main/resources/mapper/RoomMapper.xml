@@ -100,7 +100,7 @@
 		select *,(select !ap from plan where `date`=date(#{day}) and roomid =classroom.id limit 1) ap
 		from classroom
 		where id in (select roomid from plan where `date`=date(#{day}) group by roomid having count(0)=1 ) and floor in ( select floor
-		from grade_floor where gid=#{clazz.grade.id}) and people >= #{clazz.people} and people >= #{clazz.people}
+		from grade_floor where gid=#{clazz.grade.id}) and people >= #{clazz.people}
 		<choose>
 			<when test="study">
 				and inclass=true
@@ -109,5 +109,19 @@
 				and forstudy=true and inclass=false
 			</otherwise>
 		</choose>
+	</select>
+	<select id="spare" resultMap="room">
+		select *
+		from classroom
+		where id not in (select roomid from plan where `date`=#{day} and ap=#{ap}) and floor in (select floor from grade_floor where gid =(select gradeid from clazz where id =#{cid}))
+		and people >= (select people from clazz where id=#{cid})
+		<choose>
+			<when test="study">
+				and inclass=true
+			</when>
+			<otherwise>
+				and forstudy=true
+			</otherwise>
+		</choose>		
 	</select>
 </mapper>

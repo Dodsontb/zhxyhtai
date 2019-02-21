@@ -6,11 +6,14 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.zhxy.domain.Grade;
 
-
 @Mapper
 public interface GradeMapper {
 
 	Grade queryById(int id);
 	
 	List<Grade> findGrade(List<Integer> ids);
+
+	List<Grade> grades(int mid);
+	
+	List<Grade> allGrade();
 }

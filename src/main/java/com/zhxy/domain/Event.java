@@ -10,11 +10,13 @@ public class Event {
 	public static int PM = 2;// 下午
 
 	private int id;
+	private String allcontent;
 	private String content;
 	private boolean great;
 	private String note;
 	private Date date;
 	private int ap;
+	private int roomid;
 	private Room room;
 	private boolean aP;
 	private boolean study;
@@ -34,7 +36,8 @@ public class Event {
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.allcontent=content;
+		this.content = content.length()>7? content.substring(0,7)+"...":content;
 	}
 
 	public boolean isGreat() {
@@ -104,9 +107,14 @@ public class Event {
 		this.peoples = peoples;
 		StringBuffer sb=new StringBuffer();
 		for (People people : peoples) {
-			sb.append(people.getName()+" / ");
+			sb.append(people.getAllname()+" / ");
 		}
-		this.peoplesStr=sb.substring(0, sb.lastIndexOf("/"));
+		if(peoples.size()>0) {
+			this.peoplesStr=sb.substring(0, sb.lastIndexOf("/"));			
+			if(peoplesStr.length()>10) {
+				this.peoplesStr=peoplesStr.substring(0, 10)+"...";
+			}
+		}
 	}
 
 	public String getPeoplesStr() {
@@ -116,4 +124,21 @@ public class Event {
 	public void setPeoplesStr(String peoplesStr) {
 		this.peoplesStr = peoplesStr;
 	}
+
+	public int getRoomid() {
+		return roomid;
+	}
+
+	public void setRoomid(int roomid) {
+		this.roomid = roomid;
+	}
+
+	public String getAllcontent() {
+		return allcontent;
+	}
+
+	public void setAllcontent(String allcontent) {
+		this.allcontent = allcontent;
+	}
+	
 }
