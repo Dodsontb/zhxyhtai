@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Message;
+import com.zhxy.domain.MessageReception;
 
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer messageId);
@@ -22,7 +23,7 @@ public interface MessageMapper {
     
     List<Message> queryByMessageName(String username);
     
-    List<CpUser> queryCpUser();
+    List<CpUser> queryUserGetId();
     
     List<CpUser> queryCpUserByName(String username);
     
@@ -33,4 +34,14 @@ public interface MessageMapper {
     List<Message> getChatRecord(int sendid,int receiver);
     
     Message selectUid(int uid);
+    
+    int insertReception(Message message);
+    
+  //获取联系人列表
+  /*	List<CpUser> getChatList(Integer userid);*/
+  	
+  	List<CpUser> getUserlist(Integer chatid,Integer userid);
+  	
+  	List<Message> getChatRecordList(int sendid,int receiver);
+  
 }

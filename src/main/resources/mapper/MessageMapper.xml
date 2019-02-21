@@ -13,8 +13,9 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+    <result column="receiver" jdbcType="VARCHAR" property="receiver" />
     <association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="queryMessageType"></association>
-   	<association property="imgs" column="Notice_Id" javaType="list" select="queryMessageimgs"></association>
+   	<association property="imgs" column="Message_Id" javaType="list" select="queryMessageimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
     
   </resultMap>
@@ -52,24 +53,74 @@
   				delete from Message where Message_Id=#{messageId}
   		</delete>
   
- 		<insert id="insertMessage">
+ 		<insert id="insertMessage" useGeneratedKeys="true" keyProperty="messageId">
  			insert into `Message`( Uid, mcontent,  mtime, mstate, TypeId)values(#{uid},#{mcontent},#{mtime},#{mstate},#{typeid})
  		</insert> 
   
   		<select id="getChatRecord" resultMap="BaseResultMap">
   				SELECT * FROM message 
+						INNER JOIN `message_reception` 
+						ON message.`Message_Id`=`message_reception`.`Message_Id`
+						WHERE (`message_reception`.`Uid`=#{sendid} AND message.`Uid`=#{receiver})
+						OR (`message_reception`.`Uid`=#{receiver} AND message.`Uid`=#{sendid})
+  		</select>
+  		
+  		<select id="getChatRecordList" resultMap="BaseResultMap">
+  				SELECT *,message_reception.Uid as receiver FROM message 
 					INNER JOIN `message_reception` 
 					ON message.`Message_Id`=`message_reception`.`Message_Id`
-					WHERE (`message_reception`.`Uid`=#{uid} AND message.`Uid`=#{uid})
+					WHERE (`message`.`Uid`=#{sendid} AND `message_reception`.`Uid`=#{receiver})
+					
   		</select>
   		
   		<select id="selectUid" resultMap="BaseResultMap">
   				SELECT * FROM Message WHERE Uid=#{uid}
   		</select>
   
-  		<!-- <select id="">
-  				select * from Message 
+  
+  		
+  		<!-- <select id="getChatList" resultMap="CpUser">
+  			SELECT u.`userid`,u.`username`,u.`usertypeid`,u.`usertypenub`,
+ 			 CONCAT(IFNULL(s.`staffname`,''),IFNULL(stu.`studentname`,''),
+			 IFNULL(p.`parentsname`,'')) AS `name`,
+			 CONCAT(IFNULL(s.`sex`,''),IFNULL(stu.`sex`,''),
+			 IFNULL(p.`sex`,'')) AS `sex`,img.`url` FROM cp_user 
+			 AS u LEFT JOIN cp_staff AS s ON s.`staffid`=u.`usertypeid` 
+			 AND u.`usertypenub`=0 LEFT JOIN cp_student AS stu ON stu.`studentid`=u.`usertypeid` 
+			 AND u.`usertypenub`=1 LEFT JOIN cp_parents AS p ON p.`parentsid`=u.`usertypeid` 
+			 AND u.`usertypenub`=2 
+			 LEFT JOIN img ON img.`id`=u.`userid` WHERE u.`userid` 
+			 IN (SELECT (message.uid+message_reception.`uid`-#{userid}) AS uid FROM message INNER JOIN message_reception ON message.`Message_Id`=message_reception.`Message_Id` 
+			 WHERE message_reception.`uid`=#{userid} OR message.`uid`=#{userid} GROUP BY uid)
+  		
   		</select> -->
+  		
+  		
+  		  <select id="getUserlist" resultType="com.zhxy.domain.CpUser">
+  				SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` WHERE cp_user.`userid` IN (#{chatid},#{userid})
+  		</select>  
+  		
+  		<!-- <resultMap id="CpUser" type="com.zhxy.domain.CpUser">
+  		
+  		<id property="userid" jdbcType="INTEGER" column="userid"/>
+
+		<result property="username" jdbcType="VARCHAR" column="username"/>
+		
+		<result property="usertypeid" jdbcType="INTEGER" column="usertypeid"/>
+		
+		<result property="usertypenub" jdbcType="INTEGER" column="usertypenub"/>
+		
+		<result property="name" jdbcType="VARCHAR" column="name"/>
+		
+		<result property="sex" jdbcType="INTEGER" column="sex"/>
+		
+		<result property="positionid" jdbcType="INTEGER" column="positionid"/>
+		
+		<result property="positionname" jdbcType="VARCHAR" column="positionname"/>
+		
+		<result property="url" jdbcType="VARCHAR" column="url"/>
+		
+		</resultMap> -->
   
   
   <sql id="Base_Column_List">

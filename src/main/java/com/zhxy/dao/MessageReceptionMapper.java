@@ -1,5 +1,6 @@
 package com.zhxy.dao;
 
+import com.zhxy.domain.Message;
 import com.zhxy.domain.MessageReception;
 
 public interface MessageReceptionMapper {
@@ -14,4 +15,6 @@ public interface MessageReceptionMapper {
     int updateByPrimaryKeySelective(MessageReception record);
 
     int updateByPrimaryKey(MessageReception record);
+    
+    int insertReception(Message message);
 }

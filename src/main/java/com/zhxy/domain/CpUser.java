@@ -35,9 +35,17 @@ public class CpUser {
 
     private String name5;
     
-   
+   private String url;
 
-    public Integer getUserid() {
+    public String getUrl() {
+	return url;
+}
+
+public void setUrl(String url) {
+	this.url = url;
+}
+
+	public Integer getUserid() {
         return userid;
     }
 

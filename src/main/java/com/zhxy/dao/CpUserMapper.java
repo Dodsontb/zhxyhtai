@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.CpUser;
 
 public interface CpUserMapper {
@@ -16,4 +18,8 @@ public interface CpUserMapper {
     int updateByPrimaryKey(CpUser record);
     
     CpUser login(String username,String password);
+    
+    List<CpUser> getUserlist(Integer chatid,Integer userid);
+    
+    List<CpUser> queryUserGetId();
 }

@@ -21,7 +21,7 @@ public class cpUser implements cpUserservice{
 		// TODO Auto-generated method stub
 		CpUser userinfo = user.login(username, password);
 		if (userinfo!=null) {
-			System.out.println("这是查询出来的"+userinfo.getUsertypenub());
+			/*System.out.println("这是查询出来的"+userinfo.getUsertypenub());*/
 			/*if(userinfo.getUsertypenub()==0) {
 				int staffid=userinfo.getUsertypeid();
 				System.out.println("登入的是员工");
