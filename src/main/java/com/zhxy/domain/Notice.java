@@ -36,7 +36,17 @@ public class Notice {
     
     private CpUser cp_user;
     
-    public List<NoticeRelation> getNoticerelation() {
+    private List<Clazz> clazzs;
+    
+    public List<Clazz> getClazzs() {
+		return clazzs;
+	}
+
+	public void setClazzs(List<Clazz> clazzs) {
+		this.clazzs = clazzs;
+	}
+
+	public List<NoticeRelation> getNoticerelation() {
 		return noticerelation;
 	}
 
