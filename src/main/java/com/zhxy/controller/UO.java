@@ -64,4 +64,14 @@ public class UO {
 	public String cp_index(HttpSession session) {
 		return "cp_index";
 	}
+	@RequestMapping("selectTest")
+	public String selectTest() {
+		return "selectTest";
+	}
+	
+	@RequestMapping("cp_select")
+	public String cp_select() {
+		return "cp_select";
+	}
+	
 }

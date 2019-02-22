@@ -7,8 +7,6 @@ public class Img {
 
     private String url;
 
-    private Integer style;
-
     private Integer status;
 
     private Date time;
@@ -16,6 +14,8 @@ public class Img {
     private Integer uid;
 
     private Integer id;
+
+    private Integer style;
 
     public Integer getImgid() {
         return imgid;
@@ -31,14 +31,6 @@ public class Img {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Integer getStyle() {
-        return style;
-    }
-
-    public void setStyle(Integer style) {
-        this.style = style;
     }
 
     public Integer getStatus() {
@@ -71,5 +63,13 @@ public class Img {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getStyle() {
+        return style;
+    }
+
+    public void setStyle(Integer style) {
+        this.style = style;
     }
 }

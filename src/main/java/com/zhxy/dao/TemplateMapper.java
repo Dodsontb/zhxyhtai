@@ -22,4 +22,8 @@ public interface TemplateMapper {
     int insertTemplate(Template record);
     
     List<Template> querybytype(Integer softtypeid);
+    
+    List<Template> cp_queryall();
+    
+    List<Template> cp_querybyname1(String name1);
 }

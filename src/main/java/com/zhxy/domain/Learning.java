@@ -24,8 +24,28 @@ public class Learning {
     private String name4;
 
     private String name5;
+    
+    private Integer cid;
+    
+    private String studentname;
 
-    public Integer getId() {
+    public String getStudentname() {
+		return studentname;
+	}
+
+	public void setStudentname(String studentname) {
+		this.studentname = studentname;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
+
+	public Integer getId() {
         return id;
     }
 
