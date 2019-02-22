@@ -151,17 +151,97 @@
   </update>
   
   <select id="whether" resultMap="whetherone">
-  		SELECT * FROM whether_accomplish where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
+  		SELECT * FROM whether_accomplish
+  		<if test="ljxYesno != null">
+  			where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
+  		</if>
+  		<if test="ljxYesno == null">
+  			where ljxUid=#{ljxUid}
+  		</if>
   </select>
   <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone">
-  		<id property="ljxWid" column="ljxWid"/>
-  		<result property="ljxTid" column="ljxTid"/>
-  		<result property="ljxYesno" column="ljxYesno"/>
-  		<result property="ljxUid" column="ljxUid"/>
-  		<result property="ljxDate" column="ljxDate"/>
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
   		
-  		<collection property="stulist" column="ljxTid"
+  		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
   		select="com.zhxy.dao.StudentassignmentMapper.stuquery"></collection>
   </resultMap>
+  
+  <select id="whether2" resultMap="whetherone2">
+  		SELECT *, #{ljxType} ljxType FROM whether_accomplish where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone2">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="stulist" column="{ljxTid=ljxtid, ljxType=ljxType}"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.dao.StudentassignmentMapper.stuType"></collection>
+  </resultMap>
+  
+   <select id="whether3" resultMap="whetherone3">
+  		SELECT * FROM whether_accomplish where ljxUid=#{ljxUid} and DATE(ljxDate) = DATE(NOW())
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone3">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.dao.StudentassignmentMapper.stutime"></collection>
+  </resultMap>
+  
+  <update id="udatew">
+  		UPDATE `whether_accomplish` SET `ljxYesno`='否' 
+	
+		WHERE `ljxYesno` = '0' AND `ljxTid` IN
+
+		(SELECT ljxTid FROM studentassignment WHERE DATE(ljxTime)=DATE(NOW()))#未完成
+  	
+  </update>
+  
+  <delete id="deletestu">
+  		DELETE FROM`whether_accomplish` WHERE `ljxTid`=#{ljxtid} AND `ljxUid`=#{ljxuid}
+  </delete>
+  
+  <insert id="pilinsert">
+  		INSERT INTO`whether_accomplish`(`ljxTid`,`ljxYesno`,`ljxUid`) VALUE
+  		<foreach collection ="u" item="user" separator =",">
+  			(#{ljxtid},0,#{user.ljxtuid})
+  		</foreach>
+  </insert>
+  
+  
+  <!-- 老师所带的班级 -->
+  
+  <select id="teacher_history" resultMap="teacher_historY">
+  		SELECT * FROM `teacher_history` WHERE pid = 1
+  </select>
+  
+  <!-- 班级 -->
+  
+	<select id="clazz" resultType="com.zhxy.domain.Clazz">
+		SELECT * FROM clazz WHERE id = #{cid}
+	</select>
+  	
+  <resultMap type="com.zhxy.domain.TeacherHistory" id="teacher_historY">
+  		<id property="id" column="id"/>
+  		<result property="pid" column="pid"/>
+  		<result property="cid" column="cid"/>
+  		
+  	<collection property="list" column="cid"
+ 		ofType="com.zhxy.domain.Clazz" 	
+ 		select="clazz"></collection>	
+  </resultMap>
+  
 </mapper>

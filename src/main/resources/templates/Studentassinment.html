@@ -82,7 +82,6 @@
         				<!-- Start #email-sidebar -->
         				<div class="p15">
         						<a id="write-email"  class="btn btn-danger btn-block uppercase"><i class="im-quill"></i>今日任务</a>
-        						
         				</div>
         				<ul id="sideNav" class="nav nav-pills nav-stacked">
 							<li class="top-search">
@@ -103,38 +102,38 @@
 						<!-- Start #email-content -->
 						<div class="email-wrapper">
 							<div class="btn-group" data-toggle="buttons" style="margin-left: 420px;">
-							  <label class="btn btn-primary active">
-								<input type="radio" name="options" id="option1" autocomplete="off" value="1" checked="true"> 考试任务
+							  <label class="btn btn-primary active" name="taskChoose">
+								<input type="radio" name="options" id="option1" autocomplete="off" value="1"> 考试任务
 							  </label>
-							  <label class="btn btn-primary">
-								<input type="radio" name="options" id="option2" autocomplete="off"> 作业任务
+							  <label class="btn btn-primary" name="taskChoose">
+								<input type="radio" name="options" id="option2" autocomplete="off" value="2"> 作业任务
 							  </label>
-							  <label class="btn btn-primary">
-								<input type="radio" name="options" id="option3" autocomplete="off"> 机试任务
+							  <label class="btn btn-primary" name="taskChoose">
+								<input type="radio" name="options" id="option3" autocomplete="off" value="3"> 机试任务
 							  </label>
 							</div>
 							
 							<div class="email-toolbar-search col-lg-12" id ="b" style="border: 1px gainsboro solid;height: 500px;margin-top: 30px;">
 								<div v-for="(b,index) in list" ><!-- th:each="list:${list}"  -->
 									<div style="border-bottom: 1px gainsboro solid;height: 50px;width: 719.38px;" v-for="(t,index) in b.stulist">
-										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">{{t.ljxTitle}}</div><!-- th:text="${list.Ljx_Title}" -->
-										<div style="margin-left: 300px;" v-if="b.ljxYesno=='0'">
-											<span>{{t.ljxTime}}</span>
+										<div style="margin-left: 100px;width: 200px;margin-top: 50px;">{{t.ljxtitle}}</div><!-- th:text="${list.Ljx_Title}" -->
+										<div style="margin-left: 300px;" v-if="b.ljxyesno=='0'">
+											<span>{{t.ljxdatetime}}</span>
 											<a style="margin-left: 50px;">立即执行</a>
-											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal" class="tui" v-on:click="tuiClick(t.ljxTid)" v-bind:value="t.ljxTid">推迟任务{{t.ljxTid}}</a>
+											<a style="margin-left: 50px;" data-toggle="modal" data-target="#myModal" class="tui" v-on:click="tuiClick(t.ljxtid)" v-bind:value="t.ljxTid">推迟任务{{t.ljxtid}}</a>
 										</div>
-										<div style="margin-left: 300px;" v-if="b.ljxYesno=='是'">
-											<span>{{t.ljxTime}}</span>
+										<div style="margin-left: 300px;" v-if="b.ljxyesno=='是'">
+											<span>{{t.ljxdatetime}}</span>
 											<a style="margin-left: 50px;">查看错题</a>
 											<a style="margin-left: 50px;">再来一套</a>
 										</div>
-										<div style="margin-left: 300px;" v-if="b.ljxYesno=='否'">
-											<span>{{t.ljxTime}}</span>
+										<div style="margin-left: 300px;" v-if="b.ljxyesno=='否'">
+											<span>{{t.ljxdatetime}}</span>
 											<a style="margin-left: 50px;">现在执行</a>
 											<a style="margin-left: 50px;">再来一套</a>
 										</div>
-										<div style="margin-left: 300px;" v-if="b.ljxContent !=null">
-											<span>{{t.ljxTime}}</span>
+										<div style="margin-left: 300px;" v-if="b.ljxcontent !=null">
+											<span>{{t.ljxdatetime}}</span>
 											<a style="margin-left: 50px;">开始执行</a>
 											<a style="margin-left: 50px;">已审核过</a><!--v-if="b.ljxYesno =='是' -->
 										</div>
@@ -151,17 +150,17 @@
 										</div>
 										<div class="modal-body">
 											<div style="width: 280px;margin-left: 150px;">
-												任务标题：<input type="text" class="ljxtow"  v-model="b.ljxTitle"/></br>
+												任务标题：<input type="text" class="ljxtow"  v-model="b.ljxtitle"/></br>
 												
 												<h5>推迟理由：</h5><textarea style="width: 250px; height: 100px;" class="liyou"></textarea>
-												<input type="text" name="" id="" v-model="b.ljxTime" style="width: 143.61px;height: 39.6px;" /><span style="margin-left: 50px;">(结束时间)</span><input type="date" name="time" id="" value="" style="margin-top: 20px;"/><span style="margin-left: 50px;">(推迟时间)<span>
+												<input type="text" name="" id="" v-model="b.ljxdatetime" style="width: 143.61px;height: 39.6px;" /><span style="margin-left: 50px;">(结束时间)</span><input type="date" name="time" id="" value="" style="margin-top: 20px;"/><span style="margin-left: 50px;">(推迟时间)<span>
 											</div>
 											
 										</div>
 										
 										<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary putoff" v-on:click="putoff(b.ljxTid,b.ljxClass,b.ljxClasses)">提交</button>
+										<button type="button" class="btn btn-primary putoff" v-on:click="putoff(b.ljxtid,b.ljxclass,b.ljxclasses)">提交</button>
 										</div>
 									</div>
 									</div>
@@ -278,17 +277,31 @@
 				
 			
 				function bb(ljxYesno){
-					/* alert(ljxYesno) */
-					$.ajax({
-						url:"/whetherstu",
-						type:"post",
-						data:"ljxYesno="+ljxYesno,
-						async:true,
-						success:function(date){
-							/* alert(JSON.stringify(date)) */
-							v.list = date;
-						}
-					})
+					var val=$('input:radio[name="options"]:checked').val();
+					if(val!=null){
+						$.ajax({
+							url:"/whetherstu2",
+							type:"post",
+							data:"ljxljxtype="+val+"&ljxYesno="+ljxYesno,
+							async:true,
+							success:function(date){
+								/* alert(JSON.stringify(date)) */
+								v.list = date;
+							}
+						})
+					}else{
+						/* alert(ljxYesno) */
+						$.ajax({
+							url:"/whetherstu",
+							type:"post",
+							data:"ljxYesno="+ljxYesno,
+							async:true,
+							success:function(date){
+								/* alert(JSON.stringify(date)) */
+								v.list = date;
+							}
+						})
+					}
 				}
 			
 				function bbT(){
@@ -305,12 +318,6 @@
 					})
 				}
 			
-			/*
-				单选框	
-			*/
-				$("input[type=radio]").click(function(){  
-					 alert("你被选中了"); 
-				 });  
 			
 				function tuiC(id){
 					/* alert("tui is clicked" + id); */
@@ -331,7 +338,7 @@
 					$.ajax({
 						url:"/putoffinsert",
 						type:"post",
-						data:"ljxTid="+tid+"&ljxUid=1&ljxClass="+clas+"&ljxClasses="+classes+"&ljxContent="+liyou+"&ljxTitme="+datetime,
+						data:"ljxtid="+tid+"&ljxuid=1&ljxclass="+clas+"&ljxclasses="+classes+"&ljxcontent="+liyou+"&ljxTitme="+datetime,
 						async:true,
 						success:function(date){
 							alert(date);
@@ -343,9 +350,36 @@
 						}
 					})
 				}
+				
+				/* $('label[name="taskChoose"]').click(function(){
+					nihao(this);
+				}) */
+				
+				$("#write-email").click(function(){
+				 $.ajax({
+						url:"/whetherstu3",
+						type:"post",
+						data:"",
+						async:true,
+						success:function(date){
+							/* alert(JSON.stringify(date)) */
+							v.list = date;
+						}
+					})
+				 })
 			})
-		
-		
+			
+			/*
+				单选框	
+			*/
+				/* function nihao(th){  
+					alert("你被选中了"); 
+					var radio = $(th).find('input:radio[name="options"]');//得到radio控件
+					if(radio.prop('checked')) {						
+						$(th).find('div').removeClass('checked');
+					}
+				 };  */
+			
 		</script>
     </body>
 </html>

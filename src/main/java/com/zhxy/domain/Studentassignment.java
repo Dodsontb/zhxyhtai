@@ -14,9 +14,9 @@ public class Studentassignment {
 
     private Date ljxdatetime;
 
-    private Date ljxdate;
+    private String ljxdate;
 
-    private Date ljxtime;
+    private String ljxtime;
 
     private Integer ljxuid;
 
@@ -68,29 +68,29 @@ public class Studentassignment {
         this.ljxclasses = ljxclasses;
     }
 
-    public Date getLjxdatetime() {
-        return ljxdatetime;
+    public String getLjxdatetime() {
+    	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxdatetime);
     }
 
     public void setLjxdatetime(Date ljxdatetime) {
         this.ljxdatetime = ljxdatetime;
     }
 
-    public Date getLjxdate() {
+    public String getLjxdate() {
         return ljxdate;
     }
 
-    public void setLjxdate(Date ljxdate) {
+    public void setLjxdate(String ljxdate) {
         this.ljxdate = ljxdate;
     }
 
 
     public String getLjxTime() {
-    	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxtime);
+    	return ljxtime;
 
     }
 
-    public void setLjxtime(Date ljxtime) {
+    public void setLjxtime(String ljxtime) {
         this.ljxtime = ljxtime;
     }
 
@@ -131,7 +131,9 @@ public class Studentassignment {
     }
 
     public void setName1(String name1) {
-        this.name1 = name1;
+    	if(null!=name1) {
+            this.name1 = name1.length()>0?name1:null;
+    	}
     }
 
     public String getName2() {
