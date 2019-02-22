@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <link rel='stylesheet' type='text/css' />
+       
+        <link th:href="@{assets/css/icons.css}" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link th:href="@{assets/css/sprflat-theme/jquery.ui.all.css}" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link th:href="@{assets/css/bootstrap.css}" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link th:href="@{assets/css/plugins.css}" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link th:href="@{assets/css/main.css}" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link th:href="@{assets/css/custom.css}" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{assets/img/ico/apple-touch-icon-144-precomposed.png}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{assets/img/ico/apple-touch-icon-114-precomposed.png}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{assets/img/ico/apple-touch-icon-72-precomposed.png}">
+        <link rel="apple-touch-icon-precomposed" th:href="@{assets/img/ico/apple-touch-icon-57-precomposed.png}">
+        <link rel="icon" th:href="@{assets/img/ico/favicon.ico}" type="image/png">
+		<style>
+			
+			/*table{
+				border: 1px solid #C0C0C0;
+				width: 600px;
+			}
+			*/
+			.odd {
+         		 background: #F1EFEE;
+			}
+		
+			.even{
+				 background: white;
+			}
+			
+			
+			.header-ul ul li{
+				list-style: none;
+				display: inline-block;
+				padding-left: 10px;
+				margin-left: 20px;
+			}
+		
+		</style>
+	</head>
+	<body>
+		
+		
+        <div style="width: 1000px;height: 700px;margin-left: 230px;padding-top: 50px;">
+        	 <div class="col-lg-12 heading">
+                        <h3 class="page-header"><i class="ec-archive"></i>历史公告</h3>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        	<li><i class="im-home">
+                        	</i>
+                        	<a th:href="@{index.html}">Home</a>
+                        	<i class="en-arrow-right7"></i>
+                        	</li>
+                        	<li>公告查询</li></ul>
+        	</div>
+			<div class="header-ul">
+				<ul>
+					<li><span>标题:</span>&nbsp;&nbsp;&nbsp;<input type="text" name="headline"></li>
+					<li><span>公告类型:</span>&nbsp;&nbsp;&nbsp;
+						<select name="TypeId">
+						<option value="-1">---请选择---</option>						
+						<option  value="1">全校公告</option>
+						<option  value="2">年级公告</option>
+						<option  value="3">班级公告</option>
+					</select>
+					</li>
+					<li><button class="btn btn-primary" style="width: 90px;">查询</button></li>
+				</ul>
+			
+		</div>
+					<div class="panel-body">
+                                    <table class="table table-bordered calendar display" id="datatable" >
+                                        <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>公告名称</th>
+                                                <th>公告类型</th>
+                                                <th>发送时间</th>
+                                                <th>发送人</th>
+                                               <!--  <th>阅读量</th> -->
+                                                 <th>操作</th>
+                                                 <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-striped">
+                                      
+                                           <!--  <tr class="odd gradeX" th:each="s:${list}">
+                                                <td th:text="${s.noticeId}"></td>
+                                                <td th:text="${s.headline}"></td>
+                                                
+                                                <td th:if="${s.typeid==1}">班级公告</td>
+                                                <td th:if="${s.typeid==2}">年级公告</td>
+                                                 
+                                                <td class="center" th:text="${s.Ntime}"></td>
+                                                <td class="center" th:text="${s.user.userid}"></td>
+                                                 <td th:text="${s.read}"></td>
+                                                 <td class="center">查看详情</td>
+                                                 <td>删除</td>
+                                            </tr> -->
+                                            
+                                            
+                                             <tr class="odd gradeX" v-for="item in pagebean.lists">
+                                                <td>{{item.noticeId}}</td>
+                                                <td>{{item.headline}}</td>
+                                                
+                                                <td v-if="item.typeid==1">全校公告</td>
+                                                <td v-else-if="item.typeid==2">年级公告</td>
+                                                 <td v-else-if="item.typeid==3">班级公告</td>
+                                                 
+                                                <td>{{item.ntime}}</td>
+                                                <td class="center">{{item.cp_user.username}}</td>
+                                             	
+                                                <!--  <td>{{item.read}}</td> -->
+                                                 <td class="center" @click="go(item.noticeId)">查看详情</td>
+                                                 <td><a class="delete">删除</a></td>
+                                            </tr>
+                                           
+                              </tbody>
+                            </table>
+                            
+                           <div class="dataTables_paginate paging_bs_full" id="datatable_paginate">
+                           	<ul class="pagination">
+                           		<!--<li class="disabled">
+                           			<a tabindex="0" class="paginate_button first" id="datatable_first">上一页</a>
+                           		</li>-->
+                           		<li>
+                           			<a tabindex="0" class="paginate_button" @click="page(pagebean.prevpage)">上一页</a></li>
+                           		<li>
+                           		<li><a>{{pagebean.currpage}} / {{pagebean.pagenum}}</a></li>
+                           		<li><a tabindex="0" class="paginate_button" @click="page(pagebean.nextpage)">下一页</a></li>
+                           			<!--<li><a tabindex="0" class="paginate_button last" id="datatable_last">Last</a></li></ul></div>-->
+                        </div>  
+            </div>            
+	</body>
+	
+	<script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+	<script type="text/javascript">
+			var v=new Vue({
+				el:".panel-body",
+				data:{
+					pagebean:{
+						lists:[]
+					}
+				},methods:{
+					go:function(id){
+						location.href="queryNoticeById?Notice_Id="+id;
+					},
+					page:function(i){
+						var headline=$("[name=headline]").val();
+						var TypeId=$("[name=TypeId]").val();
+						$.ajax({
+							  type:"post",
+							  url:"/queryByHead",
+							  dataType:"json",
+							  data:{
+								name:headline,
+								typeid:TypeId,
+								currpage:i
+							  },
+							  success:function(result){
+									v.pagebean=result;
+								}
+						});
+					}
+				}
+			});
+			$(function(){
+				$.ajax({
+					url:"/queryByHead",
+					dataType:"json",
+					type:"post",
+					data:{
+						typeid:-1,
+						currpage:1
+					},
+					success:function(result){
+						v.pagebean=result;
+					}
+				})
+			});
+			$("input").keyup(function(){
+				toPage();
+			});			
+			
+			$("select").change(function(){
+				toPage();
+			});
+			
+			function toPage(){
+				var headline=$("[name=headline]").val();
+				var TypeId=$("[name=TypeId]").val();
+				$.ajax({
+					  type:"post",
+					  url:"/queryByHead",
+					  dataType:"json",
+					  data:{
+						name:headline,
+						typeid:TypeId,
+						currpage:v.pagebean.currpage
+					  },
+					  success:function(result){
+							v.pagebean=result;
+						}
+				});
+			}
+		
+	</script>
+</html>

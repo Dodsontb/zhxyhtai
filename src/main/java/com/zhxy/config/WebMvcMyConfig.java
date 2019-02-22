@@ -24,6 +24,7 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// 	本工程
 		registry.addResourceHandler("*").addResourceLocations("classpath:/static/");
+		registry.addResourceHandler("/file/**").addResourceLocations("file:///d:img/");
 	}
 	
 <<<<<<< Upstream, based on origin/tanao

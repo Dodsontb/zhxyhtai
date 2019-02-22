@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <style type="text/css">
+        	ul li{
+        		list-style: none;
+        	}
+        	#xiaoxi{
+			    max-width: 680px;
+			    margin: 0 auto;
+			    background: #f1f1f1;
+			    color:#333;
+			   /* font-size: 1rem;*/
+			}
+		     #xiaoxi img{
+		     	max-width: 100%;
+   				 vertical-align: middle
+		     }   
+		     
+.back{
+    position: absolute;  
+	top: 0;
+	left: 0.3rem;
+	background:url("../wjlimg/返回.png") no-repeat;
+    width: 0.2rem;
+    height:0.4rem;
+    margin-top: 0.34rem;
+    background-size: 0.2rem 0.4rem;
+}
+/* .header .tit{
+    font-size: 0.32rem;
+    vertical-align: middle;
+    text-align: center;
+    height: 1rem;
+    line-height: 1rem;
+    font-weight: normal;
+}
+.header .right{
+	position: absolute;
+	right: 0.3rem;
+	top: 0;
+	float: none;
+	font-size: 0.24rem;
+	line-height: 1.2rem;
+} */
+/* .message{
+    background-color: #f1f1f1;
+	padding: 1.2rem 0.3rem 1rem 0.3rem;	
+} */
+.time{
+    font-size:0.24rem;
+    color:#999;
+    margin-bottom: 0.3rem;
+    text-align: center;
+}
+ 
+
+.send:after,.show:after,.msg:after{
+	content: "";
+	clear: both;
+	display: table;	
+}
+ 
+.msg>img{
+	width: 0.8rem;
+	float: left;
+}
+.msg>p{
+	float: left;
+	margin:0  0.4rem;
+	padding: 0.25rem;
+	background: #fff;
+	font-size: 14px;
+	position: relative;
+	border-radius: 0.2rem;
+	max-width:5rem ;
+	box-sizing: border-box;
+}
+ 
+.msg_input{
+	position: absolute;
+	background-size: 0.31rem auto;
+	width: 0.31rem;
+	height: 0.51rem;
+	left: -0.31rem;
+	top: 0.25rem;
+}
+.show .msg img,.show .msg p,.show .msg{
+	float: right;
+}
+ 
+ 
+.show .msg_input{
+	left: auto;
+	right: -0.11rem;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 	/* IE 9 */
+	-moz-transform:rotate(180deg); 	/* Firefox */
+	-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+	-o-transform:rotate(180deg); 	/* Opera */
+}
+.send,.show{
+	padding-bottom: 0.3rem;
+}
+.alert_novip,.flower_num,.give_flower{
+	display: none;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.28rem;
+}
+.alert_novip p,.flower_num  p{
+	margin-bottom: 0.45rem;
+ 
+.layui-layer-wrap button{
+	font-size: 0.28rem;
+	padding: 0.2rem 0.3rem;
+	margin-top: 0.1rem;
+	background: #f8f8f8;
+	border-radius: 10px;
+}
+}
+.flower_num button{
+	padding: 0.2rem 0.5rem;
+	border-radius: 10px;
+}
+.layui-layer-wrap button:first-child{
+	float: left;
+}
+.layui-layer-wrap button:last-child{
+	float: right;
+	background: #FF7171;
+	color: #fff;
+}
+.alert_novip button{
+	padding: 0.2rem 0.3rem;
+    border-radius: 10px
+}
+.flower{
+	width: 0.8rem;
+	margin: 0 auto;
+}
+.give_flower{
+	text-align: center;
+}
+.give_flower p{
+	text-align: center;
+	line-height: 1.5;
+}
+.give_flower input{
+	width: 1rem;
+	margin-right: 0.1rem;
+	margin-top: 0.2rem;
+}
+.give_flower button{
+	display: block;
+	width: 3rem;
+	font-size: 0.28rem;
+	margin: 0 auto;
+	margin-top: 0.6rem;
+	float: none!important;
+	line-height: 0.65rem;
+	border-radius: 10px;
+}
+/* .footer{
+	position: fixed;
+	bottom: 200px;
+} */
+.modal-body{
+    padding: 10px;
+    font-size: 16px;
+    box-sizing:border-box;
+    border-left: 1px solid #ccc;
+}
+.modal-header{
+    box-sizing:border-box;
+    border-bottom:1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.close{
+    color: #b7b7b7;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 70px;
+    transition: all 0.3s;
+}
+.close:hover, .close:focus{
+    color: #95b4ed;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-footer{
+    box-sizing:border-box;
+    border-top:1px solid #ccc;
+    display: flex;
+    padding: 15px;
+    justify-content: flex-end;
+    align-items: center;
+ 
+}
+
+        </style>
+	</head>
+	<body>
+		<div id="header">
+            <div class="container-fluid">
+                <div class="navbar">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html">
+                            <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-logo">智慧</span><span class="text-slogan">校园</span> 
+                        </a>
+                    </div>
+                    <nav class="top-nav" role="navigation">
+                        <ul class="nav navbar-nav pull-left">
+                            <li id="toggle-sidebar-li">
+                                <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
+                        </a>
+                            </li>
+                            <li>
+                                <a href="#" class="full-screen"><i class="fa-fullscreen"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"><i class="ec-cog"></i><span class="notification">10</span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#"><i class="st-users"></i> 个人设置</a>
+                                    </li>
+                                    <li><a href="#"><i class="st-folder"></i> 通用</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
+                                <ul class="dropdown-menu email" role="menu">
+                                    <li class="mail-head">
+                                        <div class="clearfix">
+                                            <div class="pull-left">
+                                                <a href="email-inbox.html"><i class="ec-archive"></i></a>
+                                            </div>
+                                            <span>消息</span> 
+                                            <div class="pull-right">
+                                                <a href="email-inbox.html"><i class="st-pencil"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="search-email">
+                                        <form>
+                                            <input type="text" name="search" placeholder="搜索">
+                                            <button type="submit"><i class="ec-search"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="mail-list clearfix">
+                                        <a href="#">
+                                            <img src="assets/img/avatars/128.jpg" class="mail-avatar pull-left" alt="avatar">
+                                            <p class="name">
+                                                <span class="status"><i class="en-dot"></i></span> 何新可
+                                                <span class="notification">2</span>
+                                                <span class="time">2018-01-01-20:20</span>
+                                            </p>
+                                            <p class="msg">
+                                               你快点把首页做完
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="mail-list clearfix">
+                                        <a href="#">
+                                            <img src="assets/img/avatars/129.jpg" class="mail-avatar pull-left" alt="avatar">
+                                            <p class="name">
+                                                <span class="status off"><i class="en-dot"></i></span>谭傲
+                                                <span class="notification">6</span>
+                                                <span class="time">10:26 am</span>
+                                            </p>
+                                            <p class="msg">
+                                               数据库给我我开始功能了
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="mail-list clearfix">
+                                        <a href="#">
+                                            <img src="assets/img/avatars/130.jpg" class="mail-avatar pull-left" alt="avatar">
+                                            <p class="name">
+                                                <span class="status off"><i class="en-dot"></i></span>苏寻
+                                                <span class="notification">1</span>
+                                                <span class="time">7:15 am</span>
+                                            </p>
+                                            <p class="msg">
+                                                多劳哦
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="mail-list clearfix">
+                                        <a href="#">
+                                            <img src="assets/img/avatars/131.jpg" class="mail-avatar pull-left" alt="avatar">
+                                            <p class="name">
+                                                <span class="status"><i class="en-dot"></i></span> 李佳熊
+                                                <span class="notification">5</span>
+                                                <span class="time">03:46 am</span>
+                                            </p>
+                                            <p class="msg">
+                                               吃鸡不兄嘚
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="mail-more">
+                                        <a href="email-inbox.html">查看全部<i class="en-arrow-right7"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown">
+                                    <img class="user-avatar" src="assets/img/avatars/48.jpg" alt="SuggeElson">陈鹏</a>
+                                <ul class="dropdown-menu right" role="menu">
+                                    <li><a href="#"><i class="st-cloud"></i> 题库</a>
+                                    </li>
+                                    <li><a href="#"><i class="im-exit"></i> 退出</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Start #header-area -->
+                <div id="header-area" class="fadeInDown">
+                    <div class="header-area-inner">
+                        <ul class="list-unstyled list-inline">
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="im-pie"></i>
+                                        <span>Earning Stats</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="ec-images color-dark"></i>
+                                        <span>Gallery</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="en-light-bulb color-orange"></i>
+                                        <span>Fresh ideas</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="ec-link color-blue"></i>
+                                        <span>Links</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="ec-support color-red"></i>
+                                        <span>Support</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="shortcut-button">
+                                    <a href="#">
+                                        <i class="st-lock color-teal"></i>
+                                        <span>Lock area</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End #header-area -->
+            </div>
+            <!-- Start .header-inner -->
+        </div>
+        <!-- End #header -->
+        <!-- Start #sidebar -->
+        <div id="sidebar">
+            <!-- Start .sidebar-inner -->
+            <div class="sidebar-inner">
+                <!-- Start #sideNav -->
+                <ul id="sideNav" class="nav nav-pills nav-stacked">
+                    <li class="top-search">
+                        <form>
+                            <input type="text" name="search" placeholder="Search ...">
+                            <button type="submit"><i class="ec-search s20"></i>
+                            </button>
+                        </form>
+                    </li>
+                    <li><a href="index.html">首页<i class="im-screen"></i></a>
+                    </li>
+                    <li><a href="charts.html">数据统计<i class="st-chart"></i></a>
+                    </li>
+                    <!--班级管理-->
+                    <li><a href="#"> 班级管理 <i class="im-table2"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="tables.html"><i class="en-arrow-right7"></i> 查看班级</a>
+                            </li>
+                            <li><a href="data-tables.html"><i class="en-arrow-right7"></i> 新增班级</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">考勤 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i> 班级考勤</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i> 教员考勤</a>
+                            </li>
+                            <li><a href="tiles.html"><i class="im-windows8"></i> 校工考勤</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li><a href="#">公告管理 <i class="st-lab"></i></a>
+                        <ul class="nav sub">
+                            <li><a href="notifications.html"><i class="fa-bell"></i>发布公告</a>
+                            </li>
+                            <li><a href="panels.html"><i class="br-window"></i>历史公告</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- End .sidebar-inner -->
+        </div>
+        <!-- End #sidebar -->
+        <!-- Start #right-sidebar -->
+        <div id="right-sidebar" class="hide-sidebar">
+            <!-- Start .sidebar-inner -->
+            <div class="sidebar-inner">
+                <div class="sidebar-panel mt0">
+                    <div class="sidebar-panel-content fullwidth pt0">
+                        <div class="chat-user-list">
+                            <form class="form-horizontal chat-search" role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="搜索">
+                                    <button type="submit"><i class="ec-search s16"></i>
+                                    </button>
+                                </div>
+                                <!-- End .form-group  -->
+                            </form>
+                            <ul class="chat-ui bsAccordion">
+                                <li>
+                                    <a href="#">同学<span class="notification teal">4</span><i class="en-arrow-down5"></i></a>
+                                    <ul class="in">
+                                        <li>
+                                            <a href="#" class="chat-name">
+                                                <img class="chat-avatar" src="assets/img/avatars/49.jpg" alt="@chadengle">陈智魏
+                                                <span class="has-message"><i class="im-pencil"></i></span>
+                                            </a>
+                                            <span class="status online"><i class="en-dot"></i></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">老师 <span class="notification green">3</span><i class="en-arrow-down5"></i></a>
+                                    <ul class="in">
+                                        <li>
+                                            <a href="#" class="chat-name">
+                                                <img class="chat-avatar" src="assets/img/avatars/51.jpg" alt="@kolage">唐勇</a>
+                                            <span class="status online"><i class="en-dot"></i></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">家长 <span class="notification red">5</span><i class="en-arrow-down5"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="chat-name">
+                                                <img class="chat-avatar" src="assets/img/avatars/56.jpg" alt="@laurengray">陈晨橙</a>
+                                            <span class="status offline"><i class="en-dot"></i></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chat-box">
+                            <h5>Chad Engle</h5>
+                            <a id="close-user-chat" href="#" class="btn btn-xs btn-primary"><i class="en-arrow-left4"></i></a>
+                            <ul class="chat-ui chat-messages">
+                                <li class="chat-user">
+                                    <p class="avatar">
+                                        <img src="assets/img/avatars/49.jpg" alt="@chadengle">
+                                    </p>
+                                    <p class="chat-name">Chad Engle <span class="chat-time">15 seconds ago</span>
+                                    </p>
+                                    <span class="status online"><i class="en-dot"></i></span>
+                                    <p class="chat-txt">Hello Sugge check out the last order.</p>
+                                </li>
+                                <li class="chat-me">
+                                    <p class="avatar">
+                                        <img src="assets/img/avatars/48.jpg" alt="SuggeElson">
+                                    </p>
+                                    <p class="chat-name">SuggeElson <span class="chat-time">10 seconds ago</span>
+                                    </p>
+                                    <span class="status online"><i class="en-dot"></i></span>
+                                    <p class="chat-txt">Ok i will check it out.</p>
+                                </li>
+                                <li class="chat-user">
+                                    <p class="avatar">
+                                        <img src="assets/img/avatars/49.jpg" alt="@chadengle">
+                                    </p>
+                                    <p class="chat-name">Chad Engle <span class="chat-time">now</span>
+                                    </p>
+                                    <span class="status online"><i class="en-dot"></i></span>
+                                    <p class="chat-txt">Thank you, have a nice day</p>
+                                </li>
+                            </ul>
+                            <div class="chat-write">
+                                <form action="#" class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <textarea name="sendmsg" id="sendMsg" class="form-control elastic" rows="1"></textarea>
+                                        <a role="button" class="btn" id="attach_photo_btn">
+                                            <i class="fa-picture s20"></i> 
+                                        </a>
+                                        <input type="file" name="attach_photo" id="attach_photo">
+                                    </div>
+                                    <!-- End .form-group  -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End .sidebar-inner -->
+        </div>
+        
+        
+        <div style="width: 1000px;height: 700px;margin-left: 230px;padding-top: 70px;">
+		<div class="col-lg-4">
+			
+			
+                                <form class="form-inline search-page-form">
+                                    <div class="well bn">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" v-bind:name="cp_user.username" id="man" placeholder="姓名">
+                                            <span class="input-group-btn">
+                                <button  class="btn btn-primary chaxun"><i class="ec-search s16"></i></button>
+                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+		
+		 <div class="outlet col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                         <input type="text" class="form-control"  name="username" placeholder="search here ...">
+                            <span class="input-group-btn">
+                                <button  class="btn btn-primary koko"><i class="ec-search s16"></i></button>
+                            </span>
+                    </div>
+         <!--<div class="p15 ">
+            <input class="btn btn-danger btn-block uppercase"><i class="im-quill"></i> compose
+                        </div>-->
+       
+			<ul id="email-nav" class="nav nav-pills nav-stacked">
+                          <!--  <li><a href="email-inbox.html"><i class="ec-archive"></i> Inbox <span class="notification blue">27</span></a>
+                            </li>
+                            <li><a href="#"><i class="ec-star"></i> Starred <span class="notification orange">2</span></a>
+                            </li>
+                           -->
+                          
+                            <li v-for="item in list"><a href="#"><span class="circle"><img src="assets/img/avatars/129.jpg" style="width: 2em;"></span> {{item.username}}</a>
+                            </li>
+                           
+                        </ul>
+                  
+                   </div>           	
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <!-- col-lg-3 start here -->
+                            <div class="tile red">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-download s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">3</div>
+                                    <h3>所有消息</h3>
+                                </div>
+                            </div>
+                            <!-- tile end here -->
+                        </div>
+                        <!-- col-lg-3 end here -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            
+                            <div class="tile blue">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-users s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">0</div>
+                                    <h3>新消息</h3>
+                                </div>
+                            </div>
+                          
+                        </div>
+                       
+                     
+                
+             
+             <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" id="table-striped">
+            
+            <!-- <div id="mes"><input type="button" value="哈哈哈"/></div> -->
+            
+							<div class="bs-callout bs-callout-primary fade in hahaha" v-for="item in list">
+								 <div  @click="open(item.uid)">
+								 <input type="hidden" v-bind:value="item.messageId">
+								 <input type="hidden" name="uid" v-bind:value="item.uid"> 
+								<!--  <span>{{item.messageId}}</span> -->
+                                <h4>{{item.cp_user.username}}</h4>
+                                <p>{{item.mcontent}}</p>
+                                <p>{{item.time}}</p>
+                                </div>
+                                <button  class="close" @click="del(item.messageId)">×</button> 
+                            </div>
+                    </div>        
+				</div>
+ 			
+ 				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
+ 				<header class="modal-header">
+ 				<p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p>
+ 				</header>
+		       
+		       <div class="modal-body">
+		            <div class="send">
+		                <div class="time">05/22 06:30</div>
+		                <div class="msg">
+		                    <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/>
+		                    <p class="m_message_right"><i class="msg_input"></i>傻逼</p>
+		                </div>
+		            </div>
+		            <div class="show">
+		                <div class="time">05/22 06:30</div>
+		                <div class="msg">
+		                    <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/>
+		                    <p class="m_message_left"><i class="msg_input"></i>skr</p>
+		                </div>
+		            </div>
+		        </div>
+		        
+		       
+		       <footer class="modal-footer">
+		           
+		            <input type="text" name="mcontent" style="width:600px ;height: 19px;border: 1px solid gainsboro;" />+
+		          <input type="button" value="发送" class="senderMessage"/>
+		        </footer>
+ 				
+ 			</div>
+	</body>
+</html>
+<!--  <script type="text/javascript" th:src="@{assets/js/bootstrap/bootstrap.js}"></script>  -->
+ <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+	 <script>
+	
+	console.log("进入首页，正在开始注册websocket......");
+	var websocket = new WebSocket("ws://127.0.0.1:8080/mywebsocket");
+	
+	websocket.onopen = function(){
+		console.log("连接成功.....");
+	}
+	websocket.onclose = function(){
+		console.log("连接断开.....");
+	}
+	websocket.onerror = function(){
+		console.log("连接异常.....");
+	}
+	websocket.onmessage = function(msg){
+		console.log("接收到通信的消息."+msg.data);
+		
+		$(".m_body .view").append(msg.data);
+		adduserimg()
+	}
+	</script> 
+	<script type="text/javascript">
+			var v=new Vue({
+				el:"#table-striped",
+				data:{
+					list:null
+				},
+				methods:{
+					del:function(messageId){
+						 alert(111);
+						alert("del"); 
+						  alert(messageId);
+						  $.ajax({
+								url:"/deleteMessage",
+								data:"messageId="+messageId,
+								success:function(result){
+									window.location.reload();
+						  	}
+						})  
+					},
+					open:function(uid){
+						alert(222);
+						alert("open");
+						/* $("#xiaoxi").show(); */
+						alert(uid);
+						  $.ajax({
+								url:"/selectUid",
+								data:"uid="+uid,
+								success:function(result){
+									$("#xiaoxi").show();
+						  	}
+						}) 
+					}
+				}
+			});
+			var g=new Vue({
+				el:"#email-nav",
+				data:{
+					list:null
+				}
+			});
+			$(function(){
+				
+				$.ajax({
+					url:"/queryMessageAll",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						v.list=result;
+					}
+				});
+				
+				$.ajax({
+					url:"/queryCpUser",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						g.list=result;
+					}
+				})
+			});
+			  $(".chaxun").click(function(){
+				  /* alert(111)
+				 var sss=$("#man").attr("name"); */
+				 alert(111)
+					var username=$("[id=man]").val();
+					  alert(username);
+					   $.ajax({
+						  type:"post",
+						  url:"/queryByName",
+						  dataType:"json",
+						  data:"username="+username,
+						  success:function(result){
+								console.log(result);
+								v.list=result;
+							}
+					})   
+				}) ;
+				
+				$(".koko").click(function(){
+					var username=$("[name=username]").val();
+					alert(username) 
+					   $.ajax({
+						  type:"post",
+						  url:"/queryCpUserByName",
+						  dataType:"json",
+						  data:"username="+username,
+						  success:function(result){
+								console.log(result);
+								g.list=result;
+							}
+					})   
+				});
+				
+				
+				$(".close").click(function(){
+					$("#xiaoxi").hide();
+				})
+				
+				//发送消息
+					 $(".senderMessage").click(function(){
+						 alert(111)
+						var receiver=4
+						var content=$("[name=mcontent]").val();
+						alert(content)
+						$.post("senderMessage","receiver[0]="+receiver+"&mcontent="+content,function(result){
+							console.log("发送结果："+result)
+							if("000000"==result){
+								alert("发送失败！请检查网络。")
+							}
+						})
+					}) 
+				
+				//获取聊天记录
+				 function getChatRecord(){
+					$.post("getChatRecord","chatid=4",function(result){
+						console.log(result)
+						for(var i=0;i<result.length;i++){
+							if(1==result[i].sender){
+								$(".send .time .msg").append(" <p class=\"m_message_right\"><i class=\"msg_input\"></i>"+result[i].content+"</p>");
+							}else{
+								$(".show .time .msg").append("  <p class=\"m_message_left\"><i class=\"msg_input\"></i>"+result[i].content+"</p>");
+							}
+						}
+					})
+					adduserimg()
+				}
+				
+				
+			
+				
+				
+ </script>
+ 
+ 

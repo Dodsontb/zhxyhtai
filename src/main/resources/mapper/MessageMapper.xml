@@ -3,7 +3,7 @@
 <mapper namespace="com.zhxy.dao.MessageMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Message">
     <id column="Message_Id" jdbcType="INTEGER" property="messageId" />
-    <result column="Uid" jdbcType="INTEGER" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="mcontent" jdbcType="VARCHAR" property="mcontent" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
     <result column="mstate" jdbcType="INTEGER" property="mstate" />
@@ -13,7 +13,65 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+    <association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="queryMessageType"></association>
+   	<association property="imgs" column="Notice_Id" javaType="list" select="queryMessageimgs"></association>
+   	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
+    
   </resultMap>
+  
+		  <select id="queryMessage" resultMap="BaseResultMap">
+		  		select * from Message where mstate=1
+		  </select>
+		  
+		  <select id="queryMessageType" resultType="com.zhxy.domain.MessageType">
+  				select * from `message_type` where typeid=#{typeid}
+  		</select> 
+		  
+		  <select id="queryMessageimgs" resultType="com.zhxy.domain.Messageimg">
+		  		select * from Messageimg where Message_Id=#{Message_Id}
+		  </select>
+  
+  			<select id="queryUser" resultType="com.zhxy.domain.CpUser">
+  				select * from cp_user where `userid`=#{uid}
+  		</select>
+  
+  		<select id="queryByMessageName" resultMap="BaseResultMap">
+  			SELECT * FROM Message INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
+			WHERE username LIKE CONCAT("%",#{username},"%")
+  		</select>
+  		
+  		<select id="queryCpUser" resultType="com.zhxy.domain.CpUser">
+  			select * from cp_user 
+  		</select>
+ 
+  		<select id="queryCpUserByName" resultType="com.zhxy.domain.CpUser">
+  			select * from cp_user where username LIKE CONCAT("%",#{username},"%")
+  		</select>
+  
+  		<delete id="deleteMessage">
+  				delete from Message where Message_Id=#{messageId}
+  		</delete>
+  
+ 		<insert id="insertMessage">
+ 			insert into `Message`( Uid, mcontent,  mtime, mstate, TypeId)values(#{uid},#{mcontent},#{mtime},#{mstate},#{typeid})
+ 		</insert> 
+  
+  		<select id="getChatRecord" resultMap="BaseResultMap">
+  				SELECT * FROM message 
+					INNER JOIN `message_reception` 
+					ON message.`Message_Id`=`message_reception`.`Message_Id`
+					WHERE (`message_reception`.`Uid`=#{uid} AND message.`Uid`=#{uid})
+  		</select>
+  		
+  		<select id="selectUid" resultMap="BaseResultMap">
+  				SELECT * FROM Message WHERE Uid=#{uid}
+  		</select>
+  
+  		<!-- <select id="">
+  				select * from Message 
+  		</select> -->
+  
+  
   <sql id="Base_Column_List">
     Message_Id, Uid, mcontent, mtime, mstate, TypeId, name1, name2, name3, name4, name5
   </sql>
