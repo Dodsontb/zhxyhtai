@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.QuestionbankMapper;
-import com.zhxy.dao.SofttypeMapper;
 import com.zhxy.domain.Softtype;
+import com.zhxy.mapper.SofttypeMapper;
 import com.zhxy.service.Softtypeservice;
 @Service
 @Transactional

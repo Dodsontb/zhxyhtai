@@ -7,11 +7,9 @@ import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
-import com.zhxy.domain.MessageReception;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 
-import io.lettuce.core.dynamic.annotation.Param;
 
 public interface hxk_history {
 	

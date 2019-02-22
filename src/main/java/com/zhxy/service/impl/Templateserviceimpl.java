@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.TemplateMapper;
 import com.zhxy.domain.Template;
+import com.zhxy.mapper.TemplateMapper;
 import com.zhxy.service.Templateservice;
 @Service
 @Transactional

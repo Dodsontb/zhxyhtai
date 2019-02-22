@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-@MapperScan("com.zhxy.dao")
+@MapperScan("com.zhxy.mapper")
 @SpringBootApplication
 
 @EnableScheduling

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.CpStaffMapper;
-import com.zhxy.dao.CpUserMapper;
 import com.zhxy.domain.CpUser;
+import com.zhxy.mapper.CpStaffMapper;
+import com.zhxy.mapper.CpUserMapper;
 import com.zhxy.service.cpUserservice;
 @Service
 @Transactional

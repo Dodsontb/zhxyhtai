@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.QuestionbankMapper;
-import com.zhxy.dao.TquestionMapper;
 import com.zhxy.domain.Tquestion;
+import com.zhxy.mapper.TquestionMapper;
 import com.zhxy.service.Tquestionservice;
 @Service
 @Transactional
