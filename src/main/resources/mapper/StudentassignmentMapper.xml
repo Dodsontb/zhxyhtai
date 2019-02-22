@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.StudentassignmentMapper">
+<mapper namespace="com.zhxy.mapper.StudentassignmentMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Studentassignment">
     <id column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
     <result column="ljxTitle" jdbcType="VARCHAR" property="ljxtitle" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.WhetherAccomplishMapper">
+<mapper namespace="com.zhxy.mapper.WhetherAccomplishMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.WhetherAccomplish">
     <id column="ljxWid" jdbcType="INTEGER" property="ljxwid" />
     <result column="ljxTid" jdbcType="INTEGER" property="ljxtid" />

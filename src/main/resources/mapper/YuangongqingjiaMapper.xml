@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.YuangongqingjiaMapper">
+<mapper namespace="com.zhxy.mapper.YuangongqingjiaMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Yuangongqingjia">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="staffid" jdbcType="INTEGER" property="staffid" />

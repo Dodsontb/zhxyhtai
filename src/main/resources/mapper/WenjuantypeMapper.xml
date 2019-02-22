@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.WenjuantypeMapper">
+<mapper namespace="com.zhxy.mapper.WenjuantypeMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Wenjuantype">
     <result column="wenjuanType" jdbcType="INTEGER" property="wenjuantype" />
     <result column="name" jdbcType="VARCHAR" property="name" />
