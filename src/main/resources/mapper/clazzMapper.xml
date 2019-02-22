@@ -10,6 +10,7 @@
 		<association property="grade" column="gradeId"
 			select="com.zhxy.mapper.GradeMapper.queryById"
 			javaType="com.zhxy.domain.Grade"></association>
+			
 		<association property="teacher"
 			javaType="com.zhxy.domain.People" column="teacherId"
 			select="com.zhxy.mapper.PeopleMapper.queryById"></association>
