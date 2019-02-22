@@ -27,12 +27,11 @@ public class MyWebSocketInterceptor implements HandshakeInterceptor {
 		 */
 		ServletServerHttpRequest servletRequest = (ServletServerHttpRequest)request;
 		HttpSession session = servletRequest.getServletRequest().getSession();
-		/*session.setAttribute("user", value);*/
 		CpUser u =  (CpUser)session.getAttribute("user");
+		System.out.println("进入intercepter:"+u.getUserid());
 		if (u!=null) {
-			System.out.println("进入intercepter:"+u.getUserid());
 			if(session.getAttribute("user")!=null) {
-				int uid = 1;
+				int uid = u.getUserid();
 				attributes.put("uid", uid);
 				return true;
 			}

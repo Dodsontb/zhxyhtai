@@ -7,6 +7,7 @@ import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
+import com.zhxy.domain.MessageReception;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 
@@ -39,7 +40,7 @@ public interface hxk_history {
 	    
 	    int updataNotice();
 	    
-	    List<CpUser> queryCpUser();
+	    List<CpUser> queryUserGetId();
 	    
 	    List<CpUser> queryCpUserByName(String username);
 	    
@@ -50,5 +51,12 @@ public interface hxk_history {
 	    Message selectUid(int uid);
 	    
 	    List<Message> getChatRecord(int sendid,int receiver);
+	    
+	   /* int insertReception(Message message);*/
+	    /*List<CpUser> getChatList(Integer userid);*/
+	    
+	    List<CpUser> getUserlist(Integer chatid,Integer userid);
+	    
+	    List<Message> getChatRecordList(int sendid,int receiver);
 
 }

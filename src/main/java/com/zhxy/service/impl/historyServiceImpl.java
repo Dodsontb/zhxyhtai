@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhxy.dao.CpUserMapper;
 import com.zhxy.dao.MessageMapper;
+import com.zhxy.dao.MessageReceptionMapper;
 import com.zhxy.dao.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
@@ -25,6 +27,12 @@ public class historyServiceImpl  implements hxk_history{
 	
 	@Autowired
 	MessageMapper mmapper;
+	
+	@Autowired
+	MessageReceptionMapper mrapper;
+	
+	@Autowired
+	CpUserMapper mcapper;
 	
 	@Override
 	public List<Notice> queryNoticeAll() {
@@ -109,9 +117,9 @@ public class historyServiceImpl  implements hxk_history{
 	}
 
 	@Override
-	public List<CpUser> queryCpUser() {
+	public List<CpUser> queryUserGetId() {
 		// TODO Auto-generated method stub
-		return mmapper.queryCpUser();
+		return mcapper.queryUserGetId();
 	}
 
 	@Override
@@ -135,7 +143,9 @@ public class historyServiceImpl  implements hxk_history{
 	@Override
 	public int insertMessage(Message message) {
 		// TODO Auto-generated method stub
-		return mmapper.insertMessage(message);
+		int hg=mmapper.insertMessage(message);
+		int jg=mrapper.insertReception(message);
+		return hg;
 	}
 
 	@Override
@@ -149,6 +159,24 @@ public class historyServiceImpl  implements hxk_history{
 		// TODO Auto-generated method stub
 		return mmapper.getChatRecord(sendid, receiver);
 	}
+
+	@Override
+	public List<CpUser> getUserlist(Integer chatid,Integer userid) {
+		// TODO Auto-generated method stub
+		return mmapper.getUserlist(chatid,userid);
+	}
+
+	@Override
+	public List<Message> getChatRecordList(int sendid, int receiver) {
+		// TODO Auto-generated method stub
+		return mmapper.getChatRecordList(sendid, receiver);
+	}
+
+	/*@Override
+	public List<CpUser> getChatList(Integer userid) {
+		// TODO Auto-generated method stub
+		return mmapper.getChatList(userid);
+	}*/
 
 
 }

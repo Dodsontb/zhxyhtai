@@ -46,6 +46,7 @@ public class UO {
 	@RequestMapping("/tologin")
 	public String tologin(String username,String password,HttpSession session) {
 		CpUser userinfo=cus.login(username, password);
+		
 		if(userinfo!=null) {
 			System.out.println("登录成功");
 			session.setAttribute("user", userinfo);
