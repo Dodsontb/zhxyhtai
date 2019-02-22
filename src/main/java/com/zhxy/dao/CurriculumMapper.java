@@ -5,13 +5,13 @@ import com.zhxy.domain.Curriculum;
 public interface CurriculumMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Curriculum record);
+	int insert(Curriculum record);
 
-    int insertSelective(Curriculum record);
+	int insertSelective(Curriculum record);
 
-    Curriculum selectByPrimaryKey(Integer id);
+	Curriculum selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Curriculum record);
+	int updateByPrimaryKeySelective(Curriculum record);
 
-    int updateByPrimaryKey(Curriculum record);
+	int updateByPrimaryKey(Curriculum record);	
 }

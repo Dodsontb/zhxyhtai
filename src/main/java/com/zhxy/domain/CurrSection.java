@@ -5,101 +5,53 @@ import java.util.Date;
 public class CurrSection {
     private Integer id;
 
-    private Integer cid;
+	private Integer cid;
 
-    private Integer sid;
+	private Integer sid;
 
-    private Date join;
+	private Date join;
 
-    private Date leave;
+	private Date leave;
 
-    private String name1;
+	public Integer getId() {
+		return id;
+	}
 
-    private String name2;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private String name3;
+	public Integer getCid() {
+		return cid;
+	}
 
-    private String name4;
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
 
-    private String name5;
+	public Integer getSid() {
+		return sid;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Date getJoin() {
+		return join;
+	}
 
-    public Integer getCid() {
-        return cid;
-    }
+	public void setJoin(Date join) {
+		this.join = join;
+	}
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
+	public Date getLeave() {
+		return leave;
+	}
 
-    public Integer getSid() {
-        return sid;
-    }
+	public void setLeave(Date leave) {
+		this.leave = leave;
+	}
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
-    }
-
-    public Date getJoin() {
-        return join;
-    }
-
-    public void setJoin(Date join) {
-        this.join = join;
-    }
-
-    public Date getLeave() {
-        return leave;
-    }
-
-    public void setLeave(Date leave) {
-        this.leave = leave;
-    }
-
-    public String getName1() {
-        return name1;
-    }
-
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-    public String getName3() {
-        return name3;
-    }
-
-    public void setName3(String name3) {
-        this.name3 = name3;
-    }
-
-    public String getName4() {
-        return name4;
-    }
-
-    public void setName4(String name4) {
-        this.name4 = name4;
-    }
-
-    public String getName5() {
-        return name5;
-    }
-
-    public void setName5(String name5) {
-        this.name5 = name5;
-    }
+	
 }
