@@ -18,7 +18,7 @@ public class Template {
 
     private String tquestionid;
 
-    private Date start;
+    private String start;
 
     private Integer uid;
 
@@ -122,11 +122,11 @@ public class Template {
         this.tquestionid = tquestionid;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 

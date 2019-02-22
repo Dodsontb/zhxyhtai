@@ -13,6 +13,8 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+     <result column="cid" jdbcType="INTEGER" property="cid" />
+     <result column="studentname" jdbcType="VARCHAR" property="studentname" />
   </resultMap>
   <sql id="Base_Column_List">
     Id, uid, templateid, total, time, Status, name1, name2, name3, name4, name5
@@ -160,4 +162,11 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+   <select id="cp_selectBycid" resultMap="BaseResultMap">
+	   SELECT learning.*,cp_student.`studentname` FROM learning 
+	INNER JOIN cp_student ON cp_student.`studentid`=learning.`uid`
+	WHERE templateid=#{templateid} 
+	AND learning.`uid` IN (SELECT sid FROM `stu_clazz` WHERE `cid`=#{cid})
+   </select>
+  
 </mapper>
