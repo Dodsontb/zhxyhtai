@@ -23,7 +23,17 @@ public class Message {
     
     private String time;
     
-  //接收者数组
+    private String url;
+    
+  public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	//接收者数组
     private int receiver; 
     
     public int getReceiver() {

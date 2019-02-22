@@ -239,15 +239,15 @@
                         </ul>
                   
                    </div>           	
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <!-- col-lg-3 start here -->
-                            <div class="tile red">
+                            <div class="tile green">
                                 <!-- tile start here -->
                                 <div class="tile-icon">
-                                    <i class="ec-download s64"></i>
+                                    <i class="ec-mail s64"></i>
                                 </div>
                                 <div class="tile-content">
-                                    <div class="number">3</div>
+                                    <div class="number">17</div>
                                     <h3>所有消息</h3>
                                 </div>
                             </div>
@@ -263,14 +263,30 @@
                                 </div>
                                 <div class="tile-content">
                                     <div class="number">0</div>
-                                    <h3>新消息</h3>
+                                    <h3>好友</h3>
                                 </div>
                             </div>
                           
                         </div>
-                       
+                      
                      
-                
+                	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <!-- col-lg-3 start here -->
+                            <div class="tile orange">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-trashcan s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">7</div>
+                                    <h3>已删除</h3>
+                                </div>
+                            </div>
+                            <!-- tile end here -->
+                        </div>
+                	
+                	
+                	
              
              <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" id="table-striped">
             
@@ -281,7 +297,7 @@
 								 <input type="hidden" v-bind:value="item.messageId">
 								 <input type="hidden" name="uid" v-bind:value="item.uid"> 
 								<!--  <span>{{item.messageId}}</span> -->
-                                <h4 class="sendId">{{item.cp_user.username}}</h4>
+                                <h4 class="sendId">{{item.cp_user.username}}</h4> 
                                 <p>{{item.mcontent}}</p>
                                 <p>{{item.time}}</p>
                                 </div>
@@ -458,7 +474,7 @@
 				//发送消息
 					 $(".senderMessage").click(function(){
 						
-						 $(".show .msg div").remove()
+						 $(".msg div").remove() 
 						var receiver=v.chat;
 						var content=$("[name=mcontent]").val();
 						alert(content)
@@ -468,7 +484,7 @@
 								alert("发送失败！请检查网络。")
 							}else if(result=="000001"){
 								alert("发送成功")
-								 getChatRecord(v.chat); 
+								  getChatRecord(v.chat); 
 								 $("[name=mcontent]").val(" ");
 							}
 						})
@@ -496,7 +512,7 @@
 					$.post("getChatRecord","receiver="+uid,function(result){
 						/* var content=$("[name=mcontent]").val(" "); */
 
-						 /* $(".msg div").remove()  */
+						 $(".msg div").remove()  
 						console.log(result)
 						for(var i=0;i<result.length;i++){
 							if(v.user.userid==result[i].cp_user.userid){
