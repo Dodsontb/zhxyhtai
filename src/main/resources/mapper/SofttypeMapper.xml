@@ -125,4 +125,7 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+   <select id="query" resultMap="BaseResultMap">
+    select * from softtype
+  </select>
 </mapper>

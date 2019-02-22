@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Tquestion;
 
 public interface TquestionMapper {
@@ -14,4 +16,8 @@ public interface TquestionMapper {
     int updateByPrimaryKeySelective(Tquestion record);
 
     int updateByPrimaryKey(Tquestion record);
+    
+    List<Tquestion> queryTquestion(int qid);
+    
+    int insertTquestion(Tquestion record);
 }

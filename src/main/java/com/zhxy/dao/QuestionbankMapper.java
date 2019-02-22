@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Questionbank;
 
 public interface QuestionbankMapper {
@@ -14,4 +16,6 @@ public interface QuestionbankMapper {
     int updateByPrimaryKeySelective(Questionbank record);
 
     int updateByPrimaryKey(Questionbank record);
+    
+    Questionbank selectByid(int pid);
 }
