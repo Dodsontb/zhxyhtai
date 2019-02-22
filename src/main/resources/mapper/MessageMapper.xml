@@ -14,12 +14,13 @@
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
     <result column="receiver" jdbcType="VARCHAR" property="receiver" />
-    <association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="queryMessageType"></association>
-   	<association property="imgs" column="Message_Id" javaType="list" select="queryMessageimgs"></association>
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
     
+    
   </resultMap>
-  
+  			
 		  <select id="queryMessage" resultMap="BaseResultMap">
 		  		select * from Message where mstate=1
 		  </select>
@@ -67,6 +68,8 @@
   		
   		<select id="getChatRecordList" resultMap="BaseResultMap">
   				SELECT *,message_reception.Uid as receiver FROM message 
+  					INNER JOIN cp_user ON cp_user.`userid`=message.`Uid`
+					INNER JOIN img ON img.`id`=cp_user.`userid`
 					INNER JOIN `message_reception` 
 					ON message.`Message_Id`=`message_reception`.`Message_Id`
 					WHERE (`message`.`Uid`=#{sendid} AND `message_reception`.`Uid`=#{receiver})
