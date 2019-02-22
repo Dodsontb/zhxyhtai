@@ -7,6 +7,7 @@
     <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="join" jdbcType="TIMESTAMP" property="join" />
     <result column="leave" jdbcType="TIMESTAMP" property="leave" />
+<<<<<<< Upstream, based on origin/tanao
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
     <result column="name3" jdbcType="VARCHAR" property="name3" />
@@ -149,4 +150,90 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+=======
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cid, sid, join, leave
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from curr_section
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from curr_section
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.CurrSection">
+    insert into curr_section (id, cid, sid, 
+      join, leave)
+    values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
+      #{join,jdbcType=TIMESTAMP}, #{leave,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.CurrSection">
+    insert into curr_section
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="join != null">
+        join,
+      </if>
+      <if test="leave != null">
+        leave,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="join != null">
+        #{join,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leave != null">
+        #{leave,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.CurrSection">
+    update curr_section
+    <set>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="join != null">
+        join = #{join,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leave != null">
+        leave = #{leave,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.CurrSection">
+    update curr_section
+    set cid = #{cid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      join = #{join,jdbcType=TIMESTAMP},
+      leave = #{leave,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+>>>>>>> e34a663 何新可
 </mapper>
