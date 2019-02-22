@@ -14,4 +14,6 @@ public interface CpUserMapper {
     int updateByPrimaryKeySelective(CpUser record);
 
     int updateByPrimaryKey(CpUser record);
+    
+    CpUser login(String username,String password);
 }

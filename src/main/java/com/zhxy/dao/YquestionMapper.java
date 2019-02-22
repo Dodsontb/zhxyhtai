@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Yquestion;
 
 public interface YquestionMapper {
@@ -14,4 +16,6 @@ public interface YquestionMapper {
     int updateByPrimaryKeySelective(Yquestion record);
 
     int updateByPrimaryKey(Yquestion record);
+    List<Yquestion> queryYquestion(int qid);
+    int insertYquestion(Yquestion record);
 }

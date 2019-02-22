@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Softtype;
 
 public interface SofttypeMapper {
@@ -14,4 +16,6 @@ public interface SofttypeMapper {
     int updateByPrimaryKeySelective(Softtype record);
 
     int updateByPrimaryKey(Softtype record);
+    
+    List<Softtype> query();
 }

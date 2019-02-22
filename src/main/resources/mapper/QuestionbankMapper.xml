@@ -149,4 +149,7 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+   <select id="selectByid" parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+SELECT id FROM `questionbank` WHERE pid=#{pid}
+  </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.zhxy.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Template {
     private Integer id;
@@ -34,8 +35,38 @@ public class Template {
     private String name4;
 
     private String name5;
+    
+    private List<Cquestion> cquestion;
+    
+    private List<Tquestion> tquestion;
+    
+    private List<Yquestion> yquestion;
+    
+    public List<Cquestion> getCquestion() {
+		return cquestion;
+	}
 
-    public Integer getId() {
+	public void setCquestion(List<Cquestion> cquestion) {
+		this.cquestion = cquestion;
+	}
+
+	public List<Tquestion> getTquestion() {
+		return tquestion;
+	}
+
+	public void setTquestion(List<Tquestion> tquestion) {
+		this.tquestion = tquestion;
+	}
+
+	public List<Yquestion> getYquestion() {
+		return yquestion;
+	}
+
+	public void setYquestion(List<Yquestion> yquestion) {
+		this.yquestion = yquestion;
+	}
+
+	public Integer getId() {
         return id;
     }
 

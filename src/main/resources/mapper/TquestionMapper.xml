@@ -196,4 +196,8 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryTquestion" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM `tquestion` WHERE `Qid`=#{qid}
+  </select>
+  
 </mapper>

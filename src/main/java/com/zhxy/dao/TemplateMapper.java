@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Template;
 
 public interface TemplateMapper {
@@ -14,4 +16,10 @@ public interface TemplateMapper {
     int updateByPrimaryKeySelective(Template record);
 
     int updateByPrimaryKey(Template record);
+    
+    Template queryTemplate(Integer id);
+    
+    int insertTemplate(Template record);
+    
+    List<Template> querybytype(Integer softtypeid);
 }

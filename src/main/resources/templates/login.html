@@ -6,7 +6,6 @@
 	<!-- Meta-Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<meta name="keywords" content="">
 	<script>
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -29,14 +28,14 @@
 	<div class="w3ls-login box">
 		<img src="images/logo.png" alt="logo_img" />
 		<!-- form starts here -->
-		<form method="post">
+		<form action="/tologin" method="post">
 			<div class="agile-field-txt">
-				<input type="email" name="email" placeholder="电话/账号" required="" />
+				<input type="text" name="username" id="username" placeholder="电话/账号"/>
 			</div>
 			<div class="agile-field-txt">
-				<input type="password" name="password" placeholder="密码" required="" id="myInput" />
+				<input type="password" name="password" id="password" placeholder="密码"/>
 				<div class="agile_label">
-					<input id="check3" name="check3" type="checkbox" value="show password">
+					<input id="check3" name="check3" type="checkbox">
 					<label class="check" for="check3">记住密码</label>
 				</div>
 			</div>
@@ -45,27 +44,30 @@
 			</div>
 		</form>
 	</div>
-	<!-- //form ends here -->
-	<!--copyright-->
 	<div class="copy-wthree">
 		<p>Copyright &copy;这不是监控，这是爱！</p>
 	</div>
 </body>
 
 </html>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){
+	/* $(function(){
 		$(".cp_login").click(function(){
-			var name = $("[name=email]")[0].value;
+			var name = $("[name=username]")[0].value;
 			var pwd = $("[name=password]")[0].value;
 			alert(name+""+pwd)
 			$.ajax({
+				data: {
+					username: name,
+					password: pwd
+				},
 				type:"post",
-				url:"",
+				url:"tologin",
 				async:true
+				
 			});
 		})
 	　　
-	})
+	})   */
 </script>
