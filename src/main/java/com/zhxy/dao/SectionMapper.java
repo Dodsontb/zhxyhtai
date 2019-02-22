@@ -5,13 +5,14 @@ import com.zhxy.domain.Section;
 public interface SectionMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Section record);
+	int insert(Section record);
 
-    int insertSelective(Section record);
+	int insertSelective(Section record);
 
-    Section selectByPrimaryKey(Integer id);
+	Section selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Section record);
+	int updateByPrimaryKeySelective(Section record);
 
-    int updateByPrimaryKey(Section record);
+	int updateByPrimaryKey(Section record);
+
 }

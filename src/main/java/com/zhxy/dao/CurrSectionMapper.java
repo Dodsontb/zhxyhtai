@@ -5,13 +5,13 @@ import com.zhxy.domain.CurrSection;
 public interface CurrSectionMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(CurrSection record);
+	int insert(CurrSection record);
 
-    int insertSelective(CurrSection record);
+	int insertSelective(CurrSection record);
 
-    CurrSection selectByPrimaryKey(Integer id);
+	CurrSection selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(CurrSection record);
+	int updateByPrimaryKeySelective(CurrSection record);
 
-    int updateByPrimaryKey(CurrSection record);
+	int updateByPrimaryKey(CurrSection record);
 }

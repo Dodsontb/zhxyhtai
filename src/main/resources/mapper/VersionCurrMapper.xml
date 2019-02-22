@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.dao.VersionCurrMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.VersionCurr">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vid" jdbcType="INTEGER" property="vid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="hour" jdbcType="INTEGER" property="hour" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="resthour" jdbcType="INTEGER" property="resthour" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vid, cid, hour, num, resthour
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from version_curr
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from version_curr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.VersionCurr">
+    insert into version_curr (id, vid, cid, 
+      hour, num, resthour
+      )
+    values (#{id,jdbcType=INTEGER}, #{vid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{hour,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{resthour,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.VersionCurr">
+    insert into version_curr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="vid != null">
+        vid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="hour != null">
+        hour,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="resthour != null">
+        resthour,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="vid != null">
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="hour != null">
+        #{hour,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="resthour != null">
+        #{resthour,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.VersionCurr">
+    update version_curr
+    <set>
+      <if test="vid != null">
+        vid = #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="hour != null">
+        hour = #{hour,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="resthour != null">
+        resthour = #{resthour,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.VersionCurr">
+    update version_curr
+    set vid = #{vid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      hour = #{hour,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      resthour = #{resthour,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
