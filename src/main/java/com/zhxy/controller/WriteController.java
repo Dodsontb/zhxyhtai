@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.zhxy.dao.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
@@ -94,7 +95,7 @@ public class WriteController {
 			@RequestMapping("/queryMessageAll")
 			@ResponseBody
 			public List<Message> queryMessageAll(Model model) {
-				CpUser u =  (CpUser)session.getAttribute("user");
+				
 				List<Message> list=service.queryMessage();
 				model.addAttribute("list", list);
 				return list;
@@ -194,10 +195,10 @@ public class WriteController {
 				 return i;
 			}
 			
-			@RequestMapping("/queryCpUser")
+			@RequestMapping("/queryUserGetId")
 			@ResponseBody
 			public List<CpUser> queryCpUser(Model model) {
-				List<CpUser> list=service.queryCpUser();
+				List<CpUser> list=service.queryUserGetId();
 				model.addAttribute("list", list);
 				return list;
 				
@@ -227,20 +228,19 @@ public class WriteController {
 			@RequestMapping("/senderMessage")
 			public String senderMessage(HttpSession session,Message m,HttpServletResponse response) {
 				response.setCharacterEncoding("utf-8");
-				/*CpUser u =  (CpUser)session.getAttribute("user");*/
-				m.setUid(1);
-				System.out.println("用户-发送消息"+m.getUid()+">>"+m.getReceiver().length+"个人");
-				//m.setUid (u.getUserid());
+				CpUser u =  (CpUser)session.getAttribute("user");
+				System.out.println("用户-发送消息"+u.getUserid()+">>"+m.getReceiver()+"个人");
+				m.setUid (u.getUserid());
 				//m.setTitle("好友消息");
 				int jg=service.insertMessage(m);
 				String status =null;
 				//显示自己发送的信息
-				status = handler.sendMsg(m.getUid()+"", "<p class=\"m_message_left\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+				status = handler.sendMsg(u.getUserid()+"", "<p class=\"m_message_left\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
 			//	显示好友发来的信息
-				for (int receiver : m.getReceiver()) {
-					System.out.println("接收人："+receiver);
-					status = handler.sendMsg(receiver+"", "<p class=\"m_message_right\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
-				}
+				/*for (int receiver : m.getReceiver()) {*/
+					System.out.println("接收人："+ m.getReceiver());
+					status = handler.sendMsg( m.getReceiver()+"", "<p class=\"m_message_right\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+				/*}*/
 			System.out.println("存储结果:"+jg+"发送结果："+status);
 				return status;
 			}
@@ -248,10 +248,41 @@ public class WriteController {
 			
 			@ResponseBody
 			@RequestMapping("/getChatRecord")
-			public List<Message> getChatRecord(HttpSession session,HttpServletResponse response,int chatid) {
+			public List<Message> getChatRecord(HttpSession session,HttpServletResponse response,int receiver) {
 				response.setCharacterEncoding("utf-8");
 				CpUser u =  (CpUser)session.getAttribute("user");
-				System.out.println("查询聊天记录"+chatid);
-				return service.getChatRecord(u.getUserid(),chatid);
+				System.out.println("查询聊天记录"+receiver);
+				return service.getChatRecord(u.getUserid(),receiver);
 			}
+			
+			
+			@ResponseBody
+			@RequestMapping("/getChatRecordList")
+			public List<Message> getChatRecordList(HttpSession session,HttpServletResponse response,int sendid) {
+				CpUser u =  (CpUser)session.getAttribute("user");
+				System.out.println("查询聊天记录集合"+sendid);
+				List<Message> clist=service.getChatRecordList(sendid, u.getUserid());	
+				return clist;
+			}
+			
+			@ResponseBody
+			@RequestMapping("/getAllUserList")
+			//获取弹窗中绑定的用户信息列表（userid/name/url）分别附带信息职位、班级、家长所属学生
+			public List<CpUser> getAllUserList(HttpSession session,HttpServletResponse response,int chatid) {
+				response.setCharacterEncoding("utf-8");
+				CpUser u=(CpUser) session.getAttribute("user");
+				System.out.println("查询用户列表");
+				List<CpUser> ulist=service.getUserlist(chatid,u.getUserid());
+				return ulist;
+			}
+			
+			
+			@ResponseBody
+			@RequestMapping("/getSeesionUser")
+			public CpUser getChatRecordList(HttpSession session,HttpServletResponse response) {
+				CpUser user =  (CpUser)session.getAttribute("user");
+				System.out.println(JSON.toJSONString(user));
+				return user;
+			}
+			
 }

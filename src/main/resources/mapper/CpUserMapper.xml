@@ -18,7 +18,20 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    
   </resultMap>
+  
+ 
+  	<select id="getUserlist" resultMap="BaseResultMap">
+  			SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` WHERE cp_user.`userid` IN (#{chatid},#{userid})
+  	</select> 
+  
+  	<select id="queryUserGetId" resultMap="BaseResultMap">
+  		SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` 
+  	
+  	</select>
+  
   <sql id="Base_Column_List">
     userid, username, password, roleid, usertypeid, usertypenub, creationtime, modificationtime, 
     status, uid, remark, name1, name2, name3, name4, name5

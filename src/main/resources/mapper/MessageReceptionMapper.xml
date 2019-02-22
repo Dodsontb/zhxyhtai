@@ -13,6 +13,14 @@
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
+  
+  <insert id="insertReception">
+  		insert into message_reception(Uid,Message_Id)
+  		value(#{receiver},#{messageId})
+  
+  </insert>
+  
+  
   <sql id="Base_Column_List">
     reception_Id, Uid, Reading, Read-time, Message_Id, name1, name2, name3, name4, name5
   </sql>

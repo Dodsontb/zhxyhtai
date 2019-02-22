@@ -24,13 +24,13 @@ public class Message {
     private String time;
     
   //接收者数组
-    private int[] receiver; 
+    private int receiver; 
     
-    public int[] getReceiver() {
+    public int getReceiver() {
 		return receiver;
 	}
 
-	public void setReceiver(int[] receiver) {
+	public void setReceiver(int receiver) {
 		this.receiver = receiver;
 	}
 
