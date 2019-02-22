@@ -70,7 +70,7 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
-                                <ul class="dropdown-menu email" role="menu">
+                                <ul class="dropdown-menu email xiaoxi" role="menu">
                                     <li class="mail-head">
                                         <div class="clearfix">
                                             <div class="pull-left">
@@ -89,20 +89,20 @@
                                             </button>
                                         </form>
                                     </li>
-                                    <li class="mail-list clearfix">
-                                        <a href="#">
-                                            <img src="assets/img/avatars/128.jpg" class="mail-avatar pull-left" alt="avatar">
+                                    <li class="mail-list clearfix" v-for="item in clist">
+                                        
+                                            <img v-bind:src="item.url" class="mail-avatar pull-left" alt="avatar">
                                             <p class="name">
-                                                <span class="status"><i class="en-dot"></i></span> 何新可
+                                                <span class="status"><i class="en-dot"></i></span>{{item.cp_user.username}}
                                                 <span class="notification">2</span>
-                                                <span class="time">2018-01-01-20:20</span>
+                                                <span class="time">{{item.time}}</span>
                                             </p>
                                             <p class="msg">
-                                               你快点把首页做完
+                                             {{item.mcontent}}
                                             </p>
-                                        </a>
+                                        
                                     </li>
-                                    <li class="mail-list clearfix">
+                                   <!--  <li class="mail-list clearfix">
                                         <a href="#">
                                             <img src="assets/img/avatars/129.jpg" class="mail-avatar pull-left" alt="avatar">
                                             <p class="name">
@@ -140,7 +140,7 @@
                                                吃鸡不兄嘚
                                             </p>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li class="mail-more">
                                         <a href="email-inbox.html">查看全部<i class="en-arrow-right7"></i></a>
                                     </li>
@@ -474,4 +474,29 @@
         <script src="assets/js/app.js"></script>
         <script src="assets/js/pages/dashboard.js"></script>
     </body>
+    <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+	 <script>
+	 	var v=new Vue({
+			el:".xiaoxi",
+			data:{
+				clist:null,
+				chat:3
+			}
+		});
+	 	$(function(){
+			  $.ajax({
+				url:"/getChatRecordList",
+				dataType:"json",
+				type:"post",
+				  data:'sendid='+v.chat,  
+				success:function(result){
+					console.log(result);
+					v.clist=result;	
+				}
+				
+			}); 
+	 	});
+	 
+	 </script>
 </html>
