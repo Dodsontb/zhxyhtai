@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.zhxy.domain.Clazz;
+import com.zhxy.domain.Grade;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 
@@ -33,4 +35,8 @@ public interface NoticeMapper {
     int deleteNotice(int nstate);
     
     List<Noticetype> plqueryNoticeType(int typeid);
+    
+    List<Grade> queryGrade();
+    
+    List<Clazz> queryClazz(@Param("name")String name);
 }

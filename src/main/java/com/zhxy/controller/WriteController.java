@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.dao.NoticeMapper;
+import com.zhxy.domain.Clazz;
+import com.zhxy.domain.Grade;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 import com.zhxy.service.History_hxk;
@@ -21,9 +23,9 @@ public class WriteController {
 			@Autowired
 			NoticeMapper noticeMapper;
 			
-			@RequestMapping("/write")
-			public String write() {
-				return "write";
+			@RequestMapping("/hxk_message")
+			public String hxk_message() {
+				return "hxk_message";
 			}
 			
 			@RequestMapping("/hxk_history")
@@ -56,10 +58,41 @@ public class WriteController {
 				model.addAttribute("list", list);
 				return list;
 			}
+			
+			@RequestMapping("/queryGrade")
+			@ResponseBody
+			public List<Grade> queryGrade(Model model) {
+				List<Grade> list=service.queryGrade();
+				model.addAttribute("list", list);
+				return list;
+			}
+			
+			@RequestMapping("/queryClazz")
+			@ResponseBody
+			public List<Clazz> queryClazz(Model model,String name) {
+				List<Clazz> list=service.queryClazz(name);
+				model.addAttribute("list", list);
+				return list;
+			}
 				
+			
+			@RequestMapping("/queryNoticeById")
+			@ResponseBody
+			public Notice queryNoticeById(Model model, int Notice_Id) {
+				Notice list=service.queryNoticeById(Notice_Id);
+				model.addAttribute("list", list);
+				return list;
+			}
+			
+			
+			
+			
 			@RequestMapping("/s")
 			@ResponseBody
 			public List<Noticetype> s(){
 				return noticeMapper.plqueryNoticeType(1);
 			}
+			
+			
+			
 }

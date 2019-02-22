@@ -519,18 +519,15 @@
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											
 											<span>选择年级：</span>
-                                          <select>
+                                          <select id="grade">
 												<option>---请选择---</option>
-												<option>s1</option>
-												<option>s2</option>
-												<option>Y2</option>
+												<option v-for="item in list" class="gg">{{item.grades.name}}</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											
 											<span>选择班级：</span>
-                                          <select>
+                                          <select id="clazz">
 												<option>---请选择---</option>
-												<option>1717</option>
-												<option>1718</option>
+												<option v-for="item in list">{{item.name}}</option>
 											</select>
                                         </div>
                                     </div>
@@ -614,8 +611,8 @@
         <script src="assets/js/pages/email.js"></script>
         
         
-        <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{js/vue.js}"></script>
+        <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
 		<script type="text/javascript">
 			var v=new Vue({
 				el:"#type",
@@ -623,6 +620,19 @@
 					list:null
 				}
 			});
+			
+			var g=new Vue({
+				el:"#grade",
+				data:{
+					list:null
+				}
+			});
+			var c=new Vue({
+				el:"#clazz",
+				data:{
+					list:null
+				}
+			})
 			$(function(){
 				$.ajax({
 					url:"/plqueryNoticeType",
@@ -632,9 +642,31 @@
 						console.log(result);
 						v.list=result;
 					}
-				})
+				});
+				$.ajax({
+					url:"/queryGrade",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						g.list=result;
+					}
+				});
 			})
-        
+        	$(".gg").change(function(){
+        		alert(111)
+        		var name=$(this).val();
+        		alert(name);
+        		$.ajax({
+        			url:"/queryClazz",
+        			dataType:"json",
+        			type:"post",
+        			data:"name="+name,
+        			success:function(result){
+        				c.list=result;
+        			}
+        		})
+        	})
         
         
         
