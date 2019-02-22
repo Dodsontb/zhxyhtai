@@ -1,6 +1,7 @@
 package com.zhxy.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Notice {
     private Integer noticeId;
@@ -30,6 +31,46 @@ public class Notice {
     private String name4;
 
     private String name5;
+    
+    private Noticetype type;
+    
+    private CpUser cp_user;
+    
+    public List<NoticeRelation> getNoticerelation() {
+		return noticerelation;
+	}
+
+	public void setNoticerelation(List<NoticeRelation> noticerelation) {
+		this.noticerelation = noticerelation;
+	}
+
+	private List<NoticeRelation> noticerelation;
+    
+    public CpUser getCp_user() {
+		return cp_user;
+	}
+
+	public void setCp_user(CpUser cp_user) {
+		this.cp_user = cp_user;
+	}
+
+	public Noticetype getType() {
+		return type;
+	}
+
+	public void setType(Noticetype type) {
+		this.type = type;
+	}
+
+	public List<Noticeimg> getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(List<Noticeimg> imgs) {
+		this.imgs = imgs;
+	}
+
+	private List<Noticeimg> imgs;
 
     public Integer getNoticeId() {
         return noticeId;

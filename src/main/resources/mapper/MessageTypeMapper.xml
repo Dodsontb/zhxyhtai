@@ -10,6 +10,11 @@
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
+  
+  
+  
+  
+  
   <sql id="Base_Column_List">
     TypeId, Typename, name1, name2, name3, name4, name5
   </sql>

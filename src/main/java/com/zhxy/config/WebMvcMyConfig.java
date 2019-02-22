@@ -26,6 +26,7 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		registry.addResourceHandler("*").addResourceLocations("classpath:/static/");
 	}
 	
+<<<<<<< Upstream, based on origin/tanao
 /*	*//**
 	 * 普通字符串乱码
 	 * @return
@@ -51,6 +52,8 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		super.configureMessageConverters(converters);
 	}
 	*/
+=======
+>>>>>>> b1cb161 ...
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		
