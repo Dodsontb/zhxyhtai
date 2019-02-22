@@ -73,6 +73,7 @@
 					INNER JOIN `message_reception` 
 					ON message.`Message_Id`=`message_reception`.`Message_Id`
 					WHERE (`message`.`Uid`=#{sendid} AND `message_reception`.`Uid`=#{receiver})
+					ORDER BY message.`mtime` DESC
 					
   		</select>
   		

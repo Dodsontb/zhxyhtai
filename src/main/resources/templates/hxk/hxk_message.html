@@ -233,7 +233,7 @@
                             </li>
                            -->
                           
-                            <li v-for="item in list"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
+                            <li v-for="item in list" class="shouwModel" v-bind:userid="item.userid"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
                             </li>
                            
                         </ul>
@@ -366,7 +366,7 @@
 				el:"#table-striped",
 				data:{
 					user:{userid:null},
-					chat:3,
+					/* chat:3, */
 					list:null,
 					alluserlist:null,
 					ulist:null,
@@ -394,6 +394,8 @@
 					}
 				}
 			});
+			
+			
 			var g=new Vue({
 				el:"#email-nav",
 				data:{
@@ -475,7 +477,8 @@
 					 $(".senderMessage").click(function(){
 						
 						 $(".msg div").remove() 
-						var receiver=v.chat;
+						var receiver=v.chat
+						 alert(receiver)
 						var content=$("[name=mcontent]").val();
 						alert(content)
 						$.post("senderMessage","receiver="+receiver+"&mcontent="+content,function(result){
@@ -560,6 +563,7 @@
 					$(".m_message_left").append("<img src="+getuserimg(v.user.userid)+" width='25px' height='25px'/ class='userimg'>");
 				}
 			
+				//查询聊天对象信息
 				function getAllUserList(chat){
 					 /* var chat=$(".m_message_right img").val();
 					 alert("获取"+chat) */ 
@@ -569,7 +573,14 @@
 					
 				}
 				
-				
+				$("body").on("click",".shouwModel",function(){
+					var userid=$(this).attr("userid");
+					alert(userid)
+					$("#xiaoxi").show();
+					v.chat=userid;
+					getAllUserList(v.chat);
+				 	getChatRecord(v.chat);
+				})
 				
  </script>
  
