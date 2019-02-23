@@ -14,25 +14,9 @@ public class Studentassignment {
 
     private Date ljxdatetime;
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
     private String ljxdate;
-=======
-    private Date ljxdate;
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    private Date ljxdate;
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
-
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
+    
     private String ljxtime;
-=======
-    private Date ljxtime;
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    private Date ljxtime;
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 
     private Integer ljxuid;
 
@@ -84,73 +68,27 @@ public class Studentassignment {
         this.ljxclasses = ljxclasses;
     }
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
     public String getLjxdatetime() {
     	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxdatetime);
-=======
-    public Date getLjxdatetime() {
-        return ljxdatetime;
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    public Date getLjxdatetime() {
-        return ljxdatetime;
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
     }
 
     public void setLjxdatetime(Date ljxdatetime) {
         this.ljxdatetime = ljxdatetime;
     }
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
     public String getLjxdate() {
-=======
-    public Date getLjxdate() {
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    public Date getLjxdate() {
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
         return ljxdate;
     }
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
     public void setLjxdate(String ljxdate) {
-=======
-    public void setLjxdate(Date ljxdate) {
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    public void setLjxdate(Date ljxdate) {
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
         this.ljxdate = ljxdate;
     }
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
-
     public String getLjxTime() {
     	return ljxtime;
-
-=======
-    public Date getLjxtime() {
-        return ljxtime;
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    public Date getLjxtime() {
-        return ljxtime;
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
     }
 
-<<<<<<< HEAD
-<<<<<<< Upstream, based on origin/ljx1.1
     public void setLjxtime(String ljxtime) {
-=======
-    public void setLjxtime(Date ljxtime) {
->>>>>>> 30c53b0 数据库增加一张表
-=======
-    public void setLjxtime(Date ljxtime) {
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
         this.ljxtime = ljxtime;
     }
 
