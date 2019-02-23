@@ -37,5 +37,9 @@ public class Studentassinment_impl implements Service_Studentassinment{
 		// TODO Auto-generated method stub
 		return mapper.stuType(ljxtype, ljxyesno, ljxuid);
 	}*/
+	public List<Studentassignment> stuquery() {
+		
+		return mapper.stuquery();
+	}
 
 }
