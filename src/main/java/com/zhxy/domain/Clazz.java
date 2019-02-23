@@ -21,6 +21,7 @@ public class Clazz implements Serializable {
 	private Plan am;
 	private Plan pm;
 	private List<Plan> plans;
+	private Event event;
 	
 	public int getId() {
 		return id;
@@ -57,6 +58,14 @@ public class Clazz implements Serializable {
 		this.name="";
 		this.curr=new Curriculum();
 		this.teacher=new People();
+	}
+	public Clazz(Clazz clazz) {
+		// TODO Auto-generated constructor stub
+		this.id=clazz.getId();
+		this.name=clazz.getName();
+		this.teacher=clazz.getTeacher();
+		this.curr=clazz.getCurr();
+		this.grade=clazz.getGrade();
 	}
 	public int getPlanNum() {
 		return planNum;
@@ -106,5 +115,12 @@ public class Clazz implements Serializable {
 	}
 	public void setWeekNum(int weekNum) {
 		this.weekNum = weekNum;
+	}
+	public Event getEvent() {
+		return event;
+	}
+	
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 }

@@ -25,6 +25,7 @@ import com.zhxy.mapper.EventMapper;
 import com.zhxy.mapper.PeopleMapper;
 import com.zhxy.mapper.PlanMapper;
 import com.zhxy.mapper.RoomMapper;
+import com.zhxy.service.PeopleService;
 import com.zhxy.service.PlanService;
 import com.zhxy.utils.MyUtils;
 
@@ -43,17 +44,8 @@ public class PlanServiceImpl implements PlanService {
 	EventMapper eventMapper;
 	@Autowired
 	PeopleMapper peopleMapper;
-
-	@Override
-	public List<DatePlan> weekPlan(Date date) {
-		// TODO Auto-generated method stub
-		List<DatePlan> list = new ArrayList<DatePlan>();
-		List<Date> dates = MyUtils.weeks(date);
-		for (Date itemDate : dates) {
-			list.add(datePlan(itemDate));
-		}
-		return list;
-	}
+	@Autowired
+	PeopleService peopleService;
 
 	@Override
 	public Plan existPlan(Date date, Room room, boolean ap) {
@@ -61,16 +53,18 @@ public class PlanServiceImpl implements PlanService {
 		return planMapper.existPlan(date, room, ap);
 	}
 
-	@Override
-	public void autoPlan(Date date) {
-		// TODO Auto-generated method stub
-		logger.info("<<<<<<<<<<<<<<<<<<< · 开始排课");
+	public void auto(Date date) {
 		Random random = new Random();
 		List<People> teachers = peopleMapper.allTeacher();
 		List<Date> weeks = MyUtils.weeks(date);
 		Calendar calendar = Calendar.getInstance();
 		for (People teacher : teachers) {
+			logger.info(teacher.getName());
 			for (Date day : weeks) {
+				if (day.getTime() < new Date().getTime() || MyUtils.isToday(day)) {
+					continue;
+				}
+				logger.info(MyUtils.format(day));
 				List<Date> lists = MyUtils.weeks(date);
 				Date begin = lists.get(0);
 				Date end = lists.get(lists.size() - 1);
@@ -82,6 +76,7 @@ public class PlanServiceImpl implements PlanService {
 				int i = 0;
 				Clazz tempClazz = null;
 				for (Clazz clazz : clazzs) {
+					logger.info(clazz.getName());
 					if (!hasEvent(clazz, day)) {
 						if (i < 2) {
 							dayClazzs.add(clazz);
@@ -98,10 +93,13 @@ public class PlanServiceImpl implements PlanService {
 					addPlan(new Plan(tempClazz, room, day, true, false, false));
 				}
 				for (Clazz clazz : dayClazzs) {
+					logger.info(".................");
+					logger.info(clazz.getName());
 					isStudy = isStudyByOnself(clazz, begin, end);
 					boolean ap = random.nextBoolean();
 					Room studyRoom = findRoom(true, clazz, teacher, day);
 					if (clazz.getWeekNum() >= 4 && !isStudy) {
+						logger.info("一天自习");
 						addPlan(new Plan(clazz, studyRoom, day, ap, false, false));
 						addPlan(new Plan(clazz, studyRoom, day, !ap, false, false));
 						continue;
@@ -111,6 +109,7 @@ public class PlanServiceImpl implements PlanService {
 						if (clazz.getWeekNum() < 4) {
 							if (peopleMapper.isPlanBusy(teacher, day, ap) == null
 									&& peopleMapper.isEventBusy(teacher, day, ap) == null) {
+								logger.info("上课");
 								addPlan(new Plan(clazz, studyRoom, day, ap, true, false));
 							} else {
 								addPlan(new Plan(clazz, studyRoom, day, ap, false, false));
@@ -125,6 +124,17 @@ public class PlanServiceImpl implements PlanService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Date autoPlan() {
+		// TODO Auto-generated method stub
+		logger.info("<<<<<<<<<<<<<<<<<<< · 开始排课");
+		Date date = planMapper.maxDate();
+		Date today = new Date();
+		date = date.getTime() > today.getTime() ? MyUtils.nextWeekMonday(date) : today;
+		auto(date);
+		return date;
 	}
 
 	public Room findRoom(boolean study, Clazz clazz, People teacher, Date day) {
@@ -144,7 +154,7 @@ public class PlanServiceImpl implements PlanService {
 							studyRoom = stuRoom;
 							break;
 						}
-					}						
+					}
 				}
 			} else {
 				studyRooms = roomMapper.remainRoom(day, clazz, study);
@@ -238,7 +248,25 @@ public class PlanServiceImpl implements PlanService {
 			calendar.setDatePlan(datePlan(date));
 			break;
 		}
+		calendar.setMaxDate(maxDate());
 		return calendar;
+	}
+
+	@Override
+	public DatePlan advPlan(Date date, People people) {
+		// TODO Auto-generated method stub
+		List<Integer> ids = peopleService.position(people);
+		List<Clazz> clazzs = clazzMapper.teacherClazz(ids);
+		List<Clazz> list = new ArrayList<>();
+		for (Clazz clazz : clazzs) {
+			Clazz temp = new Clazz(clazz);
+			temp.setPlans(planMapper.classadvPlan(temp.getId(), date));
+			list.add(temp);
+		}
+		DatePlan datePlan = new DatePlan();
+		datePlan.setDate(date);
+		datePlan.setPlans(list);
+		return datePlan;
 	}
 
 	@Override
@@ -247,7 +275,6 @@ public class PlanServiceImpl implements PlanService {
 		return planMapper.datePlan(date);
 	}
 
-	@Override
 	public List<DatePlan> week(Date date) {
 		// TODO Auto-generated method stub
 		List<Date> weeks = MyUtils.week(date);
@@ -274,13 +301,44 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public boolean existAuto() {
 		// TODO Auto-generated method stub
-		return planMapper.existAuto()>0;
+		return planMapper.existAuto() > 0;
 	}
 
 	@Override
 	public void pushAuto() {
 		// TODO Auto-generated method stub
 		planMapper.pushAuto();
+	}
+
+	@Override
+	public Date maxDate() {
+		// TODO Auto-generated method stub
+		return planMapper.maxDate();
+	}
+
+	@Override
+	public Map<String, List<DatePlan>> switching(People people) {
+		// TODO Auto-generated method stub
+		Date date = maxDate();
+		Date minDate = planMapper.mindate();
+		if (date == null) {
+			return null;
+		}
+		if (date.getTime() < new Date().getTime() || MyUtils.isToday(date)) {
+			return null;
+		}
+		Map<String, List<Date>> plans = MyUtils.fill(date, minDate);
+		Map<String, List<DatePlan>> maps = new HashMap<>();
+		for (String keyString : plans.keySet()) {
+			List<DatePlan> datePlans = new ArrayList<>();
+			for (Date tempDate : plans.get(keyString)) {
+				if(tempDate!=null) {
+					datePlans.add(advPlan(tempDate, people));					
+				}
+			}
+			maps.put(keyString, datePlans);
+		}
+		return maps;
 	}
 
 }

@@ -6,19 +6,48 @@
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 	</resultMap>
-	<resultMap type="com.zhxy.domain.Grade" extends="grade"
-		id="myGrade"></resultMap>
+	<resultMap type="com.zhxy.domain.Grade" extends="grade" id="m-g">
+		<association property="lists" column="{gid=id,vid=vid,mid=mid}" javaType="list" select="com.zhxy.mapper.CurriculumMapper.g-c"></association>
+	</resultMap>
 	<select id="queryById" resultMap="grade">
 		select *
 		from grade
 		where
 		id=#{id}
 	</select>
-	<select id="findGrade" resultMap="myGrade">
+	<select id="findGrade" resultMap="grade">
 		select *
 		from grade
 		where id in
 		(select gradeId from clazz where teacherId in <foreach collection="list" item="id" open="(" close=")" separator=",">#{id}</foreach> )
 		order by name
+	</select>
+	<select id="m-g" resultMap="m-g">
+		select *,#{vid} vid,#{mid} mid
+		from grade
+		where id in (
+			SELECT gradeId
+			FROM curriculum
+			WHERE mid =#{mid} and  id in (
+				select cid
+				from version_curr
+				where vid=#{vid}
+			)
+			group by gradeId
+		)
+		order by name
+	</select>
+	<select id="grades" resultMap="grade">
+		select *
+		from grade
+		where id in (
+			select gradeId
+			from curriculum
+			where mid=#{mid}
+		)
+	</select>
+	<select id="allGrade" resultMap="grade">
+		select *
+		from grade
 	</select>
 </mapper>

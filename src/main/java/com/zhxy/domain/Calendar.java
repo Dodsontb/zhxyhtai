@@ -9,25 +9,29 @@ import com.zhxy.utils.MyUtils;
 public class Calendar {
 
 	private String title;
-	
+
 	private Map<String, List<DatePlan>> months;
-	
+
 	private List<DatePlan> weeks;
-	
+
 	private DatePlan datePlan;
-	
+
 	private Date date;
-	
+
 	private String dateStr;
-	
+
 	private String preDate;
-	
+
 	private String nextDate;
-	
+
 	private String today;
-	
+
+	private Date maxDate;
+
+	private String max;
+
 	private int type;
-	
+
 	private int month;
 
 	public String getTitle() {
@@ -78,23 +82,23 @@ public class Calendar {
 	public void setDatePlan(DatePlan datePlan) {
 		this.datePlan = datePlan;
 	}
-	
+
 	public Calendar() {
 		// TODO Auto-generated constructor stub
-		this.today=MyUtils.format(new Date());
+		this.today = MyUtils.format(new Date());
 	}
-	
-	public Calendar(int type,Date date) {
+
+	public Calendar(int type, Date date) {
 		this();
-		this.date=date;
-		this.type=type;
-		java.util.Calendar calendar=java.util.Calendar.getInstance();
+		this.date = date;		
+		this.type = type;
+		java.util.Calendar calendar = java.util.Calendar.getInstance();
 		calendar.setTime(date);
-		this.month=calendar.get(java.util.Calendar.MONTH);
-		this.title=MyUtils.calendarTitle(type, date);
-		this.preDate=MyUtils.preDate(type, date);
-		this.nextDate=MyUtils.nextDate(type, date);
-		this.dateStr=MyUtils.format(date);
+		this.month = calendar.get(java.util.Calendar.MONTH);
+		this.title = MyUtils.calendarTitle(type, date);
+		this.preDate = MyUtils.preDate(type, date);
+		this.nextDate = MyUtils.nextDate(type, date);
+		this.dateStr = MyUtils.format(date);
 	}
 
 	public int getMonth() {
@@ -135,5 +139,23 @@ public class Calendar {
 
 	public void setDateStr(String dateStr) {
 		this.dateStr = dateStr;
+	}
+
+	public Date getMaxDate() {
+		return maxDate;
+	}
+
+	public void setMaxDate(Date maxDate) {
+		maxDate = new Date().getTime() > maxDate.getTime() ? new Date() : maxDate;
+		this.maxDate = maxDate;
+		this.max = MyUtils.format(maxDate);
+	}
+
+	public String getMax() {
+		return max;
+	}
+
+	public void setMax(String max) {
+		this.max = max;
 	}
 }

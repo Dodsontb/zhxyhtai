@@ -22,10 +22,13 @@
 		<result property="planNum" column="planNum" />
 		<result property="weekNum" column="weekNum" />
 	</resultMap>
-	<resultMap type="com.zhxy.domain.Clazz" extends="clazz"
-		id="planClazz">
-		<association property="plans" column="{date=date,id=id}"
-			javaType="list" select="com.zhxy.mapper.PlanMapper.classPlan"></association>
+	<resultMap type="com.zhxy.domain.Clazz" extends="clazz" id="planClazz">
+		<association property="event" column="{date=date,id=id}" javaType="com.zhxy.domain.Event" select="com.zhxy.mapper.EventMapper.dateEvent"></association>
+		<association property="plans" column="{date=date,id=id}" javaType="list" select="com.zhxy.mapper.PlanMapper.classPlan"></association>
+	</resultMap>
+	<resultMap type="com.zhxy.domain.Clazz" extends="clazz" id="advclazz">
+		<association property="event" column="{date=date,id=id}" javaType="com.zhxy.domain.Event" select="com.zhxy.mapper.EventMapper.dateEvent"></association>
+		<association property="plans" column="{date=date,id=id}" javaType="list" select="com.zhxy.mapper.PlanMapper.classadvPlan"></association>
 	</resultMap>
 	<select id="queryById" resultMap="clazz">
 		select *
@@ -50,10 +53,15 @@
 	</select>
 	<select id="clazzPlan" resultMap="planClazz">
 		select *,#{date} `date`
-		from
-		clazz
+		from clazz
 		where dissolve=false
 		order by `begin`
+	</select>
+	<select id="advplan" resultMap="advclazz">
+		select *,#{date} `date`
+		from clazz
+		where dissolve=false
+		order by `begin`		
 	</select>
 	<select id="isStudyByOnself" resultType="int">
 		select count(*)
@@ -74,9 +82,25 @@
 			</if>
 		</where>
 	</select>
+	<select id="notIndateClazz" resultMap="clazz">
+		select *
+		from clazz
+		<where>
+			teacherId in <foreach collection="ids" item="id" open="(" close=")" separator=",">#{id}</foreach>
+			<if test="grade">
+				and gradeId=#{grade}
+			</if>
+			and id not in (select cid from class_calendar where `date`=date(#{date}) )			
+		</where>
+	</select>
 	<select id="queryClazzByNotice" resultMap="clazz">
 		select *
 		from clazz
-		where id in (select cid from notice_relation where Notice_Id=#{id})		
+		where id in (select cid from notice_relation where Notice_Id=#{id})	
+	</select>
+	<select id="teacherClazz" resultMap="clazz">
+		select *
+		from clazz
+		where teacherId in (<foreach collection="list" item="item" separator=",">#{item}</foreach>)
 	</select>
 </mapper>

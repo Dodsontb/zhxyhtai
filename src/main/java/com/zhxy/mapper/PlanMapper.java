@@ -67,4 +67,11 @@ public interface PlanMapper {
 	
 	void pushAuto();
 	
+	Date maxDate();
+	
+	Date mindate();
+	
+	Date maxdate();
+	
+	List<Plan> classadvPlan(@Param("id")int id,@Param("date")Date date);
 }

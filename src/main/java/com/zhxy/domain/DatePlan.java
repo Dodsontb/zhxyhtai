@@ -37,6 +37,8 @@ public class DatePlan {
 	
 	private List<Clazz> plans;
 	
+	private String test;
+	
 	public Date getDate() {
 		return date;
 	}
@@ -104,6 +106,14 @@ public class DatePlan {
 
 	public void setDateStr(String dateStr) {
 		this.dateStr = dateStr;
+	}
+
+	public String getTest() {
+		return test;
+	}
+
+	public void setTest(String test) {
+		this.test = test;
 	}
 
 }

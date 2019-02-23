@@ -24,9 +24,15 @@ public class ClazzServiceImpl implements ClazzService{
 	}
 
 	@Override
-	public List<Clazz> clazz(List<Integer> id, int gradeid) {
+	public List<Clazz> clazz(List<Integer> id, int gradeid,String date) {
 		// TODO Auto-generated method stub
-		return clazzMapper.clazz(id, gradeid);
+		return clazzMapper.notIndateClazz(id, gradeid, date);
+	}
+
+	@Override
+	public List<Clazz> queryAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

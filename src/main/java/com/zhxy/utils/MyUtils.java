@@ -12,6 +12,7 @@ import java.util.Map;
 import com.zhxy.domain.DatePlan;
 import com.zhxy.domain.Room;
 
+
 /**
  * 帮助类
  * 
@@ -152,26 +153,14 @@ public class MyUtils {
 		return "星期" + suffix;
 	}
 
-	public static List<Room> fillList(List<Room> lists, int size) {
-		List<Room> list = new ArrayList<>();
-		for (Room room : lists) {
-			list.add(room);
-		}
-		if (size > list.size()) {
-			for (int i = 0; i < size - list.size(); i++) {
-				list.add(new Room());
-			}
-		}
-		return list;
-	}
-
 	public static Date NOW() {
 		return new Date();
 	}
 
 	public static int dateSpan(Date date, Date other) {
-		int i = (int) (date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24);
-		return i > 0 ? i : -i;
+		long i = (date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24);
+		i = i < 0 ? -i : i;
+		return (int)i;
 	}
 
 	public static int dayOfWeek(Date date) {
@@ -233,11 +222,14 @@ public class MyUtils {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			System.out.println("日期格式错误 yyyy-MM-dd");
-			return null;
+			return new Date();
 		}
 	}
 
 	public static String format(Date date) {
+		if(date==null) {
+			return null;
+		}
 		return sdf.format(date);
 	}
 
@@ -264,15 +256,15 @@ public class MyUtils {
 			calendar.add(Calendar.DATE, 1 - (calendar.get(Calendar.DAY_OF_WEEK)));
 			Date first = calendar.getTime();
 			calendar.setTime(first);
-			int year=calendar.get(Calendar.YEAR);
+			int year = calendar.get(Calendar.YEAR);
 			calendar.add(Calendar.DATE, 6);
 			Date last = calendar.getTime();
 			boolean isTrue = isAnotherMonth(first, last);
 			boolean isYear = isAnotherYear(first, last);
-			String firstStr = !isYear ? simpleDateFormat.format(first) + " " +year+"年"
-			: simpleDateFormat.format(first);
+			String firstStr = !isYear ? simpleDateFormat.format(first) + " " + year + "年"
+					: simpleDateFormat.format(first);
 			String lastStr = !isTrue ? simpleDateFormat.format(last) : calendar.get(Calendar.DATE) + "日";
-			title = firstStr + " —— " + lastStr +" "+ calendar.get(Calendar.YEAR)+"年";
+			title = firstStr + " —— " + lastStr + " " + calendar.get(Calendar.YEAR) + "年";
 			break;
 		case 3:
 			String week = weekDay(date);
@@ -347,4 +339,52 @@ public class MyUtils {
 		int twoYear = calendar.get(Calendar.YEAR);
 		return oneYear == twoYear;
 	}
+
+	public static Map<String, List<Date>> fill(Date one,Date another) {
+		Map<String, List<Date>> maps=new HashMap<>();
+		boolean isMax=one.getTime()>another.getTime();
+		Date max=isMax?one:another;
+		Date min=isMax?another:one;
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(min);
+		int dayofweek=calendar.get(Calendar.DAY_OF_WEEK);
+		int interger=0;
+		while (true) {
+			List<Date> lists=new ArrayList<>();
+			if(dayofweek!=2) {
+				for (int day = 0; day < dayofweek-2; day++) {
+					lists.add(null);
+				}
+			}
+			for (int i = 0; i <= 8-dayofweek; i++) {
+				lists.add(calendar.getTime());				
+				calendar.add(Calendar.DATE, 1);
+				if(calendar.getTime().getTime()>max.getTime()) {
+					maps.put(interger+"", lists);
+					return maps;
+				}
+			}
+			maps.put(interger+"", lists);
+			dayofweek=2;
+			interger++;
+		}
+	}
+	
+	public static boolean contains(List<Room> list,int id) {
+		for (Room room : list) {
+			if(room.getId()==id) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void removeKey(List<Room> list,int id) {
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getId()==id) {
+				list.remove(i);
+			}
+		}
+	}
+
 }
