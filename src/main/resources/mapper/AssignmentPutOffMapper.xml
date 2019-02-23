@@ -174,4 +174,26 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
   </update>
+  
+  <select id="putoff" resultMap="putoffone">
+  		SELECT * FROM `assignment_put_off` WHERE `ljxUid`=#{ljxUid}
+  </select>
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="putoffone">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.dao.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>
+  
+  <insert id="putoffinsert" parameterType="com.zhxy.domain.AssignmentPutOff">
+  		INSERT INTO `assignment_put_off` (`ljxTid`,`ljxUid`,`ljxClass`,`ljxClasses`,`ljxTitme`,`ljxContent`)
+		VALUES(#{ljxtid},#{ljxuid},#{ljxclass},#{ljxclasses},#{ljxTitme},#{ljxcontent})
+  </insert>
 </mapper>

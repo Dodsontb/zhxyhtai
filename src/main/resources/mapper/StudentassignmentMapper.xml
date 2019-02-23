@@ -220,4 +220,40 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where ljxTid = #{ljxtid,jdbcType=INTEGER}
   </update>
+  
+  <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
+		select * from studentassignment where ljxTid = #{ljxtid}
+  </select>
+  
+  <select id="stuType" resultType="com.zhxy.domain.Studentassignment">
+  		SELECT * FROM `studentassignment` WHERE `ljxType` = #{ljxType} and ljxTid = #{ljxTid}
+  </select>
+  
+   <select id="stutime" resultType="com.zhxy.domain.Studentassignment">
+		SELECT * FROM studentassignment WHERE DATE(ljxDate) = DATE(NOW())
+  </select>
+  
+  <insert id="stuinsert" parameterType="com.zhxy.domain.Studentassignment" useGeneratedKeys="true" keyProperty="ljxtid">
+  		INSERT INTO `studentassignment`(`ljxTitle`,`ljxClass`,`ljxClasses`,`ljxDatetime`,`ljxDate`,`ljxTime`,`ljxUid`,`ljxType`,`ljxWenjid`,`ljxJid`,`name1`)
+		VALUE(#{ljxtitle},#{ljxclass},#{ljxclasses},NOW(),#{ljxdate},#{ljxtime},#{ljxuid},2,'',1,#{name1})
+  </insert>
+  
+  
+  <select id="fuzao" resultMap="fuZao">
+  		SELECT * FROM `studentassignment` WHERE ljxClasses =( SELECT `name` FROM clazz WHERE teacherid = 1 AND `name`='at1716')
+		GROUP BY ljxTid DESC
+  </select>
+  
+  <select id="">
+  		SELECT COUNT(ljxWid) FROM `whether_accomplish` WHERE ljxTid = 1 AND ljxYesno = '否'
+  </select>
+  <resultMap type="com.zhxy.domain.Studentassignment" id="fuZao">
+  		<id property="ljxtid" column="ljxTid"/>
+  		<result property="ljxtitle" column="ljxTitle"/>
+  		<result property="ljxtime" column="ljxTime"/>
+  		
+  		<collection property="list" column="ljxtid"
+  		ofType="com.zhxy.domain.WhetherAccomplish"
+  		select=""></collection>
+  </resultMap>
 </mapper>

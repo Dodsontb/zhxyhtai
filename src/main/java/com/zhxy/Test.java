@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 public class Test {
 
 	public static void main(String[] args) {
-		File file=new File("C:\\Users\\35266\\git\\zhxyhtai\\src\\main\\resources\\mapper");
+		File file=new File("C:\\Users\\Administrator\\git\\zhxyhtai\\src\\main\\resources\\mapper");
 		File[] files=file.listFiles();
 		for (File item : files) {
 			BufferedReader bufferedReader=null;

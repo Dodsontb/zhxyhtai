@@ -9,7 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 @MapperScan("com.zhxy.mapper")
 @SpringBootApplication
-
 @EnableScheduling
 @EnableWebSocket // 开启 socket通信
 public class ZhxyApplication {

@@ -1,6 +1,11 @@
 package com.zhxy.config;
 
+import java.util.List;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -38,21 +43,22 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		return msg;
 	}
 	
+	/*
+	 * 解析ajax数据
+	 * */
 	@Bean
-	public FastJsonHttpMessageConverter fastJsonHttpMessageConverter() {
-		FastJsonHttpMessageConverter fjc = new FastJsonHttpMessageConverter();
-		fjc.setFeatures(SerializerFeature.DisableCircularReferenceDetect);
-        return fjc;
+	public MappingJackson2HttpMessageConverter mappingJacksonConverter() {
+		MappingJackson2HttpMessageConverter mapping = new MappingJackson2HttpMessageConverter();
+		return mapping;
 	}
 	
 	
 	@Override
 	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(stringMessageConverter());
-		converters.add(fastJsonHttpMessageConverter());
+		converters.add(mappingJacksonConverter());
 		super.configureMessageConverters(converters);
 	}
-	*/
+	
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		

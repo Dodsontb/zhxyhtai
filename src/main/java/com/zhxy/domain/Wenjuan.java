@@ -9,7 +9,6 @@ public class Wenjuan {
 
     private Integer wenjuantype;
 
-    private String yuangongname;
 
     private Date date;
 
@@ -45,14 +44,6 @@ public class Wenjuan {
 
     public void setWenjuantype(Integer wenjuantype) {
         this.wenjuantype = wenjuantype;
-    }
-
-    public String getYuangongname() {
-        return yuangongname;
-    }
-
-    public void setYuangongname(String yuangongname) {
-        this.yuangongname = yuangongname;
     }
 
     public Date getDate() {

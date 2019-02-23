@@ -1,5 +1,6 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Yuangongkaoqin {
@@ -13,73 +14,103 @@ public class Yuangongkaoqin {
 
     private Integer positionid;
 
-    private String name3;
-
-    private String name4;
-
     private String name5;
+    
+    private String time;
+    
+    
+    public String getTime() {
+		return time;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setTime(Date date) {
+		SimpleDateFormat  datatime =  new SimpleDateFormat("yyyy年MM月dd日");
+		this.time = datatime.format(date);
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	private CpStaff stafname;
+    
+    private Statuastype status;
+    
+    private CpPosition cpname;
+    
+    
+    
 
-    public Integer getStaffid() {
-        return staffid;
-    }
+	public CpStaff getStafname() {
+		return stafname;
+	}
 
-    public void setStaffid(Integer staffid) {
-        this.staffid = staffid;
-    }
+	public void setStafname(CpStaff stafname) {
+		this.stafname = stafname;
+	}
 
-    public Integer getKaoqinstatus() {
-        return kaoqinstatus;
-    }
+	public Statuastype getStatus() {
+		return status;
+	}
 
-    public void setKaoqinstatus(Integer kaoqinstatus) {
-        this.kaoqinstatus = kaoqinstatus;
-    }
+	public void setStatus(Statuastype status) {
+		this.status = status;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public CpPosition getCpname() {
+		return cpname;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setCpname(CpPosition cpname) {
+		this.cpname = cpname;
+	}
 
-    public Integer getPositionid() {
-        return positionid;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getName3() {
-        return name3;
-    }
+	public Integer getStaffid() {
+		return staffid;
+	}
 
-    public void setName3(String name3) {
-        this.name3 = name3;
-    }
+	public void setStaffid(Integer staffid) {
+		this.staffid = staffid;
+	}
 
-    public String getName4() {
-        return name4;
-    }
+	public Integer getKaoqinstatus() {
+		return kaoqinstatus;
+	}
 
-    public void setName4(String name4) {
-        this.name4 = name4;
-    }
+	public void setKaoqinstatus(Integer kaoqinstatus) {
+		this.kaoqinstatus = kaoqinstatus;
+	}
 
-    public String getName5() {
-        return name5;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setName5(String name5) {
-        this.name5 = name5;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+		this.setTime(date);
+	}
+
+	public Integer getPositionid() {
+		return positionid;
+	}
+
+	public void setPositionid(Integer positionid) {
+		this.positionid = positionid;
+	}
+
+	public String getName5() {
+		return name5;
+	}
+
+	public void setName5(String name5) {
+		this.name5 = name5;
+	}
+    
+    
+
+
 }

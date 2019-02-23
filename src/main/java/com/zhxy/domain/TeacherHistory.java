@@ -1,6 +1,7 @@
 package com.zhxy.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class TeacherHistory {
     private Integer id;
@@ -24,6 +25,10 @@ public class TeacherHistory {
     private String name4;
 
     private String name5;
+    
+    private List<Clazz> list;
+    
+    
 
     public Integer getId() {
         return id;
@@ -112,4 +117,12 @@ public class TeacherHistory {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+	public List<Clazz> getList() {
+		return list;
+	}
+
+	public void setList(List<Clazz> list) {
+		this.list = list;
+	}
 }

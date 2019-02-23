@@ -18,4 +18,6 @@ public class ExamTaskJob extends Thread {
     	ser.updataNotice();
         System.out.println("扫描考试表...........");
     }
+    
+    
 }

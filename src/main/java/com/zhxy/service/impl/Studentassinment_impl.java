@@ -15,6 +15,28 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	StudentassignmentMapper mapper;
 	
 	@Override
+	public List<Studentassignment> stuquery(Integer ljxTid) {
+		
+		return mapper.stuquery(ljxTid);
+	}
+
+	@Override
+	public void schediled() {
+		System.out.println("真好定时发布");
+	}
+
+	@Override
+	public int stuinsert(Studentassignment stu) {
+		// TODO Auto-generated method stub
+		
+		return mapper.stuinsert(stu);
+	}
+
+	/*@Override
+	public List<Studentassignment> stuType(Integer ljxtype, String ljxyesno, Integer ljxuid) {
+		// TODO Auto-generated method stub
+		return mapper.stuType(ljxtype, ljxyesno, ljxuid);
+	}*/
 	public List<Studentassignment> stuquery() {
 		
 		return null;
