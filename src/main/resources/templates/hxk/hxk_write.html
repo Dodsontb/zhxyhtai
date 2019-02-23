@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>Write email</title>
+        <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content=""
+        />
+        <meta name="keywords" content=""
+        />
+        <meta name="application-name" content="sprFlat admin template" />
+        <!-- Import google fonts - Heading first/ text second -->
+        <link rel='stylesheet' type='text/css' />
+        <!--[if lt IE 9]>
+
+<![endif]-->
+        <!-- Css files -->
+        <!-- Icons -->
+        <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+        <meta name="msapplication-TileColor" content="#3399cc" />
+        <style type="text/css">
+        	.col-lg-12 ul li{
+        			list-style: none;
+        			display: inline-block;
+        			
+        	}
+        	.file-buttom input{
+				opacity: 0;
+				position:absolute;
+				width:5em;
+				margin:5px 8px;
+				height:5em;
+				top:0px;
+				left:0px;
+			}
+			.file-buttom .defaultImg{
+				width:5em;
+				margin:5px 8px;
+				height:5em;
+				background-color: #f2f2f2;
+				text-align: center;
+				border-radius: 5px;
+			}
+			.file-buttom{
+				display: flex;
+			}
+			.file-buttom .clickView{
+				position: relative;
+			}
+			.defaultImg img{
+				/*background-image: url(img/1.png);*/
+				width:2em;
+				height: 2em;
+			}
+			.modal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+  
+}
+.modal-content{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    width: 50%;
+    max-width: 700px;
+    height: 40%;
+    max-height: 500px;
+    margin: 100px auto;
+    border-radius:10px;
+    background-color:#fff;
+    -webkit-animation: zoom 0.6s;
+    animation: zoom 0.6s;
+    resize: both;
+    overflow: auto;
+    background: #31B0D5;
+}
+@-webkit-keyframes zoom{
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+@keyframes zoom{
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+.modal-header{
+    box-sizing:border-box;
+    border-bottom:1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.close{
+    color: #b7b7b7;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 20px;
+    transition: all 0.3s;
+}
+.close:hover, .close:focus{
+    color: #95b4ed;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-body{
+    padding: 10px;
+    font-size: 16px;
+    box-sizing:border-box;
+    background-color: white; 
+    border-left: 1px solid #ccc;
+}
+.modal-footer{
+    box-sizing:border-box;
+    border-top:1px solid #ccc;
+    display: flex;
+    padding: 15px;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #75b9e6; 
+}
+.modal-footer button{
+    width: 60px;
+    height: 35px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+}
+.modal-footer button:hover, .modal-footer button:focus{
+    background-color: #95b4ed;
+    cursor: pointer;
+}
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 80%;
+    }
+}
+        </style>
+    </head>
+    
+    <body>
+    <div style="width: 1000px;height: 700px;margin-left: 230px;padding-top: 50px;">
+        	 <div class="col-lg-12 heading">
+                        <h3 class="page-header"><i class="ec-archive"></i>发布通知</h3>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        	<li><i class="im-home">
+                        	</i>
+                        	<a th:href="@{index.html}">Home</a>
+                        	<i class="en-arrow-right7"></i>
+                        	</li>
+                        	<li>发布通知</li></ul>
+        	</div>
+    	
+                  <div class="email-write">
+                      <form action="" id="file" role="form" class="form-horizontal" method="post" enctype="mulipart/form-data"> 
+                           <div class="form-group">
+                               <div class="col-lg-12">                                        	
+                                  <input type="text" class="form-control" id="to" name="headline" placeholder="标题" >
+                                  
+                                          <select id="type" name="typeid" class="form-control" style="margin-top: 10px;">
+												<option>选择类型</option>
+												<option v-for="item in list" v-bind:value="item.typeid">{{item.typename}}</option>	
+											</select>
+									
+										 <!-- <div id="grade" >
+										  <div style="height: 30px;border: 1px solid gainsboro;margin-top: 10px;" v-for="item in list" >
+											<input type="checkbox" class="gg" v-bind:value="item.id"/><span>{{item.name}}</span>
+											
+										  </div>
+										</div>
+										
+										<div id="clazz" name="cid">
+											<div style="height: 30px;border: 1px solid gainsboro;margin-top: 10px;"  v-for="item in list">
+												<input type="checkbox" v-bind:value="item.id"/><span>{{item.name}}</span>
+											</div> 
+										</div> -->
+								
+										<div style="margin-top: 10px;"><span>定时发送:</span><input type="datetime-local" name="ntime"></div>
+                        	</div>
+			 </div>
+                                 
+              <div class="form-group">
+                   <div class="col-lg-12">
+                          <textarea name="ncontent" id="email-text" class="form-control tinymce" rows="8"></textarea>
+                          
+          		 <div class="file-buttom">
+						<div id="viewImages" >
+							
+						</div>
+				<div class="clickView">
+					<div class="defaultImg">
+						<img src="assets/img/camera_fill.png" style="margin-top: 5px;">
+						<br>
+						<p style="margin-top: 2px;">选择图片</p>
+					</div>
+					<input id="FirstfileImg" accept="image/jpg,image/png,image/jpeg,image/gif,image/bmp" name="files" multiple="true" type="file">
+				</div>
+			</div>
+       </div>
+  </div>
+              <div class="form-group">
+                     <div class="col-lg-12">
+                              <div class="pull-left">
+                                                <input type="button" class="btn btn-blue tj" value="提交">
+                                                <a href="#" class="mr10 tip color-dark" title="Attach file"><i class="im-attachment s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert files using drive"><i class="im-google-drive s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert files using dropbox"><i class="fa-dropbox s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert photo"><i class="im-image2 s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert link"><i class="im-link s20"></i></a>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                               </form> 
+                            </div>
+                         
+                        </div>
+              
+                   
+         <div id="modal" class="modal">
+							<div class="modal-content">
+								<header class="modal-header">
+									<h4>新增年级</h4>
+									<span class="close">×</span>
+								</header>
+								<div class="modal-body">
+									<div id="grade" >
+										  <div style="height: 30px;border: 1px solid gainsboro;margin-top: 10px;" v-for="item in list" >
+											<input type="checkbox" class="gg" v-bind:value="item.id"/><span>{{item.name}}</span>
+											
+										  </div>
+										</div>
+								</div>
+								<footer class="modal-footer">
+									<button id="cancel">取消</button>
+									<button id="sure">确定</button>
+								</footer>
+							</div>
+				</div>
+				
+		 <div id="modal2" class="modal">
+							<div class="modal-content">
+								<header class="modal-header">
+									<h4>新增班级</h4>
+									<span class="close">×</span>
+								</header>
+								<div class="modal-body">
+									<div id="clazz" name="cid">
+											<div style="height: 30px;border: 1px solid gainsboro;margin-top: 10px;"  v-for="item in list">
+												<input type="checkbox" v-bind:value="item.id"/><span>{{item.name}}</span>
+											</div> 
+										</div>
+								</div>
+								<footer class="modal-footer">
+									<button id="cancel2">取消</button>
+									<button id="sure2">确定</button>
+								</footer>
+							</div>
+				</div>         
+  
+	
+     <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> 
+     <script type="text/javascript" th:src="@{assets/js/bootstrap/bootstrap.js}"></script> 
+	 <script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+		<script type="text/javascript">
+			var v=new Vue({
+				el:"#type",
+				data:{
+					list:null
+				}
+			});
+			
+			var g=new Vue({
+				el:"#grade",
+				data:{
+					list:null
+				}
+			});
+			var c=new Vue({
+				el:"#clazz",
+				data:{
+					list:null
+				}
+			})
+			
+			
+	 	$(".tj").click(function(){
+	 		var typeid=$("[name=typeid]").val();
+	 		var ncontent =$("[name=ncontent]").val();
+	 		var headline=$("[name=headline]").val();
+	 		var ids=[];
+	 		var inputs=$("#clazz :checked");
+	 		 var time=$("[name=ntime]").val(); 
+	 		 
+	 		 alert(time); 
+	 		$.each(inputs,function(){
+	 			ids.push(this.value);
+	 		});
+	 		$.ajax({
+				  type:"post",
+				  url:"insertNotice",
+				  data:'typeid='+typeid+'&ncontent='+ncontent+'&headline='+headline+'&cid='+ids+'&ntime='+time,
+				  traditional:true, //默认false
+			      success:function(result){
+			    	 
+			    	  window.location.href="/hxk_history";
+			      }		  
+				})
+	 		
+	 	});
+			
+			$(function(){
+				 /*  $("#grade").hide();
+				  $("#clazz").hide(); */
+				$.ajax({
+					url:"/plqueryNoticeType",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						v.list=result;
+					}
+				});
+				/*  $.ajax({
+					url:"/queryGrade",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						g.list=result;
+					}
+				})  */
+				
+				 $("select").change(function(){
+					 var typeid=$("[name=typeid]").val();
+					 if(typeid==2){
+						 $("#modal").show();
+						 $.ajax({
+								url:"/queryGrade",
+								dataType:"json",
+								type:"post",
+								success:function(result){
+									console.log(result);
+									g.list=result;
+								}
+							}) 
+					}
+					if(typeid==3){
+						$("#modal2").show();
+						$.ajax({
+		        			url:"/queryClazz",
+		        			dataType:"json",
+		        			type:"post",
+		        			success:function(result){
+		        				c.list=result;
+		        			}
+		        		})
+					}
+				}) 
+ 		});
+			
+        	$(":file").change(function(){
+        		var http=new XMLHttpRequest();
+        		var formdata=new FormData(document.getElementById("file"));
+        		http.open('post','/fileup',true);
+        		http.send(formdata);
+        		http.onreadystatechange=function(){
+        			if(http.readyState==4){
+        				var list=JSON.parse(http.responseText);
+        				for(var i=0;i<list.length;i++){
+        					var img=$("<img>");
+        					img.attr("width","100px");
+        					img.attr("height","100px");
+        					img.attr("src","file/"+list[i]);
+        					$("#viewImages").append(img);
+        				}
+        			}
+        		}
+        	});
+     
+        	$("#sure").click(function(){
+        		$("#modal").slideUp(600);        		
+        	});
+        	$("#sure2").click(function(){
+        		$("#modal2").slideUp(600);        		
+        	});
+        	$("#cancel").click(function(){
+        		$("#modal").slideUp(600);        		
+        	});
+        	$("#cancel2").click(function(){
+        		$("#modal2").slideUp(600);        		
+        	});
+        </script>
+        
+    </body>
+</html>

@@ -23,6 +23,17 @@ public class Clazz implements Serializable {
 	private List<Plan> plans;
 	private Event event;
 	
+	private Grade grades;
+	
+	public Grade getGrades() {
+		return grades;
+	}
+	public void setGrades(Grade grades) {
+		this.grades = grades;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public int getId() {
 		return id;
 	}

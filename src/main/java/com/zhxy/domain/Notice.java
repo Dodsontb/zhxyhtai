@@ -1,7 +1,9 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 
 public class Notice {
     private Integer noticeId;
@@ -16,9 +18,21 @@ public class Notice {
 
     private String headline;
 
-    private Date ntime;
+    /*private Date ntime;*/
+    
+    private String ntime;
+    
+    public String getNtime() {
+		return ntime;
+	}
 
-    private Integer nstate;
+	public void setNtime(String ntime) {
+		this.ntime = ntime;
+	}
+
+	private String time;
+
+	private Integer nstate;
 
     private Integer target;
 
@@ -130,13 +144,15 @@ public class Notice {
         this.headline = headline;
     }
 
-    public Date getNtime() {
+   /* public Date getNtime() {
         return ntime;
     }
 
     public void setNtime(Date ntime) {
+    	SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm");
         this.ntime = ntime;
-    }
+        this.time=simpleDateFormat.format(ntime);
+    }*/
 
     public Integer getNstate() {
         return nstate;
@@ -193,4 +209,12 @@ public class Notice {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 }
