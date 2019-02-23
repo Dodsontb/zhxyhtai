@@ -13,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+
 @Configuration
 public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 	
@@ -20,7 +23,7 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 	 * 跨域
 	 */
 	@Override
-	protected void addCorsMappings(CorsRegistry registry) {
+	protected void addCorsMappings(CorsRegistry registry) {		
 		registry.addMapping("/**");
 	}
 	/**
@@ -29,11 +32,8 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 	 */
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		//本工程
+		// 	本工程
 		registry.addResourceHandler("*").addResourceLocations("classpath:/static/");
-		//工程以外的静态资源
-		//registry.addResourceHandler("/ytang/**")
-		//.addResourceLocations("file:d:/xx/");
 	}
 	
 	/**
@@ -54,15 +54,24 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		MappingJackson2HttpMessageConverter mapping = new MappingJackson2HttpMessageConverter();
 		return mapping;
 	}
+	@Bean
+	public FastJsonHttpMessageConverter fastJsonHttpMessageConverter() {
+		FastJsonHttpMessageConverter fjc = new FastJsonHttpMessageConverter();
+		fjc.setFeatures(SerializerFeature.DisableCircularReferenceDetect);
+        return fjc;
+	}
+	
 	
 	@Override
 	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(stringMessageConverter());
 		converters.add(mappingJacksonConverter());
+		converters.add(fastJsonHttpMessageConverter());
 		super.configureMessageConverters(converters);
 	}
 	
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
+		
 	}	
 }

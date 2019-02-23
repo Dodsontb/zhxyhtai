@@ -1,128 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.PeopleMapper">
-  <resultMap id="BaseResultMap" type="com.zhxy.domain.People">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="rid" jdbcType="INTEGER" property="rid" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
-    <result column="name3" jdbcType="VARCHAR" property="name3" />
-    <result column="name4" jdbcType="VARCHAR" property="name4" />
-    <result column="name5" jdbcType="VARCHAR" property="name5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, rid, name1, name2, name3, name4, name5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from people
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from people
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.zhxy.domain.People">
-    insert into people (id, name, rid, 
-      name1, name2, name3, 
-      name4, name5)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{rid,jdbcType=INTEGER}, 
-      #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
-      #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.zhxy.domain.People">
-    insert into people
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="rid != null">
-        rid,
-      </if>
-      <if test="name1 != null">
-        name1,
-      </if>
-      <if test="name2 != null">
-        name2,
-      </if>
-      <if test="name3 != null">
-        name3,
-      </if>
-      <if test="name4 != null">
-        name4,
-      </if>
-      <if test="name5 != null">
-        name5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="rid != null">
-        #{rid,jdbcType=INTEGER},
-      </if>
-      <if test="name1 != null">
-        #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        #{name5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.People">
-    update people
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="rid != null">
-        rid = #{rid,jdbcType=INTEGER},
-      </if>
-      <if test="name1 != null">
-        name1 = #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        name2 = #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        name3 = #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        name4 = #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        name5 = #{name5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.People">
-    update people
-    set name = #{name,jdbcType=VARCHAR},
-      rid = #{rid,jdbcType=INTEGER},
-      name1 = #{name1,jdbcType=VARCHAR},
-      name2 = #{name2,jdbcType=VARCHAR},
-      name3 = #{name3,jdbcType=VARCHAR},
-      name4 = #{name4,jdbcType=VARCHAR},
-      name5 = #{name5,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.zhxy.mapper.PeopleMapper">
+	<!-- <cache></cache> -->
+	<resultMap type="com.zhxy.domain.People" id="staff">
+		<result property="id" column="staffid" />
+		<result property="name" column="staffname" />
+		<result property="rid" column="rid" />
+		<result property="role" column="role" />
+		<result property="position" column="positionid" />
+	</resultMap>
+	<resultMap type="com.zhxy.domain.People" extends="staff" id="position">
+		<association property="peoples" column="positionid" select="position"></association>
+	</resultMap>
+	<select id="queryById" resultMap="staff">
+		select *,(select rolename from cp_role
+		where roleid=rid) role
+		from cp_staff
+		where staffid=#{id}
+	</select>
+	<select id="classNum" resultType="int">
+		select count(0)
+		from plan
+		where
+		`date` = date(`date`) and cid in (select id from clazz where teacherId
+		= #{people.id}) and study=true
+	</select>
+	<select id="room" resultMap="staff">
+		select *
+		from cp_staff
+		where id in
+		(select teacherId from clazz where id in
+		(select id from clazz where
+		gradeId in (select gid from grade_floor
+		where floor=(select floor from
+		classroom where id=#{room.id})))
+		group by
+		teacherId
+		)
+		and id not in
+		(select teacherId from clazz where id in
+		(select cid from plan where
+		`date` between date(#{begin}) and
+		date(#{end})
+		<if test="room.inclass"> and study=true</if>
+		<if test="!room.inclass and room.forstudy">and study=false</if>
+		))
+	</select>
+	<select id="allTeacher" resultMap="staff">
+		select *
+		from cp_staff
+		where rid in (select roleid from cp_role where canTeacher=true)
+	</select>
+	<select id="floors" resultType="int">
+		select
+	</select>
+	<select id="isPlanBusy" resultType="int">
+		select 1
+		from plan
+		where `date` =date(#{day}) and ap=#{ap} and cid in
+		(select id from clazz where teacherId =#{teacher.id}) and study=true
+	</select>
+	<select id="isEventBusy" resultType="int">
+		select 1
+		from class_calendar
+		where `date`=date(#{day}) and (ap=0 or <choose><when test="ap">ap=2</when><otherwise>ap=1</otherwise></choose>) and id in(select cid from calendar_teacher where pid=#{teacher.id})
+	</select>
+	<select id="position" resultMap="position">
+		select *
+		from cp_staff
+		where positionid in (select positionid from cp_position where pid=#{id})
+	</select>
 </mapper>
