@@ -14,9 +14,17 @@ public class Studentassignment {
 
     private Date ljxdatetime;
 
+<<<<<<< Upstream, based on origin/ljx1.1
     private String ljxdate;
+=======
+    private Date ljxdate;
+>>>>>>> 30c53b0 数据库增加一张表
 
+<<<<<<< Upstream, based on origin/ljx1.1
     private String ljxtime;
+=======
+    private Date ljxtime;
+>>>>>>> 30c53b0 数据库增加一张表
 
     private Integer ljxuid;
 
@@ -68,29 +76,51 @@ public class Studentassignment {
         this.ljxclasses = ljxclasses;
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
     public String getLjxdatetime() {
     	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxdatetime);
+=======
+    public Date getLjxdatetime() {
+        return ljxdatetime;
+>>>>>>> 30c53b0 数据库增加一张表
     }
 
     public void setLjxdatetime(Date ljxdatetime) {
         this.ljxdatetime = ljxdatetime;
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
     public String getLjxdate() {
+=======
+    public Date getLjxdate() {
+>>>>>>> 30c53b0 数据库增加一张表
         return ljxdate;
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
     public void setLjxdate(String ljxdate) {
+=======
+    public void setLjxdate(Date ljxdate) {
+>>>>>>> 30c53b0 数据库增加一张表
         this.ljxdate = ljxdate;
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
 
     public String getLjxTime() {
     	return ljxtime;
 
+=======
+    public Date getLjxtime() {
+        return ljxtime;
+>>>>>>> 30c53b0 数据库增加一张表
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
     public void setLjxtime(String ljxtime) {
+=======
+    public void setLjxtime(Date ljxtime) {
+>>>>>>> 30c53b0 数据库增加一张表
         this.ljxtime = ljxtime;
     }
 

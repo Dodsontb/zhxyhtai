@@ -14,8 +14,13 @@ public class AssignmentPutOff {
 
     private String ljxclasses;
 
+<<<<<<< Upstream, based on origin/ljx1.1
     private String ljxTitme;
 
+=======
+    private Date ljxtitme;
+
+>>>>>>> 30c53b0 数据库增加一张表
     private String ljxcontent;
 
     private String name1;
@@ -70,14 +75,28 @@ public class AssignmentPutOff {
         this.ljxclasses = ljxclasses;
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
 
     public String getLjxTitme() {
         return ljxTitme;
+=======
+    public Date getLjxtitme() {
+        return ljxtitme;
+>>>>>>> 30c53b0 数据库增加一张表
     }
 
+<<<<<<< Upstream, based on origin/ljx1.1
     public void setLjxTitme(String ljxTitme) {
         this.ljxTitme = ljxTitme;
+=======
+    public void setLjxtitme(Date ljxtitme) {
+        this.ljxtitme = ljxtitme;
+>>>>>>> 30c53b0 数据库增加一张表
     }
+<<<<<<< Upstream, based on origin/ljx1.1
+=======
+
+>>>>>>> 30c53b0 数据库增加一张表
     public String getLjxcontent() {
         return ljxcontent;
     }
