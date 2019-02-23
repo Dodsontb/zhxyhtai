@@ -1,23 +1,19 @@
-package com.zhxy.hxktask;
-
+package com.zhxy.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.zhxy.service.hxk_history;
-
+import com.zhxy.service.Service_WhetherAccomplish;
 
 @Component
-public class ExamTaskJob extends Thread {
+public class LJX_ExamTaskJob extends Thread {
 
 	@Autowired
-	hxk_history ser;
-	
+	Service_WhetherAccomplish ser;
+
     @Override
     public void run() {
-    	ser.updataNotice();
         System.out.println("扫描考试表...........");
+        ser.udatew();
     }
-    
-    
 }

@@ -1,7 +1,6 @@
 package com.zhxy.controller;
 
 
-<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -16,11 +15,11 @@ import com.zhxy.domain.AssignmentPutOff;
 import com.zhxy.domain.Studentassignment;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
+import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.service.Service_AssignmentPutoff;
 import com.zhxy.service.Service_Studentassinment;
 import com.zhxy.service.Service_WhetherAccomplish;
-import com.zhxy.task.DynamicTaskJobs;
-import com.zhxy.task.ExamTaskJob;
+import com.zhxy.task.LJX_ExamTaskJob;
 import com.zhxy.task.Ljxputoff;
 
 @Controller
@@ -44,7 +43,7 @@ public class StudentassinmentController {
     DynamicTaskJobs dynamicTaskJobs;
 
     @Autowired
-    ExamTaskJob examJob;
+    LJX_ExamTaskJob examJob;
     @Autowired
     Ljxputoff ljxputoff;
     
@@ -63,7 +62,7 @@ public class StudentassinmentController {
 		return "Ljxpublish";
 	}
 	
-	@RequestMapping("/query")
+	@RequestMapping("ljx/query")
 	@ResponseBody
 	public List<Studentassignment> stuquery(Integer ljxTid) {
 		List<Studentassignment> list = ser.stuquery(ljxTid);
@@ -151,5 +150,5 @@ public class StudentassinmentController {
 	public List<TeacherHistory> teacher_history() {
 		List<TeacherHistory> list = serW.teacher_history();
 		return list;
-	}*/
+	}
 }

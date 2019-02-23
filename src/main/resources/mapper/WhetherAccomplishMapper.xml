@@ -168,7 +168,7 @@
   		
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
-  		select="com.zhxy.dao.StudentassignmentMapper.stuquery"></collection>
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
   </resultMap>
   
   <select id="whether2" resultMap="whetherone2">
@@ -183,7 +183,7 @@
   		
   		<collection property="stulist" column="{ljxTid=ljxtid, ljxType=ljxType}"
   		ofType="com.zhxy.domain.Studentassignment"
-  		select="com.zhxy.dao.StudentassignmentMapper.stuType"></collection>
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuType"></collection>
   </resultMap>
   
    <select id="whether3" resultMap="whetherone3">
@@ -198,7 +198,7 @@
   		
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
-  		select="com.zhxy.dao.StudentassignmentMapper.stutime"></collection>
+  		select="com.zhxy.mapper.StudentassignmentMapper.stutime"></collection>
   </resultMap>
   
   <update id="udatew">
