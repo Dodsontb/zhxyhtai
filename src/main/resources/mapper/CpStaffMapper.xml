@@ -23,6 +23,15 @@
     staffid, staffname, staffnub, positionid, sex, age, phone, idcard, birthday, address, 
     email, name1, name2, name3, name4, name5
   </sql>
+  
+  
+    <select id="findList"  resultType="com.zhxy.domain.CpStaff">
+		SELECT
+		*
+		FROM cp_staff
+	</select>
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

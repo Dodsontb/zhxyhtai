@@ -1,12 +1,9 @@
 package com.zhxy.config;
 
 import org.springframework.context.annotation.Configuration;
-<<<<<<< Upstream, based on origin/ljx1.1
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-=======
->>>>>>> dad30a7 碌卡
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

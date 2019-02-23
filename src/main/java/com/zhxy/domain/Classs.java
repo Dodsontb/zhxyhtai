@@ -3,11 +3,11 @@ package com.zhxy.domain;
 public class Classs {
     private Integer classid;
 
-    private String classname;
+    private String classname;  //班级名称
 
-    private Integer classnumber;
+    private Integer classnumber; //班级人数
 
-    private String name1;
+    private String staffid; //班主任ID
 
     private String name2;
 
@@ -41,15 +41,19 @@ public class Classs {
         this.classnumber = classnumber;
     }
 
-    public String getName1() {
-        return name1;
-    }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
 
-    public String getName2() {
+
+
+    public String getStaffid() {
+		return staffid;
+	}
+
+	public void setStaffid(String staffid) {
+		this.staffid = staffid;
+	}
+
+	public String getName2() {
         return name2;
     }
 

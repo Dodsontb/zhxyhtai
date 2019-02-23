@@ -149,7 +149,6 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where ljxWid = #{ljxwid,jdbcType=INTEGER}
   </update>
-<<<<<<< Upstream, based on origin/ljx1.1
   
   <select id="whether" resultMap="whetherone">
   		SELECT * FROM whether_accomplish
@@ -246,6 +245,3 @@
   </resultMap>
   
 </mapper>
-=======
-</mapper>
->>>>>>> 3beeca4 2019-2-22 15:11

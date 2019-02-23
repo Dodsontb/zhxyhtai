@@ -2,6 +2,7 @@ package com.zhxy.service;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Param;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,4 +23,11 @@ public interface Service_Studentassinment {
 	public void schediled();
 	
 	int stuinsert(Studentassignment stu);
+=======
+import com.zhxy.domain.Studentassignment;
+
+public interface Service_Studentassinment {
+
+	public List<Studentassignment> stuquery();
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 }

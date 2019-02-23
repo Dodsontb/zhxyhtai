@@ -15,6 +15,7 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	StudentassignmentMapper mapper;
 	
 	@Override
+<<<<<<< HEAD
 	public List<Studentassignment> stuquery(Integer ljxTid) {
 		
 		return mapper.stuquery(ljxTid);
@@ -37,6 +38,8 @@ public class Studentassinment_impl implements Service_Studentassinment{
 		// TODO Auto-generated method stub
 		return mapper.stuType(ljxtype, ljxyesno, ljxuid);
 	}*/
+=======
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 	public List<Studentassignment> stuquery() {
 		
 		return null;

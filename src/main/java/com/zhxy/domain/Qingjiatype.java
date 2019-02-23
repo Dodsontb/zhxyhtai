@@ -1,9 +1,9 @@
 package com.zhxy.domain;
 
 public class Qingjiatype {
-    private Integer qingjiatype;
+    private Integer qingjiatype; //请假ID
 
-    private String qingjiastatus;
+    private String qingjiastatus;  //请假名称
 
     private String name1;
 

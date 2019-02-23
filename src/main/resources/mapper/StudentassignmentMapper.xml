@@ -220,6 +220,7 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where ljxTid = #{ljxtid,jdbcType=INTEGER}
   </update>
+<<<<<<< HEAD
 <<<<<<< Upstream, based on origin/ljx1.1
   
   <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
@@ -261,3 +262,6 @@
 =======
 </mapper>
 >>>>>>> 3beeca4 2019-2-22 15:11
+=======
+</mapper>
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git

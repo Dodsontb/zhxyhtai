@@ -7,9 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
+<<<<<<< HEAD
 import org.springframework.scheduling.annotation.EnableScheduling;
+=======
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 @MapperScan("com.zhxy.mapper")
 @SpringBootApplication
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 @EnableScheduling
 @EnableWebSocket // 开启 socket通信
 public class ZhxyApplication {

@@ -1,13 +1,12 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Studentqingjia {
     private Integer id;
 
     private Integer studentid;
-
-    private String studentname;
 
     private String qingjiareason;
 
@@ -18,7 +17,8 @@ public class Studentqingjia {
     private Integer staffid;
 
     private Date date;
-
+    private String dateStr;
+    
     private String name1;
 
     private String name2;
@@ -28,108 +28,154 @@ public class Studentqingjia {
     private String name4;
 
     private String name5;
+    
+    private String time;
+    
+    private CpStaff staffname;
+    
+    private Qingjiatype qingjiaStatus;
+    
+    private CpStudent studentname;
 
-    public Integer getId() {
-        return id;
-    }
+	public String getDateStr() {
+		return dateStr;
+	}
+	
+    public String getTime() {
+		return time;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setTime(Date date) {
+		SimpleDateFormat  datatime =  new SimpleDateFormat("yyyy年MM月dd日");
+		this.time = datatime.format(date);
+	}
+	
+	
 
-    public Integer getStudentid() {
-        return studentid;
-    }
+	public void setDateStr(String dateStr) {
+		this.dateStr = dateStr;
+	}
+    
+	public Integer getId() {
+		return id;
+	}
 
-    public void setStudentid(Integer studentid) {
-        this.studentid = studentid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getStudentname() {
-        return studentname;
-    }
+	public Integer getStudentid() {
+		return studentid;
+	}
 
-    public void setStudentname(String studentname) {
-        this.studentname = studentname;
-    }
+	public void setStudentid(Integer studentid) {
+		this.studentid = studentid;
+	}
 
-    public String getQingjiareason() {
-        return qingjiareason;
-    }
+	public String getQingjiareason() {
+		return qingjiareason;
+	}
 
-    public void setQingjiareason(String qingjiareason) {
-        this.qingjiareason = qingjiareason;
-    }
+	public void setQingjiareason(String qingjiareason) {
+		this.qingjiareason = qingjiareason;
+	}
 
-    public String getQingjiatime() {
-        return qingjiatime;
-    }
+	public String getQingjiatime() {
+		return qingjiatime;
+	}
 
-    public void setQingjiatime(String qingjiatime) {
-        this.qingjiatime = qingjiatime;
-    }
+	public void setQingjiatime(String qingjiatime) {
+		this.qingjiatime = qingjiatime;
+	}
 
-    public Integer getQingjiastatus() {
-        return qingjiastatus;
-    }
+	public Integer getQingjiastatus() {
+		return qingjiastatus;
+	}
 
-    public void setQingjiastatus(Integer qingjiastatus) {
-        this.qingjiastatus = qingjiastatus;
-    }
+	public void setQingjiastatus(Integer qingjiastatus) {
+		this.qingjiastatus = qingjiastatus;
+	}
 
-    public Integer getStaffid() {
-        return staffid;
-    }
+	public Integer getStaffid() {
+		return staffid;
+	}
 
-    public void setStaffid(Integer staffid) {
-        this.staffid = staffid;
-    }
+	public void setStaffid(Integer staffid) {
+		this.staffid = staffid;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+		this.setTime(date);
+	}
 
-    public String getName1() {
-        return name1;
-    }
+	public String getName1() {
+		return name1;
+	}
 
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
+	public void setName1(String name1) {
+		this.name1 = name1;
+	}
 
-    public String getName2() {
-        return name2;
-    }
+	public String getName2() {
+		return name2;
+	}
 
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
+	public void setName2(String name2) {
+		this.name2 = name2;
+	}
 
-    public String getName3() {
-        return name3;
-    }
+	public String getName3() {
+		return name3;
+	}
 
-    public void setName3(String name3) {
-        this.name3 = name3;
-    }
+	public void setName3(String name3) {
+		this.name3 = name3;
+	}
 
-    public String getName4() {
-        return name4;
-    }
+	public String getName4() {
+		return name4;
+	}
 
-    public void setName4(String name4) {
-        this.name4 = name4;
-    }
+	public void setName4(String name4) {
+		this.name4 = name4;
+	}
 
-    public String getName5() {
-        return name5;
-    }
+	public String getName5() {
+		return name5;
+	}
 
-    public void setName5(String name5) {
-        this.name5 = name5;
-    }
+	public void setName5(String name5) {
+		this.name5 = name5;
+	}
+
+	public CpStaff getStaffname() {
+		return staffname;
+	}
+
+	public void setStaffname(CpStaff staffname) {
+		this.staffname = staffname;
+	}
+
+	public Qingjiatype getQingjiaStatus() {
+		return qingjiaStatus;
+	}
+
+	public void setQingjiaStatus(Qingjiatype qingjiaStatus) {
+		this.qingjiaStatus = qingjiaStatus;
+	}
+
+	public CpStudent getStudentname() {
+		return studentname;
+	}
+
+	public void setStudentname(CpStudent studentname) {
+		this.studentname = studentname;
+	}
+    
+    
 }

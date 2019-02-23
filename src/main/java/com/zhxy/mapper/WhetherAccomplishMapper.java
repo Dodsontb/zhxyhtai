@@ -1,5 +1,6 @@
 package com.zhxy.mapper;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -38,4 +39,20 @@ public interface WhetherAccomplishMapper {
 //    老师所带的班级
     
     List<TeacherHistory>teacher_history();
+=======
+import com.zhxy.domain.WhetherAccomplish;
+
+public interface WhetherAccomplishMapper {
+    int deleteByPrimaryKey(Integer ljxwid);
+
+    int insert(WhetherAccomplish record);
+
+    int insertSelective(WhetherAccomplish record);
+
+    WhetherAccomplish selectByPrimaryKey(Integer ljxwid);
+
+    int updateByPrimaryKeySelective(WhetherAccomplish record);
+
+    int updateByPrimaryKey(WhetherAccomplish record);
+>>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 }
