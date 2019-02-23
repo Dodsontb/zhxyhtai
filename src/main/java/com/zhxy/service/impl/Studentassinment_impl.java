@@ -39,7 +39,7 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	}*/
 	public List<Studentassignment> stuquery() {
 		
-		return mapper.stuquery();
+		return null;
 	}
 
 }
