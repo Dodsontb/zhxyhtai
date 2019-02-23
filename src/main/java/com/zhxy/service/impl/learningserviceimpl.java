@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.LearningMapper;
 import com.zhxy.domain.Learning;
+import com.zhxy.mapper.LearningMapper;
 import com.zhxy.service.learningservice;
 @Service
 @Transactional

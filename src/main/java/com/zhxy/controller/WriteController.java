@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
-import com.zhxy.dao.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
@@ -31,6 +28,7 @@ import com.zhxy.domain.Noticetype;
 import com.zhxy.handler.MyWebSocketHandler;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.hxktask.ExamTaskJob;
+import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.service.hxk_history;
 
 @Controller
@@ -206,7 +204,7 @@ public class WriteController {
 			
 			@RequestMapping("/deleteMessage")
 			public String deleteMessage(int messageId) {
-				int i=service.deleteMessage(messageId);
+				service.deleteMessage(messageId);
 				return "redirect:hxk_message";
 			}
 			

@@ -1,13 +1,11 @@
 package com.zhxy.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhxy.dao.QuestionbankMapper;
 import com.zhxy.domain.Questionbank;
+import com.zhxy.mapper.QuestionbankMapper;
 import com.zhxy.service.Questionbankservice;
 @Service
 @Transactional

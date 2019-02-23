@@ -20,12 +20,7 @@
    	<association property="type" column="typeid" javaType="com.zhxy.domain.Noticetype" select="queryNoticeType"></association>
    	<association property="imgs" column="Notice_Id" javaType="list" select="queryNoticeimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
-<<<<<<< Upstream, based on origin/tanao
-   	<association property="Clazzs" column="Notice_Id" javaType="com.zhxy.domain.Clazz" select="queryUser"></association>
-=======
    	<association property="clazzs" column="Notice_Id" javaType="list" select="queryClazzlist"></association>
-   	
->>>>>>> 66e50e6 1111
   </resultMap>
   
   <select id="queryNoticeAll" resultMap="BaseResultMap">

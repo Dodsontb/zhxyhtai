@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zhxy.domain.Cquestion;
 import com.zhxy.domain.Softtype;
-import com.zhxy.service.Cquestionservice;
 import com.zhxy.service.Softtypeservice;
 
 @Controller

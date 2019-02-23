@@ -12,8 +12,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 @Configuration
 public class WebMvcMyConfig extends WebMvcConfigurationSupport {
@@ -36,7 +34,6 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		registry.addResourceHandler("/file/**").addResourceLocations("file:///d:img/");
 	}
 	
-<<<<<<< Upstream, based on origin/tanao
 /*	*//**
 	 * 普通字符串乱码
 	 * @return
@@ -71,8 +68,6 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 		super.configureMessageConverters(converters);
 	}
 	*/
-=======
->>>>>>> b1cb161 ...
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		
@@ -80,10 +75,5 @@ public class WebMvcMyConfig extends WebMvcConfigurationSupport {
 	/**
 	 * 
 	 */
-	@Override
-	protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-		FastJsonHttpMessageConverter fjc = new FastJsonHttpMessageConverter();
-		fjc.setFeatures(SerializerFeature.DisableCircularReferenceDetect);
-        converters.add(fjc);
-	}
+	
 }

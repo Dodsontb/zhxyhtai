@@ -5,10 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhxy.dao.CpUserMapper;
-import com.zhxy.dao.MessageMapper;
-import com.zhxy.dao.MessageReceptionMapper;
-import com.zhxy.dao.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
@@ -16,6 +12,10 @@ import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
+import com.zhxy.mapper.CpUserMapper;
+import com.zhxy.mapper.MessageMapper;
+import com.zhxy.mapper.MessageReceptionMapper;
+import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.service.hxk_history;
 
 
@@ -144,7 +144,7 @@ public class historyServiceImpl  implements hxk_history{
 	public int insertMessage(Message message) {
 		// TODO Auto-generated method stub
 		int hg=mmapper.insertMessage(message);
-		int jg=mrapper.insertReception(message);
+		mrapper.insertReception(message);
 		return hg;
 	}
 

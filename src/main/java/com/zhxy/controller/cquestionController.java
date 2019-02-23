@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.domain.Cquestion;
-import com.zhxy.domain.Questionbank;
 import com.zhxy.service.Cquestionservice;
-import com.zhxy.service.Questionbankservice;
 @Controller
 public class cquestionController {
 
