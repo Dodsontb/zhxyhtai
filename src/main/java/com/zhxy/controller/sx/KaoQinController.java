@@ -1,19 +1,13 @@
 package com.zhxy.controller.sx;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.zhxy.domain.Studentkaoqin;
-import com.zhxy.domain.Yuangongkaoqin;
 import com.zhxy.service.sx.KaoQinService;
-
-import io.lettuce.core.dynamic.annotation.Param;
 
 @Controller
 public class KaoQinController {

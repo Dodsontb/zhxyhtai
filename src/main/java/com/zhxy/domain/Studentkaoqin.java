@@ -3,10 +3,6 @@ package com.zhxy.domain;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class Studentkaoqin {
 	
     private Integer id;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.zhxy.domain.Qingjiatype;
 import com.zhxy.domain.Studentqingjia;
-import io.lettuce.core.dynamic.annotation.Param;
 
 public interface QingJiaService {
 	List<Studentqingjia>  queryAllStu();  //查询所有学生请假信息

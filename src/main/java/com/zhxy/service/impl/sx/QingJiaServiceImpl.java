@@ -9,8 +9,6 @@ import com.zhxy.mapper.StudentqingjiaMapper;
 import com.zhxy.domain.Qingjiatype;
 import com.zhxy.domain.Studentqingjia;
 import com.zhxy.service.sx.QingJiaService;
-
-import io.lettuce.core.dynamic.annotation.Param;
 @Service
 public class QingJiaServiceImpl implements QingJiaService {
 
