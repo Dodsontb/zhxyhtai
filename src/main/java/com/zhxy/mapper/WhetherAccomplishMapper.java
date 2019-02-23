@@ -11,6 +11,7 @@ import com.zhxy.domain.WhetherAccomplish;
 
 @Mapper
 public interface WhetherAccomplishMapper {
+	
     int deleteByPrimaryKey(Integer ljxwid);
 
     int insert(WhetherAccomplish record);
