@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhxy.dao.WhetherAccomplishMapper;
 import com.zhxy.domain.AssignmentPutOff;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
+import com.zhxy.mapper.WhetherAccomplishMapper;
 import com.zhxy.service.Service_WhetherAccomplish;
 
 @Service

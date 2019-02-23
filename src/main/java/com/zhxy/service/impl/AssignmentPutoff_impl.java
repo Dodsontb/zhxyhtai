@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhxy.dao.AssignmentPutOffMapper;
 import com.zhxy.domain.AssignmentPutOff;
+import com.zhxy.mapper.AssignmentPutOffMapper;
 import com.zhxy.service.Service_AssignmentPutoff;
 
 @Service
