@@ -27,10 +27,6 @@ public class KaoQinServiceImpl implements KaoQinService{
 		PageHelper.startPage(1,2);
 		List<Studentkaoqin> list = studentkaoqinMapper.queryAll();
 		PageInfo<Studentkaoqin> pb = new PageInfo<Studentkaoqin>(list);
-		List<Studentkaoqin> temp=pb.getList();
-		for (Studentkaoqin studentkaoqin : list) {
-			System.out.println(studentkaoqin.getStuname());
-		}
 		return pb;
 	}
 

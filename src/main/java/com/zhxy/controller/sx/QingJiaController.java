@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zhxy.domain.Qingjiatype;
 import com.zhxy.domain.Studentqingjia;
 import com.zhxy.service.sx.QingJiaService;
 
@@ -65,7 +64,6 @@ public List<Studentqingjia> deleteStu(Integer id){
 @RequestMapping(value="/addQingjia", method=RequestMethod.POST)
 public ModelAndView addCourse(Studentqingjia studentqingjia,
 		HttpServletRequest request){
-	Qingjiatype Qingjiatype = new Qingjiatype();	
 	studentqingjia.setQingjiastatus(2);
 	studentqingjia.setDate(new Date());
 	qingJiaService.insert(studentqingjia);

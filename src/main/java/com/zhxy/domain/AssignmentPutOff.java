@@ -1,6 +1,5 @@
 package com.zhxy.domain;
 
-import java.util.Date;
 import java.util.List;
 
 public class AssignmentPutOff {
