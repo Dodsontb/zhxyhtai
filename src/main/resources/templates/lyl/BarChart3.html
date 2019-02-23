@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>考勤数据用表格</title>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="/js/echarts.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        function getKaoqinStatisByClassId(condition){
+        	console.log("123");
+        	console.log(condition);
+        	getChart(condition);
+        }
+        
+        // 使用
+        function getChart(c){
+        	$.ajax({
+        		url:'/getKaoqinStatisByClassId',
+        		data:{
+        			classId : c.classId,
+        			dateCondition : c.dateCondition,
+        			date1: c.date1,
+        			date2: c.date2
+        		}, 
+        		type:'post',
+        		success:function(data){
+        			if (!data) {
+        				/* console.log("data is null"); */
+						/* return; */
+					}
+        			console.log(data);
+        			var sData = data;
+        			parent.window.getCountExtra(data);
+			        require(
+			            [
+			                'echarts',
+			                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+			            ],
+			            function (ec) {
+			                // 基于准备好的dom，初始化echarts图表
+			                var myChart = ec.init(document.getElementById('main')); 
+			                
+			                var option = {
+			                	title:{
+			                		text: c.titleText
+			                	},
+			                    tooltip: {
+			                        show: true,
+			                        
+			                    },
+			                    legend: {
+			                        data:[/* '正常', */'迟到&早退','旷课','请假']
+			                    },
+			                    xAxis : [
+			                        {
+			                        	name : '日期',
+			                            type : 'category',
+			                            data : sData.xArisData,
+			                            axisLabel : {
+        	                            	interval : '0',
+        	                            	formatter : function(a){
+        	                            		var label = a==sData.xArisData[0]||a.substr(8,10)=="01"?a.substr(5,10):a.substr(8,10);
+        	                            		/* var label = a.substr(8,2);
+        	                            		 (a==sData.xArisData[0]||label=="01")&(label=label+"\n"+a.substr(5,2)); */
+        	                            		return label;
+        	                            	}
+        	                            }
+			                        }
+			                    ],
+			                    yAxis : [
+			                        {
+			                        	name : '次数',
+			                            type : 'value'
+			                        }
+			                    ],
+			                    series : [
+			                        /* {
+			                            "name":"正常",
+			                            "type":"bar",
+			                            "data":sData.list[0]
+			                        }, */
+			                        {
+			                            "name":"迟到&早退",
+			                            "type":"bar",
+			                            "data":sData.list[1]
+			                        },
+			                        {
+			                            "name":"旷课",
+			                            "type":"bar",
+			                            "data":sData.list[2]
+			                        },
+			                        {
+			                            "name":"请假",
+			                            "type":"bar",
+			                            "data":sData.list[3]
+			                        }
+			                    ]
+			                };
+			        
+			                // 为echarts对象加载数据 
+			                myChart.setOption(option); 
+			            }
+			        );
+        		}
+        	})
+        }
+        </script>
+</body>
+</html>

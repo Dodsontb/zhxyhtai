@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数据统计首页</title>
+		<!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</head>
+<body>
+	<div id="header">
+		<div class="container-fluid" >
+			
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div id="sidebar" class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+			<div class="sidebar-inner">
+				<ul id="sideNav" class="nav nav-pills nav-stacked">
+					<!-- <li class="top-search">
+							<form>
+									<input type="text" name="search" placeholder="Search ...">
+									<button type="submit"><i class="ec-search s20"></i>
+									</button>
+							</form>
+					</li> -->
+					<li>
+							<a href="ExamPage.html" target="main"> 考试 </a>
+							<ul class="nav sub">
+									<li><a href="ExamSearch.html" target="main"> 考试查询 </a>
+									</li>
+									<li><a href="MyExam.html" target="main"> 我的考试 </a>
+									</li>
+									<li><a href="ExamDetail.html" target="main"> 考试详情 </a>
+									</li>
+							</ul>
+					</li>
+					<li><a href="ClassPage.html" target="main"> 班级 <i class="im-table2"></i></a>
+							<!-- <ul class="nav sub">
+									<li><a href="MyClass-stu.html" target="main"> 我的班级-学生版 </a>
+									</li>
+									<li><a href="MyClass-tea.html" target="main"> 班级附加-教员/班主任版 </a>
+									</li>
+							</ul> -->
+					</li>
+					<li><a href="DailyPage.html" target="main"> 日常 <i class="st-lab"></i></a>
+							<ul class="nav sub">
+									<li><a href="MyDaily.html" target="main"> 我的日常 </a>
+									</li>
+									<li><a href="DailyExtra.html" target="main"> 日常附加 </a>
+									</li>
+							</ul>
+					</li>
+					<!-- <li><a href="ClazzPage.html" target="main"><i class="ec-mail"></i> 课程 </a>
+							<ul class="nav sub">
+									<li><a href="MyClazz.html" target="main"> 我的课程 </a>
+									</li>
+									<li><a href="ClazzExtra.html" target="main"> 课程附加 </a>
+									</li>
+							</ul>
+					</li> -->
+					<li><a href="QuestionPage.html" target="main"> 试题 </a>
+					</li>
+					<li><a href="InternalPage.html" target="main"><i class="im-images"></i> 个人 </a>
+					</li>					
+				</ul>
+			</div>
+		</div>
+		<div id="content" class="col-lg-10 col-md-10 col-sm-10 col-xs-9" style="height: 2000px;">
+			<iframe frameBorder="0" id="main" name="main" scrolling="no"
+				src="javascript:;" height="100%" width="100%">
+				
+			</iframe>
+			<!-- <div class="outlet">
+					<div class="row">
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-primary plain toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-bars"></i> Line chart with dots</h4>
+											</div>
+											<div class="panel-body blue-bg">
+													<div id="line-chart-dots" style="width: 100%; height:250px;"></div>
+						 					</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-default plain toggle">
+											<div class="panel-heading white-bg">
+													<h4 class="panel-title"><i class="im-bars"></i> Line chart only</h4>
+											</div>
+											<div class="panel-body white-bg">
+													<div id="line-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-primary plain toggle">
+											<div class="panel-heading white-bg">
+													<h4 class="panel-title"><i class="im-bars"></i> Line chart filled</h4>
+											</div>
+											<div class="panel-body white-bg">
+													<div id="line-chart-filled" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-default toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-bars"></i> Line charts style 2</h4>
+											</div>
+											<div class="panel-body">
+													<div id="line-chart-dots2" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-success toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-bars"></i> Stacked Bars chart</h4>
+											</div>
+											<div class="panel-body">
+													<div id="bars-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+									<div class="panel panel-default toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-bars"></i> Ordered Bars chart</h4>
+											</div>
+											<div class="panel-body">
+													<div id="ordered-bars-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+									<div class="panel panel-default toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-pie"></i> Pie chart</h4>
+											</div>
+											<div class="panel-body">
+													<div id="pie-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+									<div class="panel panel-default toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-pie"></i> Donut chart</h4>
+											</div>
+											<div class="panel-body">
+													<div id="donut-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-lg-12 col-md-12">
+									<div class="panel panel-default toggle">
+											<div class="panel-heading">
+													<h4 class="panel-title"><i class="im-bars"></i> Auto updating chart</h4>
+											</div>
+											<div class="panel-body">
+													<div id="autoupdate-chart" style="width: 100%; height:250px;"></div>
+											</div>
+									</div>
+							</div>
+					</div>
+					<div class="row">
+							<div class="col-lg-12">
+									<div class="page-header">
+											<h4><i class="im-bars s20"></i> Other chart elements</h4>
+									</div>
+									<div class="row">
+											<div class="col-lg-6 col-md-12">
+													<div class="panel panel-default toggle">
+															<div class="panel-heading">
+																	<h4 class="panel-title"><i class="im-pie"></i> Easy pie chart</h4>
+															</div>
+															<div class="panel-body">
+																	<div class="pie-charts">
+																			<div class="easy-pie-chart" data-percent="45">45%</div>
+																			<div class="label">New Visitors</div>
+																	</div>
+																	<div class="pie-charts red-pie">
+																			<div class="easy-pie-chart-red" data-percent="7">7%</div>
+																			<div class="label">Drop rate</div>
+																	</div>
+																	<div class="pie-charts green-pie">
+																			<div class="easy-pie-chart-green" data-percent="28">28%</div>
+																			<div class="label">Returning</div>
+																	</div>
+																	<div class="pie-charts blue-pie">
+																			<div class="easy-pie-chart-blue" data-percent="65">65%</div>
+																			<div class="label">From Google</div>
+																	</div>
+																	<div class="pie-charts teal-pie">
+																			<div class="easy-pie-chart-teal" data-percent="23">23%</div>
+																			<div class="label">Direct Hits</div>
+																	</div>
+																	<div class="pie-charts purple-pie">
+																			<div class="easy-pie-chart-purple" data-percent="88">88%</div>
+																			<div class="label">Ads source</div>
+																	</div>
+															</div>
+													</div>
+											</div>
+											<div class="col-lg-6 col-md-12">
+													<div class="panel panel-default toggle">
+															<div class="panel-heading">
+																	<h4 class="panel-title"><i class="im-bars"></i> Sparklines</h4>
+															</div>
+															<div class="panel-body">
+																	<div class="row">
+																			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+																					<div class="tile gray-spr m0 mb20">
+																							<div class="tile-content text-center clearfix">
+																									<div class="label">Visitors last week</div>
+																									<div class="spark-number"><i class="ec-users"></i> 12,678</div>
+																									<div class="spark clearfix">
+																											<div class="percent"><i class="im-arrow-up-right3 color-green"></i> 3.08%</div>
+																											<div class="sparkline sparkline-positive"></div>
+																									</div>
+																							</div>
+																					</div>
+																			</div>
+																			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+																					<div class="tile gray-spr m0 mb20">
+																							<div class="tile-content text-center clearfix">
+																									<div class="label">Time on site</div>
+																									<div class="spark-number"><i class="ec-clock"></i> 5m 26s</div>
+																									<div class="spark clearfix">
+																											<div class="percent"><i class="im-arrow-down-right2 color-red"></i> 10.24%</div>
+																											<div class="sparkline sparkline-negative"></div>
+																									</div>
+																							</div>
+																					</div>
+																			</div>
+																			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+																					<div class="tile gray-spr m0 mb20">
+																							<div class="tile-content text-center clearfix">
+																									<div class="label">New visitors</div>
+																									<div class="spark-number"><i class="ec-users"></i> 2367</div>
+																									<div class="spark clearfix">
+																											<div class="percent"><i class="im-arrow-up-right3 color-green"></i> 84.29%</div>
+																											<div class="sparkline sparkline-bar-positive"></div>
+																									</div>
+																							</div>
+																					</div>
+																			</div>
+																			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+																					<div class="tile gray-spr m0 mb20">
+																							<div class="tile-content text-center clearfix">
+																									<div class="label">Pages view</div>
+																									<div class="spark-number"><i class="fa-eye-open"></i> 2300</div>
+																									<div class="spark clearfix">
+																											<div class="percent"><i class="im-arrow-down-right2 color-red"></i> 17.65%</div>
+																											<div class="sparkline sparkline-bar-negative"></div>
+																									</div>
+																							</div>
+																					</div>
+																			</div>
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="/js/echarts.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        function getQuizzCountChart(name, id){
+        	getChart(name, 'quizzcount', id);
+        }
+        
+        function getChart(name, seKey, seId){
+        	$.ajax({
+        		url:'/getBarChart',
+        		data:{
+        			key : seKey,
+        			id : seId
+        		},
+        		type:'post',
+        		success:function(data){
+        			if (!data) {
+        				/* console.log("data is null"); */
+						return;
+					}
+        			var DataList = eval(data);
+        			console.log(DataList);
+        			var sDataList1 = DataList[0];
+        			var sDataList2 = DataList[1];
+        			require(
+        		            [
+        		                'echarts',
+        		                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+        		            ],
+        		            function (ec) {
+        		                // 基于准备好的dom，初始化echarts图表
+        		                var myChart = ec.init(document.getElementById('main')); 
+        		                
+        		                var option = {
+        		                	title: {
+        		                		text: "学生"+name+"做题时间区间统计",
+        		                		textStyle: {
+        		                			fontSize: 18,
+        		                			color: "#800"
+        		                		},
+        		                		x:'center'
+        		                	},
+        		                    tooltip: {
+        		                        show: true,
+        		                        formatter: function(a){
+        		                        	/* console.log(JSON.stringify(a)); */
+        		                        	
+        		                        	/*attention 要 只保留两位小数！！！！！！*/
+        		                        	if (a.seriesIndex==0) {
+        		                        		var cr = a["2"]/(a["2"]+sDataList2[a["1"]]);
+        		                        		return "正确率<br/>"+cr;
+											}else{
+												var cr = 1 - a["2"]/(a["2"]+sDataList1[a["1"]]);
+        		                        		return "正确率<br/>"+cr;
+											}
+        		                        }
+        		                    },
+        		                    animationDuration: 50,
+        		                    animationDurationUpdate: 50,
+        		                    legend: {
+        		                        data:[
+        		                        	{
+        		                        		name:'错题'
+        		                        	},
+        		                        	{
+        		                        		name:'正确'
+        		                        	}
+        		                        ],
+        		                        x: 'right',
+            	                        y: 'center',
+        		                        orient: 'vertical'
+        		                    },
+        		                    xAxis : [
+        		                        {
+        		                        	name : '时段',
+        		                            type : 'category',
+        		                            data : [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        		                        }
+        		                    ],
+        		                    yAxis : [
+        		                        {
+        		                        	name : '数量',
+        		                            type : 'value'
+        		                        }
+        		                    ],
+        		                    series : [
+        		                        {
+        		                        	stack:"qs",
+        		                            name:"正确",
+        		                            type:"bar",
+        		                            itemStyle:{
+        		                            	normal : {
+        		                            		label : {
+        		                            			show : true,
+        		                            			position : 'insideTop',
+        		                            			textStyle : {
+        		                            				color : '#40f'
+        		                            			},
+        		                            			formatter : function(a){
+        		                            				if (a.value>1) {
+																return a.value;
+															}
+        		                            			}
+        		                            		}
+        		                            	}
+        		                            },
+        		                            data:sDataList1
+        		                        },
+        		                        {
+        		                        	stack:"qs",
+        		                            name:"错题",
+        		                            type:"bar",
+        		                            itemStyle:{
+        		                            	normal : {
+        		                            		color : '#eec',
+        		                            		label : {
+        		                            			show : true,
+        		                            			position : 'insideTop',
+        		                            			textStyle : {
+        		                            				color : '#40f'
+        		                            			},
+        		                            			formatter : function(a){
+        		                            				if (a.value>1) {
+																return a.value;
+															}
+        		                            			}
+        		                            		}
+        		                            	}
+        		                            },
+        		                            data:sDataList2
+        		                        }
+        		                    ]
+        		                };
+        		        
+        		                // 为echarts对象加载数据 
+        		                myChart.setOption(option); 
+        		            }
+        		        );
+        		}
+        	})
+        }
+        // 使用
+        </script>
+</body>
+</html>
