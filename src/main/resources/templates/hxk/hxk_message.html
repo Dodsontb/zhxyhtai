@@ -233,13 +233,14 @@
                             </li>
                            -->
                           
-                            <li v-for="item in list"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
+                            <li v-for="item in list" class="shouwModel" v-bind:userid="item.userid"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
                             </li>
                            
                         </ul>
                   
-                   </div>           	
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                   </div> 
+                   <div id="table-striped">         	
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
                             <!-- col-lg-3 start here -->
                             <div class="tile green">
                                 <!-- tile start here -->
@@ -247,7 +248,7 @@
                                     <i class="ec-mail s64"></i>
                                 </div>
                                 <div class="tile-content">
-                                    <div class="number">17</div>
+                                    <div class="number">{{xum}}</div>
                                     <h3>所有消息</h3>
                                 </div>
                             </div>
@@ -262,65 +263,48 @@
                                     <i class="ec-users s64"></i>
                                 </div>
                                 <div class="tile-content">
-                                    <div class="number">0</div>  
+                                    <div class="number">{{yum}}</div>  
                                     <h3>好友</h3>
                                 </div>
                             </div>
                           
                         </div>
-                      
-                     
-                	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <!-- col-lg-3 start here -->
-                            <div class="tile orange">
-                                <!-- tile start here -->
-                                <div class="tile-icon">
-                                    <i class="ec-trashcan s64"></i>
-                                </div>
-                                <div class="tile-content">
-                                    <div class="number">7</div>
-                                    <h3>已删除</h3>
-                                </div>
-                            </div>
-                            <!-- tile end here -->
-                        </div>
-                	
                 	
                 	
              
-             <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" id="table-striped">
+             <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" >
             
-            <!-- <div id="mes"><input type="button" value="哈哈哈"/></div> -->
+         
             
 							<div class="bs-callout bs-callout-primary fade in hahaha" v-for="item in clist">
 								 <div  @click="open(item.uid)">
 								 <input type="hidden" v-bind:value="item.messageId">
 								 <input type="hidden" name="uid" v-bind:value="item.uid"> 
-								<!--  <span>{{item.messageId}}</span> -->
+								 
                                 <h4 class="sendId">{{item.cp_user.username}}</h4> 
                                 <p>{{item.mcontent}}</p>
                                 <p>{{item.time}}</p>
                                 </div>
-                                <button  class="close" @click="del(item.messageId)">×</button> 
+                               <button  class="close" @click="del(item.messageId)">×</button> 
                             </div>
                     </div>        
 				</div>
- 			
+ 			</div>
  				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
  				<header class="modal-header">
- 				<p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p>
+ 				<!-- <p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p> -->
  				</header>
 		       
 		       <div class="modal-body">
 		            <div class="send">
-		                <div class="time">05/22 06:30</div>
+		              <!--   <div class="time">05/22 06:30</div> -->
 		                <div class="msg">
 		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
 		                    <div class="m_message_right" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
 		                </div>
 		            </div>
 		            <div class="show">
-		                <div class="time">05/22 06:30</div>
+		               <!--  <div class="time">05/22 06:30</div> -->
 		                <div class="msg">
 		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
 		                    <div class="m_message_left" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
@@ -330,7 +314,6 @@
 		        
 		       
 		       <footer class="modal-footer">
-		           
 		            <input type="text" name="mcontent" style="width:600px ;height: 19px;border: 1px solid gainsboro;" />+
 		          <input type="button" value="发送" class="senderMessage"/>
 		        </footer>
@@ -338,9 +321,9 @@
  			</div>
 	</body>
 </html>
-<!--  <script type="text/javascript" src="assets/js/bootstrap/bootstrap.js"></script>  -->
- 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/vue.js"></script>
+<!--  <script type="text/javascript" th:src="@{assets/js/bootstrap/bootstrap.js}"></script>  -->
+ <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
 	 <script>
 	
 	console.log("进入首页，正在开始注册websocket......");
@@ -362,53 +345,63 @@
 	}
 	</script> 
 	<script type="text/javascript">
+	 		var uid;
+	 		
 			var v=new Vue({
 				el:"#table-striped",
 				data:{
 					user:{userid:null},
-					chat:3,
 					list:null,
-					alluserlist:null,
 					ulist:null,
-					clist:null
+					clist:null,
+					xum:0,
+					yum:0
 					
 				},
 				methods:{
-					del:function(messageId){
-						  alert(messageId);
+					   del:function(messageId){
 						  $.ajax({
-								url:"/deleteMessage",
+								url:"/updateDiv",
+								dataType:"json",
+								type:"post",	
 								data:"messageId="+messageId,
 								success:function(result){
-									window.location.reload();
-						  	}
+									location.reload();		
+							}	
 						})  
-					},
-					open:function(uid){
-						$("#xiaoxi").show(); 
-						v.chat=uid;
-						alert(uid);
-						getAllUserList(v.chat);
-					 	getChatRecord(v.chat);
-						 
+					},  
+					open:function(id){
+						uid=id;
+						$("#xiaoxi").show();
+						getAllUserList(id);
+					 	getChatRecord(id);						 
 					}
 				}
 			});
+			
+			
 			var g=new Vue({
 				el:"#email-nav",
 				data:{
-					list:null
+					list:null,
+					
 				}
 			});
 			$(function(){
+				
+			/* 	$(".hidebtn").click(function(){
+					$(this).parents("div").hide();
+				}); */
+				
 				  $.ajax({
 					url:"/getChatRecordList",
 					dataType:"json",
-					type:"post",
-					  data:'sendid='+v.chat,  
+					type:"post",	
 					success:function(result){
-						console.log(result);
+						console.log("消息"+result);
 						v.clist=result;	
+						v.xum=v.clist.length;
+						
 					}
 					
 				});  
@@ -420,8 +413,9 @@
 					success:function(result){
 						console.log(result);
 						g.list=result;
+						v.yum=g.list.length;
 					}
-				})
+				});
 				
 				$.ajax({
 					url:"/getSeesionUser",
@@ -430,15 +424,15 @@
 					success:function(result){
 						console.log(result);
 						v.user=result;
+						
 					}
 				})
 				
-				getAllUserList(v.chat);
-			});
+				/* getAllUserList(uid); */
+ 			});
 			
 			  $(".chaxun").click(function(){
 					var username=$("[id=man]").val();
-					  alert(username);
 					   $.ajax({
 						  type:"post",
 						  url:"/queryByName",
@@ -467,61 +461,46 @@
 				});
 				
 				
-				$(".close").click(function(){
+				$(".modal-header").on("click",".close",function(){
 					$("#xiaoxi").hide();
+					$(this).parents(".modal-header").html("");
 				})
 				
 				//发送消息
 					 $(".senderMessage").click(function(){
-						
 						 $(".msg div").remove() 
-						var receiver=v.chat;
 						var content=$("[name=mcontent]").val();
-						alert(content)
-						$.post("senderMessage","receiver="+receiver+"&mcontent="+content,function(result){
+						$.post("senderMessage","receiver="+uid+"&mcontent="+content,function(result){
 							console.log("发送结果："+result)
 							if("000000"==result){
 								alert("发送失败！请检查网络。")
+								 getChatRecord(uid); 
+								 $("[name=mcontent]").val(" ");
 							}else if(result=="000001"){
 								alert("发送成功")
-								  getChatRecord(v.chat); 
+								  getChatRecord(uid); 
 								 $("[name=mcontent]").val(" ");
 							}
 						})
 						
 					}); 
 				
-				/* //获取聊天记录
-				 function getChatRecord(uid){
-					$.post("getChatRecord","receiver="+uid,function(result){
-						var content=$("[name=mcontent]").html(" ");
-						console.log(result)
-						for(var i=0;i<result.length;i++){
-							if(1==result[i].sender){
-								$(".send .msg").append(" <p class=\"m_message_right\">"+"<img src="+getuserimg(v.user.userid)+" style=\"width: 2em;\">"+"<i class=\"msg_input\"></i>"+result[i].mcontent+"</p><br/>");
-							}else{
-								$(".show .msg").append("  <p class=\"m_message_left\">"+"<img src="+getuserimg(v.chat)+" style=\"width: 2em;\">"+"<i class=\"msg_input\"></i>"+result[i].mcontent+"</p><br/>");
-							}
-						}
-						adduserimg();
-					})
-					
-				} */
+				
 				//获取聊天记录
 				 function getChatRecord(uid){
 					$.post("getChatRecord","receiver="+uid,function(result){
-						/* var content=$("[name=mcontent]").val(" "); */
-
-						 $(".msg div").remove()  
+						
+						  $(".msg div").remove(); 
 						console.log(result)
 						for(var i=0;i<result.length;i++){
 							if(v.user.userid==result[i].cp_user.userid){
 								$(".show .msg").append("<div class=\"m_message_left\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
+								
 							}else{
 								$(".send .msg").append("<div class=\"m_message_right\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
 							}
 						}
-						adduserimg();
+						adduserimg(uid);
 					})
 					
 				}
@@ -542,34 +521,39 @@
 					//系统头像
 					return "/assets/img/49.jpg"
 				}
-				/* //在聊天消息前添加头像
-				function adduserimg(){
-					$(".msg img").remove()
-					$(".msg .m_message_left").parents(".msg").prepend("<img src="+getuserimg(v.chat)+" style=\"width: 2em;\">");
-					$(".msg .m_message_right").parents(".msg").append("<img src="+getuserimg(v.user.userid)+" style=\"width: 2em;\">");
-					
-				} */
+				
 				
 				//在聊天消息前添加头像
-				function adduserimg(){
+				function adduserimg(id){
 					/* var chat=$(".send .msg img").prop("src");
 					alert("获取"+chat)
 					 */
 					$(".msg img").remove()
-					$(".m_message_right").prepend("<img src="+getuserimg(v.chat)+" width='25px' height='25px'/ class='userimg'>");
+					$(".m_message_right").prepend("<img src="+getuserimg(id)+" width='25px' height='25px'/ class='userimg'>");
 					$(".m_message_left").append("<img src="+getuserimg(v.user.userid)+" width='25px' height='25px'/ class='userimg'>");
 				}
 			
-				function getAllUserList(chat){
-					 /* var chat=$(".m_message_right img").val();
-					 alert("获取"+chat) */ 
-					$.post("getAllUserList","chatid="+chat,function(result){
+				//查询聊天对象信息
+				function getAllUserList(uid){
+					 /*  var uid=$(".m_message_right img").val();
+					 alert("获取"+uid)   */
+					$.post("getAllUserList","chatid="+uid,function(result){
+						if(result[1]!=null){
+							console.log(result[1]);
+							$(".modal-header").append("<p style=\"margin-left: 320px;\">"+result[1].username+"<span class=\"close\">×</span></p>");
+						}
+						console.log(result)
 						v.ulist=result
 					});
 					
 				}
 				
-				
+				$("body").on("click",".shouwModel",function(){
+					uid=$(this).attr("userid");	
+					$("#xiaoxi").show();
+					getAllUserList(uid);
+				 	getChatRecord(uid);
+				})
 				
  </script>
  

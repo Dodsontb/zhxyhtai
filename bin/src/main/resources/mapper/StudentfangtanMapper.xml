@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.StudentfangtanMapper">
+
+  <resultMap  type="com.zhxy.domain.Studentfangtan" id="studentfangtan">
+    <id column="id"  property="id" />
+    <result column="studentid"  property="studentid" />
+    <result column="content"  property="content" />
+     <result column="staffid"  property="staffid" />
+     <result column="fangtanstatus"  property="fangtanstatus" />
+    <result column="date"  property="date" />
+    <result column="name3"  property="name3" />
+    <result column="name4"  property="name4" />
+    <result column="name5"  property="name5" />
+	<association property="stuname" column="studentid" select="queryByStuId"></association>
+	<association property="stype"  column="fangtanstatus" select="queryAllStatus"></association>
+	<association property="staname" column="staffid" select="queryByStaffId"></association>
+  </resultMap>
+
+<select id="queryAll" resultMap="studentfangtan">
+
+select * from `studentfangtan`
+
+</select>
+<select id="queryByStuId" resultType="com.zhxy.domain.CpStudent">
+
+select * from `cp_student` where `studentid` =#{id}
+
+</select>
+
+<select id="queryAllStatus" resultType="com.zhxy.domain.FangtanType">
+
+select * from `fangtantype` where `fangtanType` =#{id}
+</select>
+<select id="queryByStaffId" resultType="com.zhxy.domain.CpStaff">
+
+select * from `cp_staff` where `staffid` =#{id}
+
+</select>
+
+
+<select id="queryByStuNameAndStatus" resultMap="studentfangtan">
+	SELECT * FROM `studentfangtan`
+	<where>
+		<if test="Status !=null and Status!=0">
+			and fangtanStatus=#{Status} 
+		</if>
+		<if test="name!=null">
+			and studentID in (select studentid from cp_student where studentname like concat('%',#{name},'%')) 
+		</if>
+	</where>
+</select>
+
+<update id="updateStu">
+
+update `studentfangtan` set `fangtanStatus`=#{Status} where `studentID`=#{id}
+
+</update>
+
+<delete id="delete">
+
+	delete from `studentfangtan` where `ID` =#{id}
+
+</delete>
+
+<insert id="insert" parameterType="com.zhxy.domain.Studentfangtan">
+ 		INSERT INTO studentfangtan (StudentID,
+     							  Content,
+     							  staffId,
+     							  fangtanStatus,
+     							  Date
+                                   )  
+	                  VALUES  (#{studentid},
+               					 #{content},
+               					 #{staffid},
+               					 #{fangtanstatus},
+               					 #{date}
+	                          )  
+
+</insert>
+
+</mapper>

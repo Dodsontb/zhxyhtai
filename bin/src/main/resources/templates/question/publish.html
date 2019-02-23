@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<base href="<%=basePath %>" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<link th:href="@{/resource/css/bootstrap.min.css}"  rel="stylesheet" />
+<script type="text/javascript" th:src="@{/resource/js/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/resource/js/bootstrap.min.js}" ></script>
+
+<!-- 输入过滤 -->
+<script th:src="@{/resource/jquery-validation-1.17.0/lib/jquery.js}"></script>
+<script th:src="@{/resource/jquery-validation-1.17.0/dist/jquery.validate.js}"></script>
+<script th:src="@{/resource/jquery-validation-1.17.0/dist/localization/messages_zh.js}"></script>
+
+<link rel="stylesheet" type="text/css" th:href="@{/resource/My97DatePicker/skin/WdatePicker.css}">
+<script  type="text/javascript" th:src="@{/resource/My97DatePicker/WdatePicker.js}"></script>
+
+
+
+<script type="text/javascript">
+
+
+</script>
+<style>
+.error{
+	color:red;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		<h1 style="text-align:center">发布新的学生问卷</h1>
+	</div>
+<form action="/publish"  id="commentForm"  class="form-horizontal" method="post">
+
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">问卷类型</label>
+					<div class="col-xs-9 ">
+						<select class="form-control" name="type" >
+								<option value="入学问卷">入学问卷</option>
+								<option value="就业问卷">就业问卷</option>
+								<option value="学习方向问卷">学习方向问卷</option>
+								<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">问卷标题</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="title" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+		
+		
+		
+		<!-- 开始2 -->
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">Date</label>
+					<div class="col-xs-9 ">
+						<input type="text" style="height: 34px;" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false})" required name="time" class="Wdate form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<input type="button" onclick="app()" class="btn btn-success" value="添加题目" /> 
+				</div>
+			</div>
+
+		</div>
+		<!--结束2 -->
+		
+		<script type="text/javascript">
+		
+		function app(){
+			$("#content").append(
+					"<div class='row'>"+
+						"<div class='col-xs-5'>"+
+							"<div class='form-group'>"+
+								"<label class='col-xs-3 control-label'>题目</label>"+
+								"<div class='col-xs-9 '>"+
+									"<input type='text' required name='q' class='form-control' />"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+						"<div class='col-xs-5'>"+
+							"<div class='form-group'>"+
+								"<label class='col-xs-3 control-label'>选项一</label>"+
+								"<div class='col-xs-9 '>"+
+								"	<input type='text' required name='a1' class='form-control' />"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+					"</div>"+
+				
+					"<div class='row'>"+
+					"	<div class='col-xs-5'>"+
+						"	<div class='form-group '>"+
+					"			<label class='col-xs-3 control-label'>选项二</label>"+
+					"			<div class='col-xs-9 '>"+
+					"				<input type='text' required name='a2' class='form-control' />"+
+					"			</div>"+
+					"		</div>"+
+					"	</div>"+
+					"	<div class='col-xs-5'>"+
+					"		<div class='form-group '>"+
+					"			<label class='col-xs-3 control-label'>选项三</label>"+
+					"			<div class='col-xs-9 '>"+
+					"				<input type='text' required name='a3' class='form-control' />"+
+					"			</div>"+
+					"		</div>"+
+					"	</div>"+
+					"</div>");
+		}
+		
+		</script>
+		
+		<div id="content">
+		
+		<!-- 开始3 -->
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">题目</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="q" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">选项一</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="a1" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束3 -->
+
+		<!-- 开始3 -->
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">选项二</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="a2" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">选项三</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="a3" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束3 -->
+
+        </div>
+
+	
+		
+		
+		<div class="row">
+			<div class="col-xs-3 col-xs-offset-4">
+				<input type="submit" class="btn btn-success" value="保存" /> 
+				<input type="reset" class="btn btn-danger" value="重置信息" />
+			</div>
+
+		</div>
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.Message">
+    <id column="Message_Id" jdbcType="INTEGER" property="messageId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="mcontent" jdbcType="VARCHAR" property="mcontent" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="mstate" jdbcType="INTEGER" property="mstate" />
+    <result column="TypeId" jdbcType="INTEGER" property="typeid" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+    <result column="receiver" jdbcType="VARCHAR" property="receiver" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    
+   	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
+    
+    
+  </resultMap>
+  			
+		  <select id="queryMessage" resultMap="BaseResultMap">
+		  		select * from Message where mstate=1
+		  </select>
+		  
+		  <select id="queryMessageType" resultType="com.zhxy.domain.MessageType">
+  				select * from `message_type` where typeid=#{typeid}
+  		</select> 
+		  
+		  <select id="queryMessageimgs" resultType="com.zhxy.domain.Messageimg">
+		  		select * from Messageimg where Message_Id=#{Message_Id}
+		  </select>
+  
+  			<select id="queryUser" resultType="com.zhxy.domain.CpUser">
+  				select * from cp_user where `userid`=#{uid}
+  		</select>
+  
+  		<select id="queryByMessageName" resultMap="BaseResultMap">
+  			SELECT * FROM Message INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
+			WHERE username LIKE CONCAT("%",#{username},"%")
+  		</select>
+  		
+  		<select id="queryCpUser" resultType="com.zhxy.domain.CpUser">
+  			select * from cp_user 
+  		</select>
+ 
+  		<select id="queryCpUserByName" resultType="com.zhxy.domain.CpUser">
+  			select * from cp_user where username LIKE CONCAT("%",#{username},"%")
+  		</select>
+  
+  		<delete id="deleteMessage">
+  				delete from Message where Message_Id=#{messageId}
+  		</delete>
+  
+ 		<insert id="insertMessage" useGeneratedKeys="true" keyProperty="messageId">
+ 			insert into `Message`( Uid, mcontent,  mtime, mstate, TypeId)values(#{uid},#{mcontent},#{mtime},#{mstate},#{typeid})
+ 		</insert> 
+  
+  		<select id="getChatRecord" resultMap="BaseResultMap">
+  				SELECT * FROM message 
+						INNER JOIN `message_reception` 
+						ON message.`Message_Id`=`message_reception`.`Message_Id`
+						WHERE (`message_reception`.`Uid`=#{sendid} AND message.`Uid`=#{receiver})
+						OR (`message_reception`.`Uid`=#{receiver} AND message.`Uid`=#{sendid})
+  		</select>
+  		
+  		<select id="getChatRecordList" resultMap="BaseResultMap">
+  				SELECT *,message_reception.Uid as receiver FROM message 
+  					INNER JOIN cp_user ON cp_user.`userid`=message.`Uid`
+					INNER JOIN img ON img.`id`=cp_user.`userid`
+					INNER JOIN `message_reception` 
+					ON message.`Message_Id`=`message_reception`.`Message_Id`
+					WHERE (`message`.`Uid`=#{sendid} AND `message_reception`.`Uid`=#{receiver})
+					
+  		</select>
+  		
+  		<select id="selectUid" resultMap="BaseResultMap">
+  				SELECT * FROM Message WHERE Uid=#{uid}
+  		</select>
+  
+  
+  		
+  		<!-- <select id="getChatList" resultMap="CpUser">
+  			SELECT u.`userid`,u.`username`,u.`usertypeid`,u.`usertypenub`,
+ 			 CONCAT(IFNULL(s.`staffname`,''),IFNULL(stu.`studentname`,''),
+			 IFNULL(p.`parentsname`,'')) AS `name`,
+			 CONCAT(IFNULL(s.`sex`,''),IFNULL(stu.`sex`,''),
+			 IFNULL(p.`sex`,'')) AS `sex`,img.`url` FROM cp_user 
+			 AS u LEFT JOIN cp_staff AS s ON s.`staffid`=u.`usertypeid` 
+			 AND u.`usertypenub`=0 LEFT JOIN cp_student AS stu ON stu.`studentid`=u.`usertypeid` 
+			 AND u.`usertypenub`=1 LEFT JOIN cp_parents AS p ON p.`parentsid`=u.`usertypeid` 
+			 AND u.`usertypenub`=2 
+			 LEFT JOIN img ON img.`id`=u.`userid` WHERE u.`userid` 
+			 IN (SELECT (message.uid+message_reception.`uid`-#{userid}) AS uid FROM message INNER JOIN message_reception ON message.`Message_Id`=message_reception.`Message_Id` 
+			 WHERE message_reception.`uid`=#{userid} OR message.`uid`=#{userid} GROUP BY uid)
+  		
+  		</select> -->
+  		
+  		
+  		  <select id="getUserlist" resultType="com.zhxy.domain.CpUser">
+  				SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` WHERE cp_user.`userid` IN (#{chatid},#{userid})
+  		</select>  
+  		
+  		<!-- <resultMap id="CpUser" type="com.zhxy.domain.CpUser">
+  		
+  		<id property="userid" jdbcType="INTEGER" column="userid"/>
+
+		<result property="username" jdbcType="VARCHAR" column="username"/>
+		
+		<result property="usertypeid" jdbcType="INTEGER" column="usertypeid"/>
+		
+		<result property="usertypenub" jdbcType="INTEGER" column="usertypenub"/>
+		
+		<result property="name" jdbcType="VARCHAR" column="name"/>
+		
+		<result property="sex" jdbcType="INTEGER" column="sex"/>
+		
+		<result property="positionid" jdbcType="INTEGER" column="positionid"/>
+		
+		<result property="positionname" jdbcType="VARCHAR" column="positionname"/>
+		
+		<result property="url" jdbcType="VARCHAR" column="url"/>
+		
+		</resultMap> -->
+  
+  
+  <sql id="Base_Column_List">
+    Message_Id, Uid, mcontent, mtime, mstate, TypeId, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where Message_Id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message
+    where Message_Id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.Message">
+    insert into message (Message_Id, Uid, mcontent, 
+      mtime, mstate, TypeId, 
+      name1, name2, name3, 
+      name4, name5)
+    values (#{messageId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{mcontent,jdbcType=VARCHAR}, 
+      #{mtime,jdbcType=TIMESTAMP}, #{mstate,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, 
+      #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
+      #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.Message">
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        Message_Id,
+      </if>
+      <if test="uid != null">
+        Uid,
+      </if>
+      <if test="mcontent != null">
+        mcontent,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="mstate != null">
+        mstate,
+      </if>
+      <if test="typeid != null">
+        TypeId,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="mcontent != null">
+        #{mcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mstate != null">
+        #{mstate,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Message">
+    update message
+    <set>
+      <if test="uid != null">
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="mcontent != null">
+        mcontent = #{mcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mstate != null">
+        mstate = #{mstate,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null">
+        TypeId = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Message_Id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Message">
+    update message
+    set Uid = #{uid,jdbcType=INTEGER},
+      mcontent = #{mcontent,jdbcType=VARCHAR},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      mstate = #{mstate,jdbcType=INTEGER},
+      TypeId = #{typeid,jdbcType=INTEGER},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where Message_Id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

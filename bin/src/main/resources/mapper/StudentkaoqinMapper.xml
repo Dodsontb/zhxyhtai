@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.StudentkaoqinMapper">
+
+<resultMap type="com.zhxy.domain.Studentkaoqin" id="student">
+	<id column="id" property="id" />
+    <result column="studentid"  property="studentid" />
+    <result column="kaoqinstatus"  property="kaoqinstatus" />
+    <result column="date"  property="date" />
+    <result column="classid"  property="classid" />
+    <result column="staffname"  property="staffname" />
+    <result column="name3" property="name3" />
+    <result column="name4" property="name4" />
+    <result column="name5" property="name5" />
+    
+<association property="stuname" column="studentid" select="queryByStuId"></association> <!-- queryByStuId为调用的方法  studentid为之间关联的id -->
+<association property="status" column="kaoqinstatus" select="queryAllStatus"></association>
+<association property="className" column="classid" select="queryAllClass"></association>
+
+</resultMap>												
+
+  
+<select id="queryAll" resultMap="student">
+SELECT * FROM `studentkaoqin` 
+
+</select>
+
+<select id="queryByStuId" resultType="com.zhxy.domain.CpStudent">
+SELECT * FROM `cp_student` WHERE studentid = #{id}
+</select>
+<select id="queryAllStatus" resultType="com.zhxy.domain.Statuastype">
+SELECT * FROM `statuastype` WHERE statuasType = #{id}
+
+</select>
+<select id="queryAllClass" resultType="com.zhxy.domain.Classs">
+SELECT * FROM `classs` WHERE classID=#{id}
+
+</select>
+<select id="queryByClassNameAndStuStatus" resultMap="student">
+	SELECT * FROM `studentkaoqin`
+	<where>
+		<if test="StuStatus !=null and StuStatus!=0">
+			and kaoqinStatus=#{StuStatus} 
+		</if>
+		<if test="name!=null">
+			and studentID in (select studentid from cp_student where studentname like concat('%',#{name},'%')) 
+		</if>
+	</where>
+</select>
+
+
+
+<update id="updateStu">
+
+ update `studentkaoqin` set `kaoqinStatus`=#{StuStatus} where `studentID`=#{id}
+
+</update>
+
+
+</mapper>

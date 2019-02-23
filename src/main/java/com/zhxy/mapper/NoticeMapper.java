@@ -34,7 +34,7 @@ public interface NoticeMapper {
 
     int queryByHeadCount(HxkPageBean<Notice> bean);
 
-    int deleteNotice(int nstate);
+   /* int deleteNotice(int nstate);*/
     
     List<Noticetype> plqueryNoticeType();
     

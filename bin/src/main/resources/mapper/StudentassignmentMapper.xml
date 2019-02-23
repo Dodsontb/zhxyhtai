@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.StudentassignmentMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.Studentassignment">
+    <id column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
+    <result column="ljxTitle" jdbcType="VARCHAR" property="ljxtitle" />
+    <result column="ljxClass" jdbcType="VARCHAR" property="ljxclass" />
+    <result column="ljxClasses" jdbcType="VARCHAR" property="ljxclasses" />
+    <result column="ljxDatetime" jdbcType="TIMESTAMP" property="ljxdatetime" />
+    <result column="ljxDate" jdbcType="TIMESTAMP" property="ljxdate" />
+    <result column="ljxTime" jdbcType="TIMESTAMP" property="ljxtime" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
+    <result column="ljxType" jdbcType="INTEGER" property="ljxtype" />
+    <result column="ljxWenjid" jdbcType="VARCHAR" property="ljxwenjid" />
+    <result column="ljxJid" jdbcType="INTEGER" property="ljxjid" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ljxTid, ljxTitle, ljxClass, ljxClasses, ljxDatetime, ljxDate, ljxTime, ljxUid, ljxType, 
+    ljxWenjid, ljxJid, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from studentassignment
+    where ljxTid = #{ljxtid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from studentassignment
+    where ljxTid = #{ljxtid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.Studentassignment">
+    insert into studentassignment (ljxTid, ljxTitle, ljxClass, 
+      ljxClasses, ljxDatetime, ljxDate, 
+      ljxTime, ljxUid, ljxType, 
+      ljxWenjid, ljxJid, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{ljxtid,jdbcType=INTEGER}, #{ljxtitle,jdbcType=VARCHAR}, #{ljxclass,jdbcType=VARCHAR}, 
+      #{ljxclasses,jdbcType=VARCHAR}, #{ljxdatetime,jdbcType=TIMESTAMP}, #{ljxdate,jdbcType=TIMESTAMP}, 
+      #{ljxtime,jdbcType=TIMESTAMP}, #{ljxuid,jdbcType=INTEGER}, #{ljxtype,jdbcType=INTEGER}, 
+      #{ljxwenjid,jdbcType=VARCHAR}, #{ljxjid,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.Studentassignment">
+    insert into studentassignment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ljxtid != null">
+        ljxTid,
+      </if>
+      <if test="ljxtitle != null">
+        ljxTitle,
+      </if>
+      <if test="ljxclass != null">
+        ljxClass,
+      </if>
+      <if test="ljxclasses != null">
+        ljxClasses,
+      </if>
+      <if test="ljxdatetime != null">
+        ljxDatetime,
+      </if>
+      <if test="ljxdate != null">
+        ljxDate,
+      </if>
+      <if test="ljxtime != null">
+        ljxTime,
+      </if>
+      <if test="ljxuid != null">
+        ljxUid,
+      </if>
+      <if test="ljxtype != null">
+        ljxType,
+      </if>
+      <if test="ljxwenjid != null">
+        ljxWenjid,
+      </if>
+      <if test="ljxjid != null">
+        ljxJid,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ljxtid != null">
+        #{ljxtid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtitle != null">
+        #{ljxtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclass != null">
+        #{ljxclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclasses != null">
+        #{ljxclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxdatetime != null">
+        #{ljxdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxdate != null">
+        #{ljxdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxtime != null">
+        #{ljxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtype != null">
+        #{ljxtype,jdbcType=INTEGER},
+      </if>
+      <if test="ljxwenjid != null">
+        #{ljxwenjid,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxjid != null">
+        #{ljxjid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Studentassignment">
+    update studentassignment
+    <set>
+      <if test="ljxtitle != null">
+        ljxTitle = #{ljxtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclass != null">
+        ljxClass = #{ljxclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclasses != null">
+        ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxdatetime != null">
+        ljxDatetime = #{ljxdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxdate != null">
+        ljxDate = #{ljxdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxtime != null">
+        ljxTime = #{ljxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtype != null">
+        ljxType = #{ljxtype,jdbcType=INTEGER},
+      </if>
+      <if test="ljxwenjid != null">
+        ljxWenjid = #{ljxwenjid,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxjid != null">
+        ljxJid = #{ljxjid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ljxTid = #{ljxtid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Studentassignment">
+    update studentassignment
+    set ljxTitle = #{ljxtitle,jdbcType=VARCHAR},
+      ljxClass = #{ljxclass,jdbcType=VARCHAR},
+      ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
+      ljxDatetime = #{ljxdatetime,jdbcType=TIMESTAMP},
+      ljxDate = #{ljxdate,jdbcType=TIMESTAMP},
+      ljxTime = #{ljxtime,jdbcType=TIMESTAMP},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
+      ljxType = #{ljxtype,jdbcType=INTEGER},
+      ljxWenjid = #{ljxwenjid,jdbcType=VARCHAR},
+      ljxJid = #{ljxjid,jdbcType=INTEGER},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where ljxTid = #{ljxtid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
+		select * from studentassignment where ljxTid = #{ljxtid}
+  </select>
+  
+  <select id="stuType" resultType="com.zhxy.domain.Studentassignment">
+  		SELECT * FROM `studentassignment` WHERE `ljxType` = #{ljxType} and ljxTid = #{ljxTid}
+  </select>
+  
+   <select id="stutime" resultType="com.zhxy.domain.Studentassignment">
+		SELECT * FROM studentassignment WHERE DATE(ljxDate) = DATE(NOW())
+  </select>
+  
+  <insert id="stuinsert" parameterType="com.zhxy.domain.Studentassignment" useGeneratedKeys="true" keyProperty="ljxtid">
+  		INSERT INTO `studentassignment`(`ljxTitle`,`ljxClass`,`ljxClasses`,`ljxDatetime`,`ljxDate`,`ljxTime`,`ljxUid`,`ljxType`,`ljxWenjid`,`ljxJid`,`name1`)
+		VALUE(#{ljxtitle},#{ljxclass},#{ljxclasses},NOW(),#{ljxdate},#{ljxtime},#{ljxuid},2,'',1,#{name1})
+  </insert>
+  
+  
+  <select id="fuzao" resultMap="fuZao">
+  		SELECT * FROM `studentassignment` WHERE ljxClasses =( SELECT `name` FROM clazz WHERE teacherid = 1 AND `name`='at1716')
+		GROUP BY ljxTid DESC
+  </select>
+  
+  <select id="">
+  		SELECT COUNT(ljxWid) FROM `whether_accomplish` WHERE ljxTid = 1 AND ljxYesno = '否'
+  </select>
+  <resultMap type="com.zhxy.domain.Studentassignment" id="fuZao">
+  		<id property="ljxtid" column="ljxTid"/>
+  		<result property="ljxtitle" column="ljxTitle"/>
+  		<result property="ljxtime" column="ljxTime"/>
+  		
+  		<collection property="list" column="ljxtid"
+  		ofType="com.zhxy.domain.WhetherAccomplish"
+  		select=""></collection>
+  </resultMap>
+</mapper>

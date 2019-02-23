@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhxy.mapper.CpUserMapper;
+import com.zhxy.mapper.MessageMapper;
+import com.zhxy.mapper.MessageReceptionMapper;
+import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
@@ -12,10 +16,6 @@ import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
-import com.zhxy.mapper.CpUserMapper;
-import com.zhxy.mapper.MessageMapper;
-import com.zhxy.mapper.MessageReceptionMapper;
-import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.service.hxk_history;
 
 
@@ -57,11 +57,11 @@ public class historyServiceImpl  implements hxk_history{
 		return bean;
 	}
 
-	@Override
+	/*@Override
 	public int deleteNotice(int nstate) {
 		// TODO Auto-generated method stub
 		return mapper.deleteNotice(nstate);
-	}
+	}*/
 
 	@Override
 	public List<Noticetype> plqueryNoticeType() {
@@ -128,11 +128,11 @@ public class historyServiceImpl  implements hxk_history{
 		return mmapper.queryCpUserByName(username);
 	}
 
-	@Override
+	/*@Override
 	public int deleteMessage(int messageId) {
 		// TODO Auto-generated method stub
 		return mmapper.deleteMessage(messageId);
-	}
+	}*/
 
 	@Override
 	public int updataNotice() {
@@ -144,14 +144,8 @@ public class historyServiceImpl  implements hxk_history{
 	public int insertMessage(Message message) {
 		// TODO Auto-generated method stub
 		int hg=mmapper.insertMessage(message);
-		mrapper.insertReception(message);
+		int jg=mrapper.insertReception(message);
 		return hg;
-	}
-
-	@Override
-	public Message selectUid(int uid) {
-		// TODO Auto-generated method stub
-		return mmapper.selectUid(uid);
 	}
 
 	@Override
@@ -167,9 +161,15 @@ public class historyServiceImpl  implements hxk_history{
 	}
 
 	@Override
-	public List<Message> getChatRecordList(int sendid, int receiver) {
+	public List<Message> getChatRecordList(int receiver) {
 		// TODO Auto-generated method stub
-		return mmapper.getChatRecordList(sendid, receiver);
+		return mmapper.getChatRecordList(receiver);
+	}
+
+	@Override
+	public int updateDiv(int Message_Id) {
+		// TODO Auto-generated method stub
+		return mmapper.updateDiv(Message_Id);
 	}
 
 	/*@Override

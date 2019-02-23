@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.PutOffExamineMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.PutOffExamine">
+    <id column="ljxSid" jdbcType="INTEGER" property="ljxsid" />
+    <result column="ljxTuid" jdbcType="INTEGER" property="ljxtuid" />
+    <result column="ljxYesno" jdbcType="CHAR" property="ljxyesno" />
+    <result column="ljxUname" jdbcType="VARCHAR" property="ljxuname" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ljxSid, ljxTuid, ljxYesno, ljxUname, ljxUid, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from put_off_examine
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from put_off_examine
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.PutOffExamine">
+    insert into put_off_examine (ljxSid, ljxTuid, ljxYesno, 
+      ljxUname, ljxUid, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{ljxsid,jdbcType=INTEGER}, #{ljxtuid,jdbcType=INTEGER}, #{ljxyesno,jdbcType=CHAR}, 
+      #{ljxuname,jdbcType=VARCHAR}, #{ljxuid,jdbcType=INTEGER}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.PutOffExamine">
+    insert into put_off_examine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ljxsid != null">
+        ljxSid,
+      </if>
+      <if test="ljxtuid != null">
+        ljxTuid,
+      </if>
+      <if test="ljxyesno != null">
+        ljxYesno,
+      </if>
+      <if test="ljxuname != null">
+        ljxUname,
+      </if>
+      <if test="ljxuid != null">
+        ljxUid,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ljxsid != null">
+        #{ljxsid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtuid != null">
+        #{ljxtuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxyesno != null">
+        #{ljxyesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxuname != null">
+        #{ljxuname,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.PutOffExamine">
+    update put_off_examine
+    <set>
+      <if test="ljxtuid != null">
+        ljxTuid = #{ljxtuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxyesno != null">
+        ljxYesno = #{ljxyesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxuname != null">
+        ljxUname = #{ljxuname,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.PutOffExamine">
+    update put_off_examine
+    set ljxTuid = #{ljxtuid,jdbcType=INTEGER},
+      ljxYesno = #{ljxyesno,jdbcType=CHAR},
+      ljxUname = #{ljxuname,jdbcType=VARCHAR},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where ljxSid = #{ljxsid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -21,6 +21,7 @@
    	<association property="imgs" column="Notice_Id" javaType="list" select="queryNoticeimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
    	<association property="clazzs" column="Notice_Id" javaType="list" select="queryClazzlist"></association>
+   	
   </resultMap>
   
   <select id="queryNoticeAll" resultMap="BaseResultMap">
@@ -60,6 +61,7 @@
 	  			and TypeId =#{typeid}
 	  		 </if>
   		</where>
+  		
   </select>
   
   <select id="queryByHead" resultMap="BaseResultMap">
@@ -72,7 +74,9 @@
 	  			and TypeId =#{typeid}
 	  		 </if>
   		</where>
+  		ORDER BY `ntime` DESC
   		limit #{start},#{pagesize}
+  		
   </select>
   
   	 <insert id="insertNotice" useGeneratedKeys="true" keyProperty="noticeId">
@@ -88,9 +92,9 @@
  			insert into  noticeimg(nurl,Notice_Id)value(#{nurl},#{Notice_Id})
  	</insert>
   
-	  <update id="deleteNotice">
+	 <!--  <update id="deleteNotice">
 	  		update  `Notice` set nstate=0 where Notice_Id=#{Notice_Id}
-	  </update>
+	  </update> -->
 	  
 	  
 	 <resultMap id="Clazz" type="com.zhxy.domain.Clazz">

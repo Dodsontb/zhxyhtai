@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
@@ -28,7 +31,6 @@ import com.zhxy.domain.Noticetype;
 import com.zhxy.handler.MyWebSocketHandler;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.hxktask.ExamTaskJob;
-import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.service.hxk_history;
 
 @Controller
@@ -202,11 +204,11 @@ public class WriteController {
 				
 			}
 			
-			@RequestMapping("/deleteMessage")
+			/*@RequestMapping("/deleteMessage")
 			public String deleteMessage(int messageId) {
-				service.deleteMessage(messageId);
+				int i=service.deleteMessage(messageId);
 				return "redirect:hxk_message";
-			}
+			}*/
 			
 			@RequestMapping("/queryCpUserByName")
 			@ResponseBody
@@ -214,12 +216,6 @@ public class WriteController {
 				List<CpUser> list=service.queryCpUserByName(username);
 				model.addAttribute("list", list);
 				return list;
-			}
-			
-			@RequestMapping("/selectUid")
-			@ResponseBody
-			public Message selectUid(int uid) {
-				return service.selectUid(uid);
 			}
 			
 			@ResponseBody
@@ -256,31 +252,38 @@ public class WriteController {
 			
 			@ResponseBody
 			@RequestMapping("/getChatRecordList")
-			public List<Message> getChatRecordList(HttpSession session,HttpServletResponse response,int sendid) {
+			public List<Message> getChatRecordList(HttpSession session,HttpServletResponse response) {
 				CpUser u =  (CpUser)session.getAttribute("user");
-				System.out.println("查询聊天记录集合"+sendid);
-				List<Message> clist=service.getChatRecordList(sendid, u.getUserid());	
+				System.out.println("查询聊天记录集合");
+				List<Message> clist=service.getChatRecordList(u.getUserid());	
 				return clist;
 			}
 			
 			@ResponseBody
 			@RequestMapping("/getAllUserList")
-			//获取弹窗中绑定的用户信息列表（userid/name/url）分别附带信息职位、班级、家长所属学生
+			//获取弹窗中绑定的用户信息列表
 			public List<CpUser> getAllUserList(HttpSession session,HttpServletResponse response,int chatid) {
 				response.setCharacterEncoding("utf-8");
 				CpUser u=(CpUser) session.getAttribute("user");
-				System.out.println("查询用户列表");
 				List<CpUser> ulist=service.getUserlist(chatid,u.getUserid());
+				System.out.println("查询用户列表"+JSON.toJSONString(ulist));	
 				return ulist;
 			}
 			
 			
 			@ResponseBody
 			@RequestMapping("/getSeesionUser")
-			public CpUser getChatRecordList(HttpSession session,HttpServletResponse response) {
+			public CpUser getSeesionUser(HttpSession session,HttpServletResponse response) {
 				CpUser user =  (CpUser)session.getAttribute("user");
 				System.out.println(JSON.toJSONString(user));
 				return user;
+			}
+			
+			@ResponseBody
+			@RequestMapping("/updateDiv")
+			public int updateDiv(int messageId) {
+				int i=service.updateDiv(messageId);
+				return i;
 			}
 			
 }

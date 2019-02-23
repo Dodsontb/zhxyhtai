@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace = "com.zhxy.mapper.TitleMapper"> 
+	
+   
+	
+	<!--List<title> findList(title hoteltitle);-->
+	<select id="findList"  resultType="com.zhxy.domain.Title">
+		SELECT
+		*
+		FROM title
+      
+	</select>
+	
+	
+	
+	<!--title findById(@Param("id") Integer id);-->
+	<select id="findById" parameterType="Integer"  resultType="com.zhxy.domain.Title">
+		SELECT
+		*
+		FROM title  where id=#{id}
+	</select>
+	
+
+	<!--Integer insert(title hoteltitle);-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.zhxy.domain.Title">  
+	        INSERT INTO title (q,
+      						 a1,
+      						 a2,
+      						 a3)  
+	                  VALUES  (#{q},
+                 				#{a1},
+                 				#{a2},
+                 				#{a3}
+	                          )  
+	 </insert>
+	
+	
+	
+	
+	
+</mapper>

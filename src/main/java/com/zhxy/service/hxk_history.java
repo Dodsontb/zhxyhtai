@@ -7,9 +7,11 @@ import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
+import com.zhxy.domain.MessageReception;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 
+import io.lettuce.core.dynamic.annotation.Param;
 
 public interface hxk_history {
 	
@@ -19,7 +21,7 @@ public interface hxk_history {
 	    
 	    HxkPageBean<Notice> queryByHead(String name,int typeid,int currpage);
 	    
-	    int deleteNotice(int nstate);
+	   /* int deleteNotice(int nstate);*/
 	    
 	    List<Noticetype> plqueryNoticeType();
 	    
@@ -42,11 +44,9 @@ public interface hxk_history {
 	    
 	    List<CpUser> queryCpUserByName(String username);
 	    
-	    int deleteMessage(int messageId);
+	  /*  int deleteMessage(int messageId);*/
 	    
 	    int insertMessage(Message message);
-	    
-	    Message selectUid(int uid);
 	    
 	    List<Message> getChatRecord(int sendid,int receiver);
 	    
@@ -55,6 +55,8 @@ public interface hxk_history {
 	    
 	    List<CpUser> getUserlist(Integer chatid,Integer userid);
 	    
-	    List<Message> getChatRecordList(int sendid,int receiver);
+	    List<Message> getChatRecordList(int receiver);
+	    
+	    int updateDiv(int Message_Id);
 
 }

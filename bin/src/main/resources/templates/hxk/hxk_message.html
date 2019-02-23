@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <style type="text/css">
+        
+        	ul li{
+        		list-style: none;
+        	}
+        	#xiaoxi{
+			    max-width: 680px;
+			    margin: 0 auto;
+			    background: #f1f1f1;
+			    color:#333;
+			   /* font-size: 1rem;*/
+			}
+		      #xiaoxi img{
+		     	max-width: 100%;
+   				 vertical-align: middle
+		     }    
+		     
+
+.time{
+    font-size:0.24rem;
+    color:#999;
+    margin-bottom: 0.3rem;
+    text-align: center;
+}
+ 
+
+.send:after,.show:after,.msg:after{
+	content: "";
+	clear: both;
+	display: table;	
+}
+ 
+/* .msg>img{
+	width: 0.8rem;
+	float: left;
+} */
+  /* .msg>div{
+	float: left;
+	margin:3px;
+	padding: 0.25rem;
+	background: #fff;
+	font-size: 14px;
+	position: relative;
+	border-radius: 0.2rem;
+	 max-width:5rem ;  
+	box-sizing: border-box;
+}   */
+ 
+ /* .msg_input{
+	position: absolute;
+	background-size: 0.31rem auto;
+	width: 0.31rem;
+	height: 0.51rem;
+	left: -0.31rem;
+	top: 0.25rem;
+	
+}  */
+.show .msg img,.show .msg{
+	float: right;
+}
+ 
+ .send .msg img,.send .msg{
+	float: left;
+}
+/*  .show .msg_input{
+	left: auto;
+	right: -0.11rem;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 	
+	-moz-transform:rotate(180deg); 	
+	-webkit-transform:rotate(180deg); 
+	-o-transform:rotate(180deg); 	
+}  */
+.send,.show{
+	padding-bottom: 0.3rem;
+}
+.alert_novip,.flower_num,.give_flower{
+	display: none;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.28rem;
+}
+.alert_novip p,.flower_num  p{
+	margin-bottom: 0.45rem;
+ 
+.layui-layer-wrap button{
+	font-size: 0.28rem;
+	padding: 0.2rem 0.3rem;
+	margin-top: 0.1rem;
+	background: #f8f8f8;
+	border-radius: 10px;
+}
+}
+.flower_num button{
+	padding: 0.2rem 0.5rem;
+	border-radius: 10px;
+}
+.layui-layer-wrap button:first-child{
+	float: left;
+}
+.layui-layer-wrap button:last-child{
+	float: right;
+	background: #FF7171;
+	color: #fff;
+}
+.alert_novip button{
+	padding: 0.2rem 0.3rem;
+    border-radius: 10px
+}
+.flower{
+	width: 0.8rem;
+	margin: 0 auto;
+}
+.give_flower{
+	text-align: center;
+}
+.give_flower p{
+	text-align: center;
+	line-height: 1.5;
+}
+.give_flower input{
+	width: 1rem;
+	margin-right: 0.1rem;
+	margin-top: 0.2rem;
+}
+.give_flower button{
+	display: block;
+	width: 3rem;
+	font-size: 0.28rem;
+	margin: 0 auto;
+	margin-top: 0.6rem;
+	float: none!important;
+	line-height: 0.65rem;
+	border-radius: 10px;
+}
+/* .footer{
+	position: fixed;
+	bottom: 200px;
+} */
+.modal-body{
+    padding: 10px;
+    font-size: 16px;
+    box-sizing:border-box;
+    border-left: 1px solid #ccc;
+}
+.modal-header{
+    box-sizing:border-box;
+    border-bottom:1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.close{
+    color: #b7b7b7;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 70px;
+    transition: all 0.3s;
+}
+.close:hover, .close:focus{
+    color: #95b4ed;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-footer{
+    box-sizing:border-box;
+    border-top:1px solid #ccc;
+    display: flex;
+    padding: 15px;
+    justify-content: flex-end;
+    align-items: center;
+ 
+}
+
+		
+        </style>
+	</head>
+	<body>
+	
+        
+        <div style="width: 1000px;height: 700px;padding-top: 70px;">
+		<div class="col-lg-4">
+			
+			
+                                <form class="form-inline search-page-form">
+                                    <div class="well bn">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" v-bind:name="cp_user.username" id="man" placeholder="姓名">
+                                            <span class="input-group-btn">
+                                <button  class="btn btn-primary chaxun"><i class="ec-search s16"></i></button>
+                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+		
+		 <div class="outlet col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                         <input type="text" class="form-control"  name="username" placeholder="search here ...">
+                            <span class="input-group-btn">
+                                <button  class="btn btn-primary koko"><i class="ec-search s16"></i></button>
+                            </span>
+                    </div>
+         <!--<div class="p15 ">
+            <input class="btn btn-danger btn-block uppercase"><i class="im-quill"></i> compose
+                        </div>-->
+       
+			<ul id="email-nav" class="nav nav-pills nav-stacked">
+                          <!--  <li><a href="email-inbox.html"><i class="ec-archive"></i> Inbox <span class="notification blue">27</span></a>
+                            </li>
+                            <li><a href="#"><i class="ec-star"></i> Starred <span class="notification orange">2</span></a>
+                            </li>
+                           -->
+                          
+                            <li v-for="item in list"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
+                            </li>
+                           
+                        </ul>
+                  
+                   </div>           	
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <!-- col-lg-3 start here -->
+                            <div class="tile green">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-mail s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">17</div>
+                                    <h3>所有消息</h3>
+                                </div>
+                            </div>
+                            <!-- tile end here -->
+                        </div>
+                        <!-- col-lg-3 end here -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            
+                            <div class="tile blue">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-users s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">0</div>  
+                                    <h3>好友</h3>
+                                </div>
+                            </div>
+                          
+                        </div>
+                      
+                     
+                	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <!-- col-lg-3 start here -->
+                            <div class="tile orange">
+                                <!-- tile start here -->
+                                <div class="tile-icon">
+                                    <i class="ec-trashcan s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">7</div>
+                                    <h3>已删除</h3>
+                                </div>
+                            </div>
+                            <!-- tile end here -->
+                        </div>
+                	
+                	
+                	
+             
+             <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" id="table-striped">
+            
+            <!-- <div id="mes"><input type="button" value="哈哈哈"/></div> -->
+            
+							<div class="bs-callout bs-callout-primary fade in hahaha" v-for="item in clist">
+								 <div  @click="open(item.uid)">
+								 <input type="hidden" v-bind:value="item.messageId">
+								 <input type="hidden" name="uid" v-bind:value="item.uid"> 
+								<!--  <span>{{item.messageId}}</span> -->
+                                <h4 class="sendId">{{item.cp_user.username}}</h4> 
+                                <p>{{item.mcontent}}</p>
+                                <p>{{item.time}}</p>
+                                </div>
+                                <button  class="close" @click="del(item.messageId)">×</button> 
+                            </div>
+                    </div>        
+				</div>
+ 			
+ 				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
+ 				<header class="modal-header">
+ 				<p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p>
+ 				</header>
+		       
+		       <div class="modal-body">
+		            <div class="send">
+		                <div class="time">05/22 06:30</div>
+		                <div class="msg">
+		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
+		                    <div class="m_message_right" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
+		                </div>
+		            </div>
+		            <div class="show">
+		                <div class="time">05/22 06:30</div>
+		                <div class="msg">
+		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
+		                    <div class="m_message_left" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
+		                </div>
+		            </div>
+		        </div>
+		        
+		       
+		       <footer class="modal-footer">
+		           
+		            <input type="text" name="mcontent" style="width:600px ;height: 19px;border: 1px solid gainsboro;" />+
+		          <input type="button" value="发送" class="senderMessage"/>
+		        </footer>
+ 				
+ 			</div>
+	</body>
+</html>
+<!--  <script type="text/javascript" src="assets/js/bootstrap/bootstrap.js"></script>  -->
+ 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/vue.js"></script>
+	 <script>
+	
+	console.log("进入首页，正在开始注册websocket......");
+	var websocket = new WebSocket("ws://127.0.0.1:8080/mywebsocket");
+	
+	websocket.onopen = function(){
+		console.log("连接成功.....");
+	}
+	websocket.onclose = function(){
+		console.log("连接断开.....");
+	}
+	websocket.onerror = function(){
+		console.log("连接异常.....");
+	}
+	websocket.onmessage = function(msg){
+		console.log("接收到通信的消息."+msg.data+'\n'+v.user.userid);
+		/* var chat=msg.data.substring(0,msg.data.indexOf("-")) */
+		
+	}
+	</script> 
+	<script type="text/javascript">
+			var v=new Vue({
+				el:"#table-striped",
+				data:{
+					user:{userid:null},
+					chat:3,
+					list:null,
+					alluserlist:null,
+					ulist:null,
+					clist:null
+					
+				},
+				methods:{
+					del:function(messageId){
+						  alert(messageId);
+						  $.ajax({
+								url:"/deleteMessage",
+								data:"messageId="+messageId,
+								success:function(result){
+									window.location.reload();
+						  	}
+						})  
+					},
+					open:function(uid){
+						$("#xiaoxi").show(); 
+						v.chat=uid;
+						alert(uid);
+						getAllUserList(v.chat);
+					 	getChatRecord(v.chat);
+						 
+					}
+				}
+			});
+			var g=new Vue({
+				el:"#email-nav",
+				data:{
+					list:null
+				}
+			});
+			$(function(){
+				  $.ajax({
+					url:"/getChatRecordList",
+					dataType:"json",
+					type:"post",
+					  data:'sendid='+v.chat,  
+					success:function(result){
+						console.log(result);
+						v.clist=result;	
+					}
+					
+				});  
+				
+				$.ajax({
+					url:"/queryUserGetId",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						g.list=result;
+					}
+				})
+				
+				$.ajax({
+					url:"/getSeesionUser",
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						console.log(result);
+						v.user=result;
+					}
+				})
+				
+				getAllUserList(v.chat);
+			});
+			
+			  $(".chaxun").click(function(){
+					var username=$("[id=man]").val();
+					  alert(username);
+					   $.ajax({
+						  type:"post",
+						  url:"/queryByName",
+						  dataType:"json",
+						  data:"username="+username,
+						  success:function(result){
+								console.log(result);
+								v.list=result;
+							}
+					})   
+				}) ;
+				
+				$(".koko").click(function(){
+					var username=$("[name=username]").val();
+					alert(username) 
+					   $.ajax({
+						  type:"post",
+						  url:"/queryCpUserByName",
+						  dataType:"json",
+						  data:"username="+username,
+						  success:function(result){
+								console.log(result);
+								g.list=result;
+							}
+					})   
+				});
+				
+				
+				$(".close").click(function(){
+					$("#xiaoxi").hide();
+				})
+				
+				//发送消息
+					 $(".senderMessage").click(function(){
+						
+						 $(".msg div").remove() 
+						var receiver=v.chat;
+						var content=$("[name=mcontent]").val();
+						alert(content)
+						$.post("senderMessage","receiver="+receiver+"&mcontent="+content,function(result){
+							console.log("发送结果："+result)
+							if("000000"==result){
+								alert("发送失败！请检查网络。")
+							}else if(result=="000001"){
+								alert("发送成功")
+								  getChatRecord(v.chat); 
+								 $("[name=mcontent]").val(" ");
+							}
+						})
+						
+					}); 
+				
+				/* //获取聊天记录
+				 function getChatRecord(uid){
+					$.post("getChatRecord","receiver="+uid,function(result){
+						var content=$("[name=mcontent]").html(" ");
+						console.log(result)
+						for(var i=0;i<result.length;i++){
+							if(1==result[i].sender){
+								$(".send .msg").append(" <p class=\"m_message_right\">"+"<img src="+getuserimg(v.user.userid)+" style=\"width: 2em;\">"+"<i class=\"msg_input\"></i>"+result[i].mcontent+"</p><br/>");
+							}else{
+								$(".show .msg").append("  <p class=\"m_message_left\">"+"<img src="+getuserimg(v.chat)+" style=\"width: 2em;\">"+"<i class=\"msg_input\"></i>"+result[i].mcontent+"</p><br/>");
+							}
+						}
+						adduserimg();
+					})
+					
+				} */
+				//获取聊天记录
+				 function getChatRecord(uid){
+					$.post("getChatRecord","receiver="+uid,function(result){
+						/* var content=$("[name=mcontent]").val(" "); */
+
+						 $(".msg div").remove()  
+						console.log(result)
+						for(var i=0;i<result.length;i++){
+							if(v.user.userid==result[i].cp_user.userid){
+								$(".show .msg").append("<div class=\"m_message_left\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
+							}else{
+								$(".send .msg").append("<div class=\"m_message_right\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
+							}
+						}
+						adduserimg();
+					})
+					
+				}
+				
+				
+				//获取用户头像
+				function getuserimg(userid){
+					for(var i=0;i<v.ulist.length;i++){
+						if(userid==v.ulist[i].userid){
+							console.log("获取头像："+userid+"-"+v.ulist[i].userid+"-"+v.ulist[i].url)
+							if(v.ulist[i].url==null){
+								return "/assets/img/48.jpg";//未查询到头像
+							}else{
+								return v.ulist[i].url
+							}
+						}
+					}
+					//系统头像
+					return "/assets/img/49.jpg"
+				}
+				/* //在聊天消息前添加头像
+				function adduserimg(){
+					$(".msg img").remove()
+					$(".msg .m_message_left").parents(".msg").prepend("<img src="+getuserimg(v.chat)+" style=\"width: 2em;\">");
+					$(".msg .m_message_right").parents(".msg").append("<img src="+getuserimg(v.user.userid)+" style=\"width: 2em;\">");
+					
+				} */
+				
+				//在聊天消息前添加头像
+				function adduserimg(){
+					/* var chat=$(".send .msg img").prop("src");
+					alert("获取"+chat)
+					 */
+					$(".msg img").remove()
+					$(".m_message_right").prepend("<img src="+getuserimg(v.chat)+" width='25px' height='25px'/ class='userimg'>");
+					$(".m_message_left").append("<img src="+getuserimg(v.user.userid)+" width='25px' height='25px'/ class='userimg'>");
+				}
+			
+				function getAllUserList(chat){
+					 /* var chat=$(".m_message_right img").val();
+					 alert("获取"+chat) */ 
+					$.post("getAllUserList","chatid="+chat,function(result){
+						v.ulist=result
+					});
+					
+				}
+				
+				
+				
+ </script>
+ 
+ 
