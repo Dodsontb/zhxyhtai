@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>考试查询首页</title>
+		<!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</head>
+<body>
+	<div class="container-fluid">
+		<div id="content">
+			<div class="outlet">
+				<div class="row">
+					<div class="col-lg-6 col-md-12">
+						<h1>考试查询</h1>
+						<div style="border: 1px solid #EEEEEE; height: 400px;">
+							<div class="col-lg-6 col-md-6"><div><label>查询</label><input type="text"></div></div>
+							<!-- <div>
+								<table class="table" id="searchClass">
+									<tr>
+										<th>编号</th>
+										<th>班级编号</th>
+										<th>班级名称</th>
+										<th>最近考试时间</th>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>10121</td>
+										<td>一二一</td>
+										<td>2019-01-11</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>10122</td>
+										<td>一二二</td>
+										<td>2019-01-11</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>10123</td>
+										<td>一二三</td>
+										<td>2019-01-11</td>
+									</tr>
+								</table>
+							</div> -->
+							<div>
+								<table class="table"  id="searchExam">
+									<tr>
+										<th>编号</th>
+										<th>考试编号</th>
+										<th>考试名称</th>
+										<th>考试年级</th>
+										<th>考试班级</th>
+										<th>考试时间</th>
+										<th></th>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>11</td>
+										<td>111</td>
+										<td>S1</td>
+										<td>一二一,一二二,一二三</td>
+										<td>2019-01-07</td>
+										<td><a href="ExamDetail.html" target="blank_">查看详情</a></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>12</td>
+										<td>112</td>
+										<td>S1</td>
+										<td>一二一,一二二,一二三</td>
+										<td>2019-01-08</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>13</td>
+										<td>113</td>
+										<td>S1</td>
+										<td>一二一,一二二,一二三</td>
+										<td>2019-01-09</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>14</td>
+										<td>114</td>
+										<td>S1</td>
+										<td>一二一,一二二,一二三</td>
+										<td>2019-01-10</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>15</td>
+										<td>115</td>
+										<td>S1</td>
+										<td>一二一,一二二,一二三</td>
+										<td>2019-01-11</td>
+									</tr>
+								</table>
+								<div>
+									<div class="col-lg-6 col-md-5" style="text-align: right;">上一页</div>
+									<div class="col-lg-6 col-md-2" style="text-align: center;">1/1</div>
+									<div class="col-lg-6 col-md-5" style="text-align: left;">下一页</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<iframe frameBorder="0" id="chart1" name="KSChart" scrolling="no"
+									src="ExamDetail.html" height="100%" width="100%" style="height:1320px;">
+									
+						</iframe>
+					</div>
+					<!-- 
+					<div class="col-lg-6 col-md-8 hide">
+						<div class="panel panel-primary plain toggle">
+							Start .panel
+							<div class="panel-heading">
+								<h2 id="chart1_title" style="text-align: center">班级一二一近期考试成绩</h2>
+								
+							</div>
+							<div class="panel-body">
+								<iframe frameBorder="0" id="chart1" name="KSChart" scrolling="no"
+									src="KSeriesChart.html" height="100%" width="100%" style="height:400px">
+									
+								</iframe>
+							</div>
+						</div>
+						End .panel
+					</div>
+					<div class="col-lg-6 col-md-4">
+						<div style="border: 1px solid #EEEEEE; height: 200px;">
+							具体成绩表
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-8">
+						<div style="border: 1px solid #EEEEEE; height: 200px;">
+							<div>分析：
+							班级趋于稳定，总体提升明显
+							“一步一个脚印，胜利就在眼前！”
+							</div>
+							<div>分析：
+							班级两极分化，总体提升明显
+							“同学们还应互帮互助提升自我！”
+							</div>
+						</div>
+					</div> -->
+					<div>
+						<div>大部分教员可以查考试，学生也可以查考试</div>
+						<div>部分教员可以查班级，学生也可以查班级</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var condition = {};
+	var searchClass = [];
+	
+	$(function(){
+		$("#searchClass tr").click(function(){
+			searchClass = $(this).find("td");
+			if(searchClass[0]&&condition.classId != searchClass[1].innerHTML){
+				$("#searchClass tr").removeClass("selected");
+				$(this).addClass("selected");
+				condition.classId = searchClass[1].innerHTML;
+				console.log(condition.classId);
+				condition.titleText = "班级" + searchClass[2].innerHTML + "近期考试情况";
+				$("#chart1")[0].contentWindow.getKSChartByClassId(condition);
+			}
+		})
+		
+		$("#searchExam tr").click(function(){
+			searchClass = $(this).find("td");
+			if(searchClass[0]&&condition.templateId != searchClass[1].innerHTML){
+				$("#searchClass tr").removeClass("selected");
+				$(this).addClass("selected");
+				condition.templateId = searchClass[1].innerHTML;
+				console.log(condition.templateId);
+				condition.titleText = "考试" + searchClass[2].innerHTML + "情况";
+				$("#chart1")[0].contentWindow.getKSChartByTemplateId(condition);
+			}
+		})
+	})
+	</script>
+</body>
+</html>

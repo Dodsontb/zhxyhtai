@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhxy.mapper.KaoqinStatisMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.Studentkaoqin">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="studentID" jdbcType="INTEGER" property="studentid" />
+    <result column="kaoqinStatus" jdbcType="INTEGER" property="kaoqinstatus" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="studentClass" jdbcType="VARCHAR" property="studentclass" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  
+  <select id="queryKaoqinStatisByClassId" resultType="com.zhxy.domain.KaoqinStatis">
+  	SELECT `date`, kaoqinCount(#{classId} ,1,`date`) sta1, kaoqinCount(#{classId} ,2,`date`) sta2, kaoqinCount(#{classId} ,3,`date`) sta3, kaoqinCount(#{classId} ,4,`date`) sta4 
+  	FROM `studentkaoqin` 
+  	<trim>
+  		<if test="dateCondition=='day'">
+  			WHERE `date` > SUBDATE(NOW(), INTERVAL #{date1} DAY)
+  		</if>
+  		<if test="dateCondition=='range'">
+  			WHERE `date` BETWEEN #{date1} AND #{date2}
+  		</if>
+  	</trim>
+  	GROUP BY `date`;
+  </select>
+ </mapper>

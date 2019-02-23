@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>试题统计首页</title>
+		<!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/vue.js"></script>
+	</head>
+<body>
+	<div class="container-fluid">
+		<div id="content">
+			<div class="outlet">
+				<div class="row">
+					<div class="col-lg-6 col-md-12">
+						<div style="border: 1px solid #EEEEEE; height: 200px;">
+							<h1>试题情况一览</h1>
+							<h4>xx班学生列表</h4>
+							<div id="stuList">
+								<button v-for="(item, i) in data.stuList" v-on:click="showQuizzStatis(item.studentname, item.studentid, i)" v-bind:value="item.studentid">{{item.studentname}}</button>
+							</div>
+						</div>
+						<div class="panel panel-primary plain toggle">
+							<!-- Start .panel -->
+							<div class="panel-heading">
+								<h4 class="panel-title"><i class="im-bars"></i> 做题时间区间  </h4>
+							</div>
+							<div class="panel-body blue-bg">
+								<div class="col-lg-6 col-md-4 hide" id="stuInfo">
+									<ul>
+										<li><p>学生姓名：{{info.studentname}}</p></li>
+										<li><p>班级：</p></li>
+										<li><p>性别：</p></li>
+										<li><p>做题数量：</p></li>
+										<li><p>正确率：</p></li>
+									</ul>
+									<ul>
+										<li><p>小贴士：您在？点的做题正确率比较高，在此时间段进行学习效率期望更高</p></li>
+									</ul>
+								</div>
+								<div class="col-lg-6 col-md-8">
+									<iframe frameBorder="0" id="chart1" name="barChart" scrolling="no"
+										src="BarChart.html" height="100%" width="100%" style="height:400px">
+										
+									</iframe>
+								</div>
+							</div>
+						</div>
+						<!-- End .panel -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var stuList = new Vue({
+			el:"#stuList",
+			data:{
+				data:{}
+			},
+			methods:{
+				showQuizzStatis:function(name, id, i){
+					stuInfo.info = this.data.stuList[i];
+					console.log(this.data.stuList[i]);
+					$("#stuInfo").removeClass("hide");
+					getChart(name, id);
+				}
+			}
+		})
+		
+		var stuInfo = new Vue({
+			el:"#stuInfo",
+			data:{
+				info:{}
+			}
+		})
+		
+		$(function(){
+			$.ajax({
+        		url:'/getStuList',
+        		type:'post',
+        		success:function(data){
+        			if (!data) {
+        				console.log("data is null");
+						return;
+					}
+        			/* console.log(data); */
+        			stuList.data = data;
+        		}
+			})
+		})
+	
+		function getChart(key, id){
+			$("#chart1")[0].contentWindow.getQuizzCountChart(key, id);
+		}
+	</script>
+</body>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KSeriesChart</title>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="/js/echarts.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        var seriesData;
+        
+        var option_exam = {
+        		title : {
+        			text : '标题',
+        			x : 'center'
+        		},
+        		tooltip : {
+                    show : true,
+                    position : function([x,y]){
+                    	return [x-40, y+40];
+                    },
+                    backgroundColor : 'rgba(120,23,65,0.8)',
+                    textStyle : { color:'#fee',decoration:'none' },
+                    formatter : function(a){
+                    	return "班级"+a["1"]+
+                    	"<br/>最高分："+a["2"][3]+
+                    	"<br/>高均分："+a["2"][1]+
+                    	"<br/>低均分："+a["2"][0]+
+                    	"<br/>最低分："+a["2"][2];
+                    }
+                },
+                xAxis : {
+                	name : '班级'
+                },
+                yAxis : {
+                	name : '分数'
+                },
+                legend : {
+                	orient: 'vertical',
+                    data:[{
+                    	name: '最高分\n高均分\n低均分\n最低分'
+                    }],
+                    x: 'right',
+                    y: 'center',
+                    itemHeight: 50,
+                },
+                series : [
+                	{
+                		"name":"最高分\n高均分\n低均分\n最低分",
+                	}
+                ]
+                
+        	};
+        
+        $(function(){
+        	getKSChart_easy();
+        })
+        
+        function getKSChart_easy(){
+        	getChart('/getKSChart_easy',1,1,option_exam);
+        }
+        
+        function getKSChartByClassId(condition){
+        	option_exam.title.text = condition.titleText;
+        	getChart('/getKSChartByClassId',1,condition.classId,option_exam);
+        }
+        
+		function getKSChartByTemplateId(condition){
+			option_exam.title.text = condition.titleText;
+			getChart('/getKSChartByTemplateId',1,condition.templateId,option_exam);
+        }
+        
+        function getChart(url, seKey, seId, op){
+        	var xDataList = [];
+        	var sDataList = [];
+        	$.ajax({
+        		url:url,
+        		data:{
+        			key : seKey,
+        			id : seId
+        		},
+        		type:'post',
+        		dataType:'json',
+        		success:function(data){
+        			if (!data) {
+        				console.log("data is null");
+						return;
+					}
+        			var dataList = data.list;
+        			/* console.log(JSON.stringify(dataList)); */
+        			// 使用
+        			for ( var i in dataList) {
+        				/* console.log(i);
+        				console.log(JSON.stringify(dataList[i])); */
+        				xDataList[i] = dataList[i].id;
+        				sDataList[i] = eval(dataList[i].kseriesData);
+					} 
+        	        require(
+        	            [
+        	                'echarts',
+        	                'echarts/chart/k' // 使用柱状图就加载bar模块，按需加载
+        	            ],
+        	            function (ec) {
+        	                // 基于准备好的dom，初始化echarts图表
+        	                var myChart = ec.init(document.getElementById('main')); 
+        	                var option = {
+        	                	title : op.title,
+        	                	backgroundColor : 'rgba(0,0,255,0.1)',
+        	                	borderColor : '#aaa',
+        	                	/* color: [
+        	                		'#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed', 
+        	                	    '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0', 
+        	                	    '#1e90ff', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700', 
+        	                	    '#6b8e23', '#ff00ff', '#3cb371', '#b8860b', '#30e0e0' 
+        	                	], */
+        	                    /* tooltip : op.tooltip, */
+        	                    legend : op.legend,
+        	                    grid : {
+        	                    	height : '50%'
+        	                    },
+        	                    xAxis : [
+        	                        {
+        	                        	name : op.xAxis.name,
+        	                            type : 'category',
+        	                            data : xDataList,
+        	                            axisLabel : {
+        	                            	show : true,
+        	                            	interval : '0'
+        	                            }
+        	                        }
+        	                    ],
+        	                    yAxis : [
+        	                        {
+        	                        	name : op.yAxis.name,
+        	                            type : 'value'
+        	                        }
+        	                    ],
+        	                    series : [
+           	                        {
+           	                            name:op.series[0]["name"],
+           	                            type:"k",
+           	                            data:sDataList,
+           	                         	itemStyle : {
+	              	                    	normal : {
+	              	                    		lineStyle : {
+	              	                    			color : '#ddd'
+	              	                    		}
+	              	                    	},
+	              	                    	emphasis : {
+	              	                    		lineStyle : {
+	              	                    			color : '#f33'
+	              	                    		},
+	              	                    		label: {
+	              	                    			show : true,
+	              	                    			position : 'right',
+	              	                    			textStyle : {
+	              	                    				color : '#000'
+	              	                    			},
+	              	                    			formatter : function(a){
+	              	                    				return a.value[3] + "\n\n" +
+	              	                    				a.value[1] + "\n\n" +
+	              	                    				a.value[0] + "\n\n" +
+	              	                    				a.value[2];
+	              	                    			}
+             	                    	        }
+	              	                    	}
+              	                    	},
+              	                    	markLine : {
+              	                    		data : [
+              	                    			[
+              	                    				{name: '标线1起点', value: 100, xAxis: 1, yAxis: 20},
+              	                    				{name: '标线1终点', xAxis: '周三', yAxis: 20},
+              	                    			]
+              	                    		]
+              	                    	}
+           	                        }
+            	                ]
+        	                };
+        	        
+        	                // 为echarts对象加载数据 
+        	                myChart.setOption(option); 
+        	            }
+        	        );
+        		}
+        	})
+        }
+        
+        
+        /* var myChart = echarts.init(document.getElementById('main')); 
+        
+        var option = {
+            tooltip: {
+                show: true
+            },
+            legend: {
+                data:['成绩']
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["11","12","13","14","15"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "name":"成绩",
+                    "type":"k",
+                    "data":[
+                    	[57.0,90.7,47,98],
+                    	[50.5,89.3,27,92],
+                    	[68.5,84.0,67,89],
+                    	[65.0,81.7,64,99],
+                    	[56.0,84.3,45,97]
+                    ]
+                }
+            ]
+        };
+
+        // 为echarts对象加载数据 
+        myChart.setOption(option);  */
+    </script>
+    <div>数据统计分析</div>
+    <div>数据报表</div>
+</body>
+</html>

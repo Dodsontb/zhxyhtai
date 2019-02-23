@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>班级首页</title>
+		<!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</head>
+<body>
+	<div class="container-fluid">
+		<div id="content">
+			<div class="outlet">
+				<div class="row">
+					<div class="col-lg-6 col-md-12">
+						<div style="border: 1px solid #EEEEEE; height: 400px;">
+							<h1>班级一览</h1>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<div class="panel panel-primary plain toggle">
+							<!-- Start .panel -->
+							<div class="panel-heading">
+								<h2 style="text-align: center"></h2>
+								
+							</div>
+							<div class="panel-body blue-bg">
+								<iframe frameBorder="0" id="chart1" name="chart1" scrolling="no"
+									src="LineChart.html" height="100%" width="100%" style="height:400px">
+									
+								</iframe>
+							</div>
+						</div>
+						<!-- End .panel -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-12">
+						<div style="border: 1px solid #EEEEEE; height: 400px;">
+							<h1>日常情况一览</h1>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<div class="panel panel-primary plain toggle">
+							<!-- Start .panel -->
+							<div class="panel-heading">
+								<h2 style="text-align: center">日常</h2>
+								
+							</div>
+							<div class="panel-body blue-bg">
+								<iframe frameBorder="0" id="chart1" name="chart1" scrolling="no"
+									src="KSeriesChart.html" height="100%" width="100%" style="height:400px">
+									
+								</iframe>
+							</div>
+						</div>
+						<!-- End .panel -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-12">
+						<div style="border: 1px solid #EEEEEE; height: 400px;">
+							<h1>班级评价一览</h1>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<div class="panel panel-primary plain toggle">
+							<!-- Start .panel -->
+							<div class="panel-heading">
+								<h2 style="text-align: center">评价</h2>
+								
+							</div>
+							<div class="panel-body blue-bg">
+								<iframe frameBorder="0" id="chart1" name="chart1" scrolling="no"
+									src="KSeriesChart.html" height="100%" width="100%" style="height:400px">
+									
+								</iframe>
+							</div>
+						</div>
+						<!-- End .panel -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

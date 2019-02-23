@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhxy.mapper.ExamStatisMapper">
+	
+	
+	<select id="queryKSeriesData" resultType="com.zhxy.domain.KSeriesData">
+		SELECT templateid id, getKSeriesData(templateid) KSeriesData FROM `record` WHERE templateid IN 
+	(<foreach collection="list" separator="," item="id">#{id}</foreach>)
+	 GROUP BY templateid;
+	</select>
+	
+	<select id="queryKSeriesDataByClassId" resultType="com.zhxy.domain.KSeriesData">
+		SELECT templateid id, getAvgKSeriesDataByClassId(templateid, #{classId}) KSeriesData FROM `record` WHERE templateid IN 
+	(SELECT id FROM `template` WHERE `name1` LIKE CONCAT('%,', #{classId}, ',%'))
+	 GROUP BY templateid;
+	</select>
+	
+	<select id="queryKSeriesDataByTemplateId" resultType="com.zhxy.domain.KSeriesData">
+		SELECT id, getAvgKSeriesDataByClassId(#{templateid}, id) KSeriesData FROM `clazz` WHERE id IN
+	(SELECT id FROM `clazz` WHERE POSITION(id IN (SELECT `name1` FROM `template` WHERE id = #{templateid})) != 0)
+	</select>
+	
+	
+	
+	<!-- <select id="queryTemplate_exam" resultType="com.zhxy.domain.Template">
+		SELECT * FROM `template`
+	</select>
+	
+	<select id="queryClass_exam" resultType="com.zhxy.domain.Clazz">
+		SELECT * FROM `clazz`
+	</select> -->
+</mapper>
