@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.NoticeMapper">
+<mapper namespace="com.zhxy.mapper.NoticeMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Notice">
   	
     <id column="Notice_Id" jdbcType="INTEGER" property="noticeId" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.CpPositionMapper">
+<mapper namespace="com.zhxy.mapper.CpPositionMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.CpPosition">
     <id column="positionid" jdbcType="INTEGER" property="positionid" />
     <result column="positionname" jdbcType="VARCHAR" property="positionname" />

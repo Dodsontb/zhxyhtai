@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.PutOffExamineMapper">
+<mapper namespace="com.zhxy.mapper.PutOffExamineMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.PutOffExamine">
     <id column="ljxSid" jdbcType="INTEGER" property="ljxsid" />
     <result column="ljxTuid" jdbcType="INTEGER" property="ljxtuid" />

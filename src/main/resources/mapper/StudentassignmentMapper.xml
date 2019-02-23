@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhxy.dao.StudentassignmentMapper">
+<mapper namespace="com.zhxy.mapper.StudentassignmentMapper">
   <resultMap id="BaseResultMap" type="com.zhxy.domain.Studentassignment">
     <id column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
     <result column="ljxTitle" jdbcType="VARCHAR" property="ljxtitle" />
@@ -220,6 +220,7 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where ljxTid = #{ljxtid,jdbcType=INTEGER}
   </update>
+<<<<<<< Upstream, based on origin/ljx1.1
   
   <select id="stuquery" resultType="com.zhxy.domain.Studentassignment">
 		select * from studentassignment where ljxTid = #{ljxtid}
@@ -257,3 +258,6 @@
   		select=""></collection>
   </resultMap>
 </mapper>
+=======
+</mapper>
+>>>>>>> 3beeca4 2019-2-22 15:11
