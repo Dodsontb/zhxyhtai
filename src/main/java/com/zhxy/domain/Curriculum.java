@@ -39,9 +39,11 @@ public class Curriculum implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getEname() {
 		return ename;
 	}
+
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
@@ -103,5 +105,4 @@ public class Curriculum implements Serializable{
 	public void setCheck(boolean check) {
 		this.check = check;
 	}
-	
 }
