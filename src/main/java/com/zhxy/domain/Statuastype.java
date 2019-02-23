@@ -1,10 +1,11 @@
 package com.zhxy.domain;
 
 public class Statuastype {
-    private Integer statuastype;
+    private Integer statuastype;//考勤状态ID
 
-    private String statuasname;
+    private String statuasname; //状态名称
 
+    //1.正常2.请假3.迟到4.早退5.旷课
     private String name1;
 
     private String name2;
