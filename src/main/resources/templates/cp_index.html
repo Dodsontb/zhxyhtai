@@ -68,9 +68,9 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
-                                <ul class="dropdown-menu email xiaoxi" role="menu">
+                            <li class="dropdown xiaoxi">
+                                <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">{{num}}</span></a>
+                                <ul class="dropdown-menu email" role="menu">
                                     <li class="mail-head">
                                         <div class="clearfix">
                                             <div class="pull-left">
@@ -94,7 +94,7 @@
                                             <img v-bind:src="item.url" class="mail-avatar pull-left" alt="avatar">
                                             <p class="name">
                                                 <span class="status"><i class="en-dot"></i></span>{{item.cp_user.username}}
-                                                <span class="notification">2</span>
+                                               <!--   <span class="notification">2</span>  -->
                                                 <span class="time">{{item.time}}</span>
                                             </p>
                                             <p class="msg">
@@ -474,14 +474,15 @@
         <script src="assets/js/app.js"></script>
         <script src="assets/js/pages/dashboard.js"></script>
     </body>
-    <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+   <!--  <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> -->
 	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
 	 <script>
 	 	var v=new Vue({
 			el:".xiaoxi",
 			data:{
 				clist:null,
-				chat:3
+				chat:null,
+				num:0
 			}
 		});
 	 	$(function(){
@@ -491,8 +492,8 @@
 				type:"post",
 				  data:'sendid='+v.chat,  
 				success:function(result){
-					console.log(result);
-					v.clist=result;	
+					v.clist=result;
+					v.num=v.clist.length;
 				}
 				
 			}); 

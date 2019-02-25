@@ -38,8 +38,11 @@
   		</select>
   
   		<select id="queryByMessageName" resultMap="BaseResultMap">
-  			SELECT * FROM Message INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
-			WHERE username LIKE CONCAT("%",#{username},"%")
+  			SELECT * FROM Message 
+				INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
+				INNER JOIN `message_reception` 
+				ON message.`Message_Id`=`message_reception`.`Message_Id`
+				WHERE username LIKE CONCAT("%",#{username},"%") AND `message_reception`.`Uid`=#{receiver}
   		</select>
   		
   		<select id="queryCpUser" resultType="com.zhxy.domain.CpUser">
@@ -47,7 +50,7 @@
   		</select>
  
   		<select id="queryCpUserByName" resultType="com.zhxy.domain.CpUser">
-  			select * from cp_user where username LIKE CONCAT("%",#{username},"%")
+  			SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` where username LIKE CONCAT("%",#{username},"%")
   		</select>
   
   		<!-- <delete id="deleteMessage">

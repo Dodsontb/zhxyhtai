@@ -11,6 +11,7 @@ import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 
 import io.lettuce.core.dynamic.annotation.Param;
+import lombok.experimental.PackagePrivate;
 
 @Mapper
 public interface NoticeMapper {
@@ -34,7 +35,7 @@ public interface NoticeMapper {
 
     int queryByHeadCount(HxkPageBean<Notice> bean);
 
-   /* int deleteNotice(int nstate);*/
+    int deleteNotice(int Notice_Id);
     
     List<Noticetype> plqueryNoticeType();
     
@@ -43,11 +44,14 @@ public interface NoticeMapper {
    /* List<Clazz> queryClazz(@Param("name")String name);*/
     List<Clazz> queryClazz();
     
-    int insertNotice(Notice notice);
+    void insertNotice(Notice notice);
+    
+    void insertNoticeNow(Notice notice);
     
     int insertRelation(@Param("cid")int cid,@Param("Notice_Id")int Notice_Id);
     
     int insertImg(@Param("nurl")String nurl,@Param("Notice_Id") int Notice_Id);
     
     int updataNotice();
+    
 }

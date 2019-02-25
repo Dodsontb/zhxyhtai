@@ -21,7 +21,7 @@ public interface MessageMapper {
     
     List<Message> queryMessage();
     
-    List<Message> queryByMessageName(String username);
+    List<Message> queryByMessageName(String username,int receiver);
     
     List<CpUser> queryUserGetId();
     

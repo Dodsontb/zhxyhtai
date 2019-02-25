@@ -18,6 +18,8 @@ import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
 import com.zhxy.service.hxk_history;
 
+import io.lettuce.core.dynamic.annotation.Param;
+
 
 @Service
 public class historyServiceImpl  implements hxk_history{
@@ -57,11 +59,11 @@ public class historyServiceImpl  implements hxk_history{
 		return bean;
 	}
 
-	/*@Override
-	public int deleteNotice(int nstate) {
+	@Override
+	public int deleteNotice(int Notice_Id) {
 		// TODO Auto-generated method stub
-		return mapper.deleteNotice(nstate);
-	}*/
+		return mapper.deleteNotice(Notice_Id);
+	}
 
 	@Override
 	public List<Noticetype> plqueryNoticeType() {
@@ -82,18 +84,14 @@ public class historyServiceImpl  implements hxk_history{
 	}
 
 	@Override
-	public int insertNotice(Notice notice,int[] cid,List<String> urls) {
-		// TODO Auto-generated method stub
-		/*Notice n=new Notice();*/
-		/*n.setHeadline(headline);
-		n.setNcontent(ncontent);
-		n.setTypeid(typeid);
-		
-		n.setUid(uid);*/
-		int i=mapper.insertNotice(notice);
+	public void insertNotice(Notice notice,int[] cid,List<String> urls,String dtime) {
+		if(dtime!=null) {
+			mapper.insertNotice(notice);			
+		}else {
+			mapper.insertNoticeNow(notice);
+		}
 		int noticeId=notice.getNoticeId();
 		System.out.println("Notice_Id:"+noticeId);
-		/*int s=mapper.insertRelation(cid, noticeId);*/
 		for (int j = 0; j < cid.length; j++) {
 			System.out.println(cid[j]);
 			mapper.insertRelation(cid[j], noticeId);
@@ -101,7 +99,6 @@ public class historyServiceImpl  implements hxk_history{
 		for (String string : urls) {
 			mapper.insertImg("file/"+string, noticeId);
 		}
-		return i;
 	}
 
 	@Override
@@ -111,9 +108,9 @@ public class historyServiceImpl  implements hxk_history{
 	}
 
 	@Override
-	public List<Message> queryByMessageName(String username) {
+	public List<Message> queryByMessageName(String username,int receiver) {
 		// TODO Auto-generated method stub
-		return mmapper.queryByMessageName(username);
+		return mmapper.queryByMessageName(username,receiver);
 	}
 
 	@Override

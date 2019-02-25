@@ -32,6 +32,7 @@ import com.zhxy.handler.MyWebSocketHandler;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.hxktask.ExamTaskJob;
 import com.zhxy.service.hxk_history;
+import com.zhxy.service.impl.historyServiceImpl;
 
 @Controller
 public class WriteController {
@@ -107,11 +108,13 @@ public class WriteController {
 				return service.queryByHead(name,typeid,currpage);
 			}
 			
-			@RequestMapping("/queryByName")
+			@RequestMapping("/queryByMessageName")
 			@ResponseBody
 			public List<Message> queryByName(Model model,String username) {
-				List<Message> list=service.queryByMessageName(username);
+				CpUser u=(CpUser) session.getAttribute("user");
+				List<Message> list=service.queryByMessageName(username,u.getUserid());
 				model.addAttribute("list", list);
+				System.out.println(JSON.toJSONString(list)+"kfkuyhtgrf");
 				return list;
 			}
 			
@@ -175,11 +178,11 @@ public class WriteController {
 			@SuppressWarnings("unchecked")
 			@RequestMapping("/insertNotice")
 			@ResponseBody
-			public int insertNotice(Notice notice,int[] cid) throws ParseException{
-				/*CpUser user =  (CpUser)session.getAttribute("user");*/
+			public void insertNotice(Notice notice,int[] cid) throws ParseException{
+				CpUser user =  (CpUser)session.getAttribute("user");
 				List<String> urls=(List<String>) session.getAttribute("fileimg");
 			
-				notice.setUid(1);
+				notice.setUid(user.getUserid());
 				for (int i = 0; i < cid.length; i++) {
 					System.out.println("controller:"+cid[i]);
 				}
@@ -187,12 +190,11 @@ public class WriteController {
 				/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				notice.setNtime= formatter.parse(time);
 				notice.setNtime(s);*/
-				int i=service.insertNotice(notice, cid, urls);
+				service.insertNotice(notice, cid, urls,time);
 				// System.out.println("13243254356"+s);
 				 dynamicTaskJobs.addTaskJob(examJob,time);
 			   //  dynamicTaskJobs.addTaskTimerJob(examJob,"*/5 * * * * *");
 			     
-				 return i;
 			}
 			
 			@RequestMapping("/queryUserGetId")
@@ -283,6 +285,13 @@ public class WriteController {
 			@RequestMapping("/updateDiv")
 			public int updateDiv(int messageId) {
 				int i=service.updateDiv(messageId);
+				return i;
+			}
+			
+			@ResponseBody
+			@RequestMapping("/deleteNotice")
+			public int deleteNotice(int noticeId) {
+				int i=service.deleteNotice(noticeId);
 				return i;
 			}
 			

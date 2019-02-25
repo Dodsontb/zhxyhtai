@@ -121,7 +121,7 @@
                                              	
                                                 <!--  <td>{{item.read}}</td> -->
                                                  <td class="center" @click="go(item.noticeId)">查看详情</td>
-                                                 <td><a class="delete">删除</a></td>
+                                                 <td><a class="delete" @click="del(item.noticeId)">删除</a></td>
                                             </tr>
                                            
                               </tbody>
@@ -155,6 +155,17 @@
 					go:function(id){
 						location.href="queryNoticeById?Notice_Id="+id;
 					},
+					 del:function(noticeId){
+						  $.ajax({
+								url:"/deleteNotice",
+								dataType:"json",
+								type:"post",	
+								data:"noticeId="+noticeId,
+								success:function(result){
+									location.reload();		
+							}	
+						})  
+					},  
 					page:function(i){
 						var headline=$("[name=headline]").val();
 						var TypeId=$("[name=TypeId]").val();

@@ -163,6 +163,7 @@
     font-size: 16px;
     box-sizing:border-box;
     border-left: 1px solid #ccc;
+  
 }
 .modal-header{
     box-sizing:border-box;
@@ -190,7 +191,7 @@
     padding: 15px;
     justify-content: flex-end;
     align-items: center;
- 
+ 	background:  #75b9e6;
 }
 
 		
@@ -291,6 +292,7 @@
 				</div>
  			</div>
  				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
+ 				<div class="modal-content">
  				<header class="modal-header">
  				<!-- <p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p> -->
  				</header>
@@ -307,7 +309,7 @@
 		               <!--  <div class="time">05/22 06:30</div> -->
 		                <div class="msg">
 		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
-		                    <div class="m_message_left" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
+		                    <div class="m_message_left" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br/>
 		                </div>
 		            </div>
 		        </div>
@@ -315,9 +317,9 @@
 		       
 		       <footer class="modal-footer">
 		            <input type="text" name="mcontent" style="width:600px ;height: 19px;border: 1px solid gainsboro;" />+
-		          <input type="button" value="发送" class="senderMessage"/>
+		          <input type="button" value="发送" class="senderMessage" style="border: none;"/>
 		        </footer>
- 				
+ 				</div>
  			</div>
 	</body>
 </html>
@@ -387,11 +389,8 @@
 					
 				}
 			});
+			
 			$(function(){
-				
-			/* 	$(".hidebtn").click(function(){
-					$(this).parents("div").hide();
-				}); */
 				
 				  $.ajax({
 					url:"/getChatRecordList",
@@ -432,14 +431,14 @@
  			});
 			
 			  $(".chaxun").click(function(){
-					var username=$("[id=man]").val();
+					var username=$("#man").val();
+					alert(username)
 					   $.ajax({
 						  type:"post",
-						  url:"/queryByName",
+						  url:"/queryByMessageName",
 						  dataType:"json",
 						  data:"username="+username,
 						  success:function(result){
-								console.log(result);
 								v.list=result;
 							}
 					})   
@@ -454,7 +453,6 @@
 						  dataType:"json",
 						  data:"username="+username,
 						  success:function(result){
-								console.log(result);
 								g.list=result;
 							}
 					})   
@@ -472,7 +470,7 @@
 						var content=$("[name=mcontent]").val();
 						$.post("senderMessage","receiver="+uid+"&mcontent="+content,function(result){
 							console.log("发送结果："+result)
-							if("000000"==result){
+							if(result=="000000"){
 								alert("发送失败！请检查网络。")
 								 getChatRecord(uid); 
 								 $("[name=mcontent]").val(" ");
@@ -480,6 +478,9 @@
 								alert("发送成功")
 								  getChatRecord(uid); 
 								 $("[name=mcontent]").val(" ");
+							}else{
+								  getChatRecord(uid); 
+								  $("[name=mcontent]").val(" ");
 							}
 						})
 						
@@ -489,8 +490,7 @@
 				//获取聊天记录
 				 function getChatRecord(uid){
 					$.post("getChatRecord","receiver="+uid,function(result){
-						
-						  $(".msg div").remove(); 
+						 $(".msg div").remove(); 
 						console.log(result)
 						for(var i=0;i<result.length;i++){
 							if(v.user.userid==result[i].cp_user.userid){
@@ -540,7 +540,7 @@
 					$.post("getAllUserList","chatid="+uid,function(result){
 						if(result[1]!=null){
 							console.log(result[1]);
-							$(".modal-header").append("<p style=\"margin-left: 320px;\">"+result[1].username+"<span class=\"close\">×</span></p>");
+							$(".modal-header").append("<p style=\"margin-left: 320px;font-size:20px\">"+result[1].username+"<span class=\"close\">×</span></p>");
 						}
 						console.log(result)
 						v.ulist=result

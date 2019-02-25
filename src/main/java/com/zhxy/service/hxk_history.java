@@ -21,7 +21,7 @@ public interface hxk_history {
 	    
 	    HxkPageBean<Notice> queryByHead(String name,int typeid,int currpage);
 	    
-	   /* int deleteNotice(int nstate);*/
+	    int deleteNotice(int Notice_Id);
 	    
 	    List<Noticetype> plqueryNoticeType();
 	    
@@ -32,11 +32,11 @@ public interface hxk_history {
 	    
 	  /*  int insertNotice(String headline,String ncontent,int typeid,int uid,int[] cid,List<String> urls);*/
 	    
-	    int insertNotice(Notice notice,int[] cid,List<String> urls);
+	    void insertNotice(Notice notice,int[] cid,List<String> urls,String dtime);
 	    
 	    List<Message> queryMessage();
 	    
-	    List<Message> queryByMessageName(String username);
+	    List<Message> queryByMessageName(String username,int receiver);
 	    
 	    int updataNotice();
 	    
@@ -58,5 +58,6 @@ public interface hxk_history {
 	    List<Message> getChatRecordList(int receiver);
 	    
 	    int updateDiv(int Message_Id);
+	    
 
 }
