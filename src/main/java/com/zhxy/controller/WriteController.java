@@ -154,6 +154,10 @@ public class WriteController {
 			@RequestMapping("/fileup")
 			@ResponseBody
 			public List<String> fileup(@RequestParam MultipartFile[] files,HttpSession session) {
+				File f=new File("d:/img");
+				if(!f.exists()) {
+					f.mkdirs();
+				}
 				List<String> list=new ArrayList<>();
 				for (MultipartFile multipartFile : files) {
 					try {
