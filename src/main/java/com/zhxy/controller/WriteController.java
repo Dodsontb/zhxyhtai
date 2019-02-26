@@ -153,11 +153,14 @@ public class WriteController {
 			
 			@RequestMapping("/fileup")
 			@ResponseBody
-			public List<String> fileup(@RequestParam MultipartFile[] files,HttpSession session) {
+			public List<String> fileup(@RequestParam MultipartFile[] files,HttpSession session) throws IOException {
+				File f=new File("d:/img");
+				if(!f.exists()) {
+					f.mkdirs();
+				}
 				List<String> list=new ArrayList<>();
 				for (MultipartFile multipartFile : files) {
 					try {
-						System.out.println(multipartFile.getOriginalFilename());	
 						hxk=multipartFile.getOriginalFilename();
 						File file=new File("d:/img/"+multipartFile.getOriginalFilename());
 						list.add(multipartFile.getOriginalFilename());
