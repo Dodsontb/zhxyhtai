@@ -28,9 +28,9 @@
         	#xiaoxi{
 			    max-width: 680px;
 			    margin: 0 auto;
-			    background: #f1f1f1;
+			   
 			    color:#333;
-			   /* font-size: 1rem;*/
+			  
 			}
 		      #xiaoxi img{
 		     	max-width: 100%;
@@ -160,7 +160,7 @@
 } */
 .modal-body{
     padding: 10px;
-    font-size: 16px;
+   /*  font-size: 16px; */
     box-sizing:border-box;
     border-left: 1px solid #ccc;
   
@@ -192,8 +192,18 @@
     justify-content: flex-end;
     align-items: center;
  	background:  #75b9e6;
+ 	
 }
-
+#content{
+	background: #ffd351;
+ 	padding: 7px;
+ 	border-radius: 10px;
+ 	max-width: 400px;
+ 	border: 1px solid white;
+ 	box-shadow: 0 0 3px #879eee;
+ 	margin: 6px 10px 0 10px;
+ 	overflow: hidden;
+}
 		
         </style>
 	</head>
@@ -207,7 +217,7 @@
                                 <form class="form-inline search-page-form">
                                     <div class="well bn">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" v-bind:name="cp_user.username" id="man" placeholder="姓名">
+                                            <input type="text" class="form-control" v-bind:name="list.cp_user.username" id="man" placeholder="姓名">
                                             <span class="input-group-btn">
                                 <button  class="btn btn-primary chaxun"><i class="ec-search s16"></i></button>
                             </span>
@@ -223,16 +233,9 @@
                                 <button  class="btn btn-primary koko"><i class="ec-search s16"></i></button>
                             </span>
                     </div>
-         <!--<div class="p15 ">
-            <input class="btn btn-danger btn-block uppercase"><i class="im-quill"></i> compose
-                        </div>-->
+       
        
 			<ul id="email-nav" class="nav nav-pills nav-stacked">
-                          <!--  <li><a href="email-inbox.html"><i class="ec-archive"></i> Inbox <span class="notification blue">27</span></a>
-                            </li>
-                            <li><a href="#"><i class="ec-star"></i> Starred <span class="notification orange">2</span></a>
-                            </li>
-                           -->
                           
                             <li v-for="item in list" class="shouwModel" v-bind:userid="item.userid"><a><span class="circle"><img v-bind:src="item.url" style="width: 2em;"></span> {{item.username}}</a>
                             </li>
@@ -270,7 +273,20 @@
                             </div>
                           
                         </div>
-                	
+               	<!--  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            col-lg-3 start here
+                            <div class="tile purple">
+                                tile start here
+                                <div class="tile-icon">
+                                    <i class="ec-search s64"></i>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="number">2540</div>
+                                    <h3>Searches</h3>
+                                </div>
+                            </div>
+                            tile end here
+                        </div> -->
                 	
              
              <div class="col-lg-10 col-md-9 col-sm-10 col-xs-12" >
@@ -302,14 +318,14 @@
 		              <!--   <div class="time">05/22 06:30</div> -->
 		                <div class="msg">
 		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
-		                    <div class="m_message_right" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br>
+		                    <div class="m_message_right" ><span id="content"></span></div><br>
 		                </div>
 		            </div>
 		            <div class="show">
 		               <!--  <div class="time">05/22 06:30</div> -->
 		                <div class="msg">
 		                  <!--   <img src="assets/img/avatars/129.jpg" alt="" style="width: 2em;"/> -->
-		                    <div class="m_message_left" ><i class="msg_input"></i><span style="background: white;padding: 3px"></span></div><br/>
+		                    <div class="m_message_left" ><span id="content"></span></div><br/>
 		                </div>
 		            </div>
 		        </div>
@@ -432,7 +448,7 @@
 			
 			  $(".chaxun").click(function(){
 					var username=$("#man").val();
-					alert(username)
+					//alert(username)
 					   $.ajax({
 						  type:"post",
 						  url:"/queryByMessageName",
@@ -446,7 +462,7 @@
 				
 				$(".koko").click(function(){
 					var username=$("[name=username]").val();
-					alert(username) 
+					//alert(username) 
 					   $.ajax({
 						  type:"post",
 						  url:"/queryCpUserByName",
@@ -494,10 +510,10 @@
 						console.log(result)
 						for(var i=0;i<result.length;i++){
 							if(v.user.userid==result[i].cp_user.userid){
-								$(".show .msg").append("<div class=\"m_message_left\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
+								$(".show .msg").append("<div class=\"m_message_left\"><span id=\"content\">"+result[i].mcontent+"</span></div><br/>");
 								
 							}else{
-								$(".send .msg").append("<div class=\"m_message_right\"><i class=\"msg_input\"></i><span style=\"background: white;padding: 3px\">"+result[i].mcontent+"</span></div><br/>");
+								$(".send .msg").append("<div class=\"m_message_right\"><span id=\"content\">"+result[i].mcontent+"</span></div><br/>");
 							}
 						}
 						adduserimg(uid);

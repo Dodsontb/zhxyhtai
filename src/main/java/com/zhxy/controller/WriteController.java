@@ -231,11 +231,11 @@ public class WriteController {
 				int jg=service.insertMessage(m);
 				String status =null;
 				//显示自己发送的信息
-				status = handler.sendMsg(u.getUserid()+"", "<p class=\"m_message_left\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+				status = handler.sendMsg(u.getUserid()+"", "<div class=\"m_message_left\"><span id=\"content\">"+m.getMcontent()+"</span></div><br/>");
 			//	显示好友发来的信息
 				/*for (int receiver : m.getReceiver()) {*/
 					System.out.println("接收人："+ m.getReceiver());
-					status = handler.sendMsg( m.getReceiver()+"", "<p class=\"m_message_right\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+					status = handler.sendMsg( m.getReceiver()+"", "<div class=\"m_message_right\"><span id=\"content\">"+m.getMcontent()+"</span></div><br/>");
 				/*}*/
 			System.out.println("存储结果:"+jg+"发送结果："+status);
 				return status;
