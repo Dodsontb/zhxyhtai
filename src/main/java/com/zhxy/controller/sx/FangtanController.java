@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zhxy.domain.FangtanType;
 import com.zhxy.domain.Studentfangtan;
+import com.zhxy.domain.Studentqingjia;
 import com.zhxy.service.sx.FangtanService;
 
 @Controller
@@ -63,6 +65,7 @@ public List<Studentfangtan> update_stu(Integer id,Integer Status){
 @RequestMapping(value="/addft", method=RequestMethod.POST)
 public ModelAndView addCourse(Studentfangtan ft,
 		HttpServletRequest request){
+	FangtanType Qingjiatype = new FangtanType();	
 	ft.setFangtanstatus(2);
 	ft.setDate(new Date());
 	fangtanService.insert(ft);

@@ -327,8 +327,6 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		<!-- 谭傲 -->
-		
 		<table schema="curr_section" tableName="curr_section" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
