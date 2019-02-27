@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zhxy.domain.AssignmentPutOff;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
 import com.zhxy.mapper.WhetherAccomplishMapper;
@@ -47,7 +48,7 @@ public class WhetherAccomplish_impl implements Service_WhetherAccomplish{
 	}
 
 	@Override
-	public int pilinsert(Integer ljxtid, List<AssignmentPutOff> u) {
+	public int pilinsert(Integer ljxtid, List<CpStudent> u) {
 		// TODO Auto-generated method stub
 		return mapper.pilinsert(ljxtid, u);
 	}

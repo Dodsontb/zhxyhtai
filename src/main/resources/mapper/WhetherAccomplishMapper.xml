@@ -217,7 +217,7 @@
   <insert id="pilinsert">
   		INSERT INTO`whether_accomplish`(`ljxTid`,`ljxYesno`,`ljxUid`) VALUE
   		<foreach collection ="u" item="user" separator =",">
-  			(#{ljxtid},0,#{user.ljxtuid})
+  			(#{ljxtid},0,#{user.studentid})
   		</foreach>
   </insert>
   

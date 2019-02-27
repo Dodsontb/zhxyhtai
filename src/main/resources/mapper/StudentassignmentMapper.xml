@@ -254,4 +254,9 @@
   		ofType="com.zhxy.domain.WhetherAccomplish"
   		select="com.zhxy.mapper.WhetherAccomplishMapper.wcpstudent"></collection>
   </resultMap>
+  
+  <!--查询的学生  -->
+  <select id="cpsudentclazz" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM `cp_student` WHERE studentid IN(SELECT sid FROM stu_clazz WHERE cid =(SELECT id FROM clazz WHERE `name` = #{clazz}))
+  </select>
 </mapper>

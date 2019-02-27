@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.domain.AssignmentPutOff;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Studentassignment;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
@@ -29,7 +30,7 @@ public class StudentassinmentController {
 	
 	
 	@Autowired
-	Service_Studentassinment ser;//任务（主�?
+	Service_Studentassinment ser;//任务（主�?
 	
 	@Autowired
 	Service_WhetherAccomplish serW;//是否完成任务
@@ -134,15 +135,20 @@ public class StudentassinmentController {
 		}else {
 			count = ser.stuinsert(stu);
 			if(count >0) {
-				List<AssignmentPutOff> u = sers.putoff(1);
-				serW.pilinsert(stu.getLjxtid(), u);
+				List<Studentassignment> list = ser.stuquery(stu.getLjxtid());
+				for (Studentassignment t : list) {
+					List<CpStudent> u = ser.cpsudentclazz(t.getLjxclasses());
+					if(u!=null) {
+						serW.pilinsert(stu.getLjxtid(), u);
+					}
+				}
 			}
 		}
 		
 		return count;
 	}
 	
-	//老师�?带的班级
+	//老师�?带的班级
 	@RequestMapping("/teacher_history")
 	@ResponseBody
 	public List<TeacherHistory> teacher_history() {
