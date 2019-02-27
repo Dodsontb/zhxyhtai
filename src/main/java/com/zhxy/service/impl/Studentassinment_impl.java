@@ -2,6 +2,7 @@ package com.zhxy.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,12 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	public List<Studentassignment> stuquery() {
 		
 		return null;
+	}
+
+	@Override
+	public List<Studentassignment> fuzao(@Param("teacherid")Integer teacherid,@Param("name")String name,@Param("yesno")String yesno) {
+		List<Studentassignment> list = mapper.fuzao( teacherid,name,yesno);
+		return list;
 	}
 
 }

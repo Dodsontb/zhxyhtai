@@ -1,5 +1,6 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,18 @@ public class WhetherAccomplish {
     private String name5;
     
     private List<Studentassignment> stulist;
+    
+    private List<CpStudent> cpstudent;
 
-    public Integer getLjxwid() {
+    public List<CpStudent> getCpstudent() {
+		return cpstudent;
+	}
+
+	public void setCpstudent(List<CpStudent> cpstudent) {
+		this.cpstudent = cpstudent;
+	}
+
+	public Integer getLjxwid() {
         return ljxwid;
     }
 
@@ -58,8 +69,8 @@ public class WhetherAccomplish {
         this.ljxuid = ljxuid;
     }
 
-    public Date getLjxdate() {
-        return ljxdate;
+    public String getLjxdate() {
+         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ljxdate);
     }
 
     public void setLjxdate(Date ljxdate) {

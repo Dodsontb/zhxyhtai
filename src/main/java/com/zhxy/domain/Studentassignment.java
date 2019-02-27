@@ -2,6 +2,7 @@ package com.zhxy.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Studentassignment {
     private Integer ljxtid;
@@ -18,7 +19,7 @@ public class Studentassignment {
     
     private String ljxtime;
 
-    private Integer ljxuid;
+	private Integer ljxuid;
 
     private Integer ljxtype;
 
@@ -35,8 +36,20 @@ public class Studentassignment {
     private String name4;
 
     private String name5;
+    
+    private List<WhetherAccomplish> list;
+    
+    private String yesno;
 
-    public Integer getLjxtid() {
+    public String getYesno() {
+		return yesno;
+	}
+
+	public void setYesno(String yesno) {
+		this.yesno = yesno;
+	}
+
+	public Integer getLjxtid() {
         return ljxtid;
     }
 
@@ -165,4 +178,12 @@ public class Studentassignment {
     public void setName5(String name5) {
         this.name5 = name5;
     }
+    
+    public List<WhetherAccomplish> getList() {
+		return list;
+	}
+
+	public void setList(List<WhetherAccomplish> list) {
+		this.list = list;
+	}
 }

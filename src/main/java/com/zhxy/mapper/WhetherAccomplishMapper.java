@@ -39,4 +39,7 @@ public interface WhetherAccomplishMapper {
 //    老师所带的班级
     
     List<TeacherHistory>teacher_history();
+    
+    //查看是否完成任务的学生
+    List<WhetherAccomplish> wcpstudent(@Param("ljxTid")Integer ljxTid,@Param("yesno")String yesno);
 }

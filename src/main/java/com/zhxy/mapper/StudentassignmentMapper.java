@@ -28,4 +28,7 @@ public interface StudentassignmentMapper {
     List<Studentassignment> stutime();
     
     Integer stuinsert(Studentassignment stu);
+    
+    List<Studentassignment> fuzao(@Param("teacherid")Integer teacherid,@Param("name")String name,@Param("yesno")String yesno);
+    
 }

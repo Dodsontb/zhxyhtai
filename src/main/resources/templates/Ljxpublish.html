@@ -92,13 +92,13 @@
                         <ul class="nav sub" v-for="(t,index) in list">
                             <li v-for="(c,index) in t.list"><a href="#"> {{c.name}}</a>
 								<ul class="nav sub">
-									<li><a href="#"> 已完成</a>
+									<li><a href="#" v-on:click="cpstudent1(c.name)"> 已完成</a>
 									</li>
-									<li><a href="#"> 未完成</a>
+									<li><a href="#" v-on:click="cpstudent2(c.name)"> 未完成</a>
 									</li>
-									<li><a href="#"> 推迟任务</a>
+									<li><a href="#" v-on:click="cpstudent3(c.name)"> 推迟任务</a>
 									</li>
-									<li><a href="#"> 任务历史</a>
+									<li><a href="#" v-on:click="cpstudent4(c.name)"> 任务历史</a>
 									</li>
 								</ul>
                             </li>
@@ -151,21 +151,21 @@
         											</tbody>
         									</table>
         									<ul class="one" style="list-style: none; margin-left: -25px;">
-														<li>
-															<span>の</span>
-															<span style="margin-left:100px">java20交班测试</span>
-															<span style="margin-left:125px">2019-3-1</span>
-															<span style="margin-left:265px" class="see" v-on:click="tuiClick()">查看</span>
-															<ul id="ul01" style="margin-left: -40px;list-style: none;display: none">
-																<li>
-																	<span>一级菜单</span>
-																	<span style="margin-left:100px">一级菜单</span>
-																	<span style="margin-left:125px">一级菜单</span>
-																	<span style="margin-left:250px">已完成</span>
-																</li>
-																<li>二级菜单</li>
-																<li>二级菜单</li>
-															</ul>
+														<li v-for="(c,index) in cpsudentlist">
+															<div style="float:left;width:100px;">の</div>
+															<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
+															<div style="float:left;width:300px; margin-left: 60px">{{c.ljxdatetime}}</div>
+															<div style="float:right;width:40px;" class="see" v-on:click="tuiClick(index)">查看</div>
+															<div id="ul01" style="margin-left: -40px;display: none">
+																<div v-for="(w,index) in c.list">
+																	<a v-for="(s,index) in w.cpstudent">
+																		<div style="float:left;width:100px;margin-left: 40px">{{s.studentname}}</div>
+																		<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
+																		<div style="float:left;width:300px; margin-left: 60px">{{w.ljxdate}}</div>
+																		<div style="float:right;width:50px;margin-left:-10px;">已完成</div>
+																	</a>
+																</div>
+															</div>
 														</li>
 													</ul>
         							</div>
@@ -282,10 +282,19 @@
 					el:"#b",
 					data:{
 						list:null,
+						cpsudentlist:null,
 					},
 					methods:{
-						tuiClick:function(){
-							$(".see").next().toggle();
+						tuiClick:function(i){
+							$(".see:eq("+i+")").next().toggle();
+						},
+						cpstudent1:function(claname){
+							var yesno = "是";
+							yes(claname,yesno);
+						},
+						cpstudent2:function(claname){
+							var yesno = "否";
+							yes(claname,yesno);
 						}
 					}
 				});
@@ -298,6 +307,19 @@
 				}
 			})  
 			
+			
+			function yes(name,yesno){
+				//完成任务的学生
+				$.ajax({
+					url:"/cpstudent",
+					data:"name="+name+"&yesno="+yesno,
+					type:"post",
+					success:function(date){
+						alert(JSON.stringify(date))
+						v.cpsudentlist = date;
+					}
+				})
+			}
         	})
         	
         </script>

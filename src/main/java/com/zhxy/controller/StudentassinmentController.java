@@ -149,4 +149,12 @@ public class StudentassinmentController {
 		List<TeacherHistory> list = serW.teacher_history();
 		return list;
 	}
+	
+	//学生是否完成任务
+	@RequestMapping("/cpstudent")
+	@ResponseBody
+	public List<Studentassignment> cpstudent(String name,String yesno) {
+		List<Studentassignment> list = ser.fuzao(1,name,yesno);
+		return list;
+	}
 }
