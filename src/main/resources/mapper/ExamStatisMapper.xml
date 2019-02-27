@@ -5,13 +5,13 @@
 	
 	
 	<select id="queryKSeriesData" resultType="com.zhxy.domain.KSeriesData">
-		SELECT templateid id, getKSeriesData(templateid) KSeriesData FROM `record` WHERE templateid IN 
+		SELECT templateid id, getKSeriesData(templateid) KSeriesData FROM `learning` WHERE templateid IN 
 	(<foreach collection="list" separator="," item="id">#{id}</foreach>)
 	 GROUP BY templateid;
 	</select>
 	
 	<select id="queryKSeriesDataByClassId" resultType="com.zhxy.domain.KSeriesData">
-		SELECT templateid id, getAvgKSeriesDataByClassId(templateid, #{classId}) KSeriesData FROM `record` WHERE templateid IN 
+		SELECT templateid id, getAvgKSeriesDataByClassId(templateid, #{classId}) KSeriesData FROM `learning` WHERE templateid IN 
 	(SELECT id FROM `template` WHERE `name1` LIKE CONCAT('%,', #{classId}, ',%'))
 	 GROUP BY templateid;
 	</select>
