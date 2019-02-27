@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -50,27 +51,27 @@ public class UO {
 		if(userinfo!=null) {
 			System.out.println("登录成功");
 			session.setAttribute("user", userinfo);
-			
 			return "redirect:cp_index";
 		}else {
 			System.out.println("登录失败");
 		}
 		CpUser cc=(CpUser)session.getAttribute("user");
-		System.out.println(cc);
 		return null;
 	}
 	
 	@RequestMapping("cp_index")
-	public String cp_index(HttpSession session) {
+	public String cp_index() {
 		return "cp_index";
 	}
+
 	@RequestMapping("selectTest")
 	public String selectTest() {
 		return "selectTest";
 	}
 	
 	@RequestMapping("cp_select")
-	public String cp_select() {
+	public String cp_select(String templateid,Model model) {
+		model.addAttribute("templateid",templateid);
 		return "cp_select";
 	}
 	

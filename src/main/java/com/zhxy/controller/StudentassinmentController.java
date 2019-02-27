@@ -29,7 +29,7 @@ public class StudentassinmentController {
 	
 	
 	@Autowired
-	Service_Studentassinment ser;//任务（主）
+	Service_Studentassinment ser;//任务（主�?
 	
 	@Autowired
 	Service_WhetherAccomplish serW;//是否完成任务
@@ -142,7 +142,7 @@ public class StudentassinmentController {
 		return count;
 	}
 	
-	//老师所带的班级
+	//老师�?带的班级
 	@RequestMapping("/teacher_history")
 	@ResponseBody
 	public List<TeacherHistory> teacher_history() {

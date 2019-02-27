@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.WenjuantimuMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.Wenjuantimu">
+    <result column="wenjuanID" jdbcType="INTEGER" property="wenjuanid" />
+    <result column="wenjuanTimu" jdbcType="VARCHAR" property="wenjuantimu" />
+    <result column="TimuType" jdbcType="INTEGER" property="timutype" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zhxy.domain.Wenjuantimu">
+    insert into wenjuantimu (wenjuanID, wenjuanTimu, TimuType, 
+      name1, name2, name3, 
+      name4, name5)
+    values (#{wenjuanid,jdbcType=INTEGER}, #{wenjuantimu,jdbcType=VARCHAR}, #{timutype,jdbcType=INTEGER}, 
+      #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
+      #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.Wenjuantimu">
+    insert into wenjuantimu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wenjuanid != null">
+        wenjuanID,
+      </if>
+      <if test="wenjuantimu != null">
+        wenjuanTimu,
+      </if>
+      <if test="timutype != null">
+        TimuType,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wenjuanid != null">
+        #{wenjuanid,jdbcType=INTEGER},
+      </if>
+      <if test="wenjuantimu != null">
+        #{wenjuantimu,jdbcType=VARCHAR},
+      </if>
+      <if test="timutype != null">
+        #{timutype,jdbcType=INTEGER},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

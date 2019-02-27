@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.YuangongkaoqinMapper">
+
+<resultMap  type="com.zhxy.domain.Yuangongkaoqin" id="yuangong">
+    <id column="ID"  property="id" />
+    <result column="staffid"  property="staffid" />
+    <result column="kaoqinstatus"  property="kaoqinstatus" />
+    <result column="Date"  property="date" />
+    <result column="positionid"  property="positionid" />
+    <result column="name3"  property="name3" />
+    <result column="name4"  property="name4" />
+    <result column="name5"  property="name5" />
+    
+<association property="stafname" column="staffid" select="queryByYgId"></association><!-- queryByStuId为调用的方法  studentid为之间关联的id -->
+<association property="status" column="kaoqinstatus" select="queryAllStatus"></association>
+<association property="cpname" column="positionid" select="queryAllPosition"></association>  
+  </resultMap>
+ 
+ <select id="queryAllyg" resultMap="yuangong">
+SELECT * FROM yuangongkaoqin 
+
+</select>
+
+<select id="queryByYgId" resultType="com.zhxy.domain.CpStaff">
+SELECT * FROM `cp_staff` WHERE staffid = #{id}
+</select>
+
+<select id="queryAllStatus" resultType="com.zhxy.domain.Statuastype">
+SELECT * FROM `statuastype` WHERE statuasType = #{id}
+</select>
+
+<select id="queryAllPosition" resultType="com.zhxy.domain.CpPosition">
+SELECT * FROM `cp_position` WHERE positionid=#{id}
+
+</select>
+
+<select id="queryByYgNameAndStuStatus" resultMap="yuangong">
+	SELECT * FROM yuangongkaoqin  
+	<where>
+		<if test="StuStatus !=null and StuStatus!=0">
+			and kaoqinStatus=#{StuStatus} 
+		</if>
+		<if test="name!=null">
+			and staffid in (select staffid from cp_staff where staffname like concat('%',#{name},'%')) 
+		</if>
+	</where>
+</select>
+
+<update id="updateYg">
+
+ update `yuangongkaoqin` set `kaoqinStatus`=#{StuStatus} where `staffid`=#{id}
+
+</update>
+ 
+</mapper>

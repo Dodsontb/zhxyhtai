@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.WhetherAccomplishMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.WhetherAccomplish">
+    <id column="ljxWid" jdbcType="INTEGER" property="ljxwid" />
+    <result column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
+    <result column="ljxYesno" jdbcType="CHAR" property="ljxyesno" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
+    <result column="ljxDate" jdbcType="TIMESTAMP" property="ljxdate" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ljxWid, ljxTid, ljxYesno, ljxUid, ljxDate, name1, name2, name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from whether_accomplish
+    where ljxWid = #{ljxwid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from whether_accomplish
+    where ljxWid = #{ljxwid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.WhetherAccomplish">
+    insert into whether_accomplish (ljxWid, ljxTid, ljxYesno, 
+      ljxUid, ljxDate, name1, 
+      name2, name3, name4, 
+      name5)
+    values (#{ljxwid,jdbcType=INTEGER}, #{ljxtid,jdbcType=INTEGER}, #{ljxyesno,jdbcType=CHAR}, 
+      #{ljxuid,jdbcType=INTEGER}, #{ljxdate,jdbcType=TIMESTAMP}, #{name1,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.WhetherAccomplish">
+    insert into whether_accomplish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ljxwid != null">
+        ljxWid,
+      </if>
+      <if test="ljxtid != null">
+        ljxTid,
+      </if>
+      <if test="ljxyesno != null">
+        ljxYesno,
+      </if>
+      <if test="ljxuid != null">
+        ljxUid,
+      </if>
+      <if test="ljxdate != null">
+        ljxDate,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ljxwid != null">
+        #{ljxwid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtid != null">
+        #{ljxtid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxyesno != null">
+        #{ljxyesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxdate != null">
+        #{ljxdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.WhetherAccomplish">
+    update whether_accomplish
+    <set>
+      <if test="ljxtid != null">
+        ljxTid = #{ljxtid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxyesno != null">
+        ljxYesno = #{ljxyesno,jdbcType=CHAR},
+      </if>
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxdate != null">
+        ljxDate = #{ljxdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ljxWid = #{ljxwid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.WhetherAccomplish">
+    update whether_accomplish
+    set ljxTid = #{ljxtid,jdbcType=INTEGER},
+      ljxYesno = #{ljxyesno,jdbcType=CHAR},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
+      ljxDate = #{ljxdate,jdbcType=TIMESTAMP},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where ljxWid = #{ljxwid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="whether" resultMap="whetherone">
+  		SELECT * FROM whether_accomplish
+  		<if test="ljxYesno != null">
+  			where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
+  		</if>
+  		<if test="ljxYesno == null">
+  			where ljxUid=#{ljxUid}
+  		</if>
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>
+  
+  <select id="whether2" resultMap="whetherone2">
+  		SELECT *, #{ljxType} ljxType FROM whether_accomplish where ljxUid=#{ljxUid} AND ljxYesno=#{ljxYesno}
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone2">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="stulist" column="{ljxTid=ljxtid, ljxType=ljxType}"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuType"></collection>
+  </resultMap>
+  
+   <select id="whether3" resultMap="whetherone3">
+  		SELECT * FROM whether_accomplish where ljxUid=#{ljxUid} and DATE(ljxDate) = DATE(NOW())
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="whetherone3">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxyesno" column="ljxyesno"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stutime"></collection>
+  </resultMap>
+  
+  <update id="udatew">
+  		UPDATE `whether_accomplish` SET `ljxYesno`='否' 
+	
+		WHERE `ljxYesno` = '0' AND `ljxTid` IN
+
+		(SELECT ljxTid FROM studentassignment WHERE DATE(ljxTime)=DATE(NOW()))#未完成
+  	
+  </update>
+  
+  <delete id="deletestu">
+  		DELETE FROM`whether_accomplish` WHERE `ljxTid`=#{ljxtid} AND `ljxUid`=#{ljxuid}
+  </delete>
+  
+  <insert id="pilinsert">
+  		INSERT INTO`whether_accomplish`(`ljxTid`,`ljxYesno`,`ljxUid`) VALUE
+  		<foreach collection ="u" item="user" separator =",">
+  			(#{ljxtid},0,#{user.ljxtuid})
+  		</foreach>
+  </insert>
+  
+  
+  <!-- 老师所带的班级 -->
+  
+  <select id="teacher_history" resultMap="teacher_historY">
+  		SELECT * FROM `teacher_history` WHERE pid = 1
+  </select>
+  
+  <!-- 班级 -->
+  
+	<select id="clazz" resultType="com.zhxy.domain.Clazz">
+		SELECT * FROM clazz WHERE id = #{cid}
+	</select>
+  	
+  <resultMap type="com.zhxy.domain.TeacherHistory" id="teacher_historY">
+  		<id property="id" column="id"/>
+  		<result property="pid" column="pid"/>
+  		<result property="cid" column="cid"/>
+  		
+  	<collection property="list" column="cid"
+ 		ofType="com.zhxy.domain.Clazz" 	
+ 		select="clazz"></collection>	
+  </resultMap>
+  
+</mapper>

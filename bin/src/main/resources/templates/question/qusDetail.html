@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<base href="<%=basePath %>" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<link th:href="@{/resource/css/bootstrap.min.css}"  rel="stylesheet" />
+<script type="text/javascript" th:src="@{/resource/js/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/resource/js/bootstrap.min.js}" ></script>
+
+<!-- 输入过滤 -->
+<script th:src="@{/resource/jquery-validation-1.17.0/lib/jquery.js}"></script>
+<script th:src="@{/resource/jquery-validation-1.17.0/dist/jquery.validate.js}"></script>
+<script th:src="@{/resource/jquery-validation-1.17.0/dist/localization/messages_zh.js}"></script>
+
+<link rel="stylesheet" type="text/css" th:href="@{/resource/My97DatePicker/skin/WdatePicker.css}">
+<script  type="text/javascript" th:src="@{/resource/My97DatePicker/WdatePicker.js}"></script>
+
+
+
+<script type="text/javascript">
+
+
+</script>
+<style>
+.error{
+	color:red;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		<h1 style="text-align:center">问卷详情</h1>
+	</div>
+<form   id="commentForm"  class="form-horizontal" >
+
+		
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-7">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">问卷标题：</label>
+					<div class="col-xs-9 ">
+					<label class="col-xs-3 control-label" th:text="${pa.title}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+		
+		
+		
+		<!-- 开始2 -->
+		<div class="row">
+			<div class="col-xs-7">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">问卷类型:</label>
+					<div class="col-xs-9 ">
+					<label class="col-xs-3 control-label" th:text="${pa.type}"></label>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--结束2 -->
+		
+		<!-- 开始3 -->
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">班级:</label>
+					<div class="col-xs-9 ">
+					<label class="col-xs-3 control-label" th:text="${pa.clazz}"></label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">学生姓名:</label>
+					<div class="col-xs-9 ">
+					<label class="col-xs-3 control-label" th:text="${pa.name}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束3 -->
+
+        <div th:each="rep,paStat : ${replys}">
+		<!-- 开始3 -->
+		<div class="row">
+			<div class="col-xs-10">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">题目：</label>
+					<div class="col-xs-9 ">
+					<label class="col-xs-3 control-label" th:text="${rep.q}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束3 -->
+
+
+		<!-- 开始3 -->
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="form-group ">
+					<div class="col-xs-9 ">
+						<label>
+						<input type="radio" th:value="${rep.a1}" th:attr ="checked=${rep.a1 == rep.ra?true:false}" />
+						<a  th:text="${rep.a1}"></a>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group ">
+					<div class="col-xs-9 ">
+						<label>
+						<input type="radio" th:value="${rep.a2}"  th:attr ="checked=${rep.a2 == rep.ra?true:false}"/>
+						<a  th:text="${rep.a2}"></a>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group ">
+					<div class="col-xs-9 ">
+						<label>
+						<input type="radio" th:value="${rep.a3}"  th:attr ="checked=${rep.a3 == rep.ra?true:false}"/>
+						<a  th:text="${rep.a3}"></a>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束3  th:field="*{rep.ra}"-->
+		
+		</div>
+
+		
+		
+
+		<div class="row">
+			<div class="col-xs-3 col-xs-offset-4">
+				<input type="button" onclick="javascript:history.back();" class="btn btn-danger" value="返回" />
+			</div>
+
+		</div>
+
+	</form>
+</body>
+</html>

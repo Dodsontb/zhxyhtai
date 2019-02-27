@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
@@ -28,8 +31,8 @@ import com.zhxy.domain.Noticetype;
 import com.zhxy.handler.MyWebSocketHandler;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.hxktask.ExamTaskJob;
-import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.service.hxk_history;
+import com.zhxy.service.impl.historyServiceImpl;
 
 @Controller
 public class WriteController {
@@ -105,11 +108,13 @@ public class WriteController {
 				return service.queryByHead(name,typeid,currpage);
 			}
 			
-			@RequestMapping("/queryByName")
+			@RequestMapping("/queryByMessageName")
 			@ResponseBody
 			public List<Message> queryByName(Model model,String username) {
-				List<Message> list=service.queryByMessageName(username);
+				CpUser u=(CpUser) session.getAttribute("user");
+				List<Message> list=service.queryByMessageName(username,u.getUserid());
 				model.addAttribute("list", list);
+				System.out.println(JSON.toJSONString(list)+"kfkuyhtgrf");
 				return list;
 			}
 			
@@ -149,6 +154,10 @@ public class WriteController {
 			@RequestMapping("/fileup")
 			@ResponseBody
 			public List<String> fileup(@RequestParam MultipartFile[] files,HttpSession session) {
+				File f=new File("d:/img");
+				if(!f.exists()) {
+					f.mkdirs();
+				}
 				List<String> list=new ArrayList<>();
 				for (MultipartFile multipartFile : files) {
 					try {
@@ -173,11 +182,11 @@ public class WriteController {
 			@SuppressWarnings("unchecked")
 			@RequestMapping("/insertNotice")
 			@ResponseBody
-			public int insertNotice(Notice notice,int[] cid) throws ParseException{
-				/*CpUser user =  (CpUser)session.getAttribute("user");*/
+			public void insertNotice(Notice notice,int[] cid) throws ParseException{
+				CpUser user =  (CpUser)session.getAttribute("user");
 				List<String> urls=(List<String>) session.getAttribute("fileimg");
 			
-				notice.setUid(1);
+				notice.setUid(user.getUserid());
 				for (int i = 0; i < cid.length; i++) {
 					System.out.println("controller:"+cid[i]);
 				}
@@ -185,12 +194,11 @@ public class WriteController {
 				/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				notice.setNtime= formatter.parse(time);
 				notice.setNtime(s);*/
-				int i=service.insertNotice(notice, cid, urls);
+				service.insertNotice(notice, cid, urls,time);
 				// System.out.println("13243254356"+s);
 				 dynamicTaskJobs.addTaskJob(examJob,time);
 			   //  dynamicTaskJobs.addTaskTimerJob(examJob,"*/5 * * * * *");
 			     
-				 return i;
 			}
 			
 			@RequestMapping("/queryUserGetId")
@@ -202,11 +210,11 @@ public class WriteController {
 				
 			}
 			
-			@RequestMapping("/deleteMessage")
+			/*@RequestMapping("/deleteMessage")
 			public String deleteMessage(int messageId) {
-				service.deleteMessage(messageId);
+				int i=service.deleteMessage(messageId);
 				return "redirect:hxk_message";
-			}
+			}*/
 			
 			@RequestMapping("/queryCpUserByName")
 			@ResponseBody
@@ -214,12 +222,6 @@ public class WriteController {
 				List<CpUser> list=service.queryCpUserByName(username);
 				model.addAttribute("list", list);
 				return list;
-			}
-			
-			@RequestMapping("/selectUid")
-			@ResponseBody
-			public Message selectUid(int uid) {
-				return service.selectUid(uid);
 			}
 			
 			@ResponseBody
@@ -233,11 +235,11 @@ public class WriteController {
 				int jg=service.insertMessage(m);
 				String status =null;
 				//显示自己发送的信息
-				status = handler.sendMsg(u.getUserid()+"", "<p class=\"m_message_left\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+				status = handler.sendMsg(u.getUserid()+"", "<div class=\"m_message_left\"><span id=\"content\">"+m.getMcontent()+"</span></div><br/>");
 			//	显示好友发来的信息
 				/*for (int receiver : m.getReceiver()) {*/
 					System.out.println("接收人："+ m.getReceiver());
-					status = handler.sendMsg( m.getReceiver()+"", "<p class=\"m_message_right\"><i class=\"msg_input\"></i>"+m.getMcontent()+"</p>");
+					status = handler.sendMsg( m.getReceiver()+"", "<div class=\"m_message_right\"><span id=\"content\">"+m.getMcontent()+"</span></div><br/>");
 				/*}*/
 			System.out.println("存储结果:"+jg+"发送结果："+status);
 				return status;
@@ -256,31 +258,45 @@ public class WriteController {
 			
 			@ResponseBody
 			@RequestMapping("/getChatRecordList")
-			public List<Message> getChatRecordList(HttpSession session,HttpServletResponse response,int sendid) {
+			public List<Message> getChatRecordList(HttpSession session,HttpServletResponse response) {
 				CpUser u =  (CpUser)session.getAttribute("user");
-				System.out.println("查询聊天记录集合"+sendid);
-				List<Message> clist=service.getChatRecordList(sendid, u.getUserid());	
+				System.out.println("查询聊天记录集合");
+				List<Message> clist=service.getChatRecordList(u.getUserid());	
 				return clist;
 			}
 			
 			@ResponseBody
 			@RequestMapping("/getAllUserList")
-			//获取弹窗中绑定的用户信息列表（userid/name/url）分别附带信息职位、班级、家长所属学生
+			//获取弹窗中绑定的用户信息列表
 			public List<CpUser> getAllUserList(HttpSession session,HttpServletResponse response,int chatid) {
 				response.setCharacterEncoding("utf-8");
 				CpUser u=(CpUser) session.getAttribute("user");
-				System.out.println("查询用户列表");
 				List<CpUser> ulist=service.getUserlist(chatid,u.getUserid());
+				System.out.println("查询用户列表"+JSON.toJSONString(ulist));	
 				return ulist;
 			}
 			
 			
 			@ResponseBody
 			@RequestMapping("/getSeesionUser")
-			public CpUser getChatRecordList(HttpSession session,HttpServletResponse response) {
+			public CpUser getSeesionUser(HttpSession session,HttpServletResponse response) {
 				CpUser user =  (CpUser)session.getAttribute("user");
 				System.out.println(JSON.toJSONString(user));
 				return user;
+			}
+			
+			@ResponseBody
+			@RequestMapping("/updateDiv")
+			public int updateDiv(int messageId) {
+				int i=service.updateDiv(messageId);
+				return i;
+			}
+			
+			@ResponseBody
+			@RequestMapping("/deleteNotice")
+			public int deleteNotice(int noticeId) {
+				int i=service.deleteNotice(noticeId);
+				return i;
 			}
 			
 }

@@ -21,12 +21,11 @@
    	<association property="imgs" column="Notice_Id" javaType="list" select="queryNoticeimgs"></association>
    	<association property="cp_user" column="uid" javaType="com.zhxy.domain.CpUser" select="queryUser"></association>
    	<association property="clazzs" column="Notice_Id" javaType="list" select="queryClazzlist"></association>
+   	
   </resultMap>
   
   <select id="queryNoticeAll" resultMap="BaseResultMap">
-  		select * 
-  		from `Notice`
-  		where nstate=1
+  		select * from `Notice` where nstate=1
   </select>
   
   <select id="queryNoticeById" resultMap="BaseResultMap">
@@ -53,6 +52,7 @@
    <select id="queryByHeadCount" resultType="int">
   		select count(0) from `Notice`
   		<where>
+  				nstate=1
 	  		<if test="name">
 		  		and headline like concat ("%",#{name},"%")
 	  		</if>
@@ -60,26 +60,34 @@
 	  			and TypeId =#{typeid}
 	  		 </if>
   		</where>
+  		
   </select>
   
   <select id="queryByHead" resultMap="BaseResultMap">
   		select * from `Notice`
   		<where>
+  			nstate=1
 	  		<if test="name">
 		  		and headline like concat ("%",#{name},"%")
 	  		</if>
 	  		<if test="typeid>=0">	
 	  			and TypeId =#{typeid}
 	  		 </if>
+	  		
   		</where>
+  		ORDER BY `ntime` DESC 
   		limit #{start},#{pagesize}
+  		
   </select>
   
   	 <insert id="insertNotice" useGeneratedKeys="true" keyProperty="noticeId">
-	  		insert into `Notice`(headline,ncontent,typeid,uid,ntime)
-	  		value(#{headline},#{ncontent},#{typeid},#{uid},#{ntime})
+	  		insert into `Notice`(headline,ncontent,typeid,uid,ntime,nstate)
+	  		value(#{headline},#{ncontent},#{typeid},#{uid},#{ntime},0)
+	  </insert>
+  	 <insert id="insertNoticeNow" useGeneratedKeys="true" keyProperty="noticeId">
+	  		insert into `Notice`(headline,ncontent,typeid,uid,ntime,nstate)
+	  		value(#{headline},#{ncontent},#{typeid},#{uid},now(),0)
 	  </insert> 
-  
  	<insert id="insertRelation">
  			insert into  notice_relation(cid,Notice_Id)value(#{cid},#{Notice_Id})
  	</insert> 
@@ -88,9 +96,9 @@
  			insert into  noticeimg(nurl,Notice_Id)value(#{nurl},#{Notice_Id})
  	</insert>
   
-	  <update id="deleteNotice">
+	   <update id="deleteNotice">
 	  		update  `Notice` set nstate=0 where Notice_Id=#{Notice_Id}
-	  </update>
+	  </update> 
 	  
 	  
 	 <resultMap id="Clazz" type="com.zhxy.domain.Clazz">

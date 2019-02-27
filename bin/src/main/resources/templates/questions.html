@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>新增题目</title>
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content=""
+        />
+        <meta name="keywords" content=""
+        />
+        <meta name="application-name" content="sprFlat admin template" />
+        <!-- Import google fonts - Heading first/ text second -->
+        <link rel='stylesheet' type='text/css' />
+        <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+        <meta name="msapplication-TileColor" content="#3399cc" />
+    </head>
+    <body>
+        <!-- Start #header -->
+        <div id="content">
+        	<div class="form-group">
+				<label for="defaultSelect">类型</label> <select class="form-control form-control" id="topictype" name="rank">
+					<option value="-1" class="cp_select">请选择</option>
+					<option value="1" class="cp_select">选择题</option>
+					<option value="2" class="cp_select">填空题</option>
+					<option value="3" class="cp_select">应用题</option>
+				</select>
+			</div> 
+	        <div class="panel panel-default toggle cp_xz">
+	            <!-- Start .panel -->
+	            <div class="panel-heading">
+	                <h3 class="panel-title">选择题</h3>
+	            </div>
+	            <div class="panel-body topics">
+	            	<div class="panel panel-default toggle">
+	                    <!-- Start .panel --> 
+	                    <div class="panel-heading" style="background-color: #0088CC;">
+	                        <h3 class="panel-title" style="color: white;">题目1</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <form class="form-horizontal" role="form">
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label">题目</label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control mask-phone" type="text">
+	                                    <span class="help-block">请输入题目内容</span>
+	                                </div>
+	                            </div>
+	                            <!-- End .form-group  -->
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId"></label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control mask-phoneExt"  type="text" name="daan1">
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId"></label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control mask-phoneExt" type="text" name="daan2">
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId"></label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control mask-phoneExt" type="text" name="daan3">
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId"></label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control mask-phoneExt" type="text" name="daan4">
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <!--填空题-->
+	        <div class="panel panel-default toggle cp_tk">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">填空题</h3>
+	            </div>
+	            <div class="panel-body">
+	            	<div class="panel panel-default toggle">
+	                    <div class="panel-heading" style="background-color: #0088CC;">
+	                        <h3 class="panel-title" style="color: white;">1</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <form class="form-horizontal" role="form">
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label">题目</label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control" id="cp_tiankong" type="text">
+	                                    <span class="help-block">请输入填空题问题，一个括号一个答案</span>
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="hidden"></label>
+	                                <div class="col-lg-10 col-md-10" id="cp_input">
+	                                    <!-- <input class="form-control cp_xdaan" name="mask-cp" type="text"> -->
+	                                    <!-- <input class="form-control cp_xdaan" name="mask-cp" type="text"> -->
+	                                     <span class="help-block">答案</span>
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                   <!-- <div class="form-group">
+	                        <label class="col-lg-2 col-md-2 col-sm-12 control-label"></label>
+	                        <div class="col-lg-10 col-md-10 text-center">
+	                            <a href="#" class="btn btn-primary tip" title="添加题目"><i class="im-plus cp_tiankong"></i></a>
+	                        </div>
+	                    </div>-->
+	                </div>
+	            </div>
+	        </div>
+	        <!--应用题-->
+	        <div class="panel panel-default toggle cp_yy">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">应用题</h3>
+	            </div>
+	            <div class="panel-body">
+	            	<div class="panel panel-default toggle">
+	                    <div class="panel-heading" style="background-color: #0088CC;">
+	                        <h3 class="panel-title" style="color: white;">1</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                        <form class="form-horizontal" role="form">
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label">题目</label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control" id="cp_yy" type="text">
+	                                    <span class="help-block"></span>
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="hidden"></label>
+	                                <div class="col-lg-10 col-md-10">
+	                                    <input class="form-control" id="cp_yydaan" type="text">
+	                                    <span class="help-block">应用题答案仅次于用于作业布置方面，以保证正确性</span>
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                    <!--<div class="form-group">
+	                        <label class="col-lg-2 col-md-2 col-sm-12 control-label"></label>
+	                        <div class="col-lg-10 col-md-10 text-center">
+	                            <a href="#" class="btn btn-primary tip" title="添加题目"><i class="im-plus" class="cp_ytimu"></i></a>
+	                        </div>
+	                    </div>-->
+	                </div>
+	            </div>
+	        </div>
+	    </div> 
+	    <button class="btn btn-success cp_bot col-lg-2 col-md-2 col-sm-12">确认</button>
+        <!-- End #content -->
+        <!-- Javascripts -->
+        <!-- Load pace first -->
+        <script src="assets/plugins/core/pace/pace.min.js"></script>
+        <!-- Important javascript libs(put in all pages) -->
+        <!--<script src="assets/js/jquery-1.8.3.min.js"></script>-->
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        <script src="assets/js/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>
+         <script src="assets/js/jquery.min.js"></script>
+    </body>
+</html>
+<script type="text/javascript">
+	var Qid=1;
+	var uid=1;
+	$(function() {
+		$(".cp_xz").hide()
+		$(".cp_tk").hide()
+		$(".cp_yy").hide()
+		$("#cp_tiankong").blur(function(){
+			var question=$("#cp_tiankong").val();
+			var reg = new RegExp( '()' , 'g' );
+			var b=question.split("()").length-1;
+			for(var i = 0; i < b; i++){
+		        var input="<input class=\"form-control cp_xdaan\" name=\"mask-cp\" type=\"text\">"
+		        $("#cp_input").append(input);
+		    }
+		});
+		$("#topictype").click(function() {
+			var valu=$("#topictype").val()
+			if (valu==1) {
+				$(".cp_xz").show()
+				$(".cp_tk").hide()
+				$(".cp_yy").hide()
+			} else if(valu==2){
+				$(".cp_xz").hide()
+				$(".cp_tk").show()
+				$(".cp_yy").hide()
+			}else if(valu==3){
+				$(".cp_xz").hide()
+				$(".cp_tk").hide()
+				$(".cp_yy").show()
+			}
+		})
+		
+		$(".cp_bot").click(function(){
+			var valu=$("#topictype").val();
+			if (valu==1) {
+				var correct="";
+				var checked=$(".panel :checked");
+				console.log(checked);
+				$.each(checked,function(){
+					var val=$(this).parents(".form-group").find(":text").val();
+					correct+=val+",";
+				});
+				correct = correct.substring(0, correct.length - 1);
+				alert(correct)
+				var question =$(".mask-phone").val()
+				var daan1=$("[name='daan1']").val()
+				var daan2=$("[name='daan2']").val()
+				var daan3=$("[name='daan3']").val()
+				var daan4=$("[name='daan4']").val()
+				var answer=daan1+","+daan2+","+daan3+","+daan4
+				var cc={"question":question,"answer":answer,"correct":correct,"qid":Qid}
+				$.ajax({
+					data:cc,
+					type:"post",
+					url:"insertCquestion",
+					success : function(data) {
+						if (data!=null) {
+							alert("新增成功！")
+						} else{
+							alert("新增失败！")
+						}
+					}
+				});
+			} else if(valu==2){
+				var question=$("#cp_tiankong").val();
+				var val="";
+				var mask=document.getElementsByName("mask-cp");
+				console.log(mask);
+				$(mask).each(function(){
+					val+=this.value+","
+				});
+				answer=val.substring(0, val.length - 1);
+				var bb={"question":question,"answer":answer,"correct":correct,"qid":Qid}
+				console.log(bb)
+				$.ajax({
+					data:bb,
+					type:"post",
+					url:"insertTquestion",
+					success : function(data) {
+						if (data!=null) {
+							alert("新增成功！")
+						} else{
+							alert("新增失败！")
+						}
+					}
+				});
+			}else if(valu==3){
+				var question=$("#cp_yy").val();
+				var answer=$("#cp_yydaan").val();
+				var aa={"question":question,"answer":answer,"qid":Qid}
+				$.ajax({
+					data:aa,
+					type:"post",
+					url:"insertYquestion",
+					success : function(data) {
+						if (data!=null) {
+							alert("新增成功！")
+						} else{
+							alert("新增失败！")
+						}
+					}
+				});
+			}
+		})
+	})
+</script>

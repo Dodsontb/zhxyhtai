@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>登录</title>
+	<!-- Meta-Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- //Meta-Tags -->
+	<!-- Stylesheets -->
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<!--// Stylesheets -->
+	<!--online fonts-->
+	<!--//online fonts-->
+</head>
+
+<body>
+	<h1>智慧校园</h1>
+	<div class="w3ls-login box">
+		<img src="images/logo.png" alt="logo_img" />
+		<!-- form starts here -->
+		<form action="/tologin" method="post">
+			<div class="agile-field-txt">
+				<input type="text" name="username" id="username" placeholder="电话/账号"/>
+			</div>
+			<div class="agile-field-txt">
+				<input type="password" name="password" id="password" placeholder="密码"/>
+				<div class="agile_label">
+					<input id="check3" name="check3" type="checkbox">
+					<label class="check" for="check3">记住密码</label>
+				</div>
+			</div>
+			<div class="w3ls-bot">
+				<input type="submit" value="进入" class="cp_login">
+			</div>
+		</form>
+	</div>
+	<div class="copy-wthree">
+		<p>Copyright &copy;这不是监控，这是爱！</p>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+	/* $(function(){
+		$(".cp_login").click(function(){
+			var name = $("[name=username]")[0].value;
+			var pwd = $("[name=password]")[0].value;
+			alert(name+""+pwd)
+			$.ajax({
+				data: {
+					username: name,
+					password: pwd
+				},
+				type:"post",
+				url:"tologin",
+				async:true
+				
+			});
+		})
+	　　
+	})   */
+</script>

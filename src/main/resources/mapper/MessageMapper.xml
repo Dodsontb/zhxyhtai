@@ -38,8 +38,11 @@
   		</select>
   
   		<select id="queryByMessageName" resultMap="BaseResultMap">
-  			SELECT * FROM Message INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
-			WHERE username LIKE CONCAT("%",#{username},"%")
+  			SELECT * FROM Message 
+				INNER JOIN cp_user ON Message.`uid`=cp_user.`userid`
+				INNER JOIN `message_reception` 
+				ON message.`Message_Id`=`message_reception`.`Message_Id`
+				WHERE username LIKE CONCAT("%",#{username},"%") AND `message_reception`.`Uid`=#{receiver}
   		</select>
   		
   		<select id="queryCpUser" resultType="com.zhxy.domain.CpUser">
@@ -47,15 +50,15 @@
   		</select>
  
   		<select id="queryCpUserByName" resultType="com.zhxy.domain.CpUser">
-  			select * from cp_user where username LIKE CONCAT("%",#{username},"%")
+  			SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` where username LIKE CONCAT("%",#{username},"%")
   		</select>
   
-  		<delete id="deleteMessage">
+  		<!-- <delete id="deleteMessage">
   				delete from Message where Message_Id=#{messageId}
-  		</delete>
+  		</delete> -->
   
  		<insert id="insertMessage" useGeneratedKeys="true" keyProperty="messageId">
- 			insert into `Message`( Uid, mcontent,  mtime, mstate, TypeId)values(#{uid},#{mcontent},#{mtime},#{mstate},#{typeid})
+ 			insert into `Message`( Uid, mcontent)values(#{uid},#{mcontent})
  		</insert> 
   
   		<select id="getChatRecord" resultMap="BaseResultMap">
@@ -72,15 +75,15 @@
 					INNER JOIN img ON img.`id`=cp_user.`userid`
 					INNER JOIN `message_reception` 
 					ON message.`Message_Id`=`message_reception`.`Message_Id`
-					WHERE (`message`.`Uid`=#{sendid} AND `message_reception`.`Uid`=#{receiver})
+					WHERE `message_reception`.`Uid`=#{receiver} and message.`mstate`=1
+					ORDER BY message.`mtime` DESC
 					
   		</select>
   		
-  		<select id="selectUid" resultMap="BaseResultMap">
-  				SELECT * FROM Message WHERE Uid=#{uid}
-  		</select>
-  
-  
+  		<update id="updateDiv">
+  				update `message` set mstate=0 where Message_Id=#{Message_Id}
+  		</update>
+  		
   		
   		<!-- <select id="getChatList" resultMap="CpUser">
   			SELECT u.`userid`,u.`username`,u.`usertypeid`,u.`usertypenub`,

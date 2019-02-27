@@ -79,22 +79,11 @@
 			});
 		}) */
 		/*查看详情*/
-		$('#cp_top').on('click','.cp_aa',function(){
+		$('body').on('click','.cp_aa',function(){
 			var cid=1;//班级id
-			var templateid=1;//考试模板id
-			var name1 = this.getAttribute("data-id");//learning主键
-			$.ajax({
-				type:"post",
-				url:"cp_select",
-				async:true,
-				/* data: {
-					cid:cid,
-					templateid:templateid
-				}, */
-				success : function(data) {
-					v.list=data
-				}
-			});
+			var templateid = this.getAttribute("data-id");//learning主键
+			location.href="cp_select?templateid="+templateid;
+		
 		})
 	})
 </script>

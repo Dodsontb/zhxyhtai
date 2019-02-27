@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace = "com.zhxy.mapper.AnswerMapper"> 
+	
+   
+	
+	<!--List<answer> findList(answer hotelanswer);-->
+	<select id="findList" parameterType="com.zhxy.domain.Answer" resultType="com.zhxy.domain.Answer">
+		SELECT
+		*
+		FROM answer where qid=#{qid} 
+        <if test="clazz !=null and clazz != ''">
+            and clazz = #{clazz} 
+        </if>
+	</select>
+	
+	
+	
+	<!--answer findById(@Param("id") Integer id);-->
+	<select id="findById" parameterType="Integer"  resultType="com.zhxy.domain.AnswerDto">
+		SELECT
+		a.*,b.*
+		FROM answer a,question b where a.qid=b.id and a.id=#{id}
+	</select>
+	
+
+	<!--Integer insert(answer hotelanswer);-->
+    <insert id="insert" parameterType="com.zhxy.domain.Answer">  
+	        INSERT INTO answer (qid,
+      						 clazz,
+      						 name,
+      						 time,
+      						 rid)  
+	                  VALUES  (#{qid},
+                 				#{clazz},
+                 				#{name},
+                 				#{time},
+                 				#{rid}
+	                          )  
+	 </insert>
+	
+	
+	
+	
+	
+</mapper>
