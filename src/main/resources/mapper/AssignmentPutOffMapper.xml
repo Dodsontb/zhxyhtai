@@ -189,7 +189,7 @@
   		
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
-  		select="com.zhxy.dao.StudentassignmentMapper.stuquery"></collection>
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
   </resultMap>
   
   <insert id="putoffinsert" parameterType="com.zhxy.domain.AssignmentPutOff">

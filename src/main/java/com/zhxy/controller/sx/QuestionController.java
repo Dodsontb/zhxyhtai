@@ -33,7 +33,7 @@ public class QuestionController {
 	private TitleService titleService;
 	
 	//列表查询
-	@RequestMapping("/question")
+	@RequestMapping("/sx_question")
 	public String toUserList(
 			String type,
 			Map<String, Object> map){
