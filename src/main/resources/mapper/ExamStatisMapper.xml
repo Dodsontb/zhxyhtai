@@ -21,7 +21,19 @@
 	(SELECT id FROM `clazz` WHERE POSITION(id IN (SELECT `name1` FROM `template` WHERE id = #{templateid})) != 0)
 	</select>
 	
+	<select id="queryLearningCountBySimpleTid" resultMap="LearningCountBase">
+		CALL learningCount(#{total}*0.6, #{total}, #{name5}, #{id});
+	</select>
 	
+	<resultMap type="com.zhxy.domain.BarChartArisData" id="LearningCountBase">
+		<id property="id" column="id" javaType="java.lang.Integer"/>
+		<collection property="list1" ofType="java.lang.String">
+			<id column="list1" javaType="java.lang.String"/>
+		</collection>
+		<collection property="list2" ofType="java.lang.Integer" >
+			<result column="list2" javaType="java.lang.Integer"/>
+		</collection>
+	</resultMap>
 	
 	<!-- <select id="queryTemplate_exam" resultType="com.zhxy.domain.Template">
 		SELECT * FROM `template`
