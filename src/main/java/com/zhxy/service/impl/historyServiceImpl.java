@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhxy.mapper.CpStudentMapper;
 import com.zhxy.mapper.CpUserMapper;
 import com.zhxy.mapper.MessageMapper;
 import com.zhxy.mapper.MessageReceptionMapper;
 import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
@@ -35,6 +37,9 @@ public class historyServiceImpl  implements hxk_history{
 	
 	@Autowired
 	CpUserMapper mcapper;
+	
+	@Autowired
+	CpStudentMapper ssmapper;
 	
 	@Override
 	public List<Notice> queryNoticeAll() {
@@ -167,6 +172,18 @@ public class historyServiceImpl  implements hxk_history{
 	public int updateDiv(int Message_Id) {
 		// TODO Auto-generated method stub
 		return mmapper.updateDiv(Message_Id);
+	}
+
+	@Override
+	public List<CpStudent> queryStudentAll() {
+		// TODO Auto-generated method stub
+		return ssmapper.queryStudentAll();
+	}
+
+	@Override
+	public int insertStudent(CpStudent ss) {
+		// TODO Auto-generated method stub
+		return ssmapper.insertStudent(ss);
 	}
 
 	/*@Override

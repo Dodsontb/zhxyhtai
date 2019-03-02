@@ -210,7 +210,7 @@
 	<body>
 	
         
-        <div style="width: 1000px;height: 700px;padding-top: 70px;">
+       
 		<div class="col-lg-4">
 			
 			
@@ -306,8 +306,8 @@
                             </div>
                     </div>        
 				</div>
- 			</div>
- 				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
+ 		
+ 				<div  class="modal" id="xiaoxi" style="height:270px;margin-top: 70px">
  				<div class="modal-content">
  				<header class="modal-header">
  				<!-- <p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p> -->
@@ -554,9 +554,9 @@
 					 /*  var uid=$(".m_message_right img").val();
 					 alert("获取"+uid)   */
 					$.post("getAllUserList","chatid="+uid,function(result){
-						if(result[1]!=null){
+						if(result[0]!=null){
 							console.log(result[1]);
-							$(".modal-header").append("<p style=\"margin-left: 320px;font-size:20px\">"+result[1].username+"<span class=\"close\">×</span></p>");
+							$(".modal-header").append("<p style=\"margin-left: 320px;font-size:20px\">"+result[0].username+"<span class=\"close\">×</span></p>");
 						}
 						console.log(result)
 						v.ulist=result

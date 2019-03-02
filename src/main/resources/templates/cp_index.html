@@ -90,7 +90,7 @@
                                         </form>
                                     </li>
                                     <li class="mail-list clearfix" v-for="item in clist">
-                                        
+                                     	<a href="hxk_message.html" target="iFrame1">
                                             <img v-bind:src="item.url" class="mail-avatar pull-left" alt="avatar">
                                             <p class="name">
                                                 <span class="status"><i class="en-dot"></i></span>{{item.cp_user.username}}
@@ -100,6 +100,7 @@
                                             <p class="msg">
                                              {{item.mcontent}}
                                             </p>
+                                     	</a>                                       
                                     </li>
                                    <!--  <li class="mail-list clearfix">
                                         <a href="#">
@@ -297,7 +298,9 @@
                             </li>
                             <li><a href="hxk_message.html" target="iFrame1"><i class="im-windows8"></i> 查看消息</a>
                             </li>
-                        </ul><iframe src="" width="" height=""></iframe>
+                            <li><a href="student.html" target="iFrame1"><i class="im-windows8"></i> 学生导入</a>
+                            </li>
+                        </ul>
                     </li>
                     <li><a href="#">版本及课程 <i class="im-twitter2"></i></a>
 						<ul class="nav sub">
