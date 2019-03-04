@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhxy.domain.AssignmentPutOff;
-import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
 
@@ -35,7 +34,7 @@ public interface WhetherAccomplishMapper {
     
     int deletestu(@Param("ljxtid")Integer ljxtid,@Param("ljxuid")Integer ljxuid);
     
-    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<CpStudent> u);
+    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<AssignmentPutOff> u);
     
 //    老师所带的班级
     

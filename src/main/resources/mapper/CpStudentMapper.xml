@@ -19,6 +19,17 @@
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
   </resultMap>
+  
+  	<select id="queryStudentAll" resultMap="BaseResultMap">
+  			select * from cp_student
+  	</select>
+  
+  	<insert id="insertStudent">
+  		insert into cp_student(studentname,studentnub,positionid,sex,age,address,email) 
+  		value(#{studentname},#{studentnub},#{positionid},#{sex},#{age},#{address},#{email})
+  	</insert>
+  
+  
   <sql id="Base_Column_List">
     studentid, studentname, studentnub, positionid, sex, age, phone, idcard, birthday, 
     address, email, name1, name2, name3, name4, name5

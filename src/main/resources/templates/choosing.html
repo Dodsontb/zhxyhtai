@@ -92,10 +92,10 @@
                         <h3 class="panel-title">选择题</h3>
                     </div>
                     <div class="panel-body" >
-                    	<div class="col-lg-10 col-md-10" id="checkAllExample1"  v-for="(obj1,index) in list" @click="getxuanID(obj1.id)">
+                    	<div class="col-lg-10 col-md-10" id="checkAllExample1"  v-for="(obj1,index) in list" >
                             <div class="children">
                                 <label class="checkbox cp_box"  >
-                                    <input class="check" type="checkbox" v-bind:dataid="obj1.id" name="tiankong" value="option2" >{{obj1.question}}
+                                    <input class="check" type="checkbox" v-bind:data-id="obj1.id" name="xuanze" value="option2" >{{obj1.question}}
                                 </label>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                     	<div class="col-lg-10 col-md-10" id="checkAllExample2"  v-for="(obj2,index) in list1" @click="gettianID(obj2.id)">
 	                        <div class="children" >
 	                            <label class="checkbox cp_box" >
-	                                <input class="check" type="checkbox" v-on:click="checkboxClick1()"  v-bind:data-id="obj2.id" value="option2">{{obj2.question}}
+	                                <input class="check" type="checkbox" v-on:click="checkboxClick1()" name="tiankong" v-bind:data-id="obj2.id" value="option2">{{obj2.question}}
 	                            </label>
 	                        </div>
 	                    </div>
@@ -123,7 +123,7 @@
                     	<div class="col-lg-10 col-md-10" id="checkAllExample3"  v-for="(obj3,index) in list2" @click="getkongID(obj3.id)">
                             <div class="children" >
                                 <label class="checkbox cp_box"   v-bind:data-id="obj3.id">
-                                    <input class="check" type="checkbox" v-on:click="checkboxClick1()" value="option2" >{{obj3.question}}
+                                    <input class="check" type="checkbox" v-bind:data-id="obj3.id" name="yingyong" value="option2" >{{obj3.question}}
                                 </label>
                             </div>
                         </div>
@@ -134,8 +134,8 @@
             </div>
               <!-- End .content-wrapper -->
               <div class="form-group col-lg-10 col-md-10">
-					<label for="defaultSelect">模板类型</label> <select class="form-control form-control" id="defaultSelect"  name="kid">
-						<option v-bind:value="obj4.id"  v-for="(obj4,index) in type">{{obj4.name}}</option>
+					<label for="defaultSelect">模板类型</label> <select class="form-control form-control" id="defaultSelects"  name="kid">
+						<option v-bind:value="obj4.id"  v-for="(obj4,index) in type" class="cp_val">{{obj4.name}}</option>
 					</select>
 					模板名称: <input class="form-control" id="cp_name" type="text">
 				</div>
@@ -205,12 +205,6 @@
 				list2:null,
 				type:null,
 			},
-			methods:{
-		        getxuanID : function(id){  
-		        },gettianID : function(id){
-		        },getkongID : function(id){
-		        }
-		    }
 		})
 	
 	
@@ -229,28 +223,33 @@
 			alert("被选中了"+sid); 
 		}) */
 		/* 点击选择的章节来筛选题目 */
+		var cquestionid="";
+		var tquestionid="";
+		var yquestionid="";
+		/* 选择题 */
+		$('body').on('click','[name=xuanze]',function(){
+				var xid = this.getAttribute("data-id");//learning主键
+				cquestionid+=xid+",";
+		})
+		/* 填空题 */
+		$('body').on('click','[name=tiankong]',function(){
+				var tid = this.getAttribute("data-id");//learning主键
+				tquestionid+=tid+",";
+		})
+		/* 应用题 */
+		$('body').on('click','[name=yingyong]',function(){
+				var yid = this.getAttribute("data-id");//learning主键
+				yquestionid+=yid+",";
+		})
 		
 		$(".cp_god").click(function() {
-			/* 获取选择题id保存到数组当中 */
-			var obj=document.getElementsByName("tiankong");
-			console.log(obj)
-			var check_val=[];
-			for(k in obj){
-				/* var dataid=obj[k].attr("dataid")*/
-				if(obj[k].checked){
-					check_val.push(obj[k].dataid)
-				}
-			}
-			console.log(check_val)
-			/*  */
 			/* 这是添加的数据 */
 			var name=$("#cp_name").val();
 			var total=100;
-			var softtypeid=1;
-			var cquestionid="1,2";
-			var yquestionid="1,2";
-			var tquestionid="1,2,4";
-			var start="2019-01-16 22:51:18";
+			var softtypeid=$('#defaultSelects option:selected').val();
+			cquestionid=cquestionid.substring(0, cquestionid.length - 1);
+			yquestionid=yquestionid.substring(0, yquestionid.length - 1);
+			tquestionid=tquestionid.substring(0, tquestionid.length - 1);
 			var uid=8;
 			var name1=1;
 			var name2=0;

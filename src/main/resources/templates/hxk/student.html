@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>考勤</title>
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			#header{
+				margin-top: 3em;
+				margin-left: 3em;
+			/*	border: 1px solid red;*/
+				height: 2em;
+			}
+			/*#header input{
+				border: 1px solid lightgray;
+				border-radius: 2px;
+				height: 1.5em;
+			}*/
+			.title{
+				background-color:#f5f5f5;
+				height: 2em;
+				border-bottom: 1px solid #aaa;
+			}
+			.title span{
+				color: #333;
+				line-height: 30px;
+				margin-left: 0.8em;
+				font-size: 18px;
+				font-weight:500;
+			}
+			
+			.three input{
+				width: 8em;
+				height:2em;
+			}
+			
+			.four{
+				margin-top: -2em;
+				margin-left: 13em;
+			}
+			.four select{
+				width: 8em;
+				height: 2.2em;
+				
+			}
+			.btn button{
+				margin-top: -4.5em;
+				margin-left:25em;
+				width: 5em;
+				height: 2em;
+				line-height: 1px;
+				letter-spacing: 12px;
+			}
+		</style>
+		 <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+	</head>
+	
+	<body>
+			<div class="col-lg-12 heading">
+                        <h3 class="page-header"><i class="ec-archive"></i>学生导入</h3>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        	<li><i class="im-home">
+                        	</i>
+                        	<a th:href="@{index.html}">Home</a>
+                        	<i class="en-arrow-right7"></i>
+                        	</li>
+                        	<li>学生导入</li></ul>
+        	</div>
+                    <div class="kv-item ue-clear" style="margin-left: 30px;">
+                        <input type="file" onchange="importXlsx(this)"> 
+                    </div>
+
+			<div class="panel-body">
+                            <div class="table-responsive" >
+                                <table class="table table-striped table-bordered table-hover" style="max-width: 96%;margin-left: 2em;margin-top: 1em;">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>姓名</th>
+                                            <th>学号</th>
+                                            <th>职位</th>
+                                            <th>性别</th>
+                                            <th>年龄</th>
+                                            <th>住址</th>
+                                            <th>邮箱</th>
+                                            <th>选择</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" >
+                                        <tr v-for="item in list">
+                                        	<td>{{item.studentid}}</td>  
+                                            <td>{{item.studentname}}</td>
+                                            <td>{{item.studentnub}}</td>
+                                            <td>{{item.positionid}}</td>
+                                            <td v-if="item.sex==1">男</td>
+                                            <td v-else-if="item.sex==0">女</td>
+                                            <td>{{item.age}}</td>
+                                            <td>{{item.address}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td> <input type="checkbox" /></td>
+                                        </tr>
+                                         
+                                    </tbody>
+                                </table>
+                            </div>
+                       </div>
+                     
+	</body>
+	<script type="text/javascript" th:src="@{assets/js/xlsx.core.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+	 <script>
+		function importXlsx(e) {
+
+			const files = e.files;
+
+			let i, f;
+
+			for(i = 0, f = files[i]; i != files.length; ++i) {
+
+				let reader = new FileReader();
+
+				let name = f.name;
+
+				reader.onload = function(e) {
+
+					let data = e.target.result;
+
+					let workbook = XLSX.read(data, {
+
+						type: typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString ?
+
+							'binary' : 'array'
+
+					});
+
+					 
+
+					for(let sheet in workbook.Sheets) {
+
+						if(workbook.Sheets.hasOwnProperty(sheet)) {
+
+							fromTo = workbook.Sheets[sheet]['!ref'];
+
+							let xlsxData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+
+							for(let i = 0, len = xlsxData.length; i < len; i++) {
+
+								 
+
+								Object.keys(xlsxData[i]).forEach((keys) => {
+
+									// 日期格式会变为数字，所以需要转换一下
+
+									if(typeof xlsxData[i][keys] == 'number') {
+
+										 let date = new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7), 0, xlsxData[i][keys] - 1).toLocaleDateString();
+										
+										xlsxData[i][keys] = date;
+
+									}
+
+								})
+							}
+							// 结果数组
+							console.log(xlsxData);
+							alert(xlsxData);
+							$.ajax({
+			            		url:"insertStudent",
+			            		type:"post",
+			            		data:JSON.stringify(xlsxData),
+			            		contentType:"application/json;charset=utf-8",
+			            		success:function(data){
+			            		 location.reload();
+			            		}
+			            	});
+							
+						}
+					}
+
+				};
+				reader.readAsBinaryString(f);
+			}
+
+		}
+	</script>
+	<script type="text/javascript">
+		var v=new Vue({
+			el:"#tbody",
+			data:{
+				list:null
+			}
+		});
+		
+		 $(function(){
+			 $.ajax({
+					url:"/queryStudent",
+					dataType:"json",
+					type:"post",	
+					success:function(result){
+						v.list=result;	
+					}
+					
+				})
+		 });
+	</script>
+</html>

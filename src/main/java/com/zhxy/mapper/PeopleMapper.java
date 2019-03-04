@@ -27,4 +27,18 @@ public interface PeopleMapper {
 	Integer isEventBusy(@Param("teacher")People people,@Param("day")Date day,@Param("ap")boolean ap);
 	
 	List<People> position(int id);
+	
+	People betterClazz();
+	
+	boolean existBan();
+	
+	boolean existTeacher(@Param("vid")int vid,@Param("gid")int gid,@Param("mid")Integer mid);
+	
+	List<People> bans();
+	
+	List<People> teacher(int cid);
+	
+	List<People> queryTeacher(int cid);
+	
+	void updateCurr(@Param("cid")int cid,@Param("list")Integer[] lists);
 }
