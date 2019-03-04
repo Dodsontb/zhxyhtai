@@ -1,4 +1,4 @@
-package com.zhxy.mapper;
+package com.zhxy.service;
 
 import java.util.List;
 
