@@ -21,5 +21,5 @@ public interface CpUserMapper {
     
     List<CpUser> getUserlist(Integer chatid,Integer userid);
     
-    List<CpUser> queryUserGetId();
+    List<CpUser> queryUserGetId(Integer userid);
 }

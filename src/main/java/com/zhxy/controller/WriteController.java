@@ -86,6 +86,11 @@ public class WriteController {
 				return "hxk/message";
 			}
 			
+			@RequestMapping("/jiaStudent")
+			public String jiaStudent() {
+				return "hxk/insertStudent";
+			}
+			
 			 @Autowired
 			 DynamicTaskJobs dynamicTaskJobs;
 
@@ -210,8 +215,9 @@ public class WriteController {
 			
 			@RequestMapping("/queryUserGetId")
 			@ResponseBody
-			public List<CpUser> queryCpUser(Model model) {
-				List<CpUser> list=service.queryUserGetId();
+			public List<CpUser> queryCpUser(Model model,HttpSession session) {
+				CpUser user =  (CpUser)session.getAttribute("user");
+				List<CpUser> list=service.queryUserGetId(user.getUserid());
 				model.addAttribute("list", list);
 				return list;
 				
@@ -322,9 +328,7 @@ public class WriteController {
 						if(i!=0) {
 							CpStudent att = new CpStudent();
 							String studentname=obj.get(i).getStudentname();
-							String studentnub=obj.get(i).getStudentNo();
 							Integer sex=null;
-							Integer positionid=Integer.parseInt(obj.get(i).getPositionid());
 							if(obj.get(i).getSex().equals("男")) {
 								sex=1;
 							}else if(obj.get(i).getSex().equals("女")) {
@@ -334,8 +338,6 @@ public class WriteController {
 							String address=obj.get(i).getAddress();
 							String email=obj.get(i).getEmail();
 							att.setStudentname(studentname);
-							att.setStudentnub(studentnub);
-							att.setPositionid(positionid);
 							att.setAddress(address);
 							att.setAge(age);
 							att.setSex(sex);
@@ -345,5 +347,13 @@ public class WriteController {
 						}
 				}
 		}
+			
+			
+			//@RequestMapping(value="tianjia",produces="application/json;charset=utf-8")
+			@ResponseBody
+			@RequestMapping("/tianjia")
+			public int tianjia(CpStudent ss) {
+				return service.insertStudent(ss);
+			}
 
 }
