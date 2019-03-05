@@ -522,12 +522,14 @@ $("#plus").click(function() {
 			$(el).find("input").val(1);
 			$(el).find(":text").val("");
 			$(el).addClass("new");
-			$("#new").append(el);			
+			$("#new").append(el);
 		}
 	}
 	delHide();
 	editHide();
 	plusShow();
+	var height=$("#new-btn").offset().top;
+	$("html,body").animate({scrollTop:height},800);
 });
 
 $("#content").on("click","#edit-btn .btn-success",function(){
@@ -571,6 +573,17 @@ $("#content").on("click","#edit-btn .btn-success",function(){
 			}
 		}
 	});
+});
+
+$(window).scroll(function(){
+	var height=$("#curr-info").offset().top;
+	var h=$(this).scrollTop();
+	if(h>height){
+		$("#goup img").show();
+		$(".curr-icons").css({"position":"fixed","z-index":"99","right":"15px","top":"20px"});
+	}else{
+		$(".curr-icons").css("position",'');
+	}
 });
 
 
