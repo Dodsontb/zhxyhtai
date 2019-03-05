@@ -22,18 +22,30 @@
 	</select>
 	
 	<select id="queryLearningCountBySimpleTid" resultMap="LearningCountBase">
-		CALL learningCount(#{total}*0.6, #{total}, #{name5}, #{id});
+		CALL learningCount(#{total}*0.6, #{total}, #{name4}, #{id});
 	</select>
 	
 	<resultMap type="com.zhxy.domain.BarChartArisData" id="LearningCountBase">
-		<id property="id" column="id" javaType="java.lang.Integer"/>
-		<collection property="list1" ofType="java.lang.String">
-			<id column="list1" javaType="java.lang.String"/>
+		<id property="id" column="tid" javaType="java.lang.Integer"/>
+		<collection property="list1" ofType="String">
+			<result column="scoreRange"/>
 		</collection>
-		<collection property="list2" ofType="java.lang.Integer" >
-			<result column="list2" javaType="java.lang.Integer"/>
+		<collection property="list2" ofType="Integer" column="tid" select="queryLearningCountById">
 		</collection>
 	</resultMap>
+	
+	<select id="queryLearningCountById" resultType="Integer">
+		select learningCount from `tmp_learningCount` where tid = #{tid}
+	</select>
+	
+	<select id="queryLearningClazzByTemplateId" resultType="com.zhxy.domain.LearningClazzVO">
+		SELECT c.`id`, c.`name`, MAX(l.`total`) maxScore, MIN(l.`total`) minScore,
+		 ROUND(AVG(l.`total`), 1) avgScore, getNearestTemplateStart(c.`id`) nearestTemplateStart FROM `learning` l
+		INNER JOIN `stu_clazz` sc ON sc.`sid` = l.`uid`
+		INNER JOIN `clazz` c ON c.`id` = sc.`cid` AND POSITION(c.`id` IN (SELECT `name1` FROM `template` WHERE `template`.`id` = #{templateId})) != 0
+		WHERE l.`templateid` = #{templateId}
+		GROUP BY c.`id`
+	</select>
 	
 	<!-- <select id="queryTemplate_exam" resultType="com.zhxy.domain.Template">
 		SELECT * FROM `template`

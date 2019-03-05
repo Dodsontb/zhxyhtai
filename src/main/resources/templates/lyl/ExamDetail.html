@@ -6,8 +6,9 @@
 		<!-- Mobile specific metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.css" rel="stylesheet" />
-		<script src="js/jquery-1.8.3.min.js"></script>
-		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/vue.js"></script>
 	</head>
 <body>
 	<div class="container-fluid">
@@ -18,7 +19,7 @@
 						<div style="border: 1px solid #EEEEEE; height: 400px;">
 							<h1>考试详情</h1>
 							<ul>
-								<li>
+								<li id="templateId">
 									考试编号：
 								</li>
 								<li>
@@ -31,17 +32,27 @@
 									考试难度：
 								</li>
 							</ul>
-							<table class="table" id="searchClass">
-									<tr>
-										<th>编号</th>
-										<th>班级编号</th>
-										<th>班级名称</th>
-										<th>最高分</th>
-										<th>最低分</th>
-										<th>平均分</th>
-										<th>最近考试时间</th>
-									</tr>
-									<tr>
+							<table class="table" id="searchClazz">
+								<tr>
+									<th>编号</th>
+									<th>班级编号</th>
+									<th>班级名称</th>
+									<th>最高分</th>
+									<th>最低分</th>
+									<th>平均分</th>
+									<th>最近考试时间</th>
+								</tr>
+								<tr v-for="(clazz, i) in list">
+									<td>{{i}}</td>
+									<td>{{clazz.id}}</td>
+									<td>{{clazz.name}}</td>
+									<td>{{clazz.maxScore}}</td>
+									<td>{{clazz.minScore}}</td>
+									<td>{{clazz.avgScore}}</td>
+									<td>{{clazz.nearestTemplateStart}}</td>
+								</tr>
+									
+									<!-- <tr>
 										<td>1</td>
 										<td>10121</td>
 										<td>一二一</td>
@@ -67,8 +78,8 @@
 										<td>1</td>
 										<td>1</td>
 										<td>2019-01-11</td>
-									</tr>
-								</table>
+									</tr> -->
+							</table>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6">
@@ -95,7 +106,7 @@
 								
 							</div>
 							<div class="panel-body blue-bg">
-								<iframe frameBorder="0" id="chart1" name="chart1" scrolling="no"
+								<iframe frameBorder="0" id="chart2" name="BarChart" scrolling="no"
 									src="BarChart2.html" height="100%" width="100%" style="height:400px">
 									
 								</iframe>
@@ -111,7 +122,7 @@
 								
 							</div>
 							<div class="panel-body blue-bg">
-								<iframe frameBorder="0" id="chart1" name="chart1" scrolling="no"
+								<iframe frameBorder="0" id="chart3" name="BarChart" scrolling="no"
 									src="BarChart2.html" height="100%" width="100%" style="height:400px">
 									
 								</iframe>
@@ -124,6 +135,28 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var learningClazzList = new Vue({
+			el : '#searchClazz',
+			data : {
+				list : []
+			}
+		})
+		
+		function getLearningClazzByTemplateId(templateId){
+			$("#templateId").html("考试编号：" + templateId);
+			$.ajax({
+				url : '/getLearningClazzByTemplateId',
+				data : {
+					templateId : templateId
+				},
+				type : 'post',
+				success : function(data){
+					learningClazzList.list = data;
+				}
+			})
+			
+		}
+	
 		function getKSChartByClassId(condition){
 			$("#chart1")[0].contentWindow.getKSChartByClassId(condition);
 	    }
@@ -131,6 +164,10 @@
 		function getKSChartByTemplateId(condition){
 			$("#chart1")[0].contentWindow.getKSChartByTemplateId(condition);
 	    }
+		
+		function getBarChartByTemplate(template){
+			$("#chart2")[0].contentWindow.getChartByTid(template);
+		}
 	</script>
 </body>
 </html>

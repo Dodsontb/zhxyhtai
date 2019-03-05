@@ -6,8 +6,9 @@
 		<!-- Mobile specific metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.css" rel="stylesheet" />
-		<script src="js/jquery-1.8.3.min.js"></script>
-		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/vue.js"></script>
 	</head>
 <body>
 	<div class="container-fluid">
@@ -156,8 +157,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	var condition = {};
+	
+	condition = {};
 	var searchClass = [];
+	
+	
 	
 	$(function(){
 		$("#searchClass tr").click(function(){
@@ -166,7 +170,6 @@
 				$("#searchClass tr").removeClass("selected");
 				$(this).addClass("selected");
 				condition.classId = searchClass[1].innerHTML;
-				console.log(condition.classId);
 				condition.titleText = "班级" + searchClass[2].innerHTML + "近期考试情况";
 				$("#chart1")[0].contentWindow.getKSChartByClassId(condition);
 			}
@@ -178,12 +181,22 @@
 				$("#searchClass tr").removeClass("selected");
 				$(this).addClass("selected");
 				condition.templateId = searchClass[1].innerHTML;
-				console.log(condition.templateId);
 				condition.titleText = "考试" + searchClass[2].innerHTML + "情况";
 				$("#chart1")[0].contentWindow.getKSChartByTemplateId(condition);
+				var template = {
+						id : condition.templateId,
+						total : 100,
+						name4 : 10
+				}
+				$("#chart1")[0].contentWindow.getBarChartByTemplate(template);
+				getLearningClazzByTemplateId(condition.templateId);
 			}
 		})
 	})
+	
+	function getLearningClazzByTemplateId(templateId){
+		$("#chart1")[0].contentWindow.getLearningClazzByTemplateId(templateId);
+	}
 	</script>
 </body>
 </html>
