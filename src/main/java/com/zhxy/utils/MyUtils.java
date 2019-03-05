@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.zhxy.domain.Data;
 import com.zhxy.domain.DatePlan;
 import com.zhxy.domain.Room;
-
+import com.zhxy.domain.Student;
 
 /**
  * 帮助类
@@ -386,5 +387,116 @@ public class MyUtils {
 			}
 		}
 	}
+	
+	public static String clazzName(int num) {
+		String name="AT"+new SimpleDateFormat("yy").format(new Date());
+		if(num<10)
+			name+="0";
+		name+=num;
+		return name;
+	}
+	
+	public static String clazzName(int num,String name) {
+		String str=name;
+		if(num<10)
+			str+="0";
+		str+=num;
+		return str;
+	}
+	
+	public static List<Data> sexData(List<Student> students) {
+		List<Data> lists=new ArrayList<>();
+		double man=0;
+		double woman=0;
+		for (Student student : students) {
+			if(student.getSex()>0) {
+				man++;
+			}else {
+				woman++;
+			}
+		}
+		if(man>0) {
+			Data manData=new Data("男",man,man/students.size());			
+			lists.add(manData);
+		}
+		if(woman>0) {
+			Data womanData=new Data("女",woman,woman/students.size());
+			lists.add(womanData);			
+		}
+		return lists;
+	}
 
+	public static List<Data> ageDatas(List<Student> students) {
+		List<Data> lists=new ArrayList<>();
+		double aduit=0;
+		double nonage=0;
+		for (Student student : students) {
+			if(student.getSex()>0) {
+				aduit++;
+			}else {
+				nonage++;
+			}			
+		}
+		if(nonage>0) {
+			Data aduitData=new Data("未成年",nonage,nonage/students.size());
+			lists.add(aduitData);
+		}
+		if(aduit>0) {
+			Data nonageData=new Data("成年",aduit,aduit/students.size());
+			lists.add(nonageData);			
+		}
+		return lists;		
+	}
+	
+	public static List<Data> eduData(List<Student> students) {
+		List<Data> lists=new ArrayList<>();
+		for (Student student : students) {
+			boolean exist=false;
+			for (Data data : lists) {
+				if(data.getName().equals(student.getEdu().getName())) {
+					double num=data.getNum();
+					data.setNum(++num);
+					exist=true;
+					break;
+				}
+			}
+			if(!exist) {
+				Data data=new Data();
+				data.setName(student.getEdu().getName());
+				data.setNum(1);
+				lists.add(data);
+			}
+		}
+		for (Data data : lists) {
+			data.setWidth(data.getNum()/students.size());
+		}
+		return lists;
+	}
+	
+	public static double floatNum(double num) {
+		return (double)Math.round(num*100)/100;
+	}
+	
+	public static double floatNum(double num,int i) {
+		int y=1;
+		for (int x=0;x<i;x++) {
+			y*=10;
+		}
+		return (double)Math.round(num*y)/y;
+	}
+	
+	public static String dayAfter(String time,int day) {
+		try {
+			Date date=sdf.parse(time);
+			Calendar calendar=Calendar.getInstance();
+			calendar.setTime(date);
+			calendar.add(Calendar.DATE, day);
+			return sdf.format(calendar.getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }

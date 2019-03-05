@@ -2,6 +2,7 @@ package com.zhxy.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,4 +22,6 @@ public interface Service_Studentassinment {
 	public void schediled();
 	
 	int stuinsert(Studentassignment stu);
+	
+	List<Studentassignment> fuzao(@Param("teacherid")Integer teacherid,@Param("name")String name,@Param("yesno")String yesno);
 }

@@ -285,7 +285,7 @@ public class WriteController {
 				response.setCharacterEncoding("utf-8");
 				CpUser u=(CpUser) session.getAttribute("user");
 				List<CpUser> ulist=service.getUserlist(chatid,u.getUserid());
-				System.out.println("查询用户列表"+JSON.toJSONString(ulist));	
+				System.out.println("查询用户列表"+JSON.toJSONString(ulist));
 				return ulist;
 			}
 			

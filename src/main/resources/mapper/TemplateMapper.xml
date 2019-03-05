@@ -18,7 +18,95 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+    
+     <!-- <collection property="tquestion" ofType="com.zhxy.domain.Tquestion" javaType="ArrayList">   
+    	<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="question" jdbcType="VARCHAR" property="question" />
+	    <result column="answer" jdbcType="VARCHAR" property="answer" />
+	    <result column="Qid" jdbcType="INTEGER" property="qid" />
+	    <result column="uid" jdbcType="INTEGER" property="uid" />
+	    <result column="status" jdbcType="INTEGER" property="status" />
+	    <result column="time" jdbcType="VARCHAR" property="time" />
+	    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+	    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+	    <result column="name1" jdbcType="VARCHAR" property="name1" />
+	    <result column="name2" jdbcType="VARCHAR" property="name2" />
+	    <result column="name3" jdbcType="VARCHAR" property="name3" />
+	    <result column="name4" jdbcType="VARCHAR" property="name4" />
+	    <result column="name5" jdbcType="VARCHAR" property="name5" />
+    </collection>
+    <collection property="yquestion" ofType="com.zhxy.domain.Yquestion" javaType="ArrayList">   
+    	<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="question" jdbcType="VARCHAR" property="question" />
+	    <result column="answer" jdbcType="VARCHAR" property="answer" />
+	    <result column="Qid" jdbcType="INTEGER" property="qid" />
+	    <result column="uid" jdbcType="INTEGER" property="uid" />
+	    <result column="status" jdbcType="INTEGER" property="status" />
+	    <result column="time" jdbcType="VARCHAR" property="time" />
+	    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+	    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+	    <result column="name1" jdbcType="VARCHAR" property="name1" />
+	    <result column="name2" jdbcType="VARCHAR" property="name2" />
+	    <result column="name3" jdbcType="VARCHAR" property="name3" />
+	    <result column="name4" jdbcType="VARCHAR" property="name4" />
+	    <result column="name5" jdbcType="VARCHAR" property="name5" />
+    </collection> -->
   </resultMap>
+  <resultMap type="com.zhxy.domain.Template" id="xparents" extends="BaseResultMap">
+		<collection property="cquestion" ofType="com.zhxy.domain.Cquestion" javaType="ArrayList">   
+	    	<id column="sid" property="id" />
+		    <result column="question" property="question" />
+		    <result column="answer" property="answer" />
+		    <result column="correct" property="correct" />
+		    <result column="Qid" property="qid" />
+		    <result column="uid" property="uid" />
+		    <result column="status" property="status" />
+		    <result column="time" property="time" />
+		    <result column="difficulty" property="difficulty" />
+		    <result column="frequency" property="frequency" />
+		    <result column="name1" property="name1" />
+		    <result column="name2" property="name2" />
+		    <result column="name3" property="name3" />
+		    <result column="name4" property="name4" />
+		    <result column="name5" property="name5" />
+	    </collection>
+	</resultMap>
+	 <resultMap type="com.zhxy.domain.Template" id="tparents" extends="BaseResultMap">
+		<collection property="tquestion" ofType="com.zhxy.domain.Tquestion" javaType="ArrayList">   
+	    	<id column="sid" jdbcType="INTEGER" property="id" />
+		    <result column="question" jdbcType="VARCHAR" property="question" />
+		    <result column="answer" jdbcType="VARCHAR" property="answer" />
+		    <result column="Qid" jdbcType="INTEGER" property="qid" />
+		    <result column="uid" jdbcType="INTEGER" property="uid" />
+		    <result column="status" jdbcType="INTEGER" property="status" />
+		    <result column="time" jdbcType="VARCHAR" property="time" />
+		    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+		    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+		    <result column="name1" jdbcType="VARCHAR" property="name1" />
+		    <result column="name2" jdbcType="VARCHAR" property="name2" />
+		    <result column="name3" jdbcType="VARCHAR" property="name3" />
+		    <result column="name4" jdbcType="VARCHAR" property="name4" />
+		    <result column="name5" jdbcType="VARCHAR" property="name5" />
+	    </collection>
+	</resultMap>
+	<resultMap type="com.zhxy.domain.Template" id="yparents" extends="BaseResultMap">
+		<collection property="yquestion" ofType="com.zhxy.domain.Yquestion" javaType="ArrayList">   
+    	<id column="sid" jdbcType="INTEGER" property="id" />
+	    <result column="question" jdbcType="VARCHAR" property="question" />
+	    <result column="answer" jdbcType="VARCHAR" property="answer" />
+	    <result column="Qid" jdbcType="INTEGER" property="qid" />
+	    <result column="uid" jdbcType="INTEGER" property="uid" />
+	    <result column="status" jdbcType="INTEGER" property="status" />
+	    <result column="time" jdbcType="VARCHAR" property="time" />
+	    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+	    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+	    <result column="name1" jdbcType="VARCHAR" property="name1" />
+	    <result column="name2" jdbcType="VARCHAR" property="name2" />
+	    <result column="name3" jdbcType="VARCHAR" property="name3" />
+	    <result column="name4" jdbcType="VARCHAR" property="name4" />
+	    <result column="name5" jdbcType="VARCHAR" property="name5" />
+    </collection>
+	</resultMap>
   <sql id="Base_Column_List">
     id, Name, total, softtypeid, cquestionid, yquestionid, tquestionid, start, uid, end, 
     creation, name1, name2, name3, name4, name5
@@ -232,4 +320,22 @@
   <select id="cp_querybyname1" resultMap="BaseResultMap">
 	SELECT * FROM `template` WHERE name1=#{name1} AND name2 = 0
   </select>
+ <select id="cp_querycquestion" resultMap="xparents">
+	 SELECT *,cquestion.`id` AS sid FROM template 
+	LEFT JOIN cquestion  ON cquestion.`id` IN(SELECT DISTINCT SUBSTRING_INDEX(SUBSTRING_INDEX(a.`cquestionid`,',',b.help_topic_id+1),',',-1)   
+	FROM template a  JOIN  mysql.help_topic b  ON b.help_topic_id &lt; (LENGTH(a.`cquestionid`) - LENGTH(REPLACE(a.`cquestionid`,',',''))+1) WHERE a.id=#{id})
+	WHERE template.id=#{id}
+ </select>
+ <select id="cp_querytquestion" resultMap="tparents">
+ 	 SELECT *,tquestion.`id` AS sid FROM template 
+	LEFT JOIN `tquestion`  ON `tquestion`.`id` IN(SELECT DISTINCT SUBSTRING_INDEX(SUBSTRING_INDEX(a.`tquestionid`,',',b.help_topic_id+1),',',-1)   
+	FROM template a  JOIN  mysql.help_topic b  ON b.help_topic_id &lt; (LENGTH(a.`tquestionid`) - LENGTH(REPLACE(a.`tquestionid`,',',''))+1) WHERE a.id=#{id})
+	WHERE template.id=#{id}
+ </select>
+ <select id="cp_queryyquestion" resultMap="yparents">
+	SELECT *,yquestion.`id` AS sid FROM template 
+	LEFT JOIN `yquestion`  ON `yquestion`.`id` IN(SELECT DISTINCT SUBSTRING_INDEX(SUBSTRING_INDEX(a.`yquestionid`,',',b.help_topic_id+1),',',-1)   
+	FROM template a  JOIN  mysql.help_topic b  ON b.help_topic_id &lt; (LENGTH(a.`yquestionid`) - LENGTH(REPLACE(a.`yquestionid`,',',''))+1) WHERE a.id=#{id})
+	WHERE template.id=#{id}
+ </select>
 </mapper>

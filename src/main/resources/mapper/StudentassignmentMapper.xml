@@ -240,20 +240,18 @@
   
   
   <select id="fuzao" resultMap="fuZao">
-  		SELECT * FROM `studentassignment` WHERE ljxClasses =( SELECT `name` FROM clazz WHERE teacherid = 1 AND `name`='at1716')
+  		SELECT #{yesno} yesno, studentassignment.* FROM `studentassignment` WHERE ljxClasses =( SELECT `name` FROM clazz WHERE teacherid = #{teacherid} AND `name`= #{name})
 		GROUP BY ljxTid DESC
   </select>
   
-  <select id="">
-  		SELECT COUNT(ljxWid) FROM `whether_accomplish` WHERE ljxTid = 1 AND ljxYesno = '否'
-  </select>
   <resultMap type="com.zhxy.domain.Studentassignment" id="fuZao">
   		<id property="ljxtid" column="ljxTid"/>
   		<result property="ljxtitle" column="ljxTitle"/>
   		<result property="ljxtime" column="ljxTime"/>
+  		<result property="yesno" column="yesno"/>
   		
-  		<collection property="list" column="ljxtid"
+  		<collection property="list" column="{ljxTid=ljxTid,yesno=yesno}"
   		ofType="com.zhxy.domain.WhetherAccomplish"
-  		select=""></collection>
+  		select="com.zhxy.mapper.WhetherAccomplishMapper.wcpstudent"></collection>
   </resultMap>
 </mapper>

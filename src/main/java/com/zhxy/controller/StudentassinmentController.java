@@ -29,7 +29,7 @@ public class StudentassinmentController {
 	
 	
 	@Autowired
-	Service_Studentassinment ser;//任务（主�?
+	Service_Studentassinment ser;//任务（主�?
 	
 	@Autowired
 	Service_WhetherAccomplish serW;//是否完成任务
@@ -142,11 +142,19 @@ public class StudentassinmentController {
 		return count;
 	}
 	
-	//老师�?带的班级
+	//老师�?带的班级
 	@RequestMapping("/teacher_history")
 	@ResponseBody
 	public List<TeacherHistory> teacher_history() {
 		List<TeacherHistory> list = serW.teacher_history();
+		return list;
+	}
+	
+	//学生是否完成任务
+	@RequestMapping("/cpstudent")
+	@ResponseBody
+	public List<Studentassignment> cpstudent(String name,String yesno) {
+		List<Studentassignment> list = ser.fuzao(1,name,yesno);
 		return list;
 	}
 }

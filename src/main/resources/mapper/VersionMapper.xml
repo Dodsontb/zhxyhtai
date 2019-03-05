@@ -46,6 +46,13 @@
 		select *
 		from version
 		where `out`=false
+		order by date desc
+	</select>
+	<select id="nowId" resultType="int">
+		select id
+		from version
+		order by date desc
+		limit 1
 	</select>
 	<select id="restCurr" resultType="int">
 		select cid
@@ -113,4 +120,7 @@
 		insert into version(name,`date`)
 		value (#{name},now())
 	</insert>
+	<select id="existVer" resultType="boolean">
+		select case when (select count(0) from `version` where `out`=false )>0 then true else false end
+	</select>
 </mapper>

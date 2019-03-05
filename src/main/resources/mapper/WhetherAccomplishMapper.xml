@@ -244,4 +244,22 @@
  		select="clazz"></collection>	
   </resultMap>
   
+  
+  <select id="wcpstudent" resultMap="Wcpstudent">
+  		SELECT * FROM `whether_accomplish` WHERE ljxTid = #{ljxTid} AND ljxYesno = #{yesno}
+  </select>
+  
+  <select id="cpstudent" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM `cp_student` WHERE StudentID = #{ljxuid}
+  </select>
+  <resultMap type="com.zhxy.domain.WhetherAccomplish" id="Wcpstudent">
+  		<id property="ljxwid" column="ljxwid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxdate" column="ljxdate"/>
+  		
+  		<collection property="cpstudent" column="ljxuid"
+  			ofType="com.zhxy.domain.CpStudent"
+  			select="cpstudent"></collection>
+  </resultMap>
+  
 </mapper>
