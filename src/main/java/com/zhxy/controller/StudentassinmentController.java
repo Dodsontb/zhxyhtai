@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.domain.AssignmentPutOff;
-import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Studentassignment;
 import com.zhxy.domain.TeacherHistory;
 import com.zhxy.domain.WhetherAccomplish;
@@ -135,13 +134,8 @@ public class StudentassinmentController {
 		}else {
 			count = ser.stuinsert(stu);
 			if(count >0) {
-				List<Studentassignment> list = ser.stuquery(stu.getLjxtid());
-				for (Studentassignment t : list) {
-					List<CpStudent> u = ser.cpsudentclazz(t.getLjxclasses());
-					if(u!=null) {
-						serW.pilinsert(stu.getLjxtid(), u);
-					}
-				}
+				List<AssignmentPutOff> u = sers.putoff(1);
+				serW.pilinsert(stu.getLjxtid(), u);
 			}
 		}
 		
