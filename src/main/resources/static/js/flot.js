@@ -5,7 +5,7 @@ var eventid;
 var roomId;
 var eventStr;
 
-$("body").on("mousedown", ".draggable", function() {
+$("body").on("mousedown", ".draggable", function() {	
 	var $div = $(this);
 	var top = $div.offset().top;
 	var left = $div.offset().left;
@@ -23,7 +23,29 @@ $("body").on("mousedown", ".draggable", function() {
 	}
 });
 
+function hint(txt) {
+	$("#hint").text(txt);
+	$("#hint").show();
+	$("#hint").fadeOut(1200);
+}
+
 $("body").on("mouseup", ".draggable", function() {
+	var exist=true;
+	$.ajax({
+		async:false,
+		url:URL+"exist/clazz",
+		success:function(e){
+			exist=e;
+		}
+	});
+	if(!exist){
+		hint("暂无班级");
+		this.style.top = 0;
+		this.style.left = 0;
+		this.style.width = "100%";
+		document.onmousemove = false;
+		return;
+	}
 	document.onmousemove = false;
 	var $div = $(this);
 	var check = $(this).hasClass("event");

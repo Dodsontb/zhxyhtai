@@ -9,6 +9,7 @@
 		<association property="edu" column="eduid" javaType="com.zhxy.domain.Education" select="com.zhxy.mapper.EducationMapper.queryById"></association>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Student" extends="stu" id="clazzstu">
+		<result property="late" column="late"/>
 		<result property="join" column="join"/>
 		<association property="position" column="positionid" javaType="com.zhxy.domain.Position" select="com.zhxy.mapper.PositionMapper.stuposition"></association>
 	</resultMap>
@@ -50,7 +51,7 @@
 		where studentid = (select sid from positioninfo where cid=#{id} and pid=0 and end is null)
 	</select>
 	<select id="clazzStu" resultMap="clazzstu">
-		select c.*,s.join
+		select c.*,s.join,(select count(0) from studentkaoqin as k where studentID =c.studentid and  k.`date` between `join` and now() ) late
 		from cp_student as c,stu_clazz as s
 		where c.studentid=s.sid and s.cid=#{id} and inside=true
 		order by `join`

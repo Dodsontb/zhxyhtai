@@ -21,7 +21,9 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void addEvent(InsertEvent event) {
 		// TODO Auto-generated method stub
-		eventMapper.addEvent(event);
+		if(event.getIdList().size()>0) {
+			eventMapper.addEvent(event);			
+		}
 	}
 
 	@Override
