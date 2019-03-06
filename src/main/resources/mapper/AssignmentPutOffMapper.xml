@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhxy.mapper.AssignmentPutOffMapper">
+  <resultMap id="BaseResultMap" type="com.zhxy.domain.AssignmentPutOff">
+    <id column="ljxTuid" jdbcType="INTEGER" property="ljxtuid" />
+    <result column="ljxTid" jdbcType="INTEGER" property="ljxtid" />
+    <result column="ljxUid" jdbcType="INTEGER" property="ljxuid" />
+    <result column="ljxClass" jdbcType="VARCHAR" property="ljxclass" />
+    <result column="ljxClasses" jdbcType="VARCHAR" property="ljxclasses" />
+    <result column="ljxTitme" jdbcType="TIMESTAMP" property="ljxtitme" />
+    <result column="ljxContent" jdbcType="VARCHAR" property="ljxcontent" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ljxTuid, ljxTid, ljxUid, ljxClass, ljxClasses, ljxTitme, ljxContent, name1, name2, 
+    name3, name4, name5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from assignment_put_off
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from assignment_put_off
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhxy.domain.AssignmentPutOff">
+    insert into assignment_put_off (ljxTuid, ljxTid, ljxUid, 
+      ljxClass, ljxClasses, ljxTitme, 
+      ljxContent, name1, name2, 
+      name3, name4, name5
+      )
+    values (#{ljxtuid,jdbcType=INTEGER}, #{ljxtid,jdbcType=INTEGER}, #{ljxuid,jdbcType=INTEGER}, 
+      #{ljxclass,jdbcType=VARCHAR}, #{ljxclasses,jdbcType=VARCHAR}, #{ljxtitme,jdbcType=TIMESTAMP}, 
+      #{ljxcontent,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhxy.domain.AssignmentPutOff">
+    insert into assignment_put_off
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ljxtuid != null">
+        ljxTuid,
+      </if>
+      <if test="ljxtid != null">
+        ljxTid,
+      </if>
+      <if test="ljxuid != null">
+        ljxUid,
+      </if>
+      <if test="ljxclass != null">
+        ljxClass,
+      </if>
+      <if test="ljxclasses != null">
+        ljxClasses,
+      </if>
+      <if test="ljxtitme != null">
+        ljxTitme,
+      </if>
+      <if test="ljxcontent != null">
+        ljxContent,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="name3 != null">
+        name3,
+      </if>
+      <if test="name4 != null">
+        name4,
+      </if>
+      <if test="name5 != null">
+        name5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ljxtuid != null">
+        #{ljxtuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxtid != null">
+        #{ljxtid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxuid != null">
+        #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxclass != null">
+        #{ljxclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclasses != null">
+        #{ljxclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxtitme != null">
+        #{ljxtitme,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxcontent != null">
+        #{ljxcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.AssignmentPutOff">
+    update assignment_put_off
+    <set>
+      <if test="ljxtid != null">
+        ljxTid = #{ljxtid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxuid != null">
+        ljxUid = #{ljxuid,jdbcType=INTEGER},
+      </if>
+      <if test="ljxclass != null">
+        ljxClass = #{ljxclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxclasses != null">
+        ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
+      </if>
+      <if test="ljxtitme != null">
+        ljxTitme = #{ljxtitme,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ljxcontent != null">
+        ljxContent = #{ljxcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.AssignmentPutOff">
+    update assignment_put_off
+    set ljxTid = #{ljxtid,jdbcType=INTEGER},
+      ljxUid = #{ljxuid,jdbcType=INTEGER},
+      ljxClass = #{ljxclass,jdbcType=VARCHAR},
+      ljxClasses = #{ljxclasses,jdbcType=VARCHAR},
+      ljxTitme = #{ljxtitme,jdbcType=TIMESTAMP},
+      ljxContent = #{ljxcontent,jdbcType=VARCHAR},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR}
+    where ljxTuid = #{ljxtuid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="putoff" resultMap="putoffone">
+  		SELECT * FROM `assignment_put_off` WHERE `ljxUid`=#{ljxUid}
+  </select>
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="putoffone">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>
+  
+  <insert id="putoffinsert" parameterType="com.zhxy.domain.AssignmentPutOff">
+  		INSERT INTO `assignment_put_off` (`ljxTid`,`ljxUid`,`ljxClass`,`ljxClasses`,`ljxTitme`,`ljxContent`)
+		VALUES(#{ljxtid},#{ljxuid},#{ljxclass},#{ljxclasses},#{ljxTitme},#{ljxcontent})
+  </insert>
+  
+  <!-- 老师查看推迟任务的学生 
+  <select id="tuistudent" resultMap="tuiStudent">
+  		SELECT * FROM assignment_put_off WHERE ljxClasses = #{ljxclasses}
+		GROUP BY ljxTuid DESC
+  </select>
+  
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="tuiStudent">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>-->
+  
+  <!-- 推迟的任务 -->
+  
+  <select id="tuichiqueryA" resultMap="tuichiQueryA">
+  		SELECT * FROM `assignment_put_off` WHERE ljxTid = #{ljxTid}
+  </select>
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="tuichiQueryA">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="cpslist" column="ljxuid"
+  		ofType="com.zhxy.domain.CpStudent"
+  		select="cpstudent"></collection>
+  </resultMap>
+  
+  <!-- 推迟任务的学员 -->
+  <select id="cpstudent" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM cp_student WHERE studentid = #{ljxuid}
+  </select>
+  
+  <!-- 查看推迟的详细信息 -->
+  <select id="xiangx" resultMap="xiangX">
+  		SELECT * FROM `assignment_put_off` WHERE ljxTuid=#{ljxTuid}
+  </select>
+  <select id="cpstudentx" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM cp_student WHERE studentid = #{ljxuid}
+  </select>
+  <select id="studentassx" resultType="com.zhxy.domain.Studentassignment">
+  		SELECT * FROM studentassignment WHERE ljxtid = #{ljxtid}
+  </select>
+  
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="xiangX">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="cpslist" column="ljxuid"
+  		ofType="com.zhxy.domain.CpStudent"
+  		select="cpstudentx"></collection>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="studentassx"></collection>
+  </resultMap>
+  
+  <!-- //审核 -->
+  
+  <insert id="einsert">
+  		INSERT INTO `put_off_examine`(`ljxTuid`,`ljxYesno`,`ljxUname`,`ljxUid`)VALUE(#{ljxtuid},#{ljxyesno},#{ljxuname},#{ljxuid})
+  </insert>
+</mapper>
