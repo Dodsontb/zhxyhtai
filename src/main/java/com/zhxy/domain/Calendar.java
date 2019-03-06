@@ -146,7 +146,11 @@ public class Calendar {
 	}
 
 	public void setMaxDate(Date maxDate) {
-		maxDate = new Date().getTime() > maxDate.getTime() ? new Date() : maxDate;
+		if(null==maxDate) {
+			maxDate=new Date();
+		}else {
+			maxDate = new Date().getTime() > maxDate.getTime() ? new Date() : maxDate;			
+		}
 		this.maxDate = maxDate;
 		this.max = MyUtils.format(maxDate);
 	}

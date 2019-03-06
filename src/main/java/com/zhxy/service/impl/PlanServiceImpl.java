@@ -71,7 +71,7 @@ public class PlanServiceImpl implements PlanService {
 				calendar.setTime(day);
 				calendar.add(Calendar.DATE, -1);
 				Date dayBefore = calendar.getTime();
-				List<Clazz> clazzs = clazzMapper.findClazz(teacher, begin, end,day, dayBefore);
+				List<Clazz> clazzs = clazzMapper.findClazz(teacher, begin, end, day, dayBefore);
 				List<Clazz> dayClazzs = new ArrayList<>();
 				int i = 0;
 				Clazz tempClazz = null;
@@ -127,14 +127,10 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public Date autoPlan() {
+	public void autoPlan() {
 		// TODO Auto-generated method stub
 		logger.info("<<<<<<<<<<<<<<<<<<< · 开始排课");
-		Date date = planMapper.maxDate();
-		Date today = new Date();
-		date = date.getTime() > today.getTime() ? MyUtils.nextWeekMonday(date) : today;
-		auto(date);
-		return date;
+		auto(new Date());
 	}
 
 	public Room findRoom(boolean study, Clazz clazz, People teacher, Date day) {
@@ -313,7 +309,8 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public Date maxDate() {
 		// TODO Auto-generated method stub
-		return planMapper.maxDate();
+		Date date = planMapper.maxdate();
+		return null == date ? new Date() : date;
 	}
 
 	@Override
@@ -332,8 +329,8 @@ public class PlanServiceImpl implements PlanService {
 		for (String keyString : plans.keySet()) {
 			List<DatePlan> datePlans = new ArrayList<>();
 			for (Date tempDate : plans.get(keyString)) {
-				if(tempDate!=null) {
-					datePlans.add(advPlan(tempDate, people));					
+				if (tempDate != null) {
+					datePlans.add(advPlan(tempDate, people));
 				}
 			}
 			maps.put(keyString, datePlans);
@@ -344,10 +341,10 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public List<Clazz> weekPlan(int id) {
 		// TODO Auto-generated method stub
-		List<Clazz> list=new ArrayList<>();
-		List<Date> dates=MyUtils.week(new Date());
+		List<Clazz> list = new ArrayList<>();
+		List<Date> dates = MyUtils.week(new Date());
 		for (Date date : dates) {
-			Clazz clazz=new Clazz();
+			Clazz clazz = new Clazz();
 			clazz.setPlans(planMapper.clazzdatePlan(id, date));
 			list.add(clazz);
 		}
