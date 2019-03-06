@@ -44,4 +44,10 @@ public class SectionServiceImpl implements SectionService{
 		}
 	}
 
+	@Override
+	public List<Section> query(Integer gid, Integer mid, Integer cid) {
+		// TODO Auto-generated method stub
+		return sectionMapper.query(mid, gid, cid);
+	}
+
 }
