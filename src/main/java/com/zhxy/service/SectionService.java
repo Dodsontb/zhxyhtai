@@ -13,4 +13,6 @@ public interface SectionService {
 	void updateSec(Section section);
 	
 	void updateSec(List<Section> sections);
+	
+	List<Section> query(Integer gid,Integer mid,Integer cid);
 }

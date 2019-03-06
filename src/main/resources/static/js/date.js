@@ -47,7 +47,16 @@ $(".auto").click(function() {
 		success:function(e){
 			vue.exist=e;
 			if(!e){
-				auto();
+				$.ajax({
+					url:URL+"exist/clazz",
+					success:function(e){
+						if(e){
+							auto();
+						}else{
+							hint("暂无班级，请先开班");							
+						}
+					}
+				});
 			}else{
 				hint("课表已生成，请推送或者取消");
 			}
