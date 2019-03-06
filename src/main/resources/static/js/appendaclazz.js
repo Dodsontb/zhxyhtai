@@ -343,6 +343,7 @@ function listPage(i) {
 			page : i
 		},
 		success : function(e) {
+			console.log(e);
 			vue.stus = e;
 			$("#stus").css("overflow", "visible");
 		}

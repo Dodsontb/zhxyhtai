@@ -1,5 +1,7 @@
 package com.zhxy.domain;
 
+import java.util.List;
+
 public class Record {
     private Integer id;
 
@@ -27,7 +29,7 @@ public class Record {
 
     private String name5;
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

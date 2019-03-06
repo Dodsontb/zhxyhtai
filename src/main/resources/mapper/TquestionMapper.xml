@@ -199,5 +199,7 @@
   <select id="queryTquestion" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM `tquestion` WHERE `Qid` &gt;= #{qid} AND `Qid` &lt;= #{qid}
   </select>
-  
+  <update id="updateTquestion" parameterType="com.zhxy.domain.Tquestion">
+  	UPDATE `tquestion` SET frequency=`frequency`+1 WHERE id=#{id}
+  </update>
 </mapper>

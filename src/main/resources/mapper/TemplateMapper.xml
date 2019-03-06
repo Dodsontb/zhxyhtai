@@ -338,4 +338,7 @@
 	FROM template a  JOIN  mysql.help_topic b  ON b.help_topic_id &lt; (LENGTH(a.`yquestionid`) - LENGTH(REPLACE(a.`yquestionid`,',',''))+1) WHERE a.id=#{id})
 	WHERE template.id=#{id}
  </select>
+ <select id="queryfabu" resultMap="BaseResultMap">
+    SELECT * FROM `template` WHERE `start` IS NULL
+  </select>
 </mapper>

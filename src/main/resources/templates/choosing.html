@@ -56,8 +56,8 @@
 					<label for="defaultSelect">课程</label> <select
 						class="form-control form-control" id="defaultSelect">
 						<option>请选择</option>
-						<option>1</option>
-						<option>2</option>
+						<option>java</option>
+						<option>c#</option>
 						<option>3</option>
 						<option>4</option>
 						<option>5</option>
@@ -251,9 +251,7 @@
 			yquestionid=yquestionid.substring(0, yquestionid.length - 1);
 			tquestionid=tquestionid.substring(0, tquestionid.length - 1);
 			var uid=8;
-			var name1=1;
-			var name2=0;
-			var cc={"Name":name,"total":total,"softtypeid":softtypeid,"cquestionid":cquestionid,"yquestionid":yquestionid,"tquestionid":tquestionid,"uid":uid,"name1":name1,"name2":name2}
+			var cc={"Name":name,"total":total,"softtypeid":softtypeid,"cquestionid":cquestionid,"yquestionid":yquestionid,"tquestionid":tquestionid,"uid":uid}
 			$.ajax({
 				data:cc,
 				type:"post",

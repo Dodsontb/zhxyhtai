@@ -413,7 +413,7 @@
 						</select>
 						</span> <span v-if="clazz.grade"> 年级: {{clazz.grade.name}} </span> <span>
 							班级: {{clazz.name}} </span> <span v-if="clazz.major"> 专业:
-							{{clazz.major.name}} </span> <span v-if="clazz.allStudents"> 总人数:
+							{{clazz.major.name}} </span> <span v-if="clazz.allStudents && clazz.allStudents.length"> 总人数:
 							{{clazz.allStudents.length}} </span> <span>
 							<button class="btn btn-primary">确认 开班</button>
 						</span>

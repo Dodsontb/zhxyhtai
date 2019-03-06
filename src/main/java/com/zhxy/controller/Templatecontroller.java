@@ -34,7 +34,7 @@ public class Templatecontroller {
 		int s=d.getSeconds();
 		String goudan=y+"-"+m+"-"+day+" "+h+":"+mi+":"+s; 
 		System.out.println("当前系统时间"+goudan);
-		record.setStart(goudan);
+		record.setCreation(goudan);
 		return ts.insertTemplate(record);
 		
 	}

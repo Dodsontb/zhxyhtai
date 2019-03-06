@@ -24,5 +24,10 @@ public class Tquestionserviceimpl implements Tquestionservice{
 		// TODO Auto-generated method stub
 		return tm.insertTquestion(record);
 	}
+	@Override
+	public int updateTquestion(int id) {
+		// TODO Auto-generated method stub
+		return tm.updateTquestion(id);
+	}
 
 }

@@ -9,4 +9,6 @@ public interface Cquestionservice {
 	List<Cquestion> queryCquestion(int qid);
 	
 	int insertCquestion(Cquestion obj);
+	
+	int updatefrequency(int id);
 }

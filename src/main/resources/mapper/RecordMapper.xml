@@ -42,7 +42,7 @@
       #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zhxy.domain.Record">
+  <insert id="insertSelectivess" parameterType="com.zhxy.domain.Record">
     insert into record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -185,4 +185,25 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectxuan" resultMap="BaseResultMap">
+	SELECT * FROM `record` WHERE `templateid`=#{templateid} AND Sid=#{sid} AND cid=#{cid}
+  </select>
+  <insert id="insertxuan">
+		insert into
+		record(templateid,cid,tid,sid,result,name1,name2,name3)
+		values
+		<foreach collection="list" item="s" index="index"
+			separator=",">
+			(
+			#{s.templateid},
+			#{s.cid},
+			#{s.tid},
+			#{s.sid},
+			#{s.result},
+			#{s.name1},
+			now(),
+			#{s.name3}
+			)
+		</foreach>
+	</insert>
 </mapper>

@@ -26,5 +26,10 @@ public class Cquestionserviceimpl implements Cquestionservice{
 		// TODO Auto-generated method stub
 		return ct.insertCquestion(obj);
 	}
+	@Override
+	public int updatefrequency(int id) {
+		// TODO Auto-generated method stub
+		return ct.updatefrequency(id);
+	}
 
 }

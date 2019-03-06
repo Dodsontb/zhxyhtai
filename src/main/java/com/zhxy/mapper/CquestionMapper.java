@@ -19,5 +19,7 @@ public interface CquestionMapper {
     
     List<Cquestion> queryCquestion(int qid);
     
+    int updatefrequency(int id);
+    
     
 }

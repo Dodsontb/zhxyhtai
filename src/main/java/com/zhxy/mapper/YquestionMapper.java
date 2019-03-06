@@ -18,4 +18,5 @@ public interface YquestionMapper {
     int updateByPrimaryKey(Yquestion record);
     List<Yquestion> queryYquestion(int qid);
     int insertYquestion(Yquestion record);
+    int updataYquestion(int id);
 }

@@ -212,4 +212,8 @@
   <select id="queryCquestion" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM `cquestion` WHERE `Qid`=#{qid}
   </select>
+  <!-- 错误一题加一次 -->
+  <update id="updatefrequency" parameterType="com.zhxy.domain.Cquestion">
+  	UPDATE `cquestion` SET frequency=`frequency`+1 WHERE id=#{id}
+  </update>
 </mapper>

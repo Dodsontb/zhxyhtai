@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.zhxy.domain.CpUser;
 import com.zhxy.service.cpUserservice;
 
@@ -47,7 +48,6 @@ public class UO {
 	@RequestMapping("/tologin")
 	public String tologin(String username,String password,HttpSession session) {
 		CpUser userinfo=cus.login(username, password);
-		
 		if(userinfo!=null) {
 			System.out.println("登录成功");
 			session.setAttribute("user", userinfo);
@@ -56,20 +56,29 @@ public class UO {
 			System.out.println("登录失败");
 		}
 		CpUser cc=(CpUser)session.getAttribute("user");
+		System.out.println(cc);
 		return null;
 	}
 	
-	@RequestMapping("cp_index")
-	public String cp_index() {
+	@RequestMapping("/cp_index")
+	public String cp_index(HttpSession session) {
 		return "cp_index";
 	}
 
-	@RequestMapping("selectTest")
+	@RequestMapping("/selectTest")
 	public String selectTest() {
 		return "selectTest";
 	}
+	//后台获取sission对象
+	@RequestMapping("/getcpusersission")
+	public CpUser getsission(HttpSession session) {
+		System.out.println("静茹");
+		CpUser u=(CpUser) session.getAttribute("user");
+		System.out.println(JSON.toJSONString(u));
+		return u;
+	}
 	
-	@RequestMapping("cp_select")
+	@RequestMapping("/cp_select")
 	public String cp_select(String templateid,Model model) {
 		model.addAttribute("templateid",templateid);
 		return "cp_select";

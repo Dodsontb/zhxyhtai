@@ -27,4 +27,11 @@ public class cquestionController {
 		System.out.println();
 		return ct.insertCquestion(obj);
 	}
+	//错题+1
+	@RequestMapping("updatefrequency")
+	@ResponseBody
+	public int updatefrequency(int id) {
+		System.out.println();
+		return ct.updatefrequency(id);
+	}
 }
