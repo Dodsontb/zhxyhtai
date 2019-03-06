@@ -65,7 +65,7 @@
 		study=true) planNum
 		from clazz
 		where teacherId=#{teacher.id} and `start` <![CDATA[<=]]>
-		date(#{end})
+		date(#{date})
 		order by planNum,`start`
 	</select>
 	<select id="clazzPlan" resultMap="planClazz">

@@ -29,7 +29,7 @@ public interface ClazzMapper {
 
 	List<Clazz> teacherClazz(List<Integer> ids);
 	
-	List<Clazz> findClazz(@Param("teacher")People people,@Param("begin")Date begin,@Param("end")Date end,@Param("before")Date before);
+	List<Clazz> findClazz(@Param("teacher")People people,@Param("begin")Date begin,@Param("end")Date end,@Param("date")Date date,@Param("before")Date before);
 
 	Integer isStudyByOnself(@Param("clazz")Clazz clazz,@Param("begin")Date date,@Param("end")Date end);
 	

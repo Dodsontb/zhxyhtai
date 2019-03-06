@@ -71,7 +71,7 @@ public class PlanServiceImpl implements PlanService {
 				calendar.setTime(day);
 				calendar.add(Calendar.DATE, -1);
 				Date dayBefore = calendar.getTime();
-				List<Clazz> clazzs = clazzMapper.findClazz(teacher, begin, end, dayBefore);
+				List<Clazz> clazzs = clazzMapper.findClazz(teacher, begin, end,day, dayBefore);
 				List<Clazz> dayClazzs = new ArrayList<>();
 				int i = 0;
 				Clazz tempClazz = null;
