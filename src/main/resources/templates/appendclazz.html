@@ -13,7 +13,7 @@
 <meta name="keywords" content="" />
 <meta name="application-name" content="sprFlat admin template" />
 <!-- Import google fonts - Heading first/ text second -->
-<link rel='stylesheet' type='text/css' />
+<link rel='stylesheet' type='text/css'
 <!--[if lt IE 9]>
 
 		<![endif]-->
@@ -40,8 +40,8 @@
 <link rel="apple-touch-icon-precomposed"
 	href="assets/img/ico/apple-touch-icon-57-precomposed.png">
 <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
-<link rel="stylesheet" type="text/css" href="css/version.css" />
 <link rel="stylesheet" type="text/css" href="css/tanao_plugins.css" />
+<link rel="stylesheet" type="text/css" href="css/appendclazz.css" />
 <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
 <meta name="msapplication-TileColor" content="#3399cc" />
 </head>
@@ -50,7 +50,7 @@
 		<div class="container-fluid">
 			<div class="navbar">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="cp_index.html"> <i
+					<a class="navbar-brand" href="index.html"> <i
 						class="im-windows8 text-logo-element animated bounceIn"></i><span
 						class="text-logo">智慧</span><span class="text-slogan">校园</span>
 					</a>
@@ -343,60 +343,223 @@
 			scrolling="no" name="iFrame1"></iframe>
 	</div>
 	<div id="content">
-		<div></div>
 		<div class="content-wrapper">
 			<div class="row">
 				<div class="col-lg-12 heading">
 					<h1 class="page-header">
-						<i class="br-mouse"></i> 历史版本
+						<i class="im-calculate"></i> 新增班级
 					</h1>
 					<ul id="crumb" class="breadcrumb">
 					</ul>
 				</div>
 			</div>
-			<div id="version">
-				<div class="col-lg-2">
-					<div class="version info" v-for="item in list"
-						@click="click(item.id)">
-						<h3>{{item.name}}</h3>
-						<h6 v-if="item.num>0">{{item.num}}个班级正在使用</h6>
-						<h6 v-else>暂无班级使用</h6>
-						<span>{{item.create}}</span>
+			<div id="div" class="hide-it">
+				<div id="append">
+					<div>
+						<span class="append-span">年级:</span> <span
+							v-for="grade,index in grades"> <i v-if="index>0"> <input
+								class="grade" :value="grade.id" type="checkbox" /> <span
+								class="hide-it">{{grade.major}}</span> <span
+								class="hide-it index">{{index}}</span> {{grade.name}}
+						</i> <i v-else> <input class="grade" :value="grade.id"
+								type="checkbox" checked="checked" /> <span class="hide-it">{{grade.major}}</span>
+								<span class="hide-it index">{{index}}</span> {{grade.name}}
+						</i>
+						</span>
 					</div>
-					<i class="to-header" v-if="v">
-						<div class="version to hide-it" :value="item.id" v-for="item in v.lists">
-							<h3>{{item.name}}</h3>
-						</div>
-					</i>
+					<div id="major" class="hide-it">
+						<span class="append-span">方向:</span> <span
+							v-for="item,index in majors"> <i v-if="index>0"> <input
+								class="major" :value="item.id" type="checkbox" /> <span
+								class="hide-it">{{index}}</span> {{item.name}}
+						</i> <i v-else> <input class="major" checked="checked"
+								:value="item.id" type="checkbox" /> <span class="hide-it">{{index}}</span>
+								{{item.name}}
+						</i>
+						</span>
+					</div>
+					<div>
+						<span class="append-span">班级名称:</span> <span id="clazzName"
+							style="margin-left: 10px;">{{clazzName}}</span>
+					</div>
+					<div>
+						<span class="append-span">开班时间:</span> <input
+							type="datetime-local" disabled="disabled" style="border: none" id="time" />
+					</div>
+					<div>
+						<button class="btn btn-success btn-block">开班详细信息</button>
+					</div>
 				</div>
-				<div class="versioninfo col-lg-10" v-if="v">
+			</div>
+			<div id="info" class="hide-it">
+				<span class="icons"> <i class="im-plus"></i> <i class="im-quill"></i> <i
+					class="im-remove2"></i> <i class="im-close"></i>
+				</span>
+				<div id="clazz-div" class="col-lg-8">
 					<div class="header">
-						<h4>
-							版本 : <span>{{v.name}}</span> 创建时间 ： <span>{{v.create}}</span> <span
-								v-if="v.outtime"> 停用时间 ： <span>{{v.outtime}}</span></span>
-						</h4>
-						<h4 class="end">
-							<span v-if="v.num"> 正在使用班级 : <span>{{v.num}}</span>
-							</span> <span v-if="v.hour>0"> 总课时 ：{{v.hour}} </span>
-						</h4>
+						<button class="btn btn-danger hide-it">移除学员</button>
+						<span> 班主任 ：<select id="ban" class="select sel" disabled="disabled">
+								<option v-for="item,index in bans" v-if="index==0"
+									:value="item.id">{{item.name}}(推荐)</option>
+								<option v-for="item,index in bans" v-if="index>0"
+									:value="item.id">{{item.name}}</option>
+						</select>
+						</span> <span v-if="bans[0]"> 当前带班数 : <span id="bNum">{{bans[0].bNum}}</span>
+						</span> <span> 版本 ：<select id="ver" class="select sel" disabled="disabled">
+								<option v-for="item,index in vers" v-if="index==0"
+									:value="item.id">{{item.name}}(推荐)</option>
+								<option v-for="item,index in vers" v-if="index>0"
+									:value="item.id">{{item.name}}</option>
+						</select>
+						</span> <span v-if="clazz.grade"> 年级: {{clazz.grade.name}} </span> <span>
+							班级: {{clazz.name}} </span> <span v-if="clazz.major"> 专业:
+							{{clazz.major.name}} </span> <span v-if="clazz.allStudents"> 总人数:
+							{{clazz.allStudents.length}} </span> <span>
+							<button class="btn btn-primary">确认 开班</button>
+						</span>
 					</div>
-					<div v-for="major in v.lists">
-						<h4 :mid="major.id">{{major.name}} 课时 ：{{major.hour}}</h4>
-						<div v-for="grade in major.lists">
-							<h5>{{grade.name}} 课时 : {{grade.hour}}</h5>
-							<div v-for="curr in grade.lists">
-								<h6>{{curr.name}} {{curr.ename}} 课时 ：{{curr.hour}}</h6>
-								<div v-for="section in curr.lists">
-									<p>{{section.name}} 课时 ：{{section.hour}}</p>
-								</div>
-							</div>
+					<div class="col-lg-6">
+						<table id="stus" v-if="stus">
+							<tr>
+								<td class="hide-it"><input class="all" type="checkbox" /></td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>年龄</td>
+								<td>学历</td>
+							</tr>
+							<tr v-for="item,index in stus">
+								<td :style="remove?'display:table-cell':'display:none'"><input class="stu" type="checkbox" :value="index" /></td>
+								<td>{{item.name}}</td>
+								<td>{{item.sexInfo}}</td>
+								<td>{{item.age}}</td>
+								<td>{{item.edu.name}}</td>
+							</tr>
+						</table>
+						<div class="buttons" v-if="clazz.pagenum>1">
+							<button class="btn btn-default" v-for="i in clazz.pagenum"
+								:value="i">{{i}}</button>
 						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="col-lg-6 sex" v-if="clazz.sexs &&clazz.sexs.length>0">
+							<h4>性别组成</h4>
+							<i v-for="sex in clazz.sexs">
+								<p v-if="sex.num>0">
+									<span class="span-sign">{{sex.name}}</span> <span
+										class="span-row"> <input :size="sex.width*10"
+										readonly="readonly" class="input" />
+									</span> {{sex.num}}
+								<p>
+									<span class="span-sign"></span> {{sex.width}}
+								</p>
+								</p>
+							</i>
+						</div>
+						<div class="col-lg-6 age" v-if="clazz.ages && clazz.ages.length>0">
+							<h4>年龄组成</h4>
+							<i v-for="age in clazz.ages" class="age">
+								<p v-if="age.num>0">
+									<span class="span-sign">{{age.name}}</span> <span
+										class="span-row"> <input :size="age.width*10"
+										readonly="readonly" class="input" />
+									</span> {{age.num}}
+								<p>
+									<span class="span-sign"></span> {{age.width}}
+								</p>
+								</p>
+							</i>
+						</div>
+						<div class="col-lg-6 edu" v-if="clazz.edus && clazz.edus.length>0">
+							<h4>学历情况</h4>
+							<i v-for="edu in clazz.edus">
+								<p>
+									<span class="span-sign"> {{edu.name}} </span> <span
+										class="span-row"> <input :size="edu.width*10"
+										readonly="readonly" class="input" />
+									</span> {{edu.num}}
+								<p>
+									<span class="span-sign"></span> {{edu.width}}
+								</p>
+								</p>
+							</i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					开课时间 : <input class="select sel" readonly="readonly" style="line-height: 20px" type="date" :value="clazz.start" :min="clazz.start" id="start"/>
+					<table>
+						<tr>
+							<td>教员</td>
+							<td>课程</td>
+							<td>平均分</td>
+						</tr>
+						<tr v-for="curr,index in currs" class="curr">
+							<td><select class="teacher select sel" disabled="disabled">
+									<option v-for="item,index in curr.teacher" :value="item.id" v-if="index==0">{{item.allname}}(推荐)</option>
+									<option v-for="item,index in curr.teacher" :value="item.id" v-if="index>0">{{item.allname}}</option>
+								</select></td>
+							<td>{{curr.name}}</td>
+							<td class="curr-info" :cid="curr.id" :index="index">{{curr.teacher[0].avg}}</td>
+						</tr>
+					</table>
+				</div>
+				<div id="pond" class="col-lg-12">
+					<span class="col-lg-12 hide-it">
+						<button class="btn btn-success">添加至</button> {{clazz.name}}
+					</span>
+					<div class="col-lg-6" v-if="stuInfo.list.length>0">
+						<h4>学生池</h4>
+						<table id="stuPond">
+							<tr>
+								<td class="hide-it"><input class="all" type="checkbox" /></td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>年龄</td>
+								<td>学历</td>
+							</tr>
+							<tr v-for="stu,index in stuInfo.list">
+								<td :style="plus?'display:table-cell':'display:none'"><input class="stu" :value="index" type="checkbox" /></td>
+								<td>{{stu.name}}</td>
+								<td>{{stu.sexInfo}}</td>
+								<td>{{stu.age}}</td>
+								<td>{{stu.edu.name}}</td>
+							</tr>
+						</table>
+						<div class="page">
+							<p> {{stuInfo.pageNum}}/{{stuInfo.pages}} </p>
+							<span v-if="!stuInfo.isFirstPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="stupage(stuInfo.prePage)">上一页</span>
+							<span v-if="stuInfo.hasNextPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="stupage(stuInfo.nextPage)">下一页</span>
+						</div>
+					</div>
+					<div class="col-lg-6" v-if="freeInfo.list.length>0">
+						<h4>游离池</h4>
+						<table id="freePond">
+							<tr>
+								<td class="hide-it"><input class="all" type="checkbox" /></td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>年龄</td>
+								<td>学历</td>
+							</tr>
+							<tr v-for="stu,index in freeInfo.list">
+								<td :style="plus?'display:table-cell':'display:none'"><input class="stu" type="checkbox" :value="index" /></td>
+								<td>{{stu.name}}</td>
+								<td>{{stu.sexInfo}}</td>
+								<td>{{stu.age}}</td>
+								<td>{{stu.edu.name}}</td>
+							</tr>
+						</table>
+						<div class="page">
+							<p> {{freeInfo.pageNum}}/{{freeInfo.pages}}</p>
+							<span v-if="!freeInfo.isFirstPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="freepage(freeInfo.prePage)">上一页</span>
+							<span v-if="freeInfo.hasNextPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="freepage(freeInfo.nextPage)">下一页</span>
+						</div>						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+	<div id="hint" class="hide-it"></div>
 </body>
 <script src="assets/plugins/core/pace/pace.min.js"></script>
 <!-- Important javascript libs(put in all pages) -->
@@ -447,5 +610,5 @@
 <script src="assets/js/app.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/url.js"></script>
-<script src="js/version.js"></script>
+<script src="js/appendaclazz.js"></script>
 </html>

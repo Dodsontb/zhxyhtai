@@ -1,5 +1,7 @@
 package com.zhxy.mapper;
 
+import java.util.List;
+
 import com.zhxy.domain.CpPosition;
 
 public interface CpPositionMapper {
@@ -14,4 +16,6 @@ public interface CpPositionMapper {
     int updateByPrimaryKeySelective(CpPosition record);
 
     int updateByPrimaryKey(CpPosition record);
+    
+    List<CpPosition> selectAll();
 }

@@ -72,4 +72,18 @@ public class StudentServiceImpl implements StudentService{
 		return pageInfo.toPageInfo();
 	}
 
+	@Override
+	public PageInfo<Student> query(int page, int size) {
+		// TODO Auto-generated method stub
+		Page<Student> pageInfo=PageHelper.startPage(page, size, true);
+		studentMapper.queryAll();
+		return pageInfo.toPageInfo();
+	}
+
+	@Override
+	public void stuNo(List<Student> students) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStudent;
+import com.zhxy.domain.Grade;
 import com.zhxy.domain.Studentassignment;
 import com.zhxy.mapper.StudentassignmentMapper;
 import com.zhxy.service.Service_Studentassinment;
@@ -47,6 +50,36 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	public List<Studentassignment> fuzao(@Param("teacherid")Integer teacherid,@Param("name")String name,@Param("yesno")String yesno) {
 		List<Studentassignment> list = mapper.fuzao( teacherid,name,yesno);
 		return list;
+	}
+
+	@Override
+	public List<CpStudent> cpsudentclazz(String clazz) {
+		// TODO Auto-generated method stub
+		return mapper.cpsudentclazz(clazz);
+	}
+
+	@Override
+	public List<Grade> queryreade() {
+		// TODO Auto-generated method stub
+		return mapper.queryreade();
+	}
+
+	@Override
+	public List<Clazz> queryclazz(Integer teacherid, Integer gradeid) {
+		// TODO Auto-generated method stub
+		return mapper.queryclazz(teacherid, gradeid);
+	}
+
+	@Override
+	public List<Studentassignment> naljxcla(String ljxTname) {
+		// TODO Auto-generated method stub
+		return mapper.naljxcla(ljxTname);
+	}
+
+	@Override
+	public List<Studentassignment> tuichiquery(String ljxclaname) {
+		// TODO Auto-generated method stub
+		return mapper.tuichiquery(ljxclaname);
 	}
 
 }

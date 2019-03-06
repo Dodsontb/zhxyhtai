@@ -40,8 +40,38 @@ public class Studentassignment {
     private List<WhetherAccomplish> list;
     
     private String yesno;
+    
+    private int no;
+    
+    private int yes;
+    
+    private List<AssignmentPutOff> asslist;
 
-    public String getYesno() {
+    public List<AssignmentPutOff> getAsslist() {
+		return asslist;
+	}
+
+	public void setAsslist(List<AssignmentPutOff> asslist) {
+		this.asslist = asslist;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public int getYes() {
+		return yes;
+	}
+
+	public void setYes(int yes) {
+		this.yes = yes;
+	}
+
+	public String getYesno() {
 		return yesno;
 	}
 

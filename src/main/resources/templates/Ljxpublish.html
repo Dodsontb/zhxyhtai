@@ -112,7 +112,7 @@
         			<div id="email-content">
         					<!-- Start #email-content -->
         					<div class="email-wrapper">
-        						<select style="width: 150px;">
+        						<!-- <select style="width: 150px;">
         							<option value ="">年级</option>
         						</select>
         						<select style="width: 150px;">
@@ -120,7 +120,7 @@
         						</select>
         						<select style="width: 150px;">
         							<option value ="">日期</option>
-        						</select>
+        						</select> -->
         							<div class="email-toolbar col-lg-12">
         								<ul class="email-pager">
         									<li class="pager-info"></li>
@@ -150,7 +150,7 @@
         													</tr>
         											</tbody>
         									</table>
-        									<ul class="one" style="list-style: none; margin-left: -25px;">
+        									<ul class="one" style="list-style: none; margin-left: -25px;" v-if="yesno==0">
 														<li v-for="(c,index) in cpsudentlist">
 															<div style="float:left;width:100px;">の</div>
 															<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
@@ -168,11 +168,109 @@
 															</div>
 														</li>
 													</ul>
+													<ul class="one" style="list-style: none; margin-left: -25px;" v-if="yesno==1">
+														<li v-for="(c,index) in listyn">
+															<div style="float:left;width:100px;">の</div>
+															<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
+															<div style="float:left;width:200px; margin-left: 60px">{{c.ljxdatetime}}</div>
+															<div style="float:right;width:100px;" class="see" v-on:click="tuiClick(index)"v-for="(w,index) in c.list">已：{{w.name5}}，未：{{w.name4}}</div>
+														</li>
+													</ul>
+													<ul class="one" style="list-style: none; margin-left: -25px;" v-if="yesno==2">
+														<li v-for="(c,index) in tuichiquery">
+															<div style="float:left;width:100px;">の</div>
+															<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
+															<div style="float:left;width:300px; margin-left: 60px">{{c.ljxdatetime}}</div>
+															<div style="float:right;width:40px;" class="see" v-on:click="tuiClick(index)">查看</div>
+															<div id="ul01" style="margin-left: -40px;display: none">
+																<div v-for="(w,index) in c.asslist">
+																	<a v-for="(s,index) in w.cpslist">
+																		<div style="float:left;width:100px;margin-left: 40px">{{s.studentname}}</div>
+																		<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
+																		<div style="float:left;width:300px; margin-left: 60px">{{w.ljxTitme}}</div>
+																		<div style="float:right;width:50px;margin-left:-10px;" data-toggle="modal" data-target="#mytui" v-on:click="tuix(w.ljxtuid)">  阅读</div>
+																	</a>
+																</div>
+															</div>
+														</li>
+													</ul>
         							</div>
         					</div>
         			</div>
         			<!--End #email-content -->
         			<!-- Page End here -->
+        			
+        			<!-- Modal -->
+					<form th:action="@{/stuinsert}" method="post" >
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">发布任务</h4>
+							任务类型：<select style="width: 100.43px;height: 25.06px; color: black;" id="type" name = "ljxtype">
+											<option value ="3">机试</option>
+											<option value ="1">考试</option>
+											<option value ="2">作业</option>
+										</select>
+						</div>
+						<div class="modal-body">
+								<ul style="list-style: none; margin-left: 100px">
+									<li class="ljxone">项目标题：<input type="text" name="ljxtitle"></li>
+									<li class="ljxone">项目内容：<input type="text" name="coent"></li>
+									<li style="margin-left: 27px;" class="ljxone" >
+										年级：<select  v-model="name" style="width: 159.43px;height: 25.06px;" name="ljxclass" >
+											<option v-for="(g,index) in listgrade" v-bind:value ="g.id">{{g.name}}</option>
+										</select>
+									</li>
+									<li style="margin-left: 27px;" class="ljxone" >
+										班级：<select style="width: 159.43px;height: 25.06px;" name="ljxclasses">
+											<option v-for="(tea,index) in listteacher" v-bind:value ="tea.name">{{tea.name}}</option>
+										</select>
+									</li>
+									<li class="ljxone" >定时发布：<input type="datetime-local" name="name1">（填写之后会在规定的时间发布）</li>
+									<li class="ljxone" >开始时间：<input type="datetime-local" name="ljxdate"></li>
+									<li class="ljxone" >结束时间：<input type="datetime-local" name="ljxtime"></li>
+								</ul>
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">发布任务</button>
+						</div>
+						</div>
+					</div>
+					</div>
+			        </form>
+			        
+			        
+			        <!-- Modal -->
+					<div class="modal fade" id="mytui" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document" style="width:500px;" v-for="(s,index) in xianglist">
+						<div class="modal-content" v-for="(cp,index) in s.cpslist">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">推迟任务</h4>
+							学员姓名：<span>{{cp.studentname}}</span>
+						</div>
+						<div class="modal-body" v-for="(t,index) in s.stulist">
+								<ul style="list-style: none; margin-left: 50px">
+									<li class="ljxone">项目标题：<input type="text" name="ljxtitle" v-bind:value="t.ljxtitle"></li>
+									<li class="ljxone"><span>推迟理由：</span><textarea rows="" cols="" style="width:180px;height:100px;">{{s.ljxcontent}}</textarea> </li>
+									<li class="ljxone">发布时间：<input type="text" name="ljxtitle" v-bind:value="t.ljxdate"></li>
+									<li class="ljxone">推迟时间：<input type="text" name="ljxtitle" v-bind:value="s.ljxTitme"></li>
+								</ul>
+								
+							<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" v-on:click="examine(s.ljxtuid,s.ljxuid)">同意推迟</button>
+							</div>
+						</div>
+						
+						
+						</div>
+					</div>
+					</div>
         		</div>
         		<!-- End .outlet -->
         	</div>
@@ -181,52 +279,7 @@
         </div>
 		
 		
-		<!-- Modal -->
-		<form th:action="@{/stuinsert}" method="post" >
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">发布任务</h4>
-				任务类型：<select style="width: 100.43px;height: 25.06px; color: black;" id="type" name = "ljxtype">
-								<option value ="3">机试</option>
-								<option value ="1">考试</option>
-								<option value ="2">作业</option>
-							</select>
-			</div>
-			<div class="modal-body">
-					<ul style="list-style: none; margin-left: 100px">
-						<li class="ljxone">项目标题：<input type="text" name="ljxtitle"></li>
-						<li class="ljxone">项目内容：<input type="text" name="coent"></li>
-						<li style="margin-left: 27px;" class="ljxone" >
-							年级：<select style="width: 159.43px;height: 25.06px;" name="ljxclass">
-								<option value ="S1">S1</option>
-								<option value ="S2">S2</option>
-								<option value ="Y2">Y2</option>
-							</select>
-						</li>
-						<li style="margin-left: 27px;" class="ljxone" >
-							班级：<select style="width: 159.43px;height: 25.06px;" name="ljxclasses">
-								<option value ="1716">1716</option>
-								<option value ="1718">1718</option>
-								<option value ="1717">1717</option>
-							</select>
-						</li>
-						<li class="ljxone" >定时发布：<input type="datetime-local" name="name1">（填写之后会在规定的时间发布）</li>
-						<li class="ljxone" >开始时间：<input type="datetime-local" name="ljxdate"></li>
-						<li class="ljxone" >结束时间：<input type="datetime-local" name="ljxtime"></li>
-					</ul>
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">发布任务</button>
-			</div>
-			</div>
-		</div>
-		</div>
-        </form>
+		
         <!-- End #content -->
         <!-- Javascripts -->
         <!-- Load pace first -->
@@ -279,7 +332,14 @@
 					el:"#b",
 					data:{
 						list:null,
+						listgrade:null,
+						listteacher:null,
 						cpsudentlist:null,
+						name:null,
+						yesno:0,//历史任务统计
+						listyn:null,
+						tuichiquery:null,//推迟任务
+						xianglist:null//推迟任务的详细信息
 					},
 					methods:{
 						tuiClick:function(i){
@@ -292,6 +352,23 @@
 						cpstudent2:function(claname){
 							var yesno = "否";
 							yes(claname,yesno);
+						},
+						cpstudent4:function(claname){
+							lishiquery(claname);
+						},
+						cpstudent3:function(claname){
+							tuichiqueryS(claname);
+						},
+						tuix:function(ljxTuid){
+							ljxTuidx(ljxTuid);
+						},
+						examine:function(ljxTuid,ljxUid){
+							alert(ljxTuid+">>>>>>examine>>>>"+ljxUid);
+							e(ljxTuid,ljxUid);
+						}
+					},watch:{
+						name:function(){
+							queryteacher(this.name);
 						}
 					}
 				});
@@ -299,11 +376,18 @@
 				url:"/teacher_history",
 				type:"post",
 				success:function(date){
-					alert(JSON.stringify(date))
+					//alert(JSON.stringify(date))
 					v.list = date;
 				}
 			})  
 			
+			$.ajax({
+				url:"querygrade",
+				type:"post",
+				success:function(date){
+					v.listgrade = date;
+				}
+			})
 			
 			function yes(name,yesno){
 				//完成任务的学生
@@ -312,12 +396,99 @@
 					data:"name="+name+"&yesno="+yesno,
 					type:"post",
 					success:function(date){
-						alert(JSON.stringify(date))
+						//alert(JSON.stringify(date))
 						v.cpsudentlist = date;
+						v.yesno=0;
 					}
 				})
 			}
+			
+			function queryteacher(grade){
+				alert(grade+"grade");
+				$.ajax({
+					url:"/queryclazz",
+					data:"gradeid="+grade,
+					type:"post",
+					success:function(date){
+						v.listteacher = date;
+					}
+				})
+			}
+			
+			//任务历史
+			function lishiquery(claname){
+				$.ajax({
+					url:"/studentnyj",
+					data:"ljxTname="+claname,
+					type:"post",
+					success:function(date){
+						console.log(date);
+						v.listyn = date;
+						v.yesno = 1;
+					},error:function(){
+						console.log("error");
+					}
+				})
+			}
+			
+			//tuichi
+			function tuichiqueryS(ljxclaname){
+				//alert("tuichi");
+				$.ajax({
+					url:"/tuichiquery",
+					data:"ljxclaname="+ljxclaname,
+					type:"post",
+					success:function(date){
+						//alert(JSON.stringify(date));
+						v.tuichiquery = date;
+						v.yesno = 2;
+					}
+				})
+			}
+			
+			//ljxTuid
+			function ljxTuidx(ljxTuid){
+				$.ajax({
+					url:"/xiangx",
+					data:"ljxTuid="+ljxTuid,
+					type:"post",
+					success:function(date){
+						//alert(JSON.stringify(date));
+						v.xianglist = date;
+					}
+				})
+			}
+			
+			//通过审核
+			function e(tid,uid){
+				var yesno = "是";
+				$.ajax({
+					url:"/einsert",
+					data:"tuid="+tid+"&uid="+uid+"&yesno="+yesno,
+					type:"post",
+					success:function(date){
+						
+					}
+				})
+			}
+			
+			//未通过审核
+			function eE(tid,uid){
+        		var yesno = "否";
+				$.ajax({
+					url:"/einsert",
+					data:"",
+					type:"post",
+					success:function(date){
+						
+					}
+				})
+			}
+			
         	})
+        	
+        	
+        	
         	
         </script>
     </body>

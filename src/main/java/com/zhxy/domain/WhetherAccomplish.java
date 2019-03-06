@@ -124,4 +124,8 @@ public class WhetherAccomplish {
 	public void setStulist(List<Studentassignment> stulist) {
 		this.stulist = stulist;
 	}
+	
+	public WhetherAccomplish() {
+		this.ljxdate=new Date();
+	}
 }

@@ -28,8 +28,18 @@ public class AssignmentPutOff {
     private String name5;
     
     private List<Studentassignment> stulist;
+    
+    private List<CpStudent> cpslist;
 
-    public Integer getLjxtuid() {
+    public List<CpStudent> getCpslist() {
+		return cpslist;
+	}
+
+	public void setCpslist(List<CpStudent> cpslist) {
+		this.cpslist = cpslist;
+	}
+
+	public Integer getLjxtuid() {
         return ljxtuid;
     }
 

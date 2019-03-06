@@ -9,6 +9,7 @@ import com.zhxy.service.ClazzService;
 import com.zhxy.service.CurrService;
 import com.zhxy.service.GradeService;
 import com.zhxy.service.PeopleService;
+import com.zhxy.service.PlanService;
 import com.zhxy.service.RoomService;
 import com.zhxy.service.StudentService;
 import com.zhxy.service.VersionService;
@@ -32,6 +33,8 @@ public class ExistController {
 	GradeService gradeService;
 	@Autowired
 	CurrService currService;
+	@Autowired
+	PlanService planService;
 	
 	@RequestMapping("ver")
 	public boolean existVer() {
@@ -77,4 +80,8 @@ public class ExistController {
 		return currService.existCurr(gid, mid);
 	}
 
+	@RequestMapping("auto")
+	public boolean existAuto() {
+		return planService.existAuto();
+	}
 }

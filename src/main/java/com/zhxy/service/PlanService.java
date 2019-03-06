@@ -33,7 +33,7 @@ public interface PlanService {
 	 * 自动排课接口
 	 * @param date
 	 */
-	Date autoPlan();
+	void autoPlan();
 	
 	int addPlan(Plan plan);
 	
@@ -50,5 +50,7 @@ public interface PlanService {
 	boolean existAuto();
 	
 	void pushAuto();
+	
+	List<Clazz> weekPlan(int id);
 }
 
