@@ -379,94 +379,104 @@
 				</tr>
 			</table>
 			<div class="page-module">
-				<span class="prev page-btn" :value="1" v-if="!clazzInfo.isFirstPage">首页</span> <span
-					class="prev page-btn" :value="clazzInfo.prePage" v-if="!clazzInfo.isFirstPage">上一页</span>
-				<span v-if="clazzInfo.pages>0">
-					{{clazzInfo.pageNum}}/{{clazzInfo.pages}} </span> <span class="next page-btn"
-					:value="clazzInfo.pages" v-if="!clazzInfo.isLastPage">尾页</span> <span
-					class="next page-btn" :value="clazzInfo.nextPage" v-if="!clazzInfo.isLastPage">下一页</span>
+				<span class="prev page-btn" :value="1" v-if="!clazzInfo.isFirstPage">首页</span>
+				<span class="prev page-btn" :value="clazzInfo.prePage"
+					v-if="!clazzInfo.isFirstPage">上一页</span> <span
+					v-if="clazzInfo.pages>0">
+					{{clazzInfo.pageNum}}/{{clazzInfo.pages}} </span> <span
+					class="next page-btn" :value="clazzInfo.pages"
+					v-if="!clazzInfo.isLastPage">尾页</span> <span class="next page-btn"
+					:value="clazzInfo.nextPage" v-if="!clazzInfo.isLastPage">下一页</span>
 			</div>
 		</div>
-		<div id="clazz-info" v-if="clazz">
+		<div id="clazz-info" class="col-lg-12" v-if="clazz">
+			<div class="my-top x"></div>
+			<div class="my-bottom x"></div>
+			<div class="my-left y"></div>
+			<div class="my-right y"></div>
 			<i class="im-close"></i>
-			<div class="clazz-left col-lg-3">
-				<img src="img/read.jpg" />
-				<p>班级: {{clazz.name}}</p>
-				<p>班主任: {{clazz.ban.name}}</p>
-				<p>年级: {{clazz.grade.name}}</p>
-				<p>当前教员: {{clazz.teacher.name}}</p>
-				<p>当前课程: {{clazz.curr.name}}</p>
-				<p>班长: {{clazz.monitor?clazz.monitor.name:"暂无"}}</p>
-				<p>开班人数: {{clazz.num}}</p>
-				<p>现人数: {{clazz.people}}</p>
-			</div>
-			<div class="clazz-right col-lg-9">
-				<div id="table">
+			<div class="content">
+				<div class="clazz-left col-lg-3">
+					<img src="img/read.jpg" />
+					<p>班级: {{clazz.name}}</p>
+					<p>班主任: {{clazz.ban.name}}</p>
+					<p>年级: {{clazz.grade.name}}</p>
+					<p>当前教员: {{clazz.teacher.name}}</p>
+					<p>当前课程: {{clazz.curr.name}}</p>
+					<p>班长:  {{clazz.monitor?clazz.monitor.name:"暂无"}}</p>
+					<p>开班人数: {{clazz.num}}</p>
+					<p>现人数: {{clazz.people}}</p>
+				</div>
+				<div class="clazz-right col-lg-9">
+					<div id="table">
+						<table>
+							<tr>
+								<td></td>
+								<td>周日</td>
+								<td>周一</td>
+								<td>周二</td>
+								<td>周三</td>
+								<td>周四</td>
+								<td>周五</td>
+								<td>周六</td>
+							</tr>
+							<tr>
+								<td>上午</td>
+								<td v-for="item in plans">{{item.am?item.am.room.name:""}}</td>
+							</tr>
+							<tr>
+								<td>下午</td>
+								<td v-for="item in plans">{{item.pm?item.pm.room.name:""}}</td>
+							</tr>
+						</table>
+					</div>
+					<div id="notice" class="clazz-div">
+						<h4>公告通知</h4>
+						<div class="my-container">
+							<div class="notice notice-pre hide-it" v-for="item in pre">{{item.time}}
+								{{item.headline}}</div>
+							<div :class="nHide? 'notice show-it hide-it':'notice show-it'"
+								v-for="item in notice.list">{{item.time}}
+								{{item.headline}}</div>
+							<div class="notice notice-next hide-it" v-for="item in next">{{item.time}}
+								{{item.headline}}</div>
+						</div>
+						<div class="page-module">
+							<span class="prev" :value="1" v-if="!notice.isFirstPage">首页</span>
+							<span class="prev" :value="notice.prePage"
+								v-if="!notice.isFirstPage">上一页</span> <span
+								v-if="notice.pages>0">
+								{{notice.pageNum}}/{{notice.pages}} </span> <span class="next"
+								:value="notice.pages" v-if="!notice.isLastPage">尾页</span> <span
+								class="next" :value="notice.nextPage" v-if="!notice.isLastPage">下一页</span>
+						</div>
+					</div>
+					<div id="dynamic" class="clazz-div">
+						<h4>班级动态</h4>
+						<div class="my-container"></div>
+						<div class="page-module"></div>
+					</div>
+				</div>
+				<div id="students" class="col-lg-12" v-if="clazz.students.length>0">
 					<table>
 						<tr>
+							<td>姓名</td>
+							<td>年龄</td>
+							<td>入班时间</td>
+							<td>迟到次数</td>
+							<td>考试不通过次数</td>
+							<td>职位</td>
+						</tr>
+						<tr v-for="item in clazz.students">
+							<td>{{item.name}}</td>
+							<td>{{item.age}}</td>
+							<td>{{item.join}}</td>
 							<td></td>
-							<td>周日</td>
-							<td>周一</td>
-							<td>周二</td>
-							<td>周三</td>
-							<td>周四</td>
-							<td>周五</td>
-							<td>周六</td>
-						</tr>
-						<tr>
-							<td>上午</td>
-							<td v-for="item in plans">{{item.am?item.am.room.name:""}}</td>
-						</tr>
-						<tr>
-							<td>下午</td>
-							<td v-for="item in plans">{{item.pm?item.pm.room.name:""}}</td>
+							<td></td>
+							<td>{{item.position?item.position.name:"暂无"}}</td>
 						</tr>
 					</table>
 				</div>
-				<div id="notice" class="clazz-div">
-					<h4>公告通知</h4>
-					<div class="my-container">
-						<div class="notice notice-pre hide-it" v-for="item in pre">{{item.time}}
-							{{item.headline}}</div>
-						<div :class="nHide? 'notice show-it hide-it':'notice show-it'"
-							v-for="item in notice.list">{{item.time}} {{item.headline}}</div>
-						<div class="notice notice-next hide-it" v-for="item in next">{{item.time}}
-							{{item.headline}}</div>
-					</div>
-					<div class="page-module">
-						<span class="prev" :value="1" v-if="!notice.isFirstPage">首页</span>
-						<span class="prev" :value="notice.prePage"
-							v-if="!notice.isFirstPage">上一页</span> <span v-if="notice.pages>0">
-							{{notice.pageNum}}/{{notice.pages}} </span> <span class="next"
-							:value="notice.pages" v-if="!notice.isLastPage">尾页</span> <span
-							class="next" :value="notice.nextPage" v-if="!notice.isLastPage">下一页</span>
-					</div>
-				</div>
-				<div id="dynamic" class="clazz-div">
-					<h4>班级动态</h4>
-					<div class="my-container"></div>
-					<div class="page-module"></div>
-				</div>
-			</div>
-			<div id="students" class="col-lg-12" v-if="clazz.students.length>0">
-				<table>
-					<tr>
-						<td>姓名</td>
-						<td>年龄</td>
-						<td>入班时间</td>
-						<td>迟到次数</td>
-						<td>考试不通过次数</td>
-						<td>职位</td>
-					</tr>
-					<tr v-for="item in clazz.students">
-						<td>{{item.name}}</td>
-						<td>{{item.age}}</td>
-						<td>{{item.join}}</td>
-						<td></td>
-						<td></td>
-						<td>{{item.position?item.position.name:"暂无"}}</td>
-					</tr>
-				</table>
 			</div>
 		</div>
 	</div>

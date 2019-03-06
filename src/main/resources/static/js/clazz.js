@@ -109,6 +109,8 @@ $("#content").on("click","#clazz-div .page-btn",function(){
 
 $("#content").on("click", ".info", function() {
 	cid = $(this).attr("value");
+	$("#clazz-div").hide();
+	$("#clazz-info").show();
 	$.ajax({
 		url: URL + "clazzInfo",
 		data: {
@@ -123,10 +125,13 @@ $("#content").on("click", ".info", function() {
 				},
 				success: function(e) {
 					queryNotice(1);
-					$("#clazz-div").hide();
-					$("#clazz-info").show();
-					$("#clazz-info").addClass("cool");
 					vue.plans = e;
+					$("#clazz-info .x").addClass("show-x");
+					$("#clazz-info .y").addClass("show-y");
+					$("#clazz-info .x").removeClass("hide-x");
+					$("#clazz-info .y").removeClass("hide-y");
+				},error:function(){
+					alert("服务器异常");
 				}
 			});
 
@@ -142,9 +147,14 @@ var tid=setInterval(function(){
 },1000);
 
 $("#content").on("click",".im-close",function(){
-	$("#clazz-info").removeClass("cool");
-	$("#clazz-info").addClass("low");
+	$("#clazz-info .x").addClass("hide-x");
+	$("#clazz-info .y").addClass("hide-y");
+	$("#clazz-info .x").removeClass("show-x");
+	$("#clazz-info .y").removeClass("show-y");
 	setTimeout(function(){
-		$("#clazz-div").show();		
-	},2000);
+		$("#clazz-info .x").removeClass("hide-x");
+		$("#clazz-info .y").removeClass("hide-y");
+		$("#clazz-info").hide();
+		$("#clazz-div").fadeIn();
+	},1000);
 });
