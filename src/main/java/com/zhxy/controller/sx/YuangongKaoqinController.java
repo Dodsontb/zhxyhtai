@@ -16,8 +16,7 @@ public class YuangongKaoqinController {
 	YuangongKaoQinService yuangongKaoQinService;
 	
 @RequestMapping("/toYuangongKaoqin")
-public String toYuangongKaoqin() {
-	
+public String toYuangongKaoqin() {	
 	return"sx/YuangongKaoqinList";
 }
 
@@ -42,4 +41,10 @@ public List<Yuangongkaoqin> update_yg(Integer id,Integer StuStatus){
 	return yuangongKaoQinService.queryAllyg();
 }
 	
+@ResponseBody
+@RequestMapping("/batchInsert")
+public List<Yuangongkaoqin> batch() {
+    yuangongKaoQinService.batch();
+    return yuangongKaoQinService.queryAllyg();
+}
 }

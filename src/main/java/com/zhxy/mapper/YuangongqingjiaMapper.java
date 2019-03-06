@@ -16,6 +16,8 @@ public interface YuangongqingjiaMapper {
 	
 	List<Qingjiatype> queryAllStatus(Integer id); //查询所有请假状态
 	
+	Yuangongqingjia queryBypositionid(Integer id);//根据员工职位查询信息
+	
 	int updateYuan(Integer id,Integer Status); //根据员工ID修改员工请假信息
 	
 	int delele(Integer id);

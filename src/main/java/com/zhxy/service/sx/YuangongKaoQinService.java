@@ -24,4 +24,9 @@ public interface YuangongKaoQinService {
 	 Statuastype queryAllStatus(Integer id);  //查询所有的考勤状态
 	 
 	 CpPosition queryAllPosition(Integer id);//查询所有的职位名称
+	 
+		/**
+		 * 批量插入考勤
+		 */
+		void batch();
 }
