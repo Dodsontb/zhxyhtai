@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,12 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSON;
 import com.zhxy.mapper.NoticeMapper;
 import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
 import com.zhxy.domain.Message;
 import com.zhxy.domain.Notice;
 import com.zhxy.domain.Noticetype;
+import com.zhxy.domain.Studentxlsx;
 import com.zhxy.handler.MyWebSocketHandler;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.hxktask.ExamTaskJob;
@@ -66,6 +69,10 @@ public class WriteController {
 				return "hxk/hxk_history";
 			}
 			
+			@RequestMapping("/student")
+			public String student() {
+				return "hxk/student";
+			}
 			
 			@RequestMapping("/hxk_write")
 			public String hxk_write() {
@@ -77,6 +84,11 @@ public class WriteController {
 			@RequestMapping("/aaa")
 			public String message() {
 				return "hxk/message";
+			}
+			
+			@RequestMapping("/jiaStudent")
+			public String jiaStudent() {
+				return "hxk/insertStudent";
 			}
 			
 			 @Autowired
@@ -203,8 +215,9 @@ public class WriteController {
 			
 			@RequestMapping("/queryUserGetId")
 			@ResponseBody
-			public List<CpUser> queryCpUser(Model model) {
-				List<CpUser> list=service.queryUserGetId();
+			public List<CpUser> queryCpUser(Model model,HttpSession session) {
+				CpUser user =  (CpUser)session.getAttribute("user");
+				List<CpUser> list=service.queryUserGetId(user.getUserid());
 				model.addAttribute("list", list);
 				return list;
 				
@@ -299,4 +312,48 @@ public class WriteController {
 				return i;
 			}
 			
+			@ResponseBody
+			@RequestMapping("/queryStudent")
+			public List<CpStudent> queryStudent(Model model) {
+				List<CpStudent> list=service.queryStudentAll();
+				model.addAttribute("list", list);
+				return list;
+			}
+			@RequestMapping("insertStudent")
+//			@RequestMapping(value="insertStudent",produces="application/json;charset=utf-8")
+			@ResponseBody
+			public void insertToAtt(@RequestBody List<Studentxlsx> obj) {
+				System.out.println(obj);
+				for (int i = 0 ;i<obj.size();i++) {
+						if(i!=0) {
+							CpStudent att = new CpStudent();
+							String studentname=obj.get(i).getStudentname();
+							Integer sex=null;
+							if(obj.get(i).getSex().equals("男")) {
+								sex=1;
+							}else if(obj.get(i).getSex().equals("女")) {
+								sex=0;
+							}
+							Integer age=Integer.parseInt(obj.get(i).getAge());
+							String address=obj.get(i).getAddress();
+							String email=obj.get(i).getEmail();
+							att.setStudentname(studentname);
+							att.setAddress(address);
+							att.setAge(age);
+							att.setSex(sex);
+							att.setEmail(email);
+							service.insertStudent(att);
+							
+						}
+				}
+		}
+			
+			
+			//@RequestMapping(value="tianjia",produces="application/json;charset=utf-8")
+			@ResponseBody
+			@RequestMapping("/tianjia")
+			public int tianjia(CpStudent ss) {
+				return service.insertStudent(ss);
+			}
+
 }

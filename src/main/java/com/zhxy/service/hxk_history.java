@@ -3,6 +3,7 @@ package com.zhxy.service;
 import java.util.List;
 
 import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.CpUser;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.HxkPageBean;
@@ -40,7 +41,7 @@ public interface hxk_history {
 	    
 	    int updataNotice();
 	    
-	    List<CpUser> queryUserGetId();
+	    List<CpUser> queryUserGetId(Integer userid);
 	    
 	    List<CpUser> queryCpUserByName(String username);
 	    
@@ -59,5 +60,7 @@ public interface hxk_history {
 	    
 	    int updateDiv(int Message_Id);
 	    
-
+	    List<CpStudent> queryStudentAll();
+	    
+	    int insertStudent(CpStudent ss);
 }

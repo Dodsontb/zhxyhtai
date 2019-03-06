@@ -1,6 +1,7 @@
 package com.zhxy.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,18 @@ public class Templatecontroller {
 	@RequestMapping("insertTemplate")
 	@ResponseBody
 	public int insertTemplate(Template record) {
+		Date d=new Date();
+		int y=d.getYear()+1900;
+		int m=d.getMonth()+1;
+		int day=d.getDate();
+		int h=d.getHours();
+		int mi=d.getMinutes();
+		int s=d.getSeconds();
+		String goudan=y+"-"+m+"-"+day+" "+h+":"+mi+":"+s; 
+		System.out.println("当前系统时间"+goudan);
+		record.setStart(goudan);
 		return ts.insertTemplate(record);
+		
 	}
 	//List<Template> querybytype(Integer softtypeid);
 	@RequestMapping("querybytype")
@@ -44,5 +56,27 @@ public class Templatecontroller {
 	public List<Template> cp_querybyname1(String name1) {
 		System.out.println("laila");
 		return ts.cp_querybyname1(name1);
+	}
+	//List<Template> cp_querycquestion(Integer id)
+	//List<Template> cp_querytquestion(Integer id)
+	//List<Template> cp_queryyquestion(Integer id)
+	//查询一张模板的选择题试卷
+	//选择题
+	@RequestMapping("cp_querycquestion")
+	@ResponseBody
+	public Template cp_querycquestion(Integer id) {
+		return ts.cp_querycquestion(id);
+	}
+	//填空题
+	@RequestMapping("cp_querytquestion")
+	@ResponseBody
+	public Template cp_querytquestion(Integer id) {
+		return ts.cp_querytquestion(id);
+	}
+	//应用题
+	@RequestMapping("cp_queryyquestion")
+	@ResponseBody
+	public Template cp_queryyquestion(Integer id) {
+		return ts.cp_queryyquestion(id);
 	}
 }

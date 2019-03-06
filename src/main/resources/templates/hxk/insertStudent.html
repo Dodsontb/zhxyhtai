@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content=""
+        />
+        <meta name="keywords" content=""
+        />
+        <meta name="application-name" content="sprFlat admin template" />
+        <!-- Import google fonts - Heading first/ text second -->
+        <link rel='stylesheet' type='text/css' />
+        <!--[if lt IE 9]>
+
+<![endif]-->
+        <!-- Css files -->
+        <!-- Icons -->
+        <link href="assets/css/icons.css" rel="stylesheet" />
+        <!-- jQueryUI -->
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+        <meta name="msapplication-TileColor" content="#3399cc" />
+        <style type="text/css">
+        
+        input[type="text"] {
+     			margin-top: 10px;
+				}
+        </style>
+</head>
+<body>
+			 <div class="col-lg-12 heading">
+                        <h3 class="page-header"><i class="ec-archive"></i>学生录入</h3>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        	<li><i class="im-home">
+                        	</i>
+                        	<a th:href="@{index.html}">Home</a>
+                        	<i class="en-arrow-right7"></i>
+                        	</li>
+                        	<li>学生录入</li></ul>
+        	</div>
+    	
+                  <div class="email-write">
+                      <form action="" id="file" role="form" class="form-horizontal" method="post" enctype="mulipart/form-data"> 
+                           <div class="form-group">
+                               <div class="col-lg-12">                                        	
+                                  <input type="text" class="form-control" id="to" name="studentname" placeholder="姓名" >
+                                   
+                                   <select name="sex" class="form-control" style="margin-top: 10px;">
+												<option>选择类型</option>
+												<option value="1">男</option>
+												<option value="0">女</option>	
+											</select>
+                                   
+                                   <input type="text" class="form-control" id="to" name="age" placeholder="年龄" > 
+									
+									<input type="text" class="form-control" id="to" name="address" placeholder="地址" >
+									
+									<input type="text" class="form-control" id="to" name="email" placeholder="邮箱" >
+                        	</div>
+			 </div>
+                                 
+             
+              <div class="form-group">
+                     <div class="col-lg-12">
+                              <div class="pull-left">
+                                                <input type="button" class="btn btn-blue tj" value="提交">
+                                                <a href="#" class="mr10 tip color-dark" title="Attach file"><i class="im-attachment s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert files using drive"><i class="im-google-drive s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert files using dropbox"><i class="fa-dropbox s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert photo"><i class="im-image2 s20"></i></a>
+                                                <a href="#" class="mr10 tip color-dark" title="Insert link"><i class="im-link s20"></i></a>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                               </form> 
+                            </div>
+                         
+                      
+              
+       
+				
+		     
+  
+	
+     <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> 
+     <script type="text/javascript" th:src="@{assets/js/bootstrap/bootstrap.js}"></script> 
+	 <script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
+	<script type="text/javascript">
+		
+			$(".tj").click(function(){
+		 		var studentname=$("[name=studentname]").val();
+		 		var sex=$("[name=sex]").val();
+		 		
+		 		var age=$("[name=age]").val();		
+		 		var address=$("[name=address]").val();
+		 		var email=$("[name=email]").val();
+		 		alert(sex)
+		 		$.ajax({
+					  url:"tianjia",
+					  data:'studentname='+studentname+'&sex='+sex+'&age='+age+'&address='+address+'&email='+email,
+					//  traditional:true, //默认false
+				      success:function(result){
+				    	
+				    	  window.location.href="/student";
+				      }		  
+					})
+		 		
+		 	});
+			</script> 
+</body>
+</html>

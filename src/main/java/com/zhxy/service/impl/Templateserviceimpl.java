@@ -39,5 +39,20 @@ public class Templateserviceimpl implements Templateservice{
 		// TODO Auto-generated method stub
 		return tm.cp_querybyname1(name1);
 	}
+	@Override
+	public Template cp_querycquestion(Integer id) {
+		// TODO Auto-generated method stub
+		return tm.cp_querycquestion(id);
+	}
+	@Override
+	public Template cp_querytquestion(Integer id) {
+		// TODO Auto-generated method stub
+		return tm.cp_querytquestion(id);
+	}
+	@Override
+	public Template cp_queryyquestion(Integer id) {
+		// TODO Auto-generated method stub
+		return tm.cp_queryyquestion(id);
+	}
 
 }

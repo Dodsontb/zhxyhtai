@@ -29,6 +29,8 @@
   
   	<select id="queryUserGetId" resultMap="BaseResultMap">
   		SELECT * FROM cp_user INNER JOIN img ON img.`id`=cp_user.`userid` 
+		WHERE userid!=#{userid}
+  		
   	
   	</select>
   
