@@ -54,5 +54,10 @@ public class Templateserviceimpl implements Templateservice{
 		// TODO Auto-generated method stub
 		return tm.cp_queryyquestion(id);
 	}
+	@Override
+	public int updatetemplateid(String end, String name1, int id) {
+		// TODO Auto-generated method stub
+		return tm.updatetemplateid(end, name1, id);
+	}
 
 }

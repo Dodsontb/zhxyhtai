@@ -339,6 +339,13 @@
 	WHERE template.id=#{id}
  </select>
  <select id="queryfabu" resultMap="BaseResultMap">
-    SELECT * FROM `template` WHERE `start` IS NULL
+    SELECT * FROM `template` WHERE `start` IS NULL 
+    	<if test="name2 != null">
+        and name2 = #{name2}
+      </if>
   </select>
+  
+  <update id="updatetemplateid" parameterType="com.zhxy.domain.Template">
+  		UPDATE `template` SET `start`=NOW(),`end`=#{end},`name1`=#{name1} where Id=#{id}
+  </update>
 </mapper>

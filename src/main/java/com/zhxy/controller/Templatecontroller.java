@@ -79,4 +79,10 @@ public class Templatecontroller {
 	public Template cp_queryyquestion(Integer id) {
 		return ts.cp_queryyquestion(id);
 	}
+	
+	@RequestMapping("updatetemplateid")
+	@ResponseBody
+	public int updatetemplateid(String end,String name1,int id) {
+		return ts.updatetemplateid(end, name1, id);
+	}
 }

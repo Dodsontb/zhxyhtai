@@ -32,4 +32,6 @@ public interface TemplateMapper {
     Template cp_querytquestion(Integer id);
     
     Template cp_queryyquestion(Integer id);
+    
+    int updatetemplateid(String end,String name1,int id);
 }
