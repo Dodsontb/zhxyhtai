@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.ClazzInfo;
+import com.zhxy.domain.ClazzTest;
 import com.zhxy.domain.MyNotice;
 import com.zhxy.domain.People;
 
@@ -22,8 +23,6 @@ public interface ClazzMapper {
 	Clazz queryById(int id);
 	
 	Clazz queryInfoById(int id);
-	
-	List<Clazz> allClazz();
 	
 	List<Clazz> queryAll();
 
@@ -55,4 +54,9 @@ public interface ClazzMapper {
 	void clazzStu(ClazzInfo clazzInfo);
 	
 	void clazzCurr(ClazzInfo clazzInfo);
+	
+	boolean isClazzBusy(@Param("date") Date date,@Param("id")int id,@Param("ap")boolean ap);
+
+	ClazzTest finishTest(int id);
+
 }

@@ -360,6 +360,7 @@
 					<td>年级</td>
 					<td>班主任</td>
 					<td>班长</td>
+					<td>当前课程</td>
 					<td>开班时间</td>
 					<td>版本号</td>
 					<td>开班人数</td>
@@ -371,6 +372,7 @@
 					<td>{{item.grade.name}}</td>
 					<td>{{item.ban.name}}</td>
 					<td>{{item.monitor?item.monitor.name:"暂无"}}</td>
+					<td>{{item.nowCurr?item.nowCurr.name:"暂无"}}</td>
 					<td>{{item.begin}}</td>
 					<td>{{item.version.name}}</td>
 					<td>{{item.num}}</td>
@@ -401,11 +403,12 @@
 					<p>班级: {{clazz.name}}</p>
 					<p>班主任: {{clazz.ban.name}}</p>
 					<p>年级: {{clazz.grade.name}}</p>
-					<p>当前教员: {{clazz.teacher.name}}</p>
-					<p>当前课程: {{clazz.curr.name}}</p>
+					<p>当前教员: {{clazz.nowTeacher?clazz.nowTeacher.name:"暂无"}}</p>
+					<p>当前课程: {{clazz.nowCurr?clazz.nowCurr.name:"暂无"}}</p>
 					<p>班长:  {{clazz.monitor?clazz.monitor.name:"暂无"}}</p>
 					<p>开班人数: {{clazz.num}}</p>
 					<p>现人数: {{clazz.people}}</p>
+					<div id="finish" class="btn" v-if="clazz.finish">结业</div>
 				</div>
 				<div class="clazz-right col-lg-9">
 					<div id="table">
@@ -451,31 +454,77 @@
 								class="next" :value="notice.nextPage" v-if="!notice.isLastPage">下一页</span>
 						</div>
 					</div>
-					<div id="dynamic" class="clazz-div">
-						<h4>班级动态</h4>
-						<div class="my-container"></div>
-						<div class="page-module"></div>
-					</div>
 				</div>
 				<div id="students" class="col-lg-12" v-if="clazz.students.length>0">
 					<table>
 						<tr>
 							<td>姓名</td>
 							<td>年龄</td>
+							<td>学号</td>
 							<td>入班时间</td>
-							<td>迟到次数</td>
-							<td>考试不通过次数</td>
 							<td>职位</td>
 						</tr>
 						<tr v-for="item in clazz.students">
 							<td>{{item.name}}</td>
 							<td>{{item.age}}</td>
+							<td>{{item.age}}</td>
 							<td>{{item.join}}</td>
-							<td></td>
-							<td></td>
 							<td>{{item.position?item.position.name:"暂无"}}</td>
 						</tr>
 					</table>
+				</div>
+				<div id="pond" class="hide-it col-lg-12">
+					<div class="col-lg-6" v-if="stuInfo.list.length>0">
+						<h4>结业考试通过</h4>
+						<table id="stuPond">
+							<tr>
+								<td class="hide-it"><input class="all" type="checkbox" /></td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>年龄</td>
+								<td>学历</td>
+							</tr>
+							<tr v-for="stu,index in stuInfo.list">
+								<td :style="remove?'display:table-cell':'display:none'"><input class="stu" :value="index" type="checkbox" /></td>
+								<td>{{stu.name}}</td>
+								<td>{{stu.sexInfo}}</td>
+								<td>{{stu.age}}</td>
+								<td>{{stu.edu.name}}</td>
+							</tr>
+						</table>
+						<div class="page">
+							<p> {{stuInfo.pageNum}}/{{stuInfo.pages}} </p>
+							<span v-if="!stuInfo.isFirstPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="stupage(stuInfo.prePage)">上一页</span>
+							<span v-if="stuInfo.hasNextPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="stupage(stuInfo.nextPage)">下一页</span>
+						</div>
+					</div>
+					<div class="col-lg-6" v-if="freeInfo.list.length>0">
+						<h4>结业考试未通过</h4>
+						<table id="freePond">
+							<tr>
+								<td class="hide-it"><input class="all" type="checkbox" /></td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>年龄</td>
+								<td>学历</td>
+							</tr>
+							<tr v-for="stu,index in freeInfo.list">
+								<td :style="plus?'display:table-cell':'display:none'"><input class="stu" type="checkbox" :value="index" /></td>
+								<td>{{stu.name}}</td>
+								<td>{{stu.sexInfo}}</td>
+								<td>{{stu.age}}</td>
+								<td>{{stu.edu.name}}</td>
+							</tr>
+						</table>
+						<div class="page">
+							<p> {{freeInfo.pageNum}}/{{freeInfo.pages}}</p>
+							<span v-if="!freeInfo.isFirstPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="freepage(freeInfo.prePage)">上一页</span>
+							<span v-if="freeInfo.hasNextPage" class="fc-button fc-state-default fc-corner-left fc-corner-right" @click="freepage(freeInfo.nextPage)">下一页</span>
+						</div>						
+					</div>
+					<div class="col-lg-12">
+						<button class="btn" id="end">确认</button>
+					</div>				
 				</div>
 			</div>
 		</div>

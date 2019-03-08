@@ -267,8 +267,6 @@ $("#content").on("click",".btn-primary",function(){
 		}
 		list.push(curr);
 	});
-	vue.clazz.tid=list[0].tid;
-	vue.clazz.cid=list[0].id;
 	vue.clazz.curriculums=list;
 	$.ajax({
 		type:"post",

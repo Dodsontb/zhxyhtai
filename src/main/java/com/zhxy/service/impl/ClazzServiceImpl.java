@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.ClazzInfo;
+import com.zhxy.domain.ClazzTest;
 import com.zhxy.domain.Major;
 import com.zhxy.domain.MyNotice;
 import com.zhxy.domain.Student;
@@ -114,6 +115,12 @@ public class ClazzServiceImpl implements ClazzService{
 		Page<Clazz> pageInfo=PageHelper.startPage(page,size);
 		clazzMapper.queryAll();
 		return pageInfo.toPageInfo();
+	}
+
+	@Override
+	public ClazzTest finishTest(int id) {
+		// TODO Auto-generated method stub
+		return clazzMapper.finishTest(id);
 	}
 
 }

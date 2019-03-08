@@ -76,6 +76,7 @@
 	box-shadow: 5px 5px 5px gray inset, 5px -5px 5px gray inset, -5px 5px
 		5px gray inset, -5px -5px 5px gray inset;
 	border-radius: 10px;
+	position: relative;
 }
 
 .clazz-left img {
@@ -135,19 +136,6 @@
 .notice:nth-of-type(2n) {
 	background-color: rgba(255, 223, 37, 1);
 }
-
-.dynamic {
-	background-color: rgba(153, 204, 255, 1);
-}
-
-.dynamic:nth-of-type(2n) {
-	background-color: rgba(204, 204, 255, 1);
-}
-
-.dynamic:nth-of-type(3n) {
-	background-color: rgba(255, 204, 153, 1);
-}
-
 .notice:hover {
 	background-color: rgba(255, 204, 102, 1);
 }
@@ -200,4 +188,32 @@ td {
 .info {
 	cursor: pointer;
 	text-decoration: underline;
+}
+#finish{
+	position: absolute;
+	bottom:10px;
+	right:20px;
+	padding: 4px 15px;
+	background-color: skyblue;
+	border-radius: 10px;
+	color: white;
+}
+#finish:hover{
+	box-shadow: 3px 3px 1px gray;
+}
+.page{
+	text-align: center;
+	padding: 10px;
+}
+.page .fc-button{
+	margin: 0 10px
+}
+.col-lg-6 h4{
+	text-align: center;
+}
+#pond table{
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+	background: white;
 }

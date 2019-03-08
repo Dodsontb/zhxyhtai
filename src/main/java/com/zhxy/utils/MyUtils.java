@@ -499,4 +499,17 @@ public class MyUtils {
 		}
 	}
 	
+	public static Date dayAfter(Date date,int day) {
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, day);
+		return calendar.getTime();
+	}
+	
+	public static boolean isWeekDay(Date date) {
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.DAY_OF_WEEK)==1;
+	}
+	
 }

@@ -35,7 +35,7 @@ public interface PlanService {
 	 */
 	void autoPlan();
 	
-	int addPlan(Plan plan);
+	void addPlan(Plan plan);
 	
 	int deleteAdv();	
 	
@@ -52,5 +52,9 @@ public interface PlanService {
 	void pushAuto();
 	
 	List<Clazz> weekPlan(int id);
+	
+	void addFinishTest(int id,Date date);
+	
+	boolean notHaveTest(int id,Date date);
 }
 

@@ -1,5 +1,6 @@
 package com.zhxy.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zhxy.domain.Curriculum;
@@ -33,5 +34,13 @@ public interface CurrService {
 	
 	void delCurr(int cid);
 	
-	void updateNowCurr(int id);
+	void updateNowCurrStart(int id,Date date);
+
+	void updateNowCurrEnd(int id,Date date);
+	
+	Integer nextCurr(int id,Date date);
+	
+	Integer nowId(int id,Date date);
+	
+	Integer nowId(int id);
 }

@@ -8,19 +8,21 @@
 		<result property="num" column="num" />
 		<result property="begin" column="begin" />
 		<result property="people" column="people" />
+		<result property="finish" column="finish" />
 		<association property="grade" column="gradeId"
 			select="com.zhxy.mapper.GradeMapper.queryById"
 			javaType="com.zhxy.domain.Grade"></association>
 		<association property="ban" column="bid" select="com.zhxy.mapper.PeopleMapper.queryById" javaType="com.zhxy.domain.People"></association>
-		<association property="teacher"
-			javaType="com.zhxy.domain.People" column="teacherId"
-			select="com.zhxy.mapper.PeopleMapper.queryById"></association>
-		<association property="curr"
-			javaType="com.zhxy.domain.Curriculum" column="currId"
-			select="com.zhxy.mapper.CurriculumMapper.queryById"></association>
 		<association property="major" column="way" select="com.zhxy.mapper.MajorMapper.queryById"></association>
+		<association property="finish" column="id" javaType="boolean" select="isFinish"></association>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Clazz" extends="clazz" id="clazzinfo">
+		<association property="nowTeacher"
+			javaType="com.zhxy.domain.People" column="id"
+			select="com.zhxy.mapper.PeopleMapper.nowTeacher"></association>
+		<association property="nowCurr"
+			javaType="com.zhxy.domain.Curriculum" column="id"
+			select="com.zhxy.mapper.CurriculumMapper.clazzNowCurr"></association>
 		<association property="students" column="id" javaType="list" select="com.zhxy.mapper.StudentMapper.clazzStu"></association>
 		<association property="version" column="vid" javaType="com.zhxy.domain.Version" select="com.zhxy.mapper.VersionMapper.queryById"></association>
 		<association property="monitor" column="id" javaType="com.zhxy.domain.Student" select="com.zhxy.mapper.StudentMapper.monitor"></association>
@@ -31,10 +33,22 @@
 		<result property="weekNum" column="weekNum" />
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Clazz" extends="clazz" id="planClazz">
+		<association property="teacher"
+			javaType="com.zhxy.domain.People" column="{date=date,id=id}"
+			select="com.zhxy.mapper.PeopleMapper.queryPlanTeacher"></association>
+		<association property="curr"
+			javaType="com.zhxy.domain.Curriculum" column="{date=date,id=id}"
+			select="com.zhxy.mapper.CurriculumMapper.queryPlanCurr"></association>
 		<association property="event" column="{date=date,id=id}" javaType="com.zhxy.domain.Event" select="com.zhxy.mapper.EventMapper.dateEvent"></association>
 		<association property="plans" column="{date=date,id=id}" javaType="list" select="com.zhxy.mapper.PlanMapper.classPlan"></association>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Clazz" extends="clazz" id="advclazz">
+		<association property="teacher"
+			javaType="com.zhxy.domain.People" column="{date=date,id=id}"
+			select="com.zhxy.mapper.PeopleMapper.queryPlanTeacher"></association>
+		<association property="curr"
+			javaType="com.zhxy.domain.Curriculum" column="{date=date,id=id}"
+			select="com.zhxy.mapper.CurriculumMapper.queryPlanCurr"></association>
 		<association property="event" column="{date=date,id=id}" javaType="com.zhxy.domain.Event" select="com.zhxy.mapper.EventMapper.dateEvent"></association>
 		<association property="plans" column="{date=date,id=id}" javaType="list" select="com.zhxy.mapper.PlanMapper.classadvPlan"></association>
 	</resultMap>
@@ -43,15 +57,16 @@
 		<result property="headline" column="headline" />
 		<result property="time" column="Ntime" />
 	</resultMap>
+	<resultMap type="com.zhxy.domain.ClazzTest" id="finish">
+		<result property="id" column="id" />
+		<association property="cores" column="id" javaType="list" select="com.zhxy.mapper.StudentMapper.finishCore"></association>
+		<association property="fails" column="id" javaType="list" select="com.zhxy.mapper.StudentMapper.finishFaile"></association>
+	</resultMap>
 	<select id="queryById" resultMap="clazz">
 		select *
 		from clazz
 		where
 		id=#{id}
-	</select>
-	<select id="allClazz" resultMap="clazz">
-		select *
-		from clazz
 	</select>
 	<select id="queryAll" resultMap="clazzinfo">
 		select *
@@ -59,16 +74,16 @@
 	</select>
 	<select id="findClazz" resultMap="clazzNum">
 		select *,(select count(0) from plan where cid=clazz.id and `date`
-		between date(#{begin}) and date(#{end}) and active=false and
-		study=true) weekNum,(select count(0) from plan where cid=clazz.id and `date`
+		between date(#{begin}) and date(#{end}) and active=false)/2 weekNum,(select count(0) from plan where cid=clazz.id and `date`
 		<![CDATA[<=]]> date(#{before}) and active=false and
 		study=true) planNum
 		from clazz
-		where teacherId=#{teacher.id} and `start` <![CDATA[<=]]>
-		date(#{date})
+		where id in (select cid from teacher_history where pid=#{teacher.id}) and `start` <![CDATA[<=]]>
+		date(#{date}) and dissolve=false
 		order by planNum,`start`
 	</select>
 	<select id="clazzPlan" resultMap="planClazz">
+	
 		select *,#{date} `date`
 		from clazz
 		where dissolve=false
@@ -154,8 +169,8 @@
 		where Notice_Id in (select Notice_Id from notice_relation where cid=#{id})
 	</select>
 	<insert id="appendClazz" useGeneratedKeys="true" keyProperty="id">
-		insert into clazz(name,gradeId,teacherId,bid,start,begin,vid,currId,way,num,people)
-		value (#{name},#{grade.id},#{tid},#{bid},#{start},#{date},#{vid},#{cid},#{mid},#{num},#{num})
+		insert into clazz(name,gradeId,bid,start,begin,vid,way,num,people)
+		value (#{name},#{grade.id},#{bid},#{start},#{date},#{vid},#{mid},#{num},#{num})
 	</insert>
 	<insert id="clazzStu">
 		insert into stu_clazz(cid,sid,`join`)
@@ -168,4 +183,17 @@
 			(#{curr.tid},#{id},#{curr.id})
 		</foreach>
 	</insert>
+	<select id="isClazzBusy" resultType="boolean">
+		select case when (select count(0) from plan where `date`=date(#{date}) and cid=#{id} and ap=#{ap} )>0 then true else false end
+	</select>
+	<select id="isFinish" resultType="boolean">
+		select case when (select count(0) from class_calendar where `date`&lt;=date(now()) and cid=#{id} and eid in (select id from event where finish=true and gid =(select gradeId from clazz where id=#{id})) )>0 then true
+					else false
+					end
+	</select>
+	<select id="finishTest" resultMap="finish">
+		select id
+		from clazz
+		where id=#{id}
+	</select>
 </mapper>

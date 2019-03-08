@@ -33,9 +33,9 @@
 		select #{date} `date`
 	</select>
 	<insert id="addPlan">
-		insert plan(cid,roomid,ap,study,active,date,advance)
+		insert plan(cid,roomid,pid,cuid,ap,study,active,date,advance)
 		value
-		(#{clazz.id},#{rid},#{ap},#{study},#{active},#{date},#{advance})
+		(#{clazz.id},#{rid},#{clazz.tid},#{clazz.cid},#{ap},#{study},#{active},#{date},#{advance})
 	</insert>
 	<select id="existPlan" resultMap="plan">
 		select *
@@ -80,7 +80,7 @@
 	<select id="classadvPlan" resultMap="clazzplan">
 		select *
 		from plan
-		where `date`=date(#{date}) and cid=#{id} and advance=true		
+		where `date`=date(#{date}) and cid=#{id} and advance=true
 	</select>
 	<update id="updateDate">
 		update plan
@@ -101,11 +101,6 @@
 		select Max(`date`)
 		from plan
 	</select>
-	<select id="maxdate" resultType="date">
-		select Max(`date`)
-		from plan
-		where advance=true
-	</select>
 	<select id="mindate" resultType="date">
 		select min(`date`)
 		from plan
@@ -115,5 +110,10 @@
 		select *
 		from plan
 		where `date`=date(#{date}) and cid=#{id}
+	</select>
+	<select id="notHaveTest" resultType="boolean">
+		select case when (select count(0) from class_calendar where cid=#{id} and eid in (select id from event where finish=true and gid=(select gradeId from clazz where id=#{id})) and date &lt;=date(#{date}) )=0 then true
+		else false
+		end
 	</select>
 </mapper>

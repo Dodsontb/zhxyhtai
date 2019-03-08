@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
@@ -21,6 +22,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhxy.domain.Calendar;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.ClazzInfo;
+import com.zhxy.domain.ClazzTest;
 import com.zhxy.domain.Curriculum;
 import com.zhxy.domain.DatePlan;
 import com.zhxy.domain.Event;
@@ -82,7 +84,8 @@ public class AjaxController {
 	@RequestMapping("auto")
 	public Calendar auto(int type) {
 		planService.autoPlan();
-		return planService.calendar(type, planService.maxDate());
+		Date date=null==planService.maxDate()?new Date():planService.maxDate();
+		return planService.calendar(type, date);
 	}
 
 	@RequestMapping("cancelAdv")
@@ -90,6 +93,11 @@ public class AjaxController {
 		planService.deleteAdv();
 		Date date = MyUtils.isEmpty(str) ? new Date() : MyUtils.parse(str);
 		return planService.calendar(type, date);
+	}
+	
+	@RequestMapping("pushAuto")
+	public void pushAuto() {
+		planService.pushAuto();
 	}
 
 	@RequestMapping("grade")
@@ -389,5 +397,49 @@ public class AjaxController {
 	public void appendClazz(@RequestBody ClazzInfo clazzInfo) {
 		clazzService.appendClazz(clazzInfo);	
 	}
+	
+	@RequestMapping("finishBegin")
+	public void finishBegin(int id) {
+		ClazzTest clazz=clazzService.finishTest(id);
+		session.setAttribute("finishClazz", clazz);
+	}
+	
+	@RequestMapping(value="failDel",produces="application/json;charset=utf-8")
+	public void finishTestAdd(@RequestBody List<Student> list) {
+		ClazzTest clazz=(ClazzTest)session.getAttribute("finishClazz");
+		List<Student> lists=clazz.getCores();
+		lists.addAll(list);
+		clazz.setCores(lists);
+		List<Student> temps=clazz.getFails();
+		for (Student student : list) {
+			for (int i = 0; i < temps.size(); i++) {
+				if(student.getId()==temps.get(i).getId()) {
+					temps.remove(i);
+					i=temps.size();
+				}
+			}
+		}
+		clazz.setFails(temps);
+	}
+
+	@RequestMapping(value="successDel",produces="application/json;charset=utf-8")
+	public void finishTestDel(@RequestBody List<Student> list) {
+		ClazzTest clazz=(ClazzTest)session.getAttribute("finishClazz");
+		List<Student> lists=clazz.getFails();
+		lists.addAll(list);
+		clazz.setFails(lists);
+		List<Student> temps=clazz.getCores();
+		for (Student student : list) {
+			for (int i = 0; i < temps.size(); i++) {
+				if(student.getId()==temps.get(i).getId()) {
+					temps.remove(i);
+					i=temps.size();
+				}
+			}
+		}
+		clazz.setCores(lists);		
+	}
+	
+	
 }
 

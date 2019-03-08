@@ -66,8 +66,7 @@
 	<select id="isPlanBusy" resultType="int">
 		select 1
 		from plan
-		where `date` =date(#{day}) and ap=#{ap} and cid in
-		(select id from clazz where teacherId =#{teacher.id}) and study=true
+		where `date` =date(#{day}) and ap=#{ap} and cid in (select cid from teacher_history where pid=#{teacher.id} and (`begin`&lt;=#{day} or `begin` is null) and `end` is null group by cid) and study=true
 	</select>
 	<select id="isEventBusy" resultType="int">
 		select 1
@@ -112,8 +111,8 @@
 	<select id="teacher" resultMap="butter">
 		select *,(select score from teacher_core where pid=staffid and cid=#{id}) score
 		from cp_staff
-		where staffid in (select pid from teacher_curr where cid=#{id}) and (select count(0) from clazz where teacherId=staffid and dissolve=false) &lt; 3
-		order by (select count(0) from clazz where teacherId=staffid and dissolve=false),(select score from teacher_core where pid=staffid and cid=#{id}) desc
+		where staffid in (select pid from teacher_curr where cid=#{id}) and (select count(0) from teacher_history where pid=staffid and `begin` &lt;= now() and `end` is null) &lt; 3
+		order by (select count(0) from teacher_history where pid=staffid and `begin` &lt;= now() and `end` is null),(select score from teacher_core where pid=staffid and cid=#{id}) desc
 	</select>
 	<select id="queryTeacher" resultMap="teacher">
 		select *,case when (select count(0) from teacher_curr where pid=staffid and cid=#{cid} )>0 then true else false end `check`
@@ -124,4 +123,24 @@
 		insert into teacher_curr(pid,cid)
 		values <foreach collection="list" item="item" separator=",">(#{item},#{cid})</foreach>
 	</insert>
+	<select id="tid" resultType="Integer">
+		select pid
+		from teacher_history
+		where cid=#{id} and (`begin` &lt;= date(#{date})  or begin is null) and (`end` is null or `end` >=date(#{date}) )
+		limit 1
+	</select>
+	<select id="nowTeacher" resultMap="staff">
+		select *
+		from cp_staff
+		where staffid =(select pid
+		from teacher_history
+		where cid=#{id} and (`begin` &lt;=date(now()) or begin is null) and (`end` is null or `end` >=date(now()) )
+		limit 1)
+	</select>
+	<select id="queryPlanTeacher" resultMap="staff">
+		select *
+		from cp_staff
+		where staffid = (select pid from plan where cid=#{id} and
+		`date`=date(#{date}) and study is true)
+	</select>
 </mapper>
