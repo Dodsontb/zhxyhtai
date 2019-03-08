@@ -68,27 +68,29 @@ $(".affirm").click(function() {
 		time: $(".radio_time:checked").val(),
 		study: $(".isStudy").is(":checked")
 	};
-	$.ajax({
-		url: URL + "addEvent",
-		method: "post",
-		contentType: "application/json;charset=utf-8",
-		data: JSON.stringify(e),
-		success: function() {
-			$(".hidediv").hide(400);
-			$.ajax({
-				url: URL + "calendar",
-				data: {
-					str: vue.calendar.dateStr,
-					type: vue.calendar.type
-				},
-				success: function(data) {
-					vue.calendar = JSON.parse(data);
-					calendar = $("#calendar");
-				},
-				error: function() {
-					alert("连接超时");
-				}
-			});
-		}
-	});
+	if(list.length>0){
+		$.ajax({
+			url: URL + "addEvent",
+			type: "post",
+			contentType: "application/json;charset=utf-8",
+			data: JSON.stringify(e),
+			success: function() {				
+				$.ajax({
+					url: URL + "calendar",
+					data: {
+						str: vue.calendar.dateStr,
+						type: vue.calendar.type
+					},
+					success: function(data) {
+						vue.calendar = JSON.parse(data);
+						calendar = $("#calendar");
+					},
+					error: function() {
+						alert("连接超时");
+					}
+				});
+			}
+		});		
+	}
+	$(".hidediv").hide(400);
 });

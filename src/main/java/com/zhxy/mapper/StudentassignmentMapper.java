@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.zhxy.domain.AssignmentType;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Grade;
@@ -44,4 +45,5 @@ public interface StudentassignmentMapper {
 
 	List<Studentassignment> tuichiquery(String ljxclaname);
     
+	List<AssignmentType> typequery();
 }

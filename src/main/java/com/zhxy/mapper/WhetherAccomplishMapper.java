@@ -35,7 +35,7 @@ public interface WhetherAccomplishMapper {
     
     int deletestu(@Param("ljxtid")Integer ljxtid,@Param("ljxuid")Integer ljxuid);
     
-    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<CpStudent> u);
+    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<CpStudent> u,@Param("ljxYesno")String ljxYesno);
     
 //    老师所带的班级
     

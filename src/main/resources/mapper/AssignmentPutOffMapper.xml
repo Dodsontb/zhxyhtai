@@ -190,6 +190,10 @@
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
   		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
   </resultMap>
   
   <insert id="putoffinsert" parameterType="com.zhxy.domain.AssignmentPutOff">
@@ -234,6 +238,10 @@
   		<collection property="cpslist" column="ljxuid"
   		ofType="com.zhxy.domain.CpStudent"
   		select="cpstudent"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
   </resultMap>
   
   <!-- 推迟任务的学员 -->
@@ -250,6 +258,9 @@
   </select>
   <select id="studentassx" resultType="com.zhxy.domain.Studentassignment">
   		SELECT * FROM studentassignment WHERE ljxtid = #{ljxtid}
+  </select>
+  <select id="put" resultType="com.zhxy.domain.PutOffExamine">
+  		SELECT * FROM `put_off_examine` WHERE ljxtuid =#{ljxtuid}
   </select>
   
   <resultMap type="com.zhxy.domain.AssignmentPutOff" id="xiangX">
@@ -268,6 +279,10 @@
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
   		select="studentassx"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
   </resultMap>
   
   <!-- //审核 -->

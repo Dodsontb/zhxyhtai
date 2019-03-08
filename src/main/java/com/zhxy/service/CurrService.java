@@ -32,4 +32,6 @@ public interface CurrService {
 	boolean existCurr(int gid,Integer mid);
 	
 	void delCurr(int cid);
+	
+	void updateNowCurr(int id);
 }

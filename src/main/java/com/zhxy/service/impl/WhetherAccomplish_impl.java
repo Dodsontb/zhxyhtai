@@ -48,9 +48,9 @@ public class WhetherAccomplish_impl implements Service_WhetherAccomplish{
 	}
 
 	@Override
-	public int pilinsert(Integer ljxtid, List<CpStudent> u) {
+	public int pilinsert(Integer ljxtid, List<CpStudent> u,String ljxYesno) {
 		// TODO Auto-generated method stub
-		return mapper.pilinsert(ljxtid, u);
+		return mapper.pilinsert(ljxtid, u,ljxYesno);
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package com.zhxy.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zhxy.domain.Template;
 
 public interface TemplateMapper {
@@ -34,4 +36,5 @@ public interface TemplateMapper {
     Template cp_queryyquestion(Integer id);
     
     int updatetemplateid(String end,String name1,int id);
+    List<Template> queryfabu(@Param("name2")String name2);
 }

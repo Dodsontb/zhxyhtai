@@ -128,5 +128,11 @@ public class CurrServiceImpl implements CurrService{
 		// TODO Auto-generated method stub
 		curriculumMapper.delCurr(cid);
 	}
+
+	@Override
+	public void updateNowCurr(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

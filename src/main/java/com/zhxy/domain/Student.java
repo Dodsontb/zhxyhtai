@@ -19,6 +19,8 @@ public class Student {
 	private String sexInfo;
 
 	private Education edu;
+	
+	private int late;
 
 	private boolean checked;
 
@@ -99,5 +101,13 @@ public class Student {
 
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+
+	public int getLate() {
+		return late;
+	}
+
+	public void setLate(int late) {
+		this.late = late;
 	}
 }

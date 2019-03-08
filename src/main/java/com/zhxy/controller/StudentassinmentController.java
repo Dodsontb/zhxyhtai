@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.domain.AssignmentPutOff;
+import com.zhxy.domain.AssignmentType;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Grade;
 import com.zhxy.domain.PutOffExamine;
 import com.zhxy.domain.Studentassignment;
 import com.zhxy.domain.TeacherHistory;
+import com.zhxy.domain.Template;
 import com.zhxy.domain.WhetherAccomplish;
 import com.zhxy.hxktask.DynamicTaskJobs;
 import com.zhxy.service.Service_AssignmentPutoff;
 import com.zhxy.service.Service_Studentassinment;
 import com.zhxy.service.Service_WhetherAccomplish;
+import com.zhxy.service.Templateservice;
 import com.zhxy.task.LJX_ExamTaskJob;
 import com.zhxy.task.Ljxputoff;
 
@@ -83,6 +86,7 @@ public class StudentassinmentController {
 		return list;
 	}
 	
+	//学员查看自己的推迟任务
 	@RequestMapping("/putoff")
 	@ResponseBody
 	public List<AssignmentPutOff> putoff(Integer ljxUid){//到时候改session
@@ -133,23 +137,40 @@ public class StudentassinmentController {
 	 * */
 	@RequestMapping("/stuinsert")
 	@ResponseBody
-	public int stuinsert(Studentassignment stu){
+	public int stuinsert(Studentassignment stu,String at,String cl){
 		int count = 0;
-		if(stu.getName1()!=null && stu.getName1().length()!=0) {
-			dynamicTaskJobs.addTaskJob(ljxputoff,stu.getName1());
-		}else {
-			count = ser.stuinsert(stu);
-			if(count >0) {
-				List<Studentassignment> list = ser.stuquery(stu.getLjxtid());
-				for (Studentassignment t : list) {
-					List<CpStudent> u = ser.cpsudentclazz(t.getLjxclasses());
-					if(u!=null) {
-						serW.pilinsert(stu.getLjxtid(), u);
-					}
+		String [] s = at.split(",");
+		for (String string : s) {
+			System.out.println(string);
+			if(stu.getName1()!=null && stu.getName1().length()!=0) {
+				String time = stu.getName1();
+				time = time.replace("T", " ")+":00";
+				stu.setLjxclasses(string);
+				count = ser.stuinsert(stu);
+				if(count >0) {
+					//List<Studentassignment> list = ser.stuquery(stu.getLjxtid());
+					//for (Studentassignment t : list) {
+						List<CpStudent> u = ser.cpsudentclazz(string);
+						if(u!=null) {
+							serW.pilinsert(stu.getLjxtid(), u,"0");
+						}
+					//}
+				}
+				dynamicTaskJobs.addTaskJob(ljxputoff,time);
+			}else {
+				stu.setLjxclasses(string);
+				count = ser.stuinsert(stu);
+				if(count >0) {
+					//List<Studentassignment> list = ser.stuquery(stu.getLjxtid());
+					//for (Studentassignment t : list) {
+						List<CpStudent> u = ser.cpsudentclazz(string);
+						if(u!=null) {
+							serW.pilinsert(stu.getLjxtid(), u,"否");
+						}
+					//}
 				}
 			}
 		}
-		
 		return count;
 	}
 	
@@ -218,5 +239,23 @@ public class StudentassinmentController {
 		p.setLjxuname("唐勇");
 		int count = sers.einsert(p);
 		return count;
+	}
+	
+	//任务类型
+	@RequestMapping("/typequery")
+	@ResponseBody
+	public List<AssignmentType> typequery(){
+		List<AssignmentType> list = ser.typequery();
+		return list;
+	}
+	
+	//板块
+	@Autowired
+	Templateservice sert;
+	@RequestMapping("/queryfabu")
+	@ResponseBody
+	public List<Template> queryfabu(String name2){
+		List<Template> list = sert.queryfabu(name2);
+		return list;
 	}
 }

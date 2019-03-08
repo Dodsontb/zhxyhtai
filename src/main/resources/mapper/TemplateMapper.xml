@@ -343,6 +343,7 @@
     	<if test="name2 != null">
         and name2 = #{name2}
       </if>
+
   </select>
   
   <update id="updatetemplateid" parameterType="com.zhxy.domain.Template">
