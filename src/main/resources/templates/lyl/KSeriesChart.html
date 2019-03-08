@@ -64,21 +64,21 @@
         	};
         
         $(function(){
-        	getKSChart_easy();
+        	/* getKSChart_easy(); */
         })
         
         function getKSChart_easy(){
         	getChart('/getKSChart_easy',1,1,option_exam);
         }
         
-        function getKSChartByClassId(condition){
-        	option_exam.title.text = condition.titleText;
-        	getChart('/getKSChartByClassId',1,condition.classId,option_exam);
+        function getKSChartByClassId(clazz){
+        	option_exam.title.text = clazz.name+"班级考试情况";
+        	getChart('/getKSChartByClassId',1,clazz.id,option_exam);
         }
         
-		function getKSChartByTemplateId(condition){
-			option_exam.title.text = condition.titleText;
-			getChart('/getKSChartByTemplateId',1,condition.templateId,option_exam);
+		function getKSChartByTemplateId(template){
+			option_exam.title.text = template.name + "考试情况";
+			getChart('/getKSChartByTemplateId',1,template.id,option_exam);
         }
         
         function getChart(url, seKey, seId, op){
@@ -154,7 +154,7 @@
            	                         	itemStyle : {
 	              	                    	normal : {
 	              	                    		lineStyle : {
-	              	                    			color : '#ddd'
+	              	                    			color : '#000'
 	              	                    		}
 	              	                    	},
 	              	                    	emphasis : {
@@ -175,14 +175,6 @@
 	              	                    			}
              	                    	        }
 	              	                    	}
-              	                    	},
-              	                    	markLine : {
-              	                    		data : [
-              	                    			[
-              	                    				{name: '标线1起点', value: 100, xAxis: 1, yAxis: 20},
-              	                    				{name: '标线1终点', xAxis: '周三', yAxis: 20},
-              	                    			]
-              	                    		]
               	                    	}
            	                        }
             	                ]

@@ -9,7 +9,7 @@
     <div id="main" style="height:400px"></div>
     <!-- ECharts单文件引入 -->
     <script src="/js/echarts.js"></script>
-    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
     <script type="text/javascript">
         // 路径配置
         require.config({
@@ -18,25 +18,44 @@
             }
         });
         
+        var paramList = {};
+        paramList.url = "/getLearningCountBySimpleTid";
+        paramList.param = {
+        	id : 11,
+        	total : 100,
+        	name4 : 10
+        };
+        paramList.option = {
+        	xAxis : {
+        		name : '分数区间'
+        	},yAxis : {
+        		name : '人数'
+        	}
+        	
+        }
+        
         $(function(){
-        	getChart();
+        	/* getChart(paramList); */
         })
         
+        function getChartByTid(template){
+        	paramList.param = template;
+        	getChart(paramList);
+        }
+        
         // 使用
-        function getChart(name, seKey, seId){
+        function getChart(paramList){
         	$.ajax({
-        		url:'/getBarChart',
-        		data:{
-        			key : seKey,
-        			id : seId
-        		},
+        		url:paramList.url,
+        		data:paramList.param,
         		type:'post',
+        		dataType:'json',
         		success:function(data){
         			if (!data) {
-        				/* console.log("data is null"); */
+        				console.log("data is null");
 						/* return; */
 					}
-        			var sDataList = eval(data);
+        			var sData = data;
 			        require(
 			            [
 			                'echarts',
@@ -48,7 +67,7 @@
 			                
 			                var option = {
 			                	title:{
-			                		text:"考试分数分布"
+			                		text:"考试"+sData.id+"分数分布"
 			                		
 			                	},
 			                    tooltip: {
@@ -59,12 +78,14 @@
 			                    },
 			                    xAxis : [
 			                        {
+			                        	name : paramList.option.xAxis.name,
 			                            type : 'category',
-			                            data : ['60分以下','60-70','70-80','80-90','90以上']
+			                            data : sData.list1
 			                        }
 			                    ],
 			                    yAxis : [
 			                        {
+			                        	name : paramList.option.yAxis.name,
 			                            type : 'value'
 			                        }
 			                    ],
@@ -72,9 +93,7 @@
 			                        {
 			                            "name":"人数",
 			                            "type":"bar",
-			                            "data":[
-			                            	23,178,334,352,87
-			                            ]
+			                            "data":sData.list2
 			                        }
 			                    ]
 			                };
