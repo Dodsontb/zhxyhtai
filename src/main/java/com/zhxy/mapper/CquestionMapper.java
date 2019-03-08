@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.zhxy.domain.Cquestion;
 
+import io.lettuce.core.dynamic.annotation.Param;
+
 public interface CquestionMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,6 +20,10 @@ public interface CquestionMapper {
     int updateByPrimaryKey(Cquestion record);
     
     List<Cquestion> queryCquestion(int qid);
+    
+    int updatefrequency(int id);
+    
+    Cquestion self_motion(@Param("sid")Integer sid,Integer tid);
     
     
 }

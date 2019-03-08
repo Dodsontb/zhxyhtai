@@ -12,7 +12,7 @@ public interface Templateservice {
 	
 	 List<Template> querybytype(Integer softtypeid);
 	 
-	 List<Template> cp_queryall();
+	 List<Template> cp_queryall(String name2);
 	 
 	 List<Template> cp_querybyname1(String name1);
 	 

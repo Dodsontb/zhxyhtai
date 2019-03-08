@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>批改</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <meta name="application-name" content="sprFlat admin template" />
+        <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Droid+Sans:400,700' />
+        <link href="assets/css/icons.css" rel="stylesheet" />
+        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/plugins.css" rel="stylesheet" />
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <link href="assets/css/custom.css" rel="stylesheet" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+        <meta name="msapplication-TileColor" content="#3399cc" />
+        <script src="assets/plugins/core/pace/pace.min.js"></script>
+        <script src="assets/js/jquery-1.8.3.min.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>
+        <script src="assets/js/bootstrap/bootstrap.js"></script>
+        <script src="assets/js/jRespond.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+        <script src="assets/plugins/forms/autosize/jquery.autosize.js"></script>
+        <script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+        <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
+        <script src="assets/plugins/core/moment/moment.min.js"></script>
+        <script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
+        <script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
+        <script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
+        <script src="assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
+        <script src="assets/plugins/forms/tinymce/tinymce.min.js"></script>
+        <script src="assets/plugins/misc/highlight/highlight.pack.js"></script>
+        <script src="assets/plugins/misc/countTo/jquery.countTo.js"></script>
+        <script src="assets/js/jquery.sprFlat.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/pages/blank.js"></script>
+        <script src="assets/js/vue.js"></script>
+    </head>
+    <body>
+        <div id="content">
+            <!-- Start .content-wrapper -->
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 heading">
+                        <h1 class="page-header"><i class="im-font"></i> 做题</h1>
+                        </ul>
+                    </div>
+                </div>
+                <div class="outlet">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">填空题</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-lg-10 col-md-10" v-for="(obj2,index) in list2.tquestion">
+                                    	<div class="panel-heading" style="background-color: #0088CC;">
+					                        <h3 class="panel-title" style="color: white;">题目</h3>
+					                    </div>
+					                    <div class="panel-body cp_tiankongti">
+					                        <div class="cp-horizontal">
+					                            <div class="form-group">
+					                                <textarea class="form-control" rows="3" disabled="disabled" v-bind:data-id="obj2.id">{{obj2.question}}</textarea>
+					                            </div>
+					                            <button type="button" value="test" class="cp_tiankong" onclick ="check(this)">开始批改</button>
+					                        </div>
+					                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End .panel -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">应用题</h4>
+                                </div>
+                                <div class="panel-body">
+                                	<div class="col-lg-10 col-md-10" v-for="(obj3,index) in list3.yquestion">
+                                    	<div class="panel-heading" style="background-color: #0088CC;">
+					                        <h3 class="panel-title" style="color: white;">题目</h3>
+					                    </div>
+					                    <div class="panel-body">
+					                        <div>
+					                            <div class="col-lg-10 col-md-10 tt-horizontal">
+			                                        <textarea class="form-control" rows="3" disabled="disabled" v-bind:data-id="obj3.id">{{obj3.question}}</textarea>
+			                                        <textarea class="form-control" rows="3"></textarea>
+		                                   		 </div>
+					                        </div>
+					                    </div>
+					                    <button class="btn btn-success" onclick ="yzcheck(this)">正确</button>
+					                    <button class="btn btn-success" onclick ="yccheck(this)">错误</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"><button class="btn btn-success cp_bot">提交</button></div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+var v = new Vue({
+	el : ".outlet",
+		data : {
+			list2:{},
+			list3:{},
+			list4:{}
+		},
+	})
+var templateid=25;//题目id
+var uid=1;//学生id 
+$(function() {
+	/* 填空题 */
+	$.ajax({
+		data:{id:templateid},
+		type:"post",
+		url:"/cp_querytquestion",
+		success : function(data) {
+			v.list2=data;
+		}
+	});
+	/* 应用题 */
+	$.ajax({
+		data:{id:templateid},
+		type:"post",
+		url:"/cp_queryyquestion",
+		success : function(data) {
+			v.list3=data;
+		}
+	});
+	//selectxuan
+	/* 应用题 */
+	$.ajax({
+		data:{
+			templateid:templateid,
+			sid:uid,
+			cid:3
+		},
+		type:"post",
+		url:"/selectxuan",
+		success : function(data) {
+			console.log(data)
+		}
+	});
+	
+})
+$('body').on('click','.cp_bot',function(){
+	$.ajax({
+		data:{
+			templateid:templateid,
+			uid:uid
+		},
+		type:"post",
+		url:"/sumupdate",
+		success : function(data) {
+			
+		}
+	});
+	$.ajax({
+		data:{
+			templateid:templateid,
+			uid:uid
+		},
+		type:"post",
+		url:"/updateStatuslearning",
+		success : function(data) {
+			alert(data)
+		}
+	});
+})
+	/* 添加input */
+function check(th){
+	var question=$(th).prev().children("textarea").val();
+	var ainput=$(th).parent();
+	var reg = new RegExp( '()' , 'g' );
+	var b=question.split("()").length-1;
+	var tid=$(th).parent().find("textarea").attr("data-id");
+	for(var i = 0; i < b; i++){
+        var input="<input class=\"form-control cp_xdaan\" name=\"mask-cp\" type=\"text\" v-bind:value=\"obj4.record\"  v-for=\"(obj4,index) in list4\">"
+        $(ainput).append(input);
+    }
+	var bot="<button class=\"btn btn-success\" onclick =\"zcheck(this)\">正确</button><button class=\"btn btn-success\" onclick =\"ccheck(this)\">错误</button>";
+	$(ainput).append(bot);
+	$(th).remove();
+	
+	/* 查询答题内容 */
+	var record=[];
+	var t={};
+	alert(templateid)
+	$.ajax({
+		data:{
+			templateid:templateid,
+			sid:uid,
+			cid:2,
+			tid:tid
+		},
+		type:"post",
+		url:"/selectxuan",
+		success : function(data) {
+			var jg="";
+			var str=data.result;
+			arr=str.split(',');
+			for(var i=0;i<arr.length;i++)
+			{
+				alter(arr[i]);
+				t.arr[i]
+				record.push(t);
+			}
+			v.list4=record
+			console.log(record)
+		}
+	});
+}
+/* 正确 */
+function zcheck(th){
+	$(th).next().removeAttr("disabled");
+	$(th).parent().parent().css({"background": "#00DB00"});
+	$(th).attr("disabled", true); 
+}
+/* 错误 */
+function ccheck(th){
+	$(th).parent().removeAttr("disabled");
+	$(th).parent().parent().css({"background": "red"});
+	var tid=$(th).parent().find("textarea").attr("data-id");
+	$.ajax({
+		data:{
+			templateid:25,
+			sid:1,
+			tid:tid
+		},
+		type:"post",
+		url:"/updata_scoret",
+		success : function(data) {
+			
+		}
+	});
+	$(th).attr("disabled", true); 
+}
+function yzcheck(th){
+	$(th).next().removeAttr("disabled");
+	$(th).parent().css({"background": "#00DB00"});
+	$(th).attr("disabled", true); 
+}
+/* 错误 */
+function yccheck(th){
+	$(th).parent().removeAttr("disabled");
+	$(th).parent().css({"background": "red"});
+	var tid=$(th).parent().find("textarea").attr("data-id");
+	$.ajax({
+		data:{
+			templateid:25,
+			sid:1,
+			tid:tid
+		},
+		type:"post",
+		url:"/updata_scorey",
+		success : function(data) {
+			
+		}
+	});
+	$(th).attr("disabled", true); 
+}
+
+
+</script>

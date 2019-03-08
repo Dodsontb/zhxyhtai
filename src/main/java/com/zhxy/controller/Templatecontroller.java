@@ -34,7 +34,7 @@ public class Templatecontroller {
 		int s=d.getSeconds();
 		String goudan=y+"-"+m+"-"+day+" "+h+":"+mi+":"+s; 
 		System.out.println("当前系统时间"+goudan);
-		record.setStart(goudan);
+		record.setCreation(goudan);
 		return ts.insertTemplate(record);
 		
 	}
@@ -47,8 +47,8 @@ public class Templatecontroller {
 	//查询全部laila
 	@RequestMapping("cp_queryall")
 	@ResponseBody
-	public List<Template> cp_queryall() {
-		return ts.cp_queryall();
+	public List<Template> cp_queryall(String name2) {
+		return ts.cp_queryall(name2);
 	}
 	//按班级查询
 	@RequestMapping("cp_querybyname1")

@@ -1,5 +1,7 @@
 package com.zhxy.domain;
 
+import java.util.List;
+
 public class Record {
     private Integer id;
 
@@ -13,7 +15,7 @@ public class Record {
 
     private String result;
 
-    private Integer score;
+    private double score;
 
     private Integer status;
 
@@ -27,7 +29,7 @@ public class Record {
 
     private String name5;
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -75,11 +77,11 @@ public class Record {
         this.result = result;
     }
 
-    public Integer getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(double score) {
         this.score = score;
     }
 

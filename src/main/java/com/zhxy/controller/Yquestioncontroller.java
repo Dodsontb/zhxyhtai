@@ -26,4 +26,10 @@ public class Yquestioncontroller {
 	public int insertYquestion(Yquestion record) {
 		return ys.insertYquestion(record);
 	}
+	//错题+1
+	@RequestMapping("updataYquestion")
+	@ResponseBody
+	public int updataYquestion(int id) {
+		return ys.updataYquestion(id);
+	}
 }

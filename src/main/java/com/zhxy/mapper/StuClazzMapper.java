@@ -1,5 +1,7 @@
 package com.zhxy.mapper;
 
+import java.util.List;
+
 import com.zhxy.domain.StuClazz;
 
 public interface StuClazzMapper {
@@ -14,4 +16,6 @@ public interface StuClazzMapper {
     int updateByPrimaryKeySelective(StuClazz record);
 
     int updateByPrimaryKey(StuClazz record);
+    
+    List<StuClazz> clazzbysid(Integer cid);
 }

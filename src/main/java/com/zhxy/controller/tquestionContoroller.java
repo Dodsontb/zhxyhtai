@@ -25,6 +25,10 @@ public class tquestionContoroller {
 	public int insertTquestion(Tquestion record) {
 		return ts.insertTquestion(record);
 	}
-	
-	
+	//错题+1
+	@RequestMapping("updateTquestion")
+	@ResponseBody
+	public int updateTquestion(int id) {
+		return ts.updateTquestion(id);
+	}
 }

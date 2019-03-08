@@ -67,6 +67,6 @@
 	<select id="query" resultMap="section">
 		select *
 		from section
-		where (select sid from curr_section <where><if test="gid">and cid in (select cid from curriculum where gradeId=#{gid})<if test="mid">and mid=#{mid}</if></if><if test="cid">and cid=#{cid}</if>  </where> )
+		where id in (select sid from curr_section <where><if test="gid"> and cid in (select cid from curriculum where gradeId=#{gid} <if test="mid"> and mid=#{mid}</if>)</if><if test="cid"> and cid=#{cid}</if>  </where> )
 	</select>
 </mapper>

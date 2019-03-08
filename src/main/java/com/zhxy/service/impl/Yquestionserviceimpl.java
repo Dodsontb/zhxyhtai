@@ -23,6 +23,11 @@ public class Yquestionserviceimpl implements Yquestionservice{
 		// TODO Auto-generated method stub
 		return ym.insertYquestion(record);
 	}
+	@Override
+	public int updataYquestion(int id) {
+		// TODO Auto-generated method stub
+		return ym.updataYquestion(id);
+	}
 	
 
 }

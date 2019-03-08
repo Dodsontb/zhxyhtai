@@ -306,11 +306,10 @@
                     </div>        
 				</div>
  		
-<<<<<<< HEAD
- 				<div  class="modal" id="xiaoxi" style="height:300px;margin-top: 70px">
-=======
+
+ 			
  				<div  class="modal" id="xiaoxi" style="height:270px;margin-top: 70px">
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
+
  				<div class="modal-content">
  				<header class="modal-header">
  				<!-- <p style="margin-left: 320px;">吴亦凡<span class="close">×</span></p> -->
@@ -561,10 +560,7 @@
 					 alert("获取"+uid)   */
 					$.post("getAllUserList","chatid="+uid,function(result){
 						if(result[0]!=null){
-<<<<<<< HEAD
-=======
 							console.log(result[1]);
->>>>>>> branch 'master' of https://github.com/Dodsontb/zhxyhtai.git
 							$(".modal-header").append("<p style=\"margin-left: 320px;font-size:20px\">"+result[0].username+"<span class=\"close\">×</span></p>");
 						}
 						v.ulist=result

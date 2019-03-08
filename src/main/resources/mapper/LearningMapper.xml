@@ -5,7 +5,7 @@
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="templateid" jdbcType="INTEGER" property="templateid" />
-    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="total" property="total" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="Status" jdbcType="INTEGER" property="status" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
@@ -15,6 +15,7 @@
     <result column="name5" jdbcType="VARCHAR" property="name5" />
      <result column="cid" jdbcType="INTEGER" property="cid" />
      <result column="studentname" jdbcType="VARCHAR" property="studentname" />
+     <result column="name" property="name" />
   </resultMap>
   <sql id="Base_Column_List">
     Id, uid, templateid, total, time, Status, name1, name2, name3, name4, name5
@@ -168,5 +169,33 @@
 	WHERE templateid=#{templateid} 
 	AND learning.`uid` IN (SELECT sid FROM `stu_clazz` WHERE `cid`=#{cid})
    </select>
-  
+   <!-- 提交试卷算分数总和 -->
+   <update id="sumupdate" parameterType="com.zhxy.domain.Learning">
+		update `learning` set `total` =(
+		select sum(`Score`) from `record` where `templateid`=#{templateid} and sid=#{uid})
+		where `templateid`=#{templateid} and `uid`=#{uid}
+	</update>
+	<!-- 提交试卷改变状态 -->
+	<update id="updateStatuslearning" parameterType="com.zhxy.domain.Learning">
+		update `learning` set `Status` =1
+		where `templateid`=#{templateid} and `uid`=#{uid}
+	</update>
+  	<!-- 批量新增learning表的templateid,uid -->
+  	<insert id="insertlearning" >
+		insert into
+		record(templateid,cid)
+		values
+		<foreach collection="list" item="s" index="index"
+			separator=",">
+			(
+			#{s.templateid},
+			#{s.cid},
+			)
+		</foreach>
+	</insert>
+	<select id="selectstulearning" resultMap="BaseResultMap">
+		SELECT learning.*,template.`Name` FROM `learning` 
+		INNER JOIN `template` ON learning.`templateid`=template.`id`
+		WHERE learning.`uid`=#{uid}
+	</select>
 </mapper>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>查看试卷</title>
+		<title>查看记录</title>
 		<style>
 			table{
 				border:1px solid lightgray;
@@ -18,25 +18,24 @@
 				<thead>
 					<tr>
 						<td>分数</td>
-						<th>姓名</th>
+						<th>试卷名称</th>
 						<th>是否交卷</th>
 						<th>操作</th>
 					</tr>
 					<tbody v-for="(obj,index) in list">
 						<tr>
 							<td>{{obj.total}}</td>
-							<td>{{obj.studentname}}</td>
-							<template v-if="obj.status==1">
-							  <td>是</td>
+							<td>{{obj.name}}</td>
+							<template v-if="obj.status==0">
+							  <td>否</td>
 							  <td>
-							 	<a class="cp_aa"  v-bind:data-id="obj.id" v-bind:data-uid="obj.uid">查看详情</a>
+							 	<a class="cp_aa"  v-bind:data-id="obj.templateid" v-bind:data-uid="obj.uid">做题</a>
 							  </td>
 							</template>
 							<template v-else>
-								<td v-bind:data-id="obj.uid">否</td>
+								<td>是</td>
 								<td></td>
 							</template>
-							
 						</tr>
 					</tbody>
 				</thead>
@@ -51,27 +50,36 @@
 			list:null
 		}
 	})
-	
 	$(function() {
-		/* var cid=[[${cid}]];//获取selectTest页面传过来的班级id */
-		var cid=1;//班级id
-		var templateid=[[${templateid}]];//获取selectTest页面传过来的试卷id,题目id
+		var uid=1;//学生id
 		$.ajax({
 			type:"post",
-			url:"cp_selectBycid",
+			url:"selectstulearning",
 			async:true,
 			data: {
-				cid:cid,
-				templateid:templateid
+				uid:uid
 			},
 			success : function(data) {
+				console.log(data)
 				v.list=data
 			}
 		});
 	})
 	$('body').on('click','.cp_aa',function(){
 			var templateid = this.getAttribute("data-id");//learning主键
+			var uid = this.getAttribute("data-uid");//uid主键
 			/* location.href="correct?templateid="+templateid+"&uid="+uid; */
-			location.href="correct?id="+templateid;//模拟
+			$.ajax({
+				type:"post",
+				url:"typo",
+				async:true,
+				data: {
+					templateid:templateid,
+					uid:uid
+				},
+				success : function(data) {
+					
+				}
+			});
 	})
 </script>

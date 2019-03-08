@@ -30,9 +30,9 @@ public class Templateserviceimpl implements Templateservice{
 		return tm.querybytype(softtypeid);
 	}
 	@Override
-	public List<Template> cp_queryall() {
+	public List<Template> cp_queryall(String name2) {
 		// TODO Auto-generated method stub
-		return tm.cp_queryall();
+		return tm.cp_queryall(name2);
 	}
 	@Override
 	public List<Template> cp_querybyname1(String name1) {

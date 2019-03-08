@@ -199,4 +199,7 @@
   <select id="queryYquestion" resultMap="BaseResultMap">
     SELECT * FROM `yquestion` WHERE `Qid`=#{qid}
   </select>
+  <update id="updataYquestion" parameterType="com.zhxy.domain.Yquestion">
+  	UPDATE `yquestion` SET frequency=`frequency`+1 WHERE id=#{id}
+  </update>
 </mapper>

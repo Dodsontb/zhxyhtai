@@ -68,22 +68,22 @@
 					                <h3 class="panel-title">选择题</h3>
 					            </div>
 					            <div class="panel-body topics" >
-					            	<div class="panel panel-default toggle" id="cp_xuan" v-for="(obj1,index) in list.cquestion" >
+					            	<div class="cp_xuan panel panel-default toggle" v-for="(obj1,index) in list.cquestion" >
 					                    <div class="panel-heading" style="background-color: #0088CC;">
 					                        <h3 class="panel-title" style="color: white;">题目1</h3>
 					                    </div>
 					                    <div class="panel-body">
 					                        <div class="form-horizontal">
 					                            <div class="form-group">
-					                                <label class="col-lg-2 col-md-2 col-sm-12 control-label">题目</label>
+					                                <label class="col-lg-2 col-md-2 col-sm-12 control-label cp_lable" v-bind:data-id="obj1.id">题目</label>
 					                                <div class="col-lg-10 col-md-10">
-					                                    <input class="form-control mask-phone" type="text" v-bind:value="obj1.question" disabled="disabled">
+					                                    <input class="form-control mask-phone" type="text" v-bind:value="obj1.question"  disabled="disabled">
 					                                </div>
 					                            </div>
 					                            <div class="form-group" v-for="objs2,index in obj1.a">
-					                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId"></label>
+					                                <label class="col-lg-2 col-md-2 col-sm-12 control-label"><input type="checkbox" name="chkId" ></label>
 					                                <div class="col-lg-10 col-md-10">
-					                                    <input  class="form-control mask-phoneExt"  type="text" name="daan1" v-bind:value="objs2" v-bind:data-id="objs2.id" disabled="disabled">
+					                                    <input  class="form-control mask-phoneExt cp_form"  type="text" name="daan1" v-bind:value="objs2" disabled="disabled">
 					                                </div>
 					                            </div>
 					                        </div>
@@ -100,13 +100,13 @@
                                     	<div class="panel-heading" style="background-color: #0088CC;">
 					                        <h3 class="panel-title" style="color: white;">题目1</h3>
 					                    </div>
-					                    <div class="panel-body">
-					                        <form class="form-horizontal" role="form">
+					                    <div class="panel-body cp_tiankongti">
+					                        <div class="cp-horizontal">
 					                            <div class="form-group">
-					                                <textarea class="form-control" rows="3" disabled="disabled">{{obj2.question}}</textarea>
+					                                <textarea class="form-control" rows="3" disabled="disabled" v-bind:data-id="obj2.id">{{obj2.question}}</textarea>
 					                            </div>
-					                           <input class="form-control" id="mask-phoneExt" type="text">
-					                        </form>
+					                            <button type="button" value="test" class="cp_tiankong" onclick ="check(this)">开始答题</button>
+					                        </div>
 					                    </div>
                                     </div>
                                 </div>
@@ -122,12 +122,12 @@
 					                        <h3 class="panel-title" style="color: white;">题目1</h3>
 					                    </div>
 					                    <div class="panel-body">
-					                        <form class="form-horizontal" role="form">
-					                            <div class="col-lg-10 col-md-10">
-			                                        <textarea class="form-control" rows="3" disabled="disabled">{{obj3.question}}</textarea>
+					                        <div>
+					                            <div class="col-lg-10 col-md-10 tt-horizontal">
+			                                        <textarea class="form-control" rows="3" disabled="disabled" v-bind:data-id="obj3.id">{{obj3.question}}</textarea>
 			                                        <textarea class="form-control" rows="3"></textarea>
 		                                   		 </div>
-					                        </form>
+					                        </div>
 					                    </div>
                                     </div>
                                 </div>
@@ -149,14 +149,33 @@ var v = new Vue({
 			list3:{}
 		},
 	})
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+var id=sission.getAttribute("templateid");
+var sid=sission.getAttribute("uid");//后台获取学生id
 $(function() {
+	alert(id)
 	/* 选择题 */
 	$.ajax({
-		data:{id:24},
+		data:{id:id},
 		type:"post",
 		url:"/cp_querycquestion",
 		success : function(data) {
-			console.log(data.cquestion[1].id)
 			for(var i=0;i<data.cquestion.length;i++){
 				var str=data.cquestion[i].answer
 				var a1=str.substring(0,str.indexOf(","))
@@ -173,37 +192,181 @@ $(function() {
 	}); 
 	/* 填空题 */
 	$.ajax({
-		data:{id:24},
+		data:{id:id},
 		type:"post",
 		url:"/cp_querytquestion",
 		success : function(data) {
-			console.log(data)
 			v.list2=data;
 		}
 	});
 	/* 应用题 */
 	$.ajax({
-		data:{id:24},
+		data:{id:id},
 		type:"post",
 		url:"/cp_queryyquestion",
 		success : function(data) {
-			console.log(data)
 			v.list3=data;
 		}
 	});
-	
+
 	$(".cp_bot").click(function(){
-		var correct="";
-		var checked=$(".panel :checked");
-		console.log(checked);
-		$.each(checked,function(){
-			var val=$(this).parents(".form-group").find(":text").val();
-			var data=$(this).parents(".form-group").find(":text").getAttribute('data-id');
-			alert(data)
-			correct+=val+",";
+		xuanze();
+		tiankong();
+		yingyong();
+		var uid=1;//学生id
+		//updateStatuslearning
+		var templateid=v.list.id;//模板id
+		$.ajax({
+			data:{
+				uid:uid,
+				templateid:templateid
+				},
+			type:"post",
+			url:"/updateStatuslearning",
+			success : function(data) {
+				
+			}
 		});
-		correct = correct.substring(0, correct.length - 1);
-		alert(correct)
 	})
 })
+//点击按钮根据
+ function check(th){
+	var question=$(th).prev().children("textarea").val();
+	var ainput=$(th).parent();
+	var reg = new RegExp( '()' , 'g' );
+	var b=question.split("()").length-1;
+	for(var i = 0; i < b; i++){
+        var input="<input class=\"form-control cp_xdaan\" name=\"mask-cp\" type=\"text\">"
+        $(ainput).append(input);
+    }
+	$(th).remove();
+} 
+/* 选择题 */
+function xuanze(){
+	var name1=getNowFormatDate();
+	var xuan="";
+	var sum=0;
+	var templateid=v.list.id;//模板id
+	var record=[];
+	$(".form-horizontal").each(function(){
+		++sum;
+	})
+	var score=50/sum;
+	$(".form-horizontal").each(function(){
+		//添加每题多少分
+		var id=$(this).find("label").attr("data-id");
+		var result="";
+		var t={
+				tid:parseInt(id),
+				templateid:templateid,
+				cid:1,
+				sid:sid,
+				name1:name1,
+				score:score
+		};
+		/* var str="record[0].tid="+tid+"record[0].id="+id
+		str+="record[1].tid="+tid+"record[1].id="+id */
+		$(this).find(":checked").each(function(){
+			var val=$(this).parent().next().find(":text").val();
+			console.log(val)
+			result+=val+",";
+		});
+		t.result=result.substring(0,result.length-1);
+		record.push(t);
+	});
+	console.log(record)
+	$.ajax({
+		data:JSON.stringify(record),
+		type:"post",
+		 contentType: 'application/json',
+		url:"/insertxuan",
+		success : function(data) {
+			xuan=data
+		}
+	}); 
+	return xuan;
+}
+/* 填空题 */
+function tiankong(){
+	var name1=getNowFormatDate();
+	var tian="";
+	var sum=0;
+	var templateid=v.list.id;//模板id
+	var cid="";//题目类型id
+	var list2=[];
+	$(".cp-horizontal").each(function(){
+		++sum;
+	})
+	var score=20/sum;
+	$(".cp-horizontal").each(function(){
+		var id=$(this).find("textarea").attr("data-id");
+		var result="";
+		var t1={
+				tid:parseInt(id),
+				templateid:templateid,
+				cid:2,
+				sid:sid,
+				name1:name1,
+				score:score
+		};
+		$(this).find(".cp_xdaan").each(function(){
+			var val1=$(this).val();
+			result+=val1+",";
+		});
+		t1.result=result.substring(0,result.length-1);
+		list2.push(t1);
+	});
+	console.log(list2)
+	$.ajax({
+			data:JSON.stringify(list2),
+			type:"post",
+			 contentType: 'application/json',
+			url:"/insertxuan",
+			success : function(data) {
+				tian=data
+			}
+		}); 
+		return tian;
+}
+/* 应用题 */
+function yingyong(){
+	var name1=getNowFormatDate();
+	var ying="";
+	var sum=0;
+	var templateid=v.list.id;//模板id
+	var cid="";//题目类型id
+	var list3=[];
+	$(".tt-horizontal").each(function(){
+		++sum;
+	})
+	var score=30/sum;
+	$(".tt-horizontal").each(function(){
+		var id=$(this).find("textarea").attr("data-id");
+		var result=$(this).find("textarea").last().val();
+		var t={
+				tid:parseInt(id),
+				templateid:templateid,
+				cid:3,
+				sid:sid,
+				result:result,
+				name1:name1,
+				score:score
+		};
+		list3.push(t);
+	});
+	console.log(list3)
+	$.ajax({
+		data:JSON.stringify(list3),
+		type:"post",
+		contentType: 'application/json',
+		url:"/insertxuan",
+		success : function(data) {
+			if(data!=0){
+				alert("交卷成功!")
+			}
+		}
+	}); 
+	return ying;
+}
+
 </script>
