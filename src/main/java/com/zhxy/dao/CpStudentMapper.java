@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.CpStudent;
 
 public interface CpStudentMapper {
@@ -14,4 +16,6 @@ public interface CpStudentMapper {
     int updateByPrimaryKeySelective(CpStudent record);
 
     int updateByPrimaryKey(CpStudent record);
+    
+    List<CpStudent> selectAll();
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 public class StuClazz {
     private Integer id;
 
-    private Integer cid;
+    private Integer cid;  //班级id
 
-    private Integer sid;
+    private Integer sid;  //学生id
 
     private Date join;
 

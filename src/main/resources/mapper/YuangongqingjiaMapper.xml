@@ -1,175 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhxy.dao.YuangongqingjiaMapper">
-  <resultMap id="BaseResultMap" type="com.zhxy.domain.Yuangongqingjia">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="staffid" jdbcType="INTEGER" property="staffid" />
-    <result column="staffname" jdbcType="VARCHAR" property="staffname" />
-    <result column="qingjiaReason" jdbcType="VARCHAR" property="qingjiareason" />
-    <result column="qingjiaTime" jdbcType="VARCHAR" property="qingjiatime" />
-    <result column="qingjiaStatus" jdbcType="INTEGER" property="qingjiastatus" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="name1" jdbcType="VARCHAR" property="name1" />
-    <result column="name2" jdbcType="VARCHAR" property="name2" />
-    <result column="name3" jdbcType="VARCHAR" property="name3" />
-    <result column="name4" jdbcType="VARCHAR" property="name4" />
-    <result column="name5" jdbcType="VARCHAR" property="name5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ID, staffid, staffname, qingjiaReason, qingjiaTime, qingjiaStatus, date, name1, name2, 
-    name3, name4, name5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from yuangongqingjia
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from yuangongqingjia
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.zhxy.domain.Yuangongqingjia">
-    insert into yuangongqingjia (ID, staffid, staffname, 
-      qingjiaReason, qingjiaTime, qingjiaStatus, 
-      date, name1, name2, name3, 
-      name4, name5)
-    values (#{id,jdbcType=INTEGER}, #{staffid,jdbcType=INTEGER}, #{staffname,jdbcType=VARCHAR}, 
-      #{qingjiareason,jdbcType=VARCHAR}, #{qingjiatime,jdbcType=VARCHAR}, #{qingjiastatus,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
-      #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.zhxy.domain.Yuangongqingjia">
-    insert into yuangongqingjia
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
-      <if test="staffid != null">
-        staffid,
-      </if>
-      <if test="staffname != null">
-        staffname,
-      </if>
-      <if test="qingjiareason != null">
-        qingjiaReason,
-      </if>
-      <if test="qingjiatime != null">
-        qingjiaTime,
-      </if>
-      <if test="qingjiastatus != null">
-        qingjiaStatus,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-      <if test="name1 != null">
-        name1,
-      </if>
-      <if test="name2 != null">
-        name2,
-      </if>
-      <if test="name3 != null">
-        name3,
-      </if>
-      <if test="name4 != null">
-        name4,
-      </if>
-      <if test="name5 != null">
-        name5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="staffid != null">
-        #{staffid,jdbcType=INTEGER},
-      </if>
-      <if test="staffname != null">
-        #{staffname,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiareason != null">
-        #{qingjiareason,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiatime != null">
-        #{qingjiatime,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiastatus != null">
-        #{qingjiastatus,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="name1 != null">
-        #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        #{name5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Yuangongqingjia">
-    update yuangongqingjia
-    <set>
-      <if test="staffid != null">
-        staffid = #{staffid,jdbcType=INTEGER},
-      </if>
-      <if test="staffname != null">
-        staffname = #{staffname,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiareason != null">
-        qingjiaReason = #{qingjiareason,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiatime != null">
-        qingjiaTime = #{qingjiatime,jdbcType=VARCHAR},
-      </if>
-      <if test="qingjiastatus != null">
-        qingjiaStatus = #{qingjiastatus,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        date = #{date,jdbcType=DATE},
-      </if>
-      <if test="name1 != null">
-        name1 = #{name1,jdbcType=VARCHAR},
-      </if>
-      <if test="name2 != null">
-        name2 = #{name2,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        name3 = #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        name4 = #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        name5 = #{name5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Yuangongqingjia">
-    update yuangongqingjia
-    set staffid = #{staffid,jdbcType=INTEGER},
-      staffname = #{staffname,jdbcType=VARCHAR},
-      qingjiaReason = #{qingjiareason,jdbcType=VARCHAR},
-      qingjiaTime = #{qingjiatime,jdbcType=VARCHAR},
-      qingjiaStatus = #{qingjiastatus,jdbcType=INTEGER},
-      date = #{date,jdbcType=DATE},
-      name1 = #{name1,jdbcType=VARCHAR},
-      name2 = #{name2,jdbcType=VARCHAR},
-      name3 = #{name3,jdbcType=VARCHAR},
-      name4 = #{name4,jdbcType=VARCHAR},
-      name5 = #{name5,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+
+<resultMap type="com.zhxy.domain.Yuangongqingjia" id="yuangongqingjia">
+    <id column="id"  property="id" />
+    <result column="staffid"  property="staffid" />
+    <result column="qingjiareason"  property="qingjiareason" />
+    <result column="qingjiatime"  property="qingjiatime" />
+    <result column="qingjiastatus"  property="qingjiastatus" />
+    <result column="date"  property="date" />
+    <result column="name1"  property="name1" />
+    <result column="name2"  property="name2" />
+    <result column="name3"  property="name3" />
+    <result column="name4"  property="name4" />
+    <result column="name5"  property="name5" />
+    
+<association property="staffName" column="staffid" select="queryById"></association>
+<association property="qingjiaStatus" column="qingjiastatus" select="queryAllStatus"></association>
+</resultMap>
+ 
+<select id="queryAll" resultMap="yuangongqingjia">
+
+select * from `yuangongqingjia`
+
+</select>
+ 
+<select id="queryById" resultType="com.zhxy.domain.CpStaff">
+
+select * from `cp_staff` where `staffid` = #{id}
+
+</select>
+
+<select id="queryAllStatus" resultType="com.zhxy.domain.Qingjiatype">
+
+select * from `qingjiatype` where `qingjiaType` = #{id}
+
+</select>
+
+<select id="queryByNameAndStatus" resultMap="yuangongqingjia">
+	SELECT * FROM `yuangongqingjia`  
+	<where>
+		<if test="Status !=null and Status!=0">
+			and `qingjiastatus` =#{Status} 
+		</if>
+		<if test="name!=null">
+			and `staffid` in (select staffid from cp_staff where staffname like concat('%',#{name},'%')) 
+		</if>
+	</where>
+</select>
+
+<update id="updateYuan">
+ 
+ update `yuangongqingjia` set `qingjiaStatus`=#{Status}  where `staffid`=#{id}
+ 
+</update>
+
+<insert id="insert" parameterType="com.zhxy.domain.Yuangongqingjia">  
+	        INSERT INTO yuangongqingjia (StaffId,
+     							  qingjiaReason,
+     							  qingjiaTime,
+     							  qingjiaStatus,
+     							  Date
+                                   )  
+	                  VALUES  (#{staffid},
+               					 #{qingjiareason},
+               					 #{qingjiatime},
+               					 #{qingjiastatus},
+               					 #{date}
+	                          )  
+</insert>
+
+
+ <delete id="delele">
+ 
+ delete from `yuangongqingjia` where `staffid` = #{id}
+ 
+ </delete>
 </mapper>

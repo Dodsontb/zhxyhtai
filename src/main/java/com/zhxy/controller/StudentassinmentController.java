@@ -1,4 +1,4 @@
-package com.zhxy.controller;
+/*package com.zhxy.controller;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class StudentassinmentController {
 	public String b() {
 		System.out.println("nima>>>>>>>>>>>>>>>>>>>>.");
 		return "ljxfabu/Studentassinment";
-	}
+	}*/
 	
 	/*@RequestMapping("/query")
 	@ResponseBody
@@ -38,4 +38,4 @@ public class StudentassinmentController {
 		System.out.println(list);
 		return list;
 	}*/
-}
+/*}*/

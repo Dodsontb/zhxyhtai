@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace = "com.zhxy.dao.ReplyMapper"> 
+	
+   
+	
+	<!--List<reply> findList(reply hotelreply);-->
+	<select id="findList"  resultType="com.zhxy.domain.Reply">
+		SELECT
+		*
+		FROM reply
+      
+	</select>
+	
+	
+	
+	<!--reply findById(@Param("id") Integer id);-->
+	<select id="findById" parameterType="Integer"  resultType="com.zhxy.domain.Reply">
+		SELECT
+		*
+		FROM reply  where id=#{id}
+	</select>
+	
+	<!-- ReplyDto findDtoById(@Param("id") Integer id);
+	 -->
+	 <select id="findDtoById" parameterType="Integer"  resultType="com.zhxy.domain.ReplyDto">
+		SELECT
+		*
+		FROM reply a,title b  where a.tid = b.id
+		and a.id=#{id}
+	</select>
+	 
+
+	<!--Integer insert(reply hotelreply);-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.zhxy.domain.Reply">  
+	        INSERT INTO reply (tid,
+      						 ra)  
+	                  VALUES  (#{tid},
+                 				#{ra}
+	                          )  
+	 </insert>
+	
+	
+	
+	
+	
+</mapper>

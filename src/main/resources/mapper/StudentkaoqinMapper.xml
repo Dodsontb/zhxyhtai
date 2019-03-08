@@ -1,141 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhxy.dao.StudentkaoqinMapper">
-  <resultMap id="BaseResultMap" type="com.zhxy.domain.Studentkaoqin">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="studentID" jdbcType="INTEGER" property="studentid" />
-    <result column="kaoqinStatus" jdbcType="INTEGER" property="kaoqinstatus" />
-    <result column="date" jdbcType="DATE" property="date" />
-    <result column="classID" jdbcType="INTEGER" property="classid" />
-    <result column="staffname" jdbcType="VARCHAR" property="staffname" />
-    <result column="name3" jdbcType="VARCHAR" property="name3" />
-    <result column="name4" jdbcType="VARCHAR" property="name4" />
-    <result column="name5" jdbcType="VARCHAR" property="name5" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ID, studentID, kaoqinStatus, date, classID, staffname, name3, name4, name5
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from studentkaoqin
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from studentkaoqin
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.zhxy.domain.Studentkaoqin">
-    insert into studentkaoqin (ID, studentID, kaoqinStatus, 
-      date, classID, staffname, 
-      name3, name4, name5
-      )
-    values (#{id,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{kaoqinstatus,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE}, #{classid,jdbcType=INTEGER}, #{staffname,jdbcType=VARCHAR}, 
-      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.zhxy.domain.Studentkaoqin">
-    insert into studentkaoqin
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
-      <if test="studentid != null">
-        studentID,
-      </if>
-      <if test="kaoqinstatus != null">
-        kaoqinStatus,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-      <if test="classid != null">
-        classID,
-      </if>
-      <if test="staffname != null">
-        staffname,
-      </if>
-      <if test="name3 != null">
-        name3,
-      </if>
-      <if test="name4 != null">
-        name4,
-      </if>
-      <if test="name5 != null">
-        name5,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="studentid != null">
-        #{studentid,jdbcType=INTEGER},
-      </if>
-      <if test="kaoqinstatus != null">
-        #{kaoqinstatus,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="classid != null">
-        #{classid,jdbcType=INTEGER},
-      </if>
-      <if test="staffname != null">
-        #{staffname,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        #{name5,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhxy.domain.Studentkaoqin">
-    update studentkaoqin
-    <set>
-      <if test="studentid != null">
-        studentID = #{studentid,jdbcType=INTEGER},
-      </if>
-      <if test="kaoqinstatus != null">
-        kaoqinStatus = #{kaoqinstatus,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        date = #{date,jdbcType=DATE},
-      </if>
-      <if test="classid != null">
-        classID = #{classid,jdbcType=INTEGER},
-      </if>
-      <if test="staffname != null">
-        staffname = #{staffname,jdbcType=VARCHAR},
-      </if>
-      <if test="name3 != null">
-        name3 = #{name3,jdbcType=VARCHAR},
-      </if>
-      <if test="name4 != null">
-        name4 = #{name4,jdbcType=VARCHAR},
-      </if>
-      <if test="name5 != null">
-        name5 = #{name5,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhxy.domain.Studentkaoqin">
-    update studentkaoqin
-    set studentID = #{studentid,jdbcType=INTEGER},
-      kaoqinStatus = #{kaoqinstatus,jdbcType=INTEGER},
-      date = #{date,jdbcType=DATE},
-      classID = #{classid,jdbcType=INTEGER},
-      staffname = #{staffname,jdbcType=VARCHAR},
-      name3 = #{name3,jdbcType=VARCHAR},
-      name4 = #{name4,jdbcType=VARCHAR},
-      name5 = #{name5,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+
+<resultMap type="com.zhxy.domain.Studentkaoqin" id="student">
+	<id column="id" property="id" />
+    <result column="studentid"  property="studentid" />
+    <result column="kaoqinstatus"  property="kaoqinstatus" />
+    <result column="date"  property="date" />
+    <result column="cid"  property="cid" />
+    <result column="staffid"  property="staffid" />
+    <result column="name3" property="name3" />
+    <result column="name4" property="name4" />
+    <result column="name5" property="name5" />
+    
+<association property="stuname" column="studentid" select="queryByStuId"></association> <!-- queryByStuId为调用的方法  studentid为之间关联的id -->
+<association property="status" column="kaoqinstatus" select="queryAllStatus"></association>
+<association property="name" column="cid" select="queryClass"></association>
+<association property="stafname" column="staffid" select="queryAllteacher"></association>
+</resultMap>												
+
+  
+<select id="queryAll" resultMap="student">
+SELECT * FROM `studentkaoqin` 
+
+</select>
+
+<select id="queryByStuId" resultType="com.zhxy.domain.CpStudent">
+SELECT * FROM `cp_student` WHERE studentid = #{id}
+</select>
+<select id="queryAllStatus" resultType="com.zhxy.domain.Statuastype">
+SELECT * FROM `statuastype` WHERE statuasType = #{id}
+
+</select>
+<!-- <select id="queryAllClass" resultType="com.zhxy.domain.Classs">
+SELECT * FROM `classs` WHERE classID=#{id}
+
+</select> -->
+
+<select id="queryClass" resultType="com.zhxy.domain.Clazz">
+SELECT * FROM `clazz` WHERE id=#{id}
+</select>
+
+<select id="queryAllteacher" resultType="com.zhxy.domain.CpStaff">
+SELECT * FROM `cp_staff` WHERE staffid=#{id}
+
+</select>
+<select id="queryByClassNameAndStuStatus" resultMap="student">
+	SELECT * FROM `studentkaoqin`
+	<where>
+		<if test="StuStatus !=null and StuStatus!=0">
+			and kaoqinStatus=#{StuStatus} 
+		</if>
+		<if test="name!=null">
+			and studentID in (select studentid from cp_student where studentname like concat('%',#{name},'%')) 
+		</if>
+	</where>
+</select>
+
+
+
+<update id="updateStu">
+
+ update `studentkaoqin` set `kaoqinStatus`=#{StuStatus} where `studentID`=#{id}
+
+</update>
+
+ <insert id="insertForeachoh" parameterType="java.util.List" >
+        insert into studentkaoqin
+           (studentID,kaoqinstatus,date,cid,staffid)
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.studentid},
+            #{item.kaoqinstatus},
+            #{item.date},
+            #{item.cid},
+            #{item.staffid}
+            )
+        </foreach>
+    </insert>
+
+
 </mapper>

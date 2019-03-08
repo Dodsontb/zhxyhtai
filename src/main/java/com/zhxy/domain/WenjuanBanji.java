@@ -7,7 +7,7 @@ public class WenjuanBanji {
 
     private Integer classid;
 
-    private String name1;
+    private Integer studentid;
 
     private String name2;
 
@@ -41,15 +41,17 @@ public class WenjuanBanji {
         this.classid = classid;
     }
 
-    public String getName1() {
-        return name1;
-    }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
-    }
 
-    public String getName2() {
+    public Integer getStudentid() {
+		return studentid;
+	}
+
+	public void setStudentid(Integer studentid) {
+		this.studentid = studentid;
+	}
+
+	public String getName2() {
         return name2;
     }
 

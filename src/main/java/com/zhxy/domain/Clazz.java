@@ -3,15 +3,15 @@ package com.zhxy.domain;
 import java.util.Date;
 
 public class Clazz {
-    private Integer id;
+    private Integer id;  //班级id
 
-    private String name;
+    private String name; //班级名称
 
-    private Integer gradeid;
+    private Integer gradeid; //年级id
 
-    private Integer teacherid;
+    private Integer teacherid; //教师id
 
-    private Integer bid;
+    private Integer bid; //班主任id
 
     private Date start;
 

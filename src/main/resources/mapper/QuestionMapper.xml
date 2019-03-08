@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace = "com.zhxy.dao.QuestionMapper"> 
+	
+   
+	
+	<!--List<question> findList(question hotelquestion);-->
+	<select id="findList" parameterType="com.zhxy.domain.Question" resultType="com.zhxy.domain.Question">
+		SELECT
+		*
+		FROM question where 1=1
+		<if test="type !=null and type != ''">
+            and type = #{type} 
+        </if>
+	</select>
+	
+	
+	
+	<!--question findById(@Param("id") Integer id);-->
+	<select id="findById" parameterType="Integer"  resultType="com.zhxy.domain.Question">
+		SELECT
+		*
+		FROM question where id=#{id}
+	</select>
+	
+
+	<!--Integer insert(question hotelquestion);-->
+    <insert id="insert" parameterType="com.zhxy.domain.Question">  
+	        INSERT INTO question (type,
+      						 title,
+      						 time,
+      						 tid)  
+	                  VALUES  (#{type},
+                 				#{title},
+                 				#{time},
+                 				#{tid}
+	                          )  
+	 </insert>
+	
+	
+	
+	
+	
+</mapper>

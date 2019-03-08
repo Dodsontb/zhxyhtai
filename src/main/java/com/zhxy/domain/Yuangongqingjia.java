@@ -1,13 +1,13 @@
 package com.zhxy.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Yuangongqingjia {
+	
     private Integer id;
 
     private Integer staffid;
-
-    private String staffname;
 
     private String qingjiareason;
 
@@ -16,7 +16,11 @@ public class Yuangongqingjia {
     private Integer qingjiastatus;
 
     private Date date;
-
+    
+    private String time;
+    
+    private String dateStr;
+    
     private String name1;
 
     private String name2;
@@ -27,7 +31,60 @@ public class Yuangongqingjia {
 
     private String name5;
 
-    public Integer getId() {
+    
+    private CpStaff staffName;
+    
+    private Qingjiatype qingjiaStatus;
+    
+    private CpPosition posi;
+    
+    public CpPosition getPosi() {
+		return posi;
+	}
+
+	public void setPosi(CpPosition posi) {
+		this.posi = posi;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(Date date) {
+		SimpleDateFormat  datatime =  new SimpleDateFormat("yyyy年MM月dd日");
+		this.time = datatime.format(date);
+	}
+    
+	public Qingjiatype getQingjiaStatus() {
+		return qingjiaStatus;
+	}
+
+	public void setQingjiaStatus(Qingjiatype qingjiaStatus) {
+		this.qingjiaStatus = qingjiaStatus;
+	}
+
+	public String getDateStr() {
+		return dateStr;
+	}
+
+	public void setDateStr(String dateStr) {
+		this.dateStr = dateStr;
+	}
+
+    public CpStaff getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(CpStaff staffName) {
+		this.staffName = staffName;
+	}
+
+
+	public Integer getId() {
         return id;
     }
 
@@ -41,14 +98,6 @@ public class Yuangongqingjia {
 
     public void setStaffid(Integer staffid) {
         this.staffid = staffid;
-    }
-
-    public String getStaffname() {
-        return staffname;
-    }
-
-    public void setStaffname(String staffname) {
-        this.staffname = staffname;
     }
 
     public String getQingjiareason() {
@@ -81,6 +130,7 @@ public class Yuangongqingjia {
 
     public void setDate(Date date) {
         this.date = date;
+        this.setTime(date);
     }
 
     public String getName1() {

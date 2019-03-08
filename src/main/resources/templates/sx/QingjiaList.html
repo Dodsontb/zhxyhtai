@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+
+#xx{
+  	
+  padding: 79px;
+  margin-top: -100px;
+  margin-left: 140px;
+  
+
+}
+
+#serch{
+  margin-top: -70px;
+
+}
+#daochu{
+
+	margin-top: 200px;
+}
+
+</style>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.js}"></link>
+     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+		
+		
+	function setSelectCollege() {
+        var optionJson=[];
+        $.ajax({
+            url: "/getAllStaff",
+            type: "post",
+            success:function(data){
+                optionJson = data;
+                var a=data.length;
+                 for(var i in optionJson){
+                	 $("#staff").append("<option value='"+optionJson[i].staffid+"'>"+optionJson[i].staffname+"</option>")
+                	                  
+                } 
+            }
+        })
+    }
+	
+
+</script>
+</head>
+
+<body class="container">
+<br/>
+<h1>学生请假管理</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover"  id="tbd">
+    <thead>   
+    <div id="zz" class="ax_default droplist">
+   请假单状态：
+     <select id="status_input">
+          <option value="0">请选择</option>
+          <option value="1">通过</option>
+          <option value="2">未通过</option>
+     </select>
+       学生姓名：
+       <div id="xx" class="ax_default droplist">
+    	<input type="text" name="name">      
+      </div>
+      </div>
+      
+        <tr>
+            <th>#</th>
+            <th>学生姓名</th>
+            <th>请假原因</th>
+            <th>请假时长</th>
+            <th>请假单状态</th>
+            <th>审批人</th>
+            <th>日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in list">
+            <th scope="row"></th>
+            <td class="stuName" v-bind:sid="item.studentid" v-bind:staid="item.qingjiastatus">{{item.studentname.studentname}}</td>
+            <td>{{item.qingjiareason}}</td>
+            <td>{{item.qingjiatime}}</td>
+            <td>{{item.qingjiaStatus.qingjiastatus}}</td>
+            <td>{{item.staffname.staffname}}</td>
+            <td>{{item.time}}</td>  
+            <td button class="btn btn-primary btn-lg update_studentStatu" data-toggle="modal">编辑</td>
+            <td button class="btn btn-primary btn-lg delete" data-toggle="modal"><!-- <a  href="javascript:;"> --></a>删除</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary btn-lg" onclick="setSelectCollege()" data-toggle="modal" data-target="#myModal">申请请假</button>
+<form action="/addQingjia"  id="commentForm" class="form-horizontal" method="post">
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					添加学生请假信息
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">学生编号：</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="studentid" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+				
+				
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">请假原因：</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="qingjiareason" class="form-control"  />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+		
+		
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">请假时长：</label>
+					<div class="col-xs-9 ">
+						<input type="text" required name="qingjiatime" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+				
+				<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-3 control-label">审批人：</label>
+					<div class="col-xs-9 ">
+						<select name="staffid" id="staff"  class="form-control">
+								 <option value="0" disabled="disabled" selected="selected">--请选择审批人--</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+		
+		
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="submit" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+</form>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+    <div class="modal-dialog" id="update_modal" style="display:none;position: fixed;top:100px; left:400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改学生请假状态</h4>
+            </div>
+        <div class="modal-body">
+   		学生姓名:<span id="update_stuName"></span>
+        
+   		请假单状态:
+       <select id="xszt_input">  
+          <option value="1">通过</option>
+          <option value="2">未通过</option>
+     </select>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancle" onclick="javaScript:;" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="update_OK" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>   
+
+<script type="text/javascript" src="js/vue.js"></script>    
+    
+	<script type="text/javascript">
+		var i = 0;
+		var n = "";	
+		var v = new Vue({
+			el:"#tbd",
+			data:{
+				list:null,
+			},watch:{
+				name:function(val){
+					console.log(1);
+					n=val;
+					console.log(n);
+					select(i,n);
+				}
+			}		
+		});		
+		$.ajax({
+			url:"QingjiaList",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				v.list=data;
+			}
+		});
+		$(function(){
+			$("#status_input").change(function(){
+				i=$("#status_input").val();
+				select(i,n);
+			});
+			$("body").on("keyup",":text",function(){
+				select(i,$(this).val());
+			});
+			$("body").on("click",".update_studentStatu",function(){
+				var sid = $(this).parent().find(".stuName").attr("sid");
+				var staid = $(this).parent().find(".stuName").attr("staid");
+				var sname = $(this).parent().find(".stuName").text();
+				$(".modal-dialog").show();
+				$("#update_stuName").text(sname);
+				$("#update_stuName").attr("sid",sid);
+				$("#xszt_input option[value="+staid+"]").attr("selected",true);
+			});
+			$("body").on("click","#cancle",function(){
+				$("#update_modal").hide();
+			});
+ 			$("body").on("click",".delete",function(){
+				var id=$(this).parent().find(".stuName").attr("sid");
+				$.ajax({
+					url:"[[@{/del}]]",
+					dataType:"json",
+					data:"id="+id,
+					success:function(data){
+						//$(this).parent().remove();
+						v.list=data;
+					}
+				}); 
+			}) 
+			$("body").on("click","#update_OK",function(){
+				console.log($("#update_stuName").attr("sid"));
+				console.log($("#xszt_input").val());
+				var ssid = $("#update_stuName").attr("sid");
+				
+				 $.ajax({
+					url:"[[@{/updateStatu}]]",
+					dataType:"json",
+					data:{
+						"id":ssid,
+						"StuStatus":$("#xszt_input").val()
+					},
+					success:function(data){
+						v.list=data;
+						console.log(data);
+						$(".modal-dialog").hide();
+					}
+				}); 
+			});
+		});
+		
+		function select(id,name){
+			$.ajax({
+				url:"[[@{/cc}]]",
+				dataType:"json",
+				data:{
+					"StuStatus":id,
+					"name":name
+				},
+				success:function(data){
+					v.list=data;
+					console.log(data);
+				}
+			});
+		}
+		
+		
+
+	</script>
+</body>
+</html>

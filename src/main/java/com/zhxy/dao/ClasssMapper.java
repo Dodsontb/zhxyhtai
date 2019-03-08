@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Classs;
 
 public interface ClasssMapper {
@@ -14,4 +16,6 @@ public interface ClasssMapper {
     int updateByPrimaryKeySelective(Classs record);
 
     int updateByPrimaryKey(Classs record);
+    
+    List<Classs> selectAll();
 }

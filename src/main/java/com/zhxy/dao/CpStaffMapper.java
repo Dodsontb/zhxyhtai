@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.CpStaff;
 
 public interface CpStaffMapper {
@@ -14,4 +16,10 @@ public interface CpStaffMapper {
     int updateByPrimaryKeySelective(CpStaff record);
 
     int updateByPrimaryKey(CpStaff record);
+    
+    List<CpStaff> findList();
+    
+    CpStaff querybyid(Integer id);
+    
+    List<CpStaff> selectAll();
 }

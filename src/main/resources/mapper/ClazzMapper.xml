@@ -26,6 +26,12 @@
     id, name, gradeId, teacherId, bid, start, begin, end, dissolve, vid, currId, way, 
     num, people, name1, name2, name3, name4, name5
   </sql>
+  
+    <select id="selectAll"   resultMap="BaseResultMap">
+    select
+      *
+    from clazz
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

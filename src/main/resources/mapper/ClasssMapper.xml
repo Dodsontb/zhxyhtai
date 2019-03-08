@@ -14,6 +14,12 @@
   <sql id="Base_Column_List">
     classID, className, classNumber, name1, name2, name3, name4, name5
   </sql>
+  
+      <select id="selectAll"   resultMap="BaseResultMap">
+    select
+      *
+    from classs
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

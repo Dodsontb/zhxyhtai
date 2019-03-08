@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+
+#xx{
+  	
+  padding: 79px;
+  margin-top: -100px;
+  margin-left: 140px;
+  
+
+}
+
+#serch{
+  margin-top: -70px;
+
+}
+#daochu{
+
+	margin-top: 200px;
+}
+
+</style>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.js}"></link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body class="container">
+<br/>
+<h1>员工考勤管理</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover"  id="tbd">
+    <thead>   
+    <div id="zz" class="ax_default droplist">
+         员工状态：
+     <select id="status_input">
+          <option value="0">请选择</option>
+          <option value="1">正常</option>
+          <option value="2">迟到</option>
+          <option value="3">早退</option>
+          <option value="4">请假</option>
+          <option value="5">旷课</option>
+     </select>
+       员工姓名：
+       <div id="xx" class="ax_default droplist">
+    	<input type="text" name="name">
+        
+      </div>
+
+      </div>
+      
+        <tr>
+            <th>#</th>
+            <th>员工姓名</th>
+            <th>员工职位</th>
+            <th>员工考勤状态</th>
+            <th>日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in list">
+            <th scope="row"></th>
+            <td class="stuName" v-bind:sid="item.staffid" v-bind:staid="item.kaoqinstatus">{{item.stafname.staffname}}</td>
+            <td>{{item.cpname.positionname}}</td>
+            <td>{{item.status.statuasname}}</td>
+            <td>{{item.time}}</td>  
+            <td button class="btn btn-primary btn-lg update_studentStatu" data-toggle="modal">编辑</td>          
+        </tr>
+        </tbody>
+    </table>
+    <div id="page">
+    </div>
+</div> 
+ 
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">新增
+</button>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定要添加数据吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="save()">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+    <div class="modal-dialog" style="display:none;position: fixed;top:100px; left:400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改员工考勤状态</h4>
+            </div>
+        <div class="modal-body">
+   		员工姓名:<span id="update_stuName"></span>
+        
+   		员工状态:
+       <select id="xszt_input">  
+          <option value="1">正常</option>
+          <option value="2">迟到</option>
+          <option value="3">早退</option>
+          <option value="4">请假</option>
+          <option value="5">旷课</option>
+     </select>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancle" onclick="javaScript:;" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="update_OK" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>   
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/vue.js"></script>    
+    
+	<script type="text/javascript">
+		var i = 0;
+		var n = "";	
+		var v = new Vue({
+			el:"#tbd",
+			data:{
+				list:null,
+			},watch:{
+				name:function(val){
+					console.log(1);
+					n=val;
+					console.log(n);
+					select(i,n);
+				}
+			}		
+		});		
+		function page(page){
+            $.ajax({
+                url:"YuangongKaoqinList",
+                dataType:"json",
+                data :{'page': page},
+                success:function(result){
+                    console.log(result);
+                    $("#page").empty();
+                    v.list=result.list;
+                    $("#page").append('<div class="am-cf"> <div class="Page navigation">' +
+                        ' <ul class="pagination" >' +
+                        '<li><a class="Previous" onclick="page(' + result.firstPage +
+                        ')">首页</a></li>' +
+                        '<li id="pageul"><a onclick="page(' + result.prePage +
+                        ')">上一页</a></li>' +
+                        '<li><a    id="nextpages"  onclick="page(' + result.nextPage +
+                        ')">下一页</a></li>' +
+                        '<li ><a onclick="page(' + result.lastPage +
+                        ')">末页</a></li>' +
+                        '</ul> </div> </div>');
+
+                    var pages = result.pages;
+                    $.each(result.navigatepageNums, function (n, value) {
+                        if (result.pageNum == pages) {
+                            $("#pageul").after('<li class="am-active"><a  onclick="page(' + pages + ')">' + pages + '</a></li>');
+                        }
+                        else {
+                            $("#pageul").after('<li  ><a  onclick="page(' + pages + ')">' + pages + '</a></li>');
+                        }
+
+                        pages = pages - 1;
+                    });
+                    $("#page").append('<span>当前第' + result.pageNum + '页，共' + result.pages + '页<span>');
+
+
+                }
+            });
+        }
+		$(function(){
+            page(0);
+			$("#status_input").change(function(){
+				i=$("#status_input").val();
+				select(i,n);
+			});
+			$("body").on("keyup",":text",function(){
+				select(i,$(this).val());
+			});
+			$("body").on("click",".update_studentStatu",function(){
+				var sid = $(this).parent().find(".stuName").attr("sid");
+				var staid = $(this).parent().find(".stuName").attr("staid");
+				var sname = $(this).parent().find(".stuName").text();
+				$(".modal-dialog").show();
+				$("#update_stuName").text(sname);
+				$("#update_stuName").attr("sid",sid);
+				$("#xszt_input option[value="+staid+"]").attr("selected",true);
+			});
+			
+			
+			$("body").on("click","#cancle",function(){
+				$(".modal-dialog").hide();
+			});
+			
+			
+			$("body").on("click","#update_OK",function(){
+				console.log($("#update_stuName").attr("sid"));
+				console.log($("#xszt_input").val());
+				var ssid = $("#update_stuName").attr("sid");
+				 $.ajax({
+					url:"[[@{/updateYg}]]",
+					dataType:"json",
+					data:{
+						"id":ssid,
+						"StuStatus":$("#xszt_input").val()
+					},
+					success:function(data){
+						v.list=data;
+						console.log(data);
+						$(".modal-dialog").hide();
+					}
+				}); 
+			});
+		});
+		
+		
+		
+		function select(id,name){
+			$.ajax({
+				url:"[[@{/zz}]]",
+				dataType:"json",
+				data:{
+					"StuStatus":id,
+					"name":name
+				},
+				success:function(data){
+					v.list=data;
+					console.log(data);
+				}
+			});
+		}
+	    function save() {
+	        $.ajax({
+	            url: "/batchInsert",
+	            dataType: "JSON",
+	            success: function (data) {
+	                v.list = data;
+	            }
+	        });
+	        $("#modal").modal("toggle")
+	    }
+	</script>
+</body>
+</html>

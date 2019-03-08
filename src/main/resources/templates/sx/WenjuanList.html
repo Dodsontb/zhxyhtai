@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+
+#xx{
+  	
+  padding: 79px;
+  margin-top: -100px;
+  margin-left: 140px;
+  
+
+}
+
+#serch{
+  margin-top: -70px;
+
+}
+#daochu{
+
+	margin-top: 200px;
+}
+
+</style>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{js/bootstrap.min.js}"></link>
+</head>
+
+<body class="container">
+<br/>
+<h1>学生问卷调查管理</h1>
+<br/><br/>
+<div class="with:80%" id="tbd">
+    <table class="table table-hover">
+    <thead>   
+        <tr>
+            <th>#</th>
+            <th>问卷标题</th>
+            <th>问卷类型</th>
+            <th>日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in page.list">
+            <th scope="row"></th>
+            <td class="stuName" v-if="item.stuname" v-bind:sid="item.studentid" v-bind:staid="item.kaoqinstatus">{{item.stuname.studentname}}</td>
+            <td>{{item.className.classname}}</td>
+            <td>{{item.status.statuasname}}</td>
+            <td>{{item.staffname}}</td>
+            <td>{{item.time}}</td>  
+            <td button class="btn btn-primary btn-lg update_studentStatu" data-toggle="modal">编辑</td>          
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+ 
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>   
+
+<script type="text/javascript" src="js/vue.js"></script>    
+    
+	<script type="text/javascript">
+		var i = 0;
+		var n = "";	
+		var page = 1;
+		var v = new Vue({
+			el:"#tbd",
+			data:{
+				page:{
+					list:null
+				}
+			},methods:{
+				go:function(nowpage){
+					page = nowpage;
+					select(i,n,page);
+				}
+			}		
+		});		
+		$.ajax({
+			url:"WenjuanList",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				v.page=data;
+			}
+		});
+		$(function(){
+			$("#status_input").change(function(){
+				i=$("#status_input").val();
+				select(i,n,page);
+			});
+			$("body").on("keyup",":text",function(){
+				select(i,$(this).val(),page);
+			});
+			$("body").on("click",".update_studentStatu",function(){
+				var sid = $(this).parent().find(".stuName").attr("sid");
+				var staid = $(this).parent().find(".stuName").attr("staid");
+				var sname = $(this).parent().find(".stuName").text();
+				$(".modal-dialog").show();
+				$("#update_stuName").text(sname);
+				$("#update_stuName").attr("sid",sid);
+				$("#xszt_input option[value="+staid+"]").attr("selected",true);
+			});
+			$("body").on("click","#cancle",function(){
+				$(".modal-dialog").hide();
+			});
+
+		});
+		
+		
+		
+		function select(id,name,page){
+			$.ajax({
+				url:"[[@{/xx}]]",
+				dataType:"json",
+				data:{
+					"StuStatus":id,
+					"name":name,
+					"page":page
+				},
+				success:function(data){
+					v.page=data;
+					console.log(data);
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

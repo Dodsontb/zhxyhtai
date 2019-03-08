@@ -1,5 +1,7 @@
 package com.zhxy.dao;
 
+import java.util.List;
+
 import com.zhxy.domain.Clazz;
 
 public interface ClazzMapper {
@@ -14,4 +16,6 @@ public interface ClazzMapper {
     int updateByPrimaryKeySelective(Clazz record);
 
     int updateByPrimaryKey(Clazz record);
+    
+    List<Clazz> selectAll();
 }
