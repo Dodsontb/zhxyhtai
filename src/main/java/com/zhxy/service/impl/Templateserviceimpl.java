@@ -54,5 +54,10 @@ public class Templateserviceimpl implements Templateservice{
 		// TODO Auto-generated method stub
 		return tm.cp_queryyquestion(id);
 	}
+	@Override
+	public List<Template> queryfabu(String name2) {
+		// TODO Auto-generated method stub
+		return tm.queryfabu(name2);
+	}
 
 }

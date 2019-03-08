@@ -21,4 +21,6 @@ public interface Templateservice {
 	 Template cp_querytquestion(Integer id);
 	 
 	 Template cp_queryyquestion(Integer id);
+	 
+	 List<Template> queryfabu(String name2);
 }

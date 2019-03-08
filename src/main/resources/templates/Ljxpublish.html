@@ -188,7 +188,9 @@
 																		<div style="float:left;width:100px;margin-left: 40px">{{s.studentname}}</div>
 																		<div style="float:left;width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{c.ljxtitle}}</div>
 																		<div style="float:left;width:300px; margin-left: 60px">{{w.ljxTitme}}</div>
-																		<div style="float:right;width:50px;margin-left:-10px;" data-toggle="modal" data-target="#mytui" v-on:click="tuix(w.ljxtuid)">  阅读</div>
+																		<div style="float:right;width:50px;margin-left:-10px;" data-toggle="modal" data-target="#mytui" v-if="w.putlist == null" v-on:click="tuix(w.ljxtuid)">  阅读</div>
+																		<div style="float:right;width:50px;margin-left:-10px;"  v-for="(p,index) in w.putlist" v-if="p.ljxyesno=='是'" >  已阅/通</div>
+																		<div style="float:right;width:50px;margin-left:-10px;" data-toggle="modal" data-target="#mytui" v-for="(p,index) in w.putlist" v-if="p.ljxyesno=='否'" v-on:click="tuix(w.ljxtuid)">  已阅/未</div>
 																	</a>
 																</div>
 															</div>
@@ -208,35 +210,47 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<h4 class="modal-title" id="myModalLabel">发布任务</h4>
-							任务类型：<select style="width: 100.43px;height: 25.06px; color: black;" id="type" name = "ljxtype">
-											<option value ="3">机试</option>
-											<option value ="1">考试</option>
-											<option value ="2">作业</option>
+							任务类型：<select v-model="mo" style="width: 100.43px;height: 25.06px; color: black;" id="type" name = "ljxtype">
+											<option v-for="(type,index) in typelist" v-bind:value ="type.id">{{type.name}}</option>
 										</select>
 						</div>
 						<div class="modal-body">
 								<ul style="list-style: none; margin-left: 100px">
-									<li class="ljxone">项目标题：<input type="text" name="ljxtitle"></li>
-									<li class="ljxone">项目内容：<input type="text" name="coent"></li>
+									<li class="ljxone">项目标题：<input type="text" name="ljxtitle" class="ljxtitle"></li>
+									<li class="ljxone">项目内容：<input type="text" name="coent" class="coent"></li>
 									<li style="margin-left: 27px;" class="ljxone" >
-										年级：<select  v-model="name" style="width: 159.43px;height: 25.06px;" name="ljxclass" >
+										任务：<select   style="width: 159.43px;height: 25.06px;" name="t" class = "t">
+											<option v-for="(te,index) in telist" v-bind:value ="te.id">{{te.name}}</option>
+										</select>
+									</li>
+									<li style="margin-left: 27px;" class="ljxone" >
+										年级：<select  v-model="name" style="width: 159.43px;height: 25.06px;" name="ljxclass" class = "ljxclasss">
 											<option v-for="(g,index) in listgrade" v-bind:value ="g.id">{{g.name}}</option>
 										</select>
 									</li>
-									<li style="margin-left: 27px;" class="ljxone" >
-										班级：<select style="width: 159.43px;height: 25.06px;" name="ljxclasses">
-											<option v-for="(tea,index) in listteacher" v-bind:value ="tea.name">{{tea.name}}</option>
-										</select>
+									<li style="margin-left: 27px;" class="ljxone btn-group" data-toggle="buttons">
+									<label class="btn btn-primary" data-name="teaName" v-for="(tea,index) in listteacher" v-on:click="on(index)" ><input type="checkbox" class = "cl" v-bind:value="tea.id">{{tea.name}}</label>
+										<!-- 班级：<select style="width: 159.43px;height: 25.06px;" name="ljxclasses" id="at">
+											<option  v-bind:value ="tea.name">{{tea.name}}</option>
+										</select> -->
 									</li>
-									<li class="ljxone" >定时发布：<input type="datetime-local" name="name1">（填写之后会在规定的时间发布）</li>
-									<li class="ljxone" >开始时间：<input type="datetime-local" name="ljxdate"></li>
-									<li class="ljxone" >结束时间：<input type="datetime-local" name="ljxtime"></li>
+									<!-- 选择多个班级发布任务  
+									<li>
+										 <div> 
+											 	at1716<input type="checkbox" checked="tuer">
+										 		at1716<input type="checkbox" checked="tuer">
+										 </div>
+									</li>-->
+									<li class="ljxone" >定时发布：<input type="datetime-local" name="name1" class = "name1">（填写之后会在规定的时间发布）</li>
+									<li class="ljxone" >开始时间：<input type="datetime-local" name="ljxdate" class = "ljxdate"></li>
+									<li class="ljxone" >结束时间：<input type="datetime-local" name="ljxtime" class = "ljxtime"></li>
 								</ul>
 						</div>
 						
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-primary">发布任务</button>
+							<button type="button" v-on:click="fabu()">nnn</button>
 						</div>
 						</div>
 					</div>
@@ -262,7 +276,7 @@
 								</ul>
 								
 							<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="examine2(s.ljxtuid,s.ljxuid)">Close</button>
 							<button type="button" class="btn btn-primary" v-on:click="examine(s.ljxtuid,s.ljxuid)">同意推迟</button>
 							</div>
 						</div>
@@ -339,7 +353,11 @@
 						yesno:0,//历史任务统计
 						listyn:null,
 						tuichiquery:null,//推迟任务
-						xianglist:null//推迟任务的详细信息
+						xianglist:null,//推迟任务的详细信息
+						typelist:null,//任务类型
+						tealist:Array(),
+						mo:null,
+						telist:null
 					},
 					methods:{
 						tuiClick:function(i){
@@ -363,12 +381,37 @@
 							ljxTuidx(ljxTuid);
 						},
 						examine:function(ljxTuid,ljxUid){
-							alert(ljxTuid+">>>>>>examine>>>>"+ljxUid);
+							//alert(ljxTuid+">>>>>>examine>>>>"+ljxUid);
 							e(ljxTuid,ljxUid);
+						},
+						examine2:function(ljxTuid,ljxUid){
+							eE(ljxTuid,ljxUid);
+						},
+						fabu:function(){
+							
+							fabu();
+						},
+						on:function(i){
+							var checked = $('label[data-name="teaName"]').eq(i).find('[class="icheckbox_flat-blue checked"]');//得到radio控件
+							if(checked.length==0) {			
+								$('label[data-name="teaName"]').eq(i).find("div").addClass("checked");
+								this.tealist.push(i);
+							}else{
+								$('label[data-name="teaName"]').eq(i).find("div").removeClass("checked");
+								var index = this.tealist.indexOf(i);
+								this.tealist.splice(index,1);
+								/* $.each(this.tealist, function(i,o){
+									var text = $('label[data-name="teaName"]').eq(o).text();
+									alert(text);
+								}) */
+							}
 						}
 					},watch:{
 						name:function(){
 							queryteacher(this.name);
+						},
+						mo:function(){
+							soff(this.mo);
 						}
 					}
 				});
@@ -404,7 +447,7 @@
 			}
 			
 			function queryteacher(grade){
-				alert(grade+"grade");
+				//alert(grade+"grade");
 				$.ajax({
 					url:"/queryclazz",
 					data:"gradeid="+grade,
@@ -477,7 +520,7 @@
         		var yesno = "否";
 				$.ajax({
 					url:"/einsert",
-					data:"",
+					data:"tuid="+tid+"&uid="+uid+"&yesno="+yesno,
 					type:"post",
 					success:function(date){
 						
@@ -485,6 +528,58 @@
 				})
 			}
 			
+			//任务类型
+			$.ajax({
+					url:"/query",
+					data:"",
+					type:"post",
+					success:function(date){
+						v.typelist = date
+					}
+				})
+				
+				//发布任务修改
+				function fabu(){
+				var title = $(".ljxtitle").val();
+				var coent = $(".coent").val();
+				var ljxclasss = $(".ljxclasss").text();
+				var name1 = $(".name1").val();
+				var ljxdate = $(".ljxdate").val();
+				var ljxtime = $(".ljxtime").val();
+				var t = $(".t").val();
+				var type = $("#type").val();
+				alert(t);
+				var text = "";
+				var dan = ",";
+				$.each(v.tealist, function(i,o){
+					text += $('label[data-name="teaName"]').eq(o).text()+",";
+					dan += $(".cl:eq("+o+")").val()+",";
+				}) 
+				alert(dan);
+				
+				$.ajax({
+					url:"/stuinsert",
+					data:"ljxtitle="+title+"&ljxclass=S2&name1="+name1+"&ljxdate="+ljxdate+"&ljxtime="+ljxtime+"&at="+text+"&cl="+dan,
+					type:"post",
+					success:function(date){
+						
+					}
+				})
+			}
+			
+			
+			//soff
+			function soff(name2){
+				$.ajax({
+					url:"/queryfabu",
+					data:"name2="+name2,
+					type:"post",
+					success:function(date){
+						alert(JSON.stringify(date))
+						v.telist = date;
+					}
+				})
+			}
         	})
         	
         	

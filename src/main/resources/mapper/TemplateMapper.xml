@@ -340,5 +340,8 @@
  </select>
  <select id="queryfabu" resultMap="BaseResultMap">
     SELECT * FROM `template` WHERE `start` IS NULL
+    <if test="name2!=null">
+    	and name2 = #{name2}
+    </if>
   </select>
 </mapper>

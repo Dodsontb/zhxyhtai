@@ -135,7 +135,9 @@
 										<div style="margin-left: 300px;" v-if="b.ljxcontent !=null">
 											<span>{{t.ljxdatetime}}</span>
 											<a style="margin-left: 50px;">开始执行</a>
-											<a style="margin-left: 50px;">已审核过</a><!--v-if="b.ljxYesno =='是' -->
+											<a style="margin-left: 50px;" v-if="!b.putlist || b.putlist.length==0">正在审核</a>
+											<a style="margin-left: 50px;" v-for="(p,index) in b.putlist" v-if="p.ljxyesno=='是'">审核通过</a>
+											<a style="margin-left: 50px;" v-for="(p,index) in b.putlist" v-if="p.ljxyesno=='否'">审核未过</a>
 										</div>
 									</div>
 								</div>
