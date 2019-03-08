@@ -66,4 +66,10 @@ public class YuangongQingjiaServiceImpl implements YuangongQingjiaService{
 		return YuangongqingjiaMapper.insert(yg);
 	}
 
+	@Override
+	public Yuangongqingjia queryBypositionid(Integer id) {
+		// TODO Auto-generated method stub
+		return YuangongqingjiaMapper.queryBypositionid(id);
+	}
+
 }

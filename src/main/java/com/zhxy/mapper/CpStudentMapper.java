@@ -20,4 +20,6 @@ public interface CpStudentMapper {
     List<CpStudent> queryStudentAll();
     
     int insertStudent(CpStudent ss);
+    
+    List<CpStudent> selectAll();
 }

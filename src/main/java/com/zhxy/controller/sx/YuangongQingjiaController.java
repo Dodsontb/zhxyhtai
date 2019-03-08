@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.zhxy.domain.Qingjiatype;
+import com.zhxy.domain.Studentqingjia;
 import com.zhxy.domain.Yuangongqingjia;
 import com.zhxy.service.sx.YuangongQingjiaService;
 
@@ -44,10 +46,9 @@ public List<Yuangongqingjia> queryAll(){
 
 @ResponseBody
 @RequestMapping("delete")
-public String delete(Integer id){
-	System.out.println(id);
+public List<Yuangongqingjia> delete(Integer id){
 	yuangongQingjiaService.delele(id);
-	return "redirect:YuangongQingjiaList";
+	return yuangongQingjiaService.queryAll();
 }
 
 
@@ -69,6 +70,7 @@ public List<Yuangongqingjia> update(Integer id,Integer Status){
 @RequestMapping(value="/addYgQingjia", method=RequestMethod.POST)
 public ModelAndView addCourse(Yuangongqingjia yuangongqingjia,
 		HttpServletRequest request){
+	Qingjiatype Qingjiatype = new Qingjiatype();
 	yuangongqingjia.setQingjiastatus(2);
 	yuangongqingjia.setDate(new Date());
 	yuangongQingjiaService.insert(yuangongqingjia);

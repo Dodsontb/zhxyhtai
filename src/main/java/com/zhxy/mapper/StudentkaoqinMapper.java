@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zhxy.domain.Classs;
+import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStaff;
 import com.zhxy.domain.Statuastype;
 import com.zhxy.domain.Studentkaoqin;
+import com.zhxy.domain.Yuangongkaoqin;
 
 import io.lettuce.core.dynamic.annotation.Param;
 @Mapper
@@ -27,6 +30,12 @@ public interface StudentkaoqinMapper {
 	 Statuastype queryAllStatus(Integer id);  //查询所有的考勤状态
 	 
 	 Classs queryAllClass(Integer id);//查询所有的班级
-
-
+	 
+	 Clazz queryClass(Integer id);
+	 
+	 CpStaff queryAllteacher(Integer id); //根据员工id查询所有的老师
+	 
+	 CpStaff queryteacherByName(String teachName);
+	 
+	 int insertForeachoh(List<Studentkaoqin> list);
 }

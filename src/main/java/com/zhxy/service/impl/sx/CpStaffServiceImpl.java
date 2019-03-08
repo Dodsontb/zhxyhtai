@@ -20,6 +20,12 @@ public class CpStaffServiceImpl implements CpStaffService {
 		return cpStaffMapper.findList();
 	}
 
+	@Override
+	public CpStaff querybyid(Integer id) {
+		// TODO Auto-generated method stub
+		return cpStaffMapper.querybyid(id);
+	}
+
 	
 
 }

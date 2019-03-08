@@ -18,4 +18,6 @@ public interface CpPositionMapper {
     int updateByPrimaryKey(CpPosition record);
     
     List<CpPosition> selectAll();
+    
+    
 }

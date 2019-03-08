@@ -40,7 +40,21 @@ public class Clazz implements Serializable {
 	private List<Plan> plans;
 	private Event event;
 	private boolean finish;
+	private Integer bid;
+	private Integer teacherid;
 	
+	public Integer getBid() {
+		return bid;
+	}
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
+	public Integer getTeacherid() {
+		return teacherid;
+	}
+	public void setTeacherid(Integer teacherid) {
+		this.teacherid = teacherid;
+	}
 	public int getId() {
 		return id;
 	}

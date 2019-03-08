@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.zhxy.domain.FangtanType;
 import com.zhxy.domain.Qingjiatype;
 import com.zhxy.domain.Studentqingjia;
 

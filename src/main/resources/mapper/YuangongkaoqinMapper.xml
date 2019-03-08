@@ -52,5 +52,17 @@ SELECT * FROM `cp_position` WHERE positionid=#{id}
  update `yuangongkaoqin` set `kaoqinStatus`=#{StuStatus} where `staffid`=#{id}
 
 </update>
- 
+  <insert id="insertForeach" parameterType="java.util.List" >
+        insert into yuangongkaoqin
+           (staffid,kaoqinstatus,date,positionid)
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.staffid},
+            #{item.kaoqinstatus},
+            #{item.date},
+            #{item.positionid}
+            )
+        </foreach>
+    </insert>
 </mapper>

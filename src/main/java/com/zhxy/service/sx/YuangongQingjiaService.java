@@ -22,6 +22,8 @@ public interface YuangongQingjiaService {
 	
 	int delele(Integer id);
 	
+	Yuangongqingjia queryBypositionid(Integer id);
+	
 	int insert(Yuangongqingjia yg);
 	
 	List<Yuangongqingjia> queryByNameAndStatus(@Param("name")String name,@Param("Status")Integer Status);

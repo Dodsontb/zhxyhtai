@@ -3,6 +3,10 @@ package com.zhxy.domain;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Studentkaoqin {
 	
     private Integer id;
@@ -24,9 +28,9 @@ public class Studentkaoqin {
 		this.time = datatime.format(date);
 	}
 
-	private Integer classid;  //班级ID
+	private Integer cid;  //班级ID
 
-    private String staffname;  //班主任姓名
+    private Integer staffid;  //员工id
 
     private String name3;
 
@@ -40,9 +44,51 @@ public class Studentkaoqin {
     private Statuastype status;
     
     private Classs className;
+    
+    private CpStaff stafname;
+    
+    private Clazz name;
 
     
     
+	public Clazz getName() {
+		return name;
+	}
+
+	public void setName(Clazz name) {
+		this.name = name;
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
+
+
+
+	public Integer getStaffid() {
+		return staffid;
+	}
+
+	public void setStaffid(Integer staffid) {
+		this.staffid = staffid;
+	}
+
+	public CpStaff getStafname() {
+		return stafname;
+	}
+
+	public void setStafname(CpStaff stafname) {
+		this.stafname = stafname;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public CpStudent getStuname() {
 		return stuname;
 	}
@@ -100,21 +146,9 @@ public class Studentkaoqin {
 		this.setTime(date);
 	}
 
-	public Integer getClassid() {
-		return classid;
-	}
 
-	public void setClassid(Integer classid) {
-		this.classid = classid;
-	}
 
-	public String getStaffname() {
-		return staffname;
-	}
-
-	public void setStaffname(String staffname) {
-		this.staffname = staffname;
-	}
+	
 
 	public String getName3() {
 		return name3;

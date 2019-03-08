@@ -7,5 +7,5 @@ import com.zhxy.domain.CpStaff;
 public interface CpStaffService {
 
 	List<CpStaff> findList();
-		
+	CpStaff querybyid(Integer id);
 }

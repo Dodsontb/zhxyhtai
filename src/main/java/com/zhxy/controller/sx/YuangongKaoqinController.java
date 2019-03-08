@@ -1,10 +1,14 @@
 package com.zhxy.controller.sx;
 
 import java.util.List;
-
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhxy.domain.Yuangongkaoqin;
@@ -23,9 +27,10 @@ public String toYuangongKaoqin() {
 
 @ResponseBody
 @RequestMapping("/YuangongKaoqinList")
-public List<Yuangongkaoqin> queryAllyg() {
-	
-	return yuangongKaoQinService.queryAllyg();
+public PageInfo YuangongKaoqinList(@RequestBody  @RequestParam("page") Integer page) {
+    PageHelper.startPage(page, 10);
+    final List<Yuangongkaoqin> list = yuangongKaoQinService.queryAllyg();
+    return new PageInfo<>(list);
 }
 @ResponseBody
 @RequestMapping("/zz")

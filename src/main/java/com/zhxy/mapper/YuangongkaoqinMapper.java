@@ -26,5 +26,7 @@ public interface YuangongkaoqinMapper {
 	 Statuastype queryAllStatus(Integer id);  //查询所有的考勤状态
 	 
 	 CpPosition queryAllPosition(Integer id);//查询所有的职位名称
+	 
 	 int insertForeach(List<Yuangongkaoqin> list);
+	  
 }

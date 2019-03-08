@@ -94,7 +94,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group ">
-										<label class="col-xs-3 control-label">员工ID</label>
+										<label class="col-xs-3 control-label">员工编号：</label>
 										<div class="col-xs-9 ">
 											<input type="text" required name="staffid" class="form-control" />
 										</div>
@@ -108,7 +108,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group ">
-										<label class="col-xs-3 control-label">请假原因</label>
+										<label class="col-xs-3 control-label">请假原因：</label>
 										<div class="col-xs-9 ">
 											<input type="text" required name="qingjiareason" class="form-control" />
 										</div>
@@ -122,7 +122,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group ">
-										<label class="col-xs-3 control-label">请假时长</label>
+										<label class="col-xs-3 control-label">请假时长：</label>
 										<div class="col-xs-9 ">
 											<input type="text" required name="qingjiatime" class="form-control" />
 										</div>
@@ -226,17 +226,18 @@
 			$("body").on("click","#cancle",function(){
 				$(".modal-dialog").hide();
 			});
-/* 			$("body").on("click",".delete",function(){
+ 			$("body").on("click",".delete",function(){
 				var id=$(this).parent().find(".stuName").attr("sid");
 				$.ajax({
 					url:"[[@{/delete}]]",
 					dataType:"json",
 					data:"id="+id,
 					success:function(data){
-						location.reload();
+						//$(this).parent().remove();
+						v.list=data;
 					}
-				});
-			}) */
+				}); 
+			}) 
 			
 			
 			$("body").on("click","#update_OK",function(){

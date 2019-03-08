@@ -56,5 +56,18 @@ SELECT * FROM `classs` WHERE classID=#{id}
 
 </update>
 
-
+<insert id="insertForeachoh" parameterType="java.util.List" >
+        insert into studentkaoqin
+           (studentID,kaoqinstatus,date,cid,staffid)
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.studentid},
+            #{item.kaoqinstatus},
+            #{item.date},
+            #{item.cid},
+            #{item.staffid}
+            )
+        </foreach>
+    </insert>
 </mapper>

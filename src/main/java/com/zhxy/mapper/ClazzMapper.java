@@ -58,5 +58,7 @@ public interface ClazzMapper {
 	boolean isClazzBusy(@Param("date") Date date,@Param("id")int id,@Param("ap")boolean ap);
 
 	ClazzTest finishTest(int id);
+	
+	List<Clazz> selectAll();
 
 }

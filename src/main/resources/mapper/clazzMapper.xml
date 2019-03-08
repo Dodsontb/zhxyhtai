@@ -68,6 +68,12 @@
 		where
 		id=#{id}
 	</select>
+	 <select id="selectAll"   resultMap="clazz">
+    select
+      *
+    from clazz
+      </select>
+	
 	<select id="queryAll" resultMap="clazzinfo">
 		select *
 		from clazz

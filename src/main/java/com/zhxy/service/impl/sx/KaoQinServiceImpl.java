@@ -1,5 +1,7 @@
 package com.zhxy.service.impl.sx;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhxy.mapper.*;
 import com.zhxy.domain.Classs;
+import com.zhxy.domain.Clazz;
+import com.zhxy.domain.CpStaff;
+import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Statuastype;
 import com.zhxy.domain.Studentkaoqin;
+import com.zhxy.domain.Yuangongkaoqin;
 import com.zhxy.service.sx.KaoQinService;
 
 @Service
@@ -20,16 +26,12 @@ public class KaoQinServiceImpl implements KaoQinService{
 
 	@Autowired
 	StudentkaoqinMapper studentkaoqinMapper;
-
-	@Override
-	public PageInfo<Studentkaoqin> queryAll() {
-		// TODO Auto-generated method stub
-		PageHelper.startPage(1,2);
-		List<Studentkaoqin> list = studentkaoqinMapper.queryAll();
-		PageInfo<Studentkaoqin> pb = new PageInfo<Studentkaoqin>(list);
-		return pb;
-	}
-
+	@Autowired
+	CpStudentMapper studentMapper;
+	@Autowired
+	CpStaffMapper  cpstaffMapper;
+	@Autowired
+	ClazzMapper clazzMapper;
 	@Override
 	public List<Studentkaoqin> queryByStudentName(String stuName) {
 		// TODO Auto-generated method stub
@@ -61,11 +63,53 @@ public class KaoQinServiceImpl implements KaoQinService{
 		return studentkaoqinMapper.queryAllClass(id);
 	}
 
-	@Override
-	public PageInfo<Studentkaoqin> queryByClassNameAndStuStatus(Integer classID, String StuStatus,Integer page) {
-		// TODO Auto-generated method stub
 
-		PageHelper.startPage(page, 2);
-		return new PageInfo<Studentkaoqin>(studentkaoqinMapper.queryAll());
+
+	@Override
+	public CpStaff queryAllteacher(Integer id) {
+		// TODO Auto-generated method stub
+		return studentkaoqinMapper.queryAllteacher(id);
+	}
+
+	@Override
+	public CpStaff queryteacherByName(String teachName) {
+		// TODO Auto-generated method stub
+		return studentkaoqinMapper.queryteacherByName(teachName);
+	}
+
+	@Override
+	public List<Studentkaoqin> queryAll() {
+		// TODO Auto-generated method stub
+		return studentkaoqinMapper.queryAll();
+	}
+
+	@Override
+	public List<Studentkaoqin> queryByClassNameAndStuStatus(Integer id, String name) {
+		// TODO Auto-generated method stub
+		return studentkaoqinMapper.queryByClassNameAndStuStatus(id, name);
+	}
+
+	@Override
+	public void batchxs() {
+        final List<CpStudent> cpStaffs = studentMapper.selectAll();
+        List<Studentkaoqin> list = new ArrayList<>();
+
+        for (int i = 0; i < cpStaffs.size(); i++) {
+        	Studentkaoqin studentkaoqin = new Studentkaoqin();
+        	studentkaoqin.setStudentid(cpStaffs.get(i).getStudentid());
+        	studentkaoqin.setDate(new Date());
+        	studentkaoqin.setKaoqinstatus(1);
+        	studentkaoqin.setCid(cpStaffs.get(i).getClassid());
+        	studentkaoqin.setStaffid(cpStaffs.get(i).getStaffid());
+            list.add(studentkaoqin);
+        }
+        studentkaoqinMapper.insertForeachoh(list);
+		
+	}
+
+	@Override
+	public Clazz queryClass(Integer id) {
+		// TODO Auto-generated method stub
+		return studentkaoqinMapper.queryClass(id);
 	}
 }

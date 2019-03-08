@@ -73,7 +73,7 @@ select * from `qingjiatype` where `qingjiaType` = #{id}
 
  <delete id="delele">
  
- delete from `yuangongqingjia` where `ID` = #{id}
+ delete from `yuangongqingjia` where `staffid` = #{id}
  
  </delete>
 </mapper>

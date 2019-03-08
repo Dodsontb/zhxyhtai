@@ -36,7 +36,21 @@ public class Yuangongqingjia {
     
     private Qingjiatype qingjiaStatus;
     
-    public String getTime() {
+    private CpPosition posi;
+    
+    public CpPosition getPosi() {
+		return posi;
+	}
+
+	public void setPosi(CpPosition posi) {
+		this.posi = posi;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getTime() {
 		return time;
 	}
 

@@ -28,7 +28,11 @@
   		insert into cp_student(studentname,sex,age,address,email) 
   		value(#{studentname},#{sex},#{age},#{address},#{email})
   	</insert>
-  
+     <select id="selectAll"   resultMap="BaseResultMap">
+    select
+      *
+    from cp_student
+  </select>
   
   <sql id="Base_Column_List">
     studentid, studentname, studentnub, positionid, sex, age, phone, idcard, birthday, 
