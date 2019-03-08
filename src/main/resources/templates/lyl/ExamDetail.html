@@ -16,21 +16,21 @@
 			<div class="outlet">
 				<div class="row">
 					<div class="col-lg-6 col-md-12">
-						<div style="border: 1px solid #EEEEEE; height: 400px;">
+						<div style="border: 1px solid #EEEEEE; height: 400px;" id="examDetail">
 							<h1>考试详情</h1>
 							<ul>
 								<li id="templateId">
-									考试编号：
+									考试编号：{{template.id}}
 								</li>
 								<li>
-									考试名称：
+									考试名称：{{template.name}}
 								</li>
 								<li>
-									考试时间：
+									考试时间：{{template.start}}
 								</li>
-								<li>
+								<!-- <li>
 									考试难度：
-								</li>
+								</li> -->
 							</ul>
 							<table class="table" id="searchClazz">
 								<tr>
@@ -114,9 +114,9 @@
 						</div>
 						<!-- End .panel -->
 					</div>
-					<div class="col-lg-6 col-md-6">
+					<!-- <div class="col-lg-6 col-md-6">
 						<div class="panel panel-primary plain toggle">
-							<!-- Start .panel -->
+							Start .panel
 							<div class="panel-heading">
 								<h2 style="text-align: center"></h2>
 								
@@ -128,26 +128,27 @@
 								</iframe>
 							</div>
 						</div>
-						<!-- End .panel -->
-					</div>
+						End .panel
+					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		var learningClazzList = new Vue({
-			el : '#searchClazz',
+			el : '#examDetail',
 			data : {
+				template : {},
 				list : []
 			}
 		})
 		
-		function getLearningClazzByTemplateId(templateId){
-			$("#templateId").html("考试编号：" + templateId);
+		function getLearningClazzByTemplateId(template){
+			learningClazzList.template = template;
 			$.ajax({
 				url : '/getLearningClazzByTemplateId',
 				data : {
-					templateId : templateId
+					templateId : template.id
 				},
 				type : 'post',
 				success : function(data){
@@ -156,13 +157,23 @@
 			})
 			
 		}
+		
+		function init(template){
+			console.log("ed1");
+			getLearningClazzByTemplateId(template);
+			console.log("ed2");
+			getKSChartByTemplateId(template);
+			console.log("ed3");
+			getBarChartByTemplate(template);
+			console.log("ed4");
+		}
 	
-		function getKSChartByClassId(condition){
-			$("#chart1")[0].contentWindow.getKSChartByClassId(condition);
+		function getKSChartByClassId(clazz){
+			$("#chart1")[0].contentWindow.getKSChartByClassId(clazz);
 	    }
 	    
-		function getKSChartByTemplateId(condition){
-			$("#chart1")[0].contentWindow.getKSChartByTemplateId(condition);
+		function getKSChartByTemplateId(template){
+			$("#chart1")[0].contentWindow.getKSChartByTemplateId(template);
 	    }
 		
 		function getBarChartByTemplate(template){

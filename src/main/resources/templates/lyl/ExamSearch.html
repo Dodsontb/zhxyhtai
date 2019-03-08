@@ -18,7 +18,7 @@
 					<div class="col-lg-6 col-md-12">
 						<h1>考试查询</h1>
 						<div style="border: 1px solid #EEEEEE; height: 400px;">
-							<div class="col-lg-6 col-md-6"><div><label>查询</label><input type="text"></div></div>
+							<div class="col-lg-6 col-md-6"><div><label></label><input type="text" id="paramName"><button onclick="queryLearningListByName()">查询</button></div></div>
 							<!-- <div>
 								<table class="table" id="searchClass">
 									<tr>
@@ -58,7 +58,16 @@
 										<th>考试时间</th>
 										<th></th>
 									</tr>
-									<tr>
+									<tr v-for="(exam, i) in list" v-on:click="getExamDetail(i)">
+										<td>{{i}}</td>
+										<td>{{exam.id}}</td>
+										<td>{{exam.name}}</td>
+										<td>{{exam.gradeName}}</td>
+										<td><label class="" v-for="name in exam.className">{{name}},</label></td>
+										<td>{{exam.start}}</td>
+										<td></td>
+									</tr>
+									<!-- <tr>
 										<td>1</td>
 										<td>11</td>
 										<td>111</td>
@@ -98,7 +107,7 @@
 										<td>S1</td>
 										<td>一二一,一二二,一二三</td>
 										<td>2019-01-11</td>
-									</tr>
+									</tr> -->
 								</table>
 								<div>
 									<div class="col-lg-6 col-md-5" style="text-align: right;">上一页</div>
@@ -158,12 +167,48 @@
 	</div>
 	<script type="text/javascript">
 	
-	condition = {};
+	var condition = {};
 	var searchClass = [];
 	
+	var examList = new Vue({
+		el : "#searchExam",
+		data : {
+			list : []
+		},
+		methods : {
+			getExamDetail : function(id){
+				getExamDetail(id);
+			}
+		}
+	})
 	
+	function queryLearningListByName(){
+		var param = $("#paramName").val();
+		$.ajax({
+			url : 'getLearningListByName',
+			data : {
+				param : param
+			},
+			type : 'post',
+			success : function(data){
+				examList.list = data;
+			}
+		})
+		
+	}
 	
-	$(function(){
+	function getExamDetail(id){
+		var template = examList.list[id];
+		template.name4 = 10;
+		delete template.creation;
+		delete template.end;
+		$("#chart1")[0].contentWindow.init(template);
+		/* $("#chart1")[0].contentWindow.getKSChartByTemplateId(template);
+		$("#chart1")[0].contentWindow.getBarChartByTemplate(template); 
+		getLearningClazzByTemplateId(template); */
+	}
+	
+/* 	$(function(){
 		$("#searchClass tr").click(function(){
 			searchClass = $(this).find("td");
 			if(searchClass[0]&&condition.classId != searchClass[1].innerHTML){
@@ -192,7 +237,7 @@
 				getLearningClazzByTemplateId(condition.templateId);
 			}
 		})
-	})
+	}) */
 	
 	function getLearningClazzByTemplateId(templateId){
 		$("#chart1")[0].contentWindow.getLearningClazzByTemplateId(templateId);

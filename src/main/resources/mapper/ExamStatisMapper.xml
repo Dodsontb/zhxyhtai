@@ -47,6 +47,33 @@
 		GROUP BY c.`id`
 	</select>
 	
+	<select id="queryLearningListByName" resultMap="TemplateListVOBase">
+		SELECT t.*, g.`name` gradeName, c.name className FROM `template` t
+		LEFT JOIN `clazz` c ON POSITION(c.`id` IN t.`name1`) != 0
+		LEFT JOIN `grade` g ON g.`id` = c.`gradeId`
+		WHERE t.`Name` LIKE CONCAT('%', #{param}, '%')
+		OR t.`id` LIKE CONCAT('%', #{param}, '%')
+		OR c.`name` LIKE CONCAT('%', #{param}, '%')
+	</select>
+	
+	<resultMap type="com.zhxy.domain.TemplateListVO" id="TemplateListVOBase">
+		 <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="Name" jdbcType="VARCHAR" property="name" />
+	    <result column="total" jdbcType="INTEGER" property="total" />
+	    <result column="softtypeid" jdbcType="INTEGER" property="softtypeid" />
+	    <result column="cquestionid" jdbcType="VARCHAR" property="cquestionid" />
+	    <result column="yquestionid" jdbcType="VARCHAR" property="yquestionid" />
+	    <result column="tquestionid" jdbcType="VARCHAR" property="tquestionid" />
+	    <result column="start" jdbcType="TIMESTAMP" property="start" />
+	    <result column="uid" jdbcType="INTEGER" property="uid" />
+	    <result column="end" jdbcType="TIMESTAMP" property="end" />
+	    <result column="creation" jdbcType="TIMESTAMP" property="creation" />
+	    <result column="gradeName" jdbcType="VARCHAR" property="gradeName" />
+	    <collection property="className" ofType="java.lang.String">
+	    	<id column="className" />
+	    </collection>
+	</resultMap>
+	
 	<!-- <select id="queryTemplate_exam" resultType="com.zhxy.domain.Template">
 		SELECT * FROM `template`
 	</select>

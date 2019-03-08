@@ -6,6 +6,7 @@ import com.zhxy.domain.BarChartArisData;
 import com.zhxy.domain.KSeriesData;
 import com.zhxy.domain.LearningClazzVO;
 import com.zhxy.domain.Template;
+import com.zhxy.domain.TemplateListVO;
 
 public interface ExamStatisService {
 	public List<KSeriesData> queryKSeriesData();
@@ -13,4 +14,5 @@ public interface ExamStatisService {
 	public List<KSeriesData> queryKSeriesDataByTemplateId(Integer templateId);
 	public BarChartArisData queryLearningCountBySimpleTid(Template template);
 	public List<LearningClazzVO> queryLearningClazzByTemplateId(Integer templateId);
+	public List<TemplateListVO> queryLearningListByName(String param);
 }
