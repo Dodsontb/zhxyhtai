@@ -42,4 +42,6 @@ public interface CurriculumMapper {
 	boolean existCurr(@Param("vid")Integer vid,@Param("gid")Integer gid,@Param("mid")Integer mid);
 
 	void delCurr(int cid);
+	
+	boolean finish(int cid);
 }

@@ -248,6 +248,7 @@ $("#content").on("change",".teacher",function(){
 
 $("#content").on("click",".btn-primary",function(){
 	var length=vue.clazz.allStudents.length;
+	var list=[];
 	if(length>40){
 		hint("开班人数超过40人，无法开班");
 		return;
@@ -255,6 +256,29 @@ $("#content").on("click",".btn-primary",function(){
 		hint("开班人数少于25人，无法开班");
 		return;
 	}
+	vue.clazz.bid=$("#ban").val();
+	vue.clazz.vid=$("#ver").val();
+	$(".curr").each(function(){
+		var cid=$(this).find(".curr-info").attr("cid");
+		var tid=$(this).find(".teacher").val();
+		var curr={
+			id:cid,
+			tid:tid
+		}
+		list.push(curr);
+	});
+	vue.clazz.tid=list[0].tid;
+	vue.clazz.cid=list[0].id;
+	vue.clazz.curriculums=list;
+	$.ajax({
+		type:"post",
+		url:URL+"appendClazz",
+		data:JSON.stringify(vue.clazz),
+		contentType:"application/json;charset=utf-8",
+		success:function(){
+			location.href="clazz.to";
+		}
+	});
 });
 
 $("#content").on("change","#start",function(){

@@ -19,4 +19,6 @@ public interface SectionMapper {
 	void deleteSec(List<Section> list);
 	
 	void updateSec(Section section);
+	
+	List<Section> query(@Param("mid")Integer mid,@Param("gid")Integer gid,@Param("cid")Integer cid);
 }

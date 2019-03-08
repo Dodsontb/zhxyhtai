@@ -9,7 +9,6 @@
 		<result property="date" column="date" />
 		<result property="study" column="study" />
 		<result property="rid" column="roomid"/>
-		
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Plan" id="clazzplan" extends="plan">
 		<association property="room" column="roomid" javaType="com.zhxy.domain.Room" select="com.zhxy.mapper.RoomMapper.queryById"></association>
@@ -111,5 +110,10 @@
 		select min(`date`)
 		from plan
 		where advance=true
+	</select>
+	<select id="clazzdatePlan" resultMap="clazzplan">
+		select *
+		from plan
+		where `date`=date(#{date}) and cid=#{id}
 	</select>
 </mapper>

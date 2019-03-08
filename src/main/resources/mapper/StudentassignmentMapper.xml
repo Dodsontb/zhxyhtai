@@ -254,4 +254,72 @@
   		ofType="com.zhxy.domain.WhetherAccomplish"
   		select="com.zhxy.mapper.WhetherAccomplishMapper.wcpstudent"></collection>
   </resultMap>
+  
+  <!--查询的学生  -->
+  <select id="cpsudentclazz" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM `cp_student` WHERE studentid IN(SELECT sid FROM stu_clazz WHERE cid =(SELECT id FROM clazz WHERE `name` = #{clazz}))
+  </select>
+  
+  <!-- 查询年级 -->
+  <select id="queryreade" resultType="com.zhxy.domain.Grade">
+  		SELECT * FROM `grade`
+  </select>
+  <!-- 查询老师所带的班级 -->
+  <select id="queryclazz" resultType="com.zhxy.domain.Clazz">
+  		SELECT * FROM clazz WHERE teacherid = #{teacherid} AND gradeid = #{gradeid}
+  </select>
+  <!-- 查看学员的推迟任务 -->
+  <!--<select id="tuistudentassignment" resultMap="tuiStudentassignment">
+		select * from studentassignment where ljxTid = #{ljxtid}
+  </select>
+   <resultMap type="com.zhxy.domain.Studentassignment" id="tuiStudentassignment">
+  		<id property="ljxtid" column="ljxtid"/>
+  		<result property="ljxtitle" column="ljxtitle"/>
+  		<collection property=""column=""></collection>
+  </resultMap> -->
+  
+  <!--历史任务  
+  <select id="lishiqury" resultType="">
+  		SELECT * FROM studentassignment WHERE ljxClasses = 'at1716'
+
+		GROUP BY ljxTid DESC
+  </select>-->
+  
+    <!-- 统计完成和未完成的数量 -->
+	<select id="studentnyj" resultType="com.zhxy.domain.WhetherAccomplish">
+		SELECT ljxdate,(SELECT COUNT(*)AS yes FROM `whether_accomplish` WHERE ljxTid = #{ljxTid} AND ljxYesno = '否')`name4`,COUNT(*)AS name5 FROM `whether_accomplish` WHERE ljxTid = #{ljxTid} AND ljxYesno = '是'
+	</select>
+  
+  <select id="naljxcla" resultMap="naLjxcla">
+  		SELECT * FROM studentassignment WHERE ljxClasses = #{ljxTname}
+  </select>
+  <resultMap type="com.zhxy.domain.Studentassignment" id="naLjxcla">
+  		<id property="ljxtid" column="ljxTid"/>
+  		<result property="ljxtitle" column="ljxTitle"/>
+  		<result property="ljxtime" column="ljxTime"/>
+  		
+  		<collection property="list" column="ljxTid"
+  		ofType="com.zhxy.domain.WhetherAccomplish"
+  		select="studentnyj"></collection>
+  </resultMap>
+  
+  <!-- 推迟任务 -->
+  <select id="tuichiquery" resultMap="tuichiQuery">
+  		SELECT * FROM studentassignment WHERE ljxClasses = #{ljxclaname}
+		GROUP BY ljxTid DESC
+  </select>
+  <resultMap type="com.zhxy.domain.Studentassignment" id="tuichiQuery">
+  		<id property="ljxtid" column="ljxTid"/>
+  		<result property="ljxtitle" column="ljxTitle"/>
+  		<result property="ljxtime" column="ljxTime"/>
+  		
+  		<collection property="asslist" column="ljxTid"
+  		ofType="com.zhxy.domain.AssignmentPutOff"
+  		select="com.zhxy.mapper.AssignmentPutOffMapper.tuichiqueryA"></collection>
+  </resultMap>
+  
+  <!-- 任务类型 -->
+  <select id="typequery" resultType="com.zhxy.domain.AssignmentType">
+  		SELECT * FROM `assignment_type` 
+  </select>
 </mapper>

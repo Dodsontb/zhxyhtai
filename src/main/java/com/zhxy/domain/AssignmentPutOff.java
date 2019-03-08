@@ -28,8 +28,28 @@ public class AssignmentPutOff {
     private String name5;
     
     private List<Studentassignment> stulist;
+    
+    private List<CpStudent> cpslist;
+    
+    private List<PutOffExamine> putlist;
 
-    public Integer getLjxtuid() {
+    public List<PutOffExamine> getPutlist() {
+		return putlist;
+	}
+
+	public void setPutlist(List<PutOffExamine> putlist) {
+		this.putlist = putlist;
+	}
+
+	public List<CpStudent> getCpslist() {
+		return cpslist;
+	}
+
+	public void setCpslist(List<CpStudent> cpslist) {
+		this.cpslist = cpslist;
+	}
+
+	public Integer getLjxtuid() {
         return ljxtuid;
     }
 

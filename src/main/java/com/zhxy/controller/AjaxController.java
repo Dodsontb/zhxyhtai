@@ -85,11 +85,6 @@ public class AjaxController {
 		return planService.calendar(type, planService.maxDate());
 	}
 
-	@RequestMapping("existAuto")
-	public String existAuto() {
-		return planService.existAuto() + "";
-	}
-
 	@RequestMapping("cancelAdv")
 	public Calendar calcelAdv(int type, String str) {
 		planService.deleteAdv();
@@ -379,4 +374,20 @@ public class AjaxController {
 	public List<People> teacher(int id,Integer[] list){		
 		return peopleService.teachers(id,list);
 	}
+
+	@RequestMapping("clazzInfo")
+	public Clazz queryClazz(int id) {
+		return clazzService.queryById(id);
+	}
+	
+	@RequestMapping("clazzPlan")
+	public List<Clazz> clazzPlan(int id){
+		return planService.weekPlan(id);
+	}
+	
+	@RequestMapping(value="appendClazz",produces="application/json;charset=utf-8")
+	public void appendClazz(@RequestBody ClazzInfo clazzInfo) {
+		clazzService.appendClazz(clazzInfo);	
+	}
 }
+

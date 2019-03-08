@@ -207,4 +207,10 @@
 	<delete id="delCurr">
 		delete from teacher_curr where cid=#{cid}
 	</delete>
+	<select id="finish" resultType="boolean">
+		select case
+			   when (select count(0)*2 from plan where cid=#{cid} and study=true and cuid=(select currId from clazz where id=#{cid})) >=(select hour from version_curr where vid=(select vid from clazz where id=#{cid}) and cid=(select currId from clazz where id=#{cid})) then true
+			   else false
+			   end
+	</select>
 </mapper>

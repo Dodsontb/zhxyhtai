@@ -190,10 +190,104 @@
   		<collection property="stulist" column="ljxtid"
   		ofType="com.zhxy.domain.Studentassignment"
   		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
   </resultMap>
   
   <insert id="putoffinsert" parameterType="com.zhxy.domain.AssignmentPutOff">
   		INSERT INTO `assignment_put_off` (`ljxTid`,`ljxUid`,`ljxClass`,`ljxClasses`,`ljxTitme`,`ljxContent`)
 		VALUES(#{ljxtid},#{ljxuid},#{ljxclass},#{ljxclasses},#{ljxTitme},#{ljxcontent})
+  </insert>
+  
+  <!-- 老师查看推迟任务的学生 
+  <select id="tuistudent" resultMap="tuiStudent">
+  		SELECT * FROM assignment_put_off WHERE ljxClasses = #{ljxclasses}
+		GROUP BY ljxTuid DESC
+  </select>
+  
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="tuiStudent">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="com.zhxy.mapper.StudentassignmentMapper.stuquery"></collection>
+  </resultMap>-->
+  
+  <!-- 推迟的任务 -->
+  
+  <select id="tuichiqueryA" resultMap="tuichiQueryA">
+  		SELECT * FROM `assignment_put_off` WHERE ljxTid = #{ljxTid}
+  </select>
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="tuichiQueryA">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="cpslist" column="ljxuid"
+  		ofType="com.zhxy.domain.CpStudent"
+  		select="cpstudent"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
+  </resultMap>
+  
+  <!-- 推迟任务的学员 -->
+  <select id="cpstudent" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM cp_student WHERE studentid = #{ljxuid}
+  </select>
+  
+  <!-- 查看推迟的详细信息 -->
+  <select id="xiangx" resultMap="xiangX">
+  		SELECT * FROM `assignment_put_off` WHERE ljxTuid=#{ljxTuid}
+  </select>
+  <select id="cpstudentx" resultType="com.zhxy.domain.CpStudent">
+  		SELECT * FROM cp_student WHERE studentid = #{ljxuid}
+  </select>
+  <select id="studentassx" resultType="com.zhxy.domain.Studentassignment">
+  		SELECT * FROM studentassignment WHERE ljxtid = #{ljxtid}
+  </select>
+  <select id="put" resultType="com.zhxy.domain.PutOffExamine">
+  		SELECT * FROM `put_off_examine` WHERE ljxtuid =#{ljxtuid}
+  </select>
+  
+  <resultMap type="com.zhxy.domain.AssignmentPutOff" id="xiangX">
+  		<id property="ljxtuid" column="ljxtuid"/>
+  		<result property="ljxtid" column="ljxtid"/>
+  		<result property="ljxuid" column="ljxuid"/>
+  		<result property="ljxclass" column="ljxclass"/>
+  		<result property="ljxclasses" column="ljxclasses"/>
+  		<result property="ljxTitme" column="ljxTitme"/>
+  		<result property="ljxcontent" column="ljxcontent"/>
+  		
+  		<collection property="cpslist" column="ljxuid"
+  		ofType="com.zhxy.domain.CpStudent"
+  		select="cpstudentx"></collection>
+  		
+  		<collection property="stulist" column="ljxtid"
+  		ofType="com.zhxy.domain.Studentassignment"
+  		select="studentassx"></collection>
+  		
+  		<collection property="putlist" column="ljxtuid"
+  		ofType="com.zhxy.domain.PutOffExamine"
+  		select="put"></collection>
+  </resultMap>
+  
+  <!-- //审核 -->
+  
+  <insert id="einsert">
+  		INSERT INTO `put_off_examine`(`ljxTuid`,`ljxYesno`,`ljxUname`,`ljxUid`)VALUE(#{ljxtuid},#{ljxyesno},#{ljxuname},#{ljxuid})
   </insert>
 </mapper>

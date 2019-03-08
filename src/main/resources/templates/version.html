@@ -278,7 +278,7 @@
 				<!--班级管理-->
 				<li><a href="#"> 班级管理 <i class="im-table2"></i></a>
 					<ul class="nav sub">
-						<li><a href="tables.html"><i class="im-newspaper"></i>
+						<li><a href="clazz.to"><i class="im-newspaper"></i>
 								查看班级</a></li>
 						<li><a href="addclazz.to"><i class="im-calculate"></i>
 								新增班级</a></li>
@@ -333,6 +333,7 @@
 						</li>
 						<li><a href="curr.to"><i class="im-table2"></i> 课程管理</a></li>
 					</ul></li>
+
 			</ul>
 		</div>
 		<!-- End .sidebar-inner -->
@@ -362,6 +363,11 @@
 						<h6 v-else>暂无班级使用</h6>
 						<span>{{item.create}}</span>
 					</div>
+					<i class="to-header" v-if="v">
+						<div class="version to hide-it" :value="item.id" v-for="item in v.lists">
+							<h3>{{item.name}}</h3>
+						</div>
+					</i>
 				</div>
 				<div class="versioninfo col-lg-10" v-if="v">
 					<div class="header">
@@ -369,13 +375,13 @@
 							版本 : <span>{{v.name}}</span> 创建时间 ： <span>{{v.create}}</span> <span
 								v-if="v.outtime"> 停用时间 ： <span>{{v.outtime}}</span></span>
 						</h4>
-						<h4>
+						<h4 class="end">
 							<span v-if="v.num"> 正在使用班级 : <span>{{v.num}}</span>
 							</span> <span v-if="v.hour>0"> 总课时 ：{{v.hour}} </span>
 						</h4>
 					</div>
 					<div v-for="major in v.lists">
-						<h4>{{major.name}} 课时 ：{{major.hour}}</h4>
+						<h4 :mid="major.id">{{major.name}} 课时 ：{{major.hour}}</h4>
 						<div v-for="grade in major.lists">
 							<h5>{{grade.name}} 课时 : {{grade.hour}}</h5>
 							<div v-for="curr in grade.lists">

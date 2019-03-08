@@ -119,9 +119,9 @@ public class historyServiceImpl  implements hxk_history{
 	}
 
 	@Override
-	public List<CpUser> queryUserGetId() {
+	public List<CpUser> queryUserGetId(Integer userid) {
 		// TODO Auto-generated method stub
-		return mcapper.queryUserGetId();
+		return mcapper.queryUserGetId(userid);
 	}
 
 	@Override

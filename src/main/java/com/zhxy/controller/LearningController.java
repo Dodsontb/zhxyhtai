@@ -20,4 +20,21 @@ public class LearningController {
 	public List<Learning> cp_selectBycid(Integer cid, Integer templateid){
 		return li.cp_selectBycid(cid, templateid);
 	}
+	@RequestMapping("updateStatuslearning")
+	@ResponseBody
+	public int updateStatuslearning(Integer uid,Integer templateid) {
+		return li.updateStatuslearning(uid, templateid);
+	}
+	
+	/*@RequestMapping("insertSelective")
+	@ResponseBody
+	public int insertSelective(Learning learning) {
+		return li.insertSelective(learning);
+	}*/
+	
+	@RequestMapping("selectstulearning")
+	@ResponseBody
+	public List<Learning> selectstulearning(int uid) {
+		return li.selectstulearning(uid);
+	}
 }

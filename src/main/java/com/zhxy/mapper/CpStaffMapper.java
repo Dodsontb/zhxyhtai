@@ -18,4 +18,8 @@ public interface CpStaffMapper {
     int updateByPrimaryKey(CpStaff record);
     
     List<CpStaff> findList();
+    
+    CpStaff querybyid(Integer id);
+    
+    List<CpStaff> selectAll();
 }

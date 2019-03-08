@@ -8,4 +8,5 @@ public interface Yquestionservice {
 
 	List<Yquestion> queryYquestion(int qid);
 	int insertYquestion(Yquestion record);
+	int updataYquestion(int id);
 }

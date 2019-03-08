@@ -41,7 +41,7 @@ public interface hxk_history {
 	    
 	    int updataNotice();
 	    
-	    List<CpUser> queryUserGetId();
+	    List<CpUser> queryUserGetId(Integer userid);
 	    
 	    List<CpUser> queryCpUserByName(String username);
 	    

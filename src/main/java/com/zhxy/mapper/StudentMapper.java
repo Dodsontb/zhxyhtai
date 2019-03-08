@@ -17,4 +17,6 @@ public interface StudentMapper {
 	List<Student> frees(@Param("lists")List<Student> lists,@Param("mid")Integer mid);
 
 	List<Student> querys(@Param("lists")List<Student> lists,@Param("mid")Integer mid);
+
+	List<Student> queryAll();
 }
