@@ -1,6 +1,5 @@
 package com.zhxy.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +30,27 @@ public class recordController {
 	@ResponseBody
 	public int insertxuan(@RequestBody List<Record> record) {
 		return rr.insertxuan(record);
+	}
+	
+	
+	@RequestMapping("updata_scorex")
+	@ResponseBody
+	public int updata_scorex(Record record) {
+		return rr.updata_scorex(record);
+	}
+	@RequestMapping("updata_scoret")
+	@ResponseBody
+	public int updata_scoret(Record record) {
+		return rr.updata_scoret(record);
+	}
+	@RequestMapping("updata_scorey")
+	@ResponseBody
+	public int updata_scorey(Record record) {
+		return rr.updata_scorey(record);
+	}
+	@RequestMapping("selectxuan")
+	@ResponseBody
+	public List<Record> selectxuan(Record record) {
+		return rr.selectxuan(record);
 	}
 }

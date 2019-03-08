@@ -250,9 +250,9 @@
                      <!--班级管理-->
                     <li><a href="#"> 班级管理 <i class="im-table2"></i></a>
                         <ul class="nav sub">
-                            <li><a href="tables.html"  target="iFrame1"><i class="en-arrow-right7"></i> 查看班级</a>
+                            <li><a href="clazz.to"><i class="en-arrow-right7"></i> 查看班级</a>
                             </li>
-                            <li><a href="data-tables.html"  target="iFrame1"><i class="en-arrow-right7"></i> 新增班级</a>
+                            <li><a href="addclazz.to"><i class="en-arrow-right7"></i> 新增班级</a>
                             </li>
                         </ul>
                     </li>
@@ -286,7 +286,7 @@
                             </li>
                             <li><a href="choosing.html"  target="iFrame1"><i class="br-window"></i> 出题</a>
                             </li>
-                            <li><a href="selectTest.html"  target="iFrame1"><i class="im-windows8"></i> 班级历史考试</a>
+                           <li><a href="selectTest.html"  target="iFrame1"><i class="im-windows8"></i> 发布考试</a>
                             </li>
                             <li><a href="tiles.html" target="iFrame1"><i class="im-windows8"></i> 发布作业</a>
                             </li>
@@ -485,15 +485,14 @@
 <script src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/vue.js"></script>
     </body>
-   
-	
+   <!--  <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> -->
+	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
 	 <script>
 	 	var v=new Vue({
 			el:".xiaoxi",
 			data:{
 				clist:null,
 				chat:null,
-				list:{},
 				num:0
 			}
 		});
@@ -507,18 +506,8 @@
 					v.clist=result;
 					v.num=v.clist.length;
 				}
-			 }); 
-			  
-			  $.ajax({
-					url:"/getcpusersission",
-					dataType:"json",
-					type:"post",
-					  data:'', 
-					success:function(data){
-						v.list=data
-						console.log(data)
-					}
-				 }); 
+				
+			}); 
 	 	});
 	 
 	 </script>

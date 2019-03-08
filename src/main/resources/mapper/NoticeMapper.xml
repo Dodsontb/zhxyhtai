@@ -106,7 +106,7 @@
 		<result property="name" column="name" />
 		<result property="num" column="num" />
 		<result property="people" column="people" />
-		 <association property="grades" column="gradeId" javaType="com.zhxy.domain.Grade" select="queryGrades"></association>
+		 <association property="grade" column="gradeId" javaType="com.zhxy.domain.Grade" select="queryGrades"></association>
 	 </resultMap>
 	   
 	  <select id="queryGrades" resultType="com.zhxy.domain.Grade">

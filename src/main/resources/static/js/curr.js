@@ -17,7 +17,7 @@ $.ajax({
 		vue.majors = e;
 	}
 });
-
+//专业
 function currinfo(id){
 	$.ajax({
 		url: URL + "currinfo",
@@ -184,7 +184,7 @@ $("#remove-curr").click(function() {
 		}
 	});
 });
-
+//年级
 $("#major").change(function() {
 	var val = this.value;
 	if (val == "all") {
@@ -205,7 +205,7 @@ $("#major").change(function() {
 $("#curr-header select").change(function() {
 	queryCurrs();
 });
-
+//查课程
 function queryCurrs() {
 	var mid = $("#major").val() == "all" ? null : $("#major").val();
 	var gid = $("#grade").val() == "all" ? null : $("#grade").val();

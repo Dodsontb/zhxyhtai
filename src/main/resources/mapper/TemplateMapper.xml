@@ -315,7 +315,7 @@
     SELECT * FROM template WHERE `softtypeid`=#{softtypeid}
   </select>
   <select id="cp_queryall" resultMap="BaseResultMap">
-    SELECT * FROM `template` WHERE name2 = 0
+    SELECT * FROM `template` WHERE name2 =#{name2}
   </select>
   <select id="cp_querybyname1" resultMap="BaseResultMap">
 	SELECT * FROM `template` WHERE name1=#{name1} AND name2 = 0

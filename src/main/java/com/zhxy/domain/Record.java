@@ -15,7 +15,7 @@ public class Record {
 
     private String result;
 
-    private Integer score;
+    private double score;
 
     private Integer status;
 
@@ -77,11 +77,11 @@ public class Record {
         this.result = result;
     }
 
-    public Integer getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(double score) {
         this.score = score;
     }
 

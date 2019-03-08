@@ -47,8 +47,8 @@ public class Templatecontroller {
 	//查询全部laila
 	@RequestMapping("cp_queryall")
 	@ResponseBody
-	public List<Template> cp_queryall() {
-		return ts.cp_queryall();
+	public List<Template> cp_queryall(String name2) {
+		return ts.cp_queryall(name2);
 	}
 	//按班级查询
 	@RequestMapping("cp_querybyname1")

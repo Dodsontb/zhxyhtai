@@ -1,306 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>发布</title>
-        <!-- Mobile specific metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <!-- Force IE9 to render in normal mode -->
-        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
-        <meta name="author" content="SuggeElson" />
-        <meta name="description" content=""
-        />
-        <meta name="keywords" content=""
-        />
-        <meta name="application-name" content="sprFlat admin template" />
-        <!-- Import google fonts - Heading first/ text second -->
-        <link rel='stylesheet' type='text/css' >
-        <!--[if lt IE 9]>
+<head>
+<meta charset="utf-8">
+<title>发布</title>
+<!-- Mobile specific metas -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Force IE9 to render in normal mode -->
+<!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+<meta name="author" content="SuggeElson" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="application-name" content="sprFlat admin template" />
+<!-- Import google fonts - Heading first/ text second -->
+<link rel='stylesheet' type='text/css'>
+<!--[if lt IE 9]>
 
 <![endif]-->
-        <!-- Css files -->
-        <!-- Icons -->
-        <link href="assets/css/icons.css" rel="stylesheet" />
-        <!-- jQueryUI -->
-        <link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
-        <!-- Bootstrap stylesheets (included template modifications) -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet" />
-        <!-- Plugins stylesheets (all plugin custom css) -->
-        <link href="assets/css/plugins.css" rel="stylesheet" />
-        <!-- Main stylesheets (template main css file) -->
-        <link href="assets/css/main.css" rel="stylesheet" />
-        <!-- Custom stylesheets ( Put your own changes here ) -->
-        <link href="assets/css/custom.css" rel="stylesheet" />
-        <!-- Fav and touch icons -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/img/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/img/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="assets/img/ico/apple-touch-icon-57-precomposed.png">
-        <link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
-        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
-        <meta name="msapplication-TileColor" content="#3399cc" />
-    </head>
-    <body>
-        <!-- Start #header -->
-        <div class="cp_new">
-            <div id="content"> 
-            	<div class="form-group">
-					<label for="defaultSelect">年级</label> <select
-						class="form-control form-control" id="defaultSelect">
-						<option>S1</option>
-						<option>S2</option>
-						<option>Y2</option>
+<!-- Css files -->
+<!-- Icons -->
+<link href="assets/css/icons.css" rel="stylesheet" />
+<!-- jQueryUI -->
+<link href="assets/css/sprflat-theme/jquery.ui.all.css" rel="stylesheet" />
+<!-- Bootstrap stylesheets (included template modifications) -->
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+<!-- Plugins stylesheets (all plugin custom css) -->
+<link href="assets/css/plugins.css" rel="stylesheet" />
+<!-- Main stylesheets (template main css file) -->
+<link href="assets/css/main.css" rel="stylesheet" />
+<!-- Custom stylesheets ( Put your own changes here ) -->
+<link href="assets/css/custom.css" rel="stylesheet" />
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="assets/img/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="assets/img/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="assets/img/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/img/ico/apple-touch-icon-57-precomposed.png">
+<link rel="icon" href="assets/img/ico/favicon.ico" type="image/png">
+<!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+<meta name="msapplication-TileColor" content="#3399cc" />
+</head>
+<body>
+	<!-- Start #header -->
+	<div class="cp_new">
+		<div id="content">
+			<div>
+				<div id="curr-header">
+					<span> 专业: <select id="major">
+							<option value="all">全部</option>
+							<option v-for="major in majors" :value="major.id">{{major.name}}</option>
 					</select>
-				</div>
-				<div class="form-group">
-					<label for="defaultSelect">课程</label> <select
-						class="form-control form-control" id="defaultSelect">
-						<option>请选择</option>
-						<option>java</option>
-						<option>c#</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
+					</span> <span> 年级: <select id="grade">
+							<option value="all">全部</option>
+							<option v-for="grade in grades" :value="grade.id">{{grade.name}}</option>
 					</select>
-				</div>
-				<div class="form-group">
-					<label for="defaultSelect">章节</label> <select
-						class="form-control form-control" id="defaultSelect" name="cid">
-						<option value="-1">请选择</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
+					</span>
+					<span> 课程: <select id="curr">
+							<option value="all">全部</option>
+							<option v-for="item in lists" :value="item.id">{{item.ename}}</option>
 					</select>
-				</div>
-				<div class="form-group">
-					<label for="defaultSelect">知识点</label> <select
-						class="form-control form-control" id="defaultSelect" name="kid">
-						<option value="-1">请选择</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
+					</span>
+					<span> 章节: <select id="section">
+							<option value="all">全部</option>
+							<option v-for="item in sections" :value="item.id">{{item.name}}</option>
 					</select>
+					</span>
 				</div>
-				<button class="btn btn-success cp_bot">确认</button>
-                <!--主体部分-->
-                <div class="panel panel-default toggle cp_xuanzheti">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">选择题</h3>
-                    </div>
-                    <div class="panel-body" >
-                    	<div class="col-lg-10 col-md-10" id="checkAllExample1"  v-for="(obj1,index) in list" >
-                            <div class="children">
-                                <label class="checkbox cp_box"  >
-                                    <input class="check" type="checkbox" v-bind:data-id="obj1.id" name="xuanze" value="option2" >{{obj1.question}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default toggle cp_tiankongti">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">填空题</h3>
-                    </div>
-                    <div class="panel-body">
-                    	<div class="col-lg-10 col-md-10" id="checkAllExample2"  v-for="(obj2,index) in list1" @click="gettianID(obj2.id)">
-	                        <div class="children" >
-	                            <label class="checkbox cp_box" >
-	                                <input class="check" type="checkbox" v-on:click="checkboxClick1()" name="tiankong" v-bind:data-id="obj2.id" value="option2">{{obj2.question}}
-	                            </label>
-	                        </div>
-	                    </div>
-                    </div>
-                </div>
-                 <div class="panel panel-default toggle cp_tiankongti">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">应用题</h3>
-                    </div>
-                    <div class="panel-body" >
-                    	<div class="col-lg-10 col-md-10" id="checkAllExample3"  v-for="(obj3,index) in list2" @click="getkongID(obj3.id)">
-                            <div class="children" >
-                                <label class="checkbox cp_box"   v-bind:data-id="obj3.id">
-                                    <input class="check" type="checkbox" v-bind:data-id="obj3.id" name="yingyong" value="option2" >{{obj3.question}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                
-                <!--主体部分-->
-            </div>
-              <!-- End .content-wrapper -->
-              <div class="form-group col-lg-10 col-md-10">
-					<label for="defaultSelect">模板类型</label> <select class="form-control form-control" id="defaultSelects"  name="kid">
-						<option v-bind:value="obj4.id"  v-for="(obj4,index) in type" class="cp_val">{{obj4.name}}</option>
-					</select>
-					模板名称: <input class="form-control" id="cp_name" type="text">
+			</div>
+			<button class="btn btn-success cp_bot">确认</button>
+			<!--主体部分-->
+			<div class="panel panel-default toggle cp_xuanzheti">
+				<div class="panel-heading">
+					<h3 class="panel-title">选择题</h3>
 				</div>
-            <div class="clearfix"><button class="btn btn-success cp_god col-lg-5 col-md-5" style="width: 50px;">发布</button></div>
-          </div>
-          
-        <!-- End #content -->
-        <!-- Javascripts -->
-        <!-- Load pace first -->
-        <script src="assets/plugins/core/pace/pace.min.js"></script>
-        <!-- Important javascript libs(put in all pages) -->
-        <script src="assets/js/jquery-1.8.3.min.js"></script>
-        <script>
-        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
-        </script>
-        <script src="assets/js/jquery-ui.js"></script>
-        <script>
-        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
-        </script>
-        <!-- Bootstrap plugins -->
-        <script src="assets/js/bootstrap/bootstrap.js"></script>
-        <!-- Core plugins ( not remove ever) -->
-        <!-- Handle responsive view functions -->
-        <script src="assets/js/jRespond.min.js"></script>
-        <!-- Custom scroll for sidebars,tables and etc. -->
-        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
-        <!-- Resize text area in most pages -->
-        <script src="assets/plugins/forms/autosize/jquery.autosize.js"></script>
-        <!-- Proivde quick search for many widgets -->
-        <script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
-        <!-- Bootbox confirm dialog for reset postion on panels -->
-        <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
-        <!-- Other plugins ( load only nessesary plugins for every page) -->
-        <script src="assets/plugins/charts/flot/jquery.flot.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.pie.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.resize.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.time.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.growraf.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.categories.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.stack.js"></script>
-        <script src="assets/plugins/charts/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="assets/plugins/charts/flot/date.js"></script>
-        <script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
-        <script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
-        <script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
-        <script src="assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
-        <script src="assets/plugins/forms/tinymce/tinymce.min.js"></script>
-        <script src="assets/plugins/misc/highlight/highlight.pack.js"></script>
-        <script src="assets/plugins/misc/countTo/jquery.countTo.js"></script>
-        <script src="assets/plugins/ui/weather/skyicons.js"></script>
-        <script src="assets/plugins/ui/notify/jquery.gritter.js"></script>
-        <script src="assets/plugins/ui/calendar/fullcalendar.js"></script>
-        <script src="assets/js/jquery.sprFlat.js"></script>
-        <script src="assets/js/app.js"></script>
-        <script src="assets/js/vue.js"></script>
-        <script src="assets/js/pages/dashboard.js"></script>
-    </body>
+				<div class="panel-body">
+					<div class="col-lg-10 col-md-10" id="checkAllExample1"
+						v-for="(obj1,index) in list">
+						<div class="children">
+							<label class="checkbox cp_box"> <input class="check"
+								type="checkbox" v-bind:data-id="obj1.id" name="xuanze"
+								value="option2">{{obj1.question}}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default toggle cp_tiankongti">
+				<div class="panel-heading">
+					<h3 class="panel-title">填空题</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-lg-10 col-md-10" id="checkAllExample2"
+						v-for="(obj2,index) in list1" @click="gettianID(obj2.id)">
+						<div class="children">
+							<label class="checkbox cp_box"> <input class="check"
+								type="checkbox" v-on:click="checkboxClick1()" name="tiankong"
+								v-bind:data-id="obj2.id" value="option2">{{obj2.question}}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default toggle cp_tiankongti">
+				<div class="panel-heading">
+					<h3 class="panel-title">应用题</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-lg-10 col-md-10" id="checkAllExample3"
+						v-for="(obj3,index) in list2" @click="getkongID(obj3.id)">
+						<div class="children">
+							<label class="checkbox cp_box" v-bind:data-id="obj3.id">
+								<input class="check" type="checkbox" v-bind:data-id="obj3.id"
+								name="yingyong" value="option2">{{obj3.question}}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--主体部分-->
+		</div>
+		<!-- End .content-wrapper -->
+		<div class="form-group col-lg-10 col-md-10">
+			<label for="defaultSelect">模板类型</label> <select
+				class="form-control form-control" id="defaultSelects" name="kid">
+				<option v-bind:value="obj4.id" v-for="(obj4,index) in type"
+					class="cp_val">{{obj4.name}}</option>
+			</select> 模板名称: <input class="form-control" id="cp_name" type="text">
+		</div>
+		<div class="clearfix">
+			<button class="btn btn-success cp_god col-lg-5 col-md-5"
+				style="width: 50px;">发布</button>
+		</div>
+	</div>
+
+	<!-- End #content -->
+	<!-- Javascripts -->
+	<!-- Load pace first -->
+	<script src="assets/plugins/core/pace/pace.min.js"></script>
+	<!-- Important javascript libs(put in all pages) -->
+	<script src="assets/js/jquery-1.8.3.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+	</script>
+	<script src="assets/js/jquery-ui.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+	</script>
+	<!-- Bootstrap plugins -->
+	<script src="assets/js/bootstrap/bootstrap.js"></script>
+	<!-- Core plugins ( not remove ever) -->
+	<!-- Handle responsive view functions -->
+	<script src="assets/js/jRespond.min.js"></script>
+	<!-- Custom scroll for sidebars,tables and etc. -->
+	<script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+	<!-- Resize text area in most pages -->
+	<script src="assets/plugins/forms/autosize/jquery.autosize.js"></script>
+	<!-- Proivde quick search for many widgets -->
+	<script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+	<!-- Bootbox confirm dialog for reset postion on panels -->
+	<script src="assets/plugins/ui/bootbox/bootbox.js"></script>
+	<!-- Other plugins ( load only nessesary plugins for every page) -->
+	<script src="assets/plugins/charts/flot/jquery.flot.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.pie.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.resize.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.time.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.growraf.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.categories.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.stack.js"></script>
+	<script src="assets/plugins/charts/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="assets/plugins/charts/flot/date.js"></script>
+	<script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
+	<script src="assets/plugins/charts/pie-chart/jquery.easy-pie-chart.js"></script>
+	<script src="assets/plugins/forms/icheck/jquery.icheck.js"></script>
+	<script src="assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
+	<script src="assets/plugins/forms/tinymce/tinymce.min.js"></script>
+	<script src="assets/plugins/misc/highlight/highlight.pack.js"></script>
+	<script src="assets/plugins/misc/countTo/jquery.countTo.js"></script>
+	<script src="assets/plugins/ui/weather/skyicons.js"></script>
+	<script src="assets/plugins/ui/notify/jquery.gritter.js"></script>
+	<script src="assets/plugins/ui/calendar/fullcalendar.js"></script>
+	<script src="assets/js/jquery.sprFlat.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script src="js/url.js"></script>
+	<script src="assets/js/pages/dashboard.js"></script>
+</body>
 </html>
 <script type="text/javascript">
-	var array="";
+	var array = "";
 	var v = new Vue({
 		el : ".cp_new",
+		data : {
+			list : null,
+			list1 : null,
+			list2 : null,
+			type : null,
+			lists:[],
+			majors : [],
+			grades : [],
+			sections:[]
+		},
+	})
+	//专业
+	$.ajax({
+		url : URL + "allMajor",
+		success : function(e) {
+			v.majors = e;
+		}
+	});
+	//年级
+	$("#major").change(function() {
+		var val = this.value;
+		v.lists = [];
+		v.sections = [];
+		$("#grade").val("all");
+		if (val == "all") {
+			v.grades = [];
+		} else {
+			$.ajax({
+				url : URL + "queryGrade",
+				data : {
+					mid : val
+				},
+				success : function(e) {
+					v.grades = e;
+				}
+			});
+		}
+	});
+	$("#grade").change(function() {
+		var val = this.value;
+		v.sections = [];
+		$("#curr").val("all");
+		if (val == "all") {
+			v.lists = [];
+		} else{
+			queryCurrs();
+		}
+	});
+	$("#curr").change(function() {
+		var val = this.value;
+		if (val == "all") {
+			v.sections = [];
+		} else{
+			querySections();
+		}
+	});
+	
+	function querySections(){
+		var mid = $("#major").val();
+		var gid = $("#grade").val();
+		var cid = $("#curr").val();
+		$.ajax({
+			url: "querySection",
+			data:{
+				mid:mid,
+				gid:gid,
+				cid:cid
+			},success:function(e){
+				v.sections=e;
+			}
+		});	
+	}
+	//查课程
+	function queryCurrs() {
+		var mid = $("#major").val() == "all" ? null : $("#major").val();
+		var gid = $("#grade").val() == "all" ? null : $("#grade").val();
+		if (!mid) {
+			gid = null;
+		}
+		$.ajax({
+			url : URL + "currs",
 			data : {
-				list:null,
-				list1:null,
-				list2:null,
-				type:null,
+				mid : mid,
+				gid : gid
 			},
-		})
-	
-	
+			success : function(e) {
+				v.lists = e;
+			}
+		});
+	}
+
 	$(function() {
 		$.ajax({
-			data:null,
-			type:"post",
-			url:"/query",
-			async:true,
+			data : null,
+			type : "post",
+			url : "/query",
+			async : true,
 			success : function(data) {
-				v.type=data
+				v.type = data
 			}
-		}); 
+		});
 		/* $("body").on("click",".check",function(){
 			var sid=$(this).attr("data-id");
 			alert("被选中了"+sid); 
 		}) */
 		/* 点击选择的章节来筛选题目 */
-		var cquestionid="";
-		var tquestionid="";
-		var yquestionid="";
+		var cquestionid = "";
+		var tquestionid = "";
+		var yquestionid = "";
 		/* 选择题 */
-		$('body').on('click','[name=xuanze]',function(){
-				var xid = this.getAttribute("data-id");//learning主键
-				cquestionid+=xid+",";
+		$('body').on('click', '[name=xuanze]', function() {
+			var xid = this.getAttribute("data-id");//learning主键
+			cquestionid += xid + ",";
 		})
 		/* 填空题 */
-		$('body').on('click','[name=tiankong]',function(){
-				var tid = this.getAttribute("data-id");//learning主键
-				tquestionid+=tid+",";
+		$('body').on('click', '[name=tiankong]', function() {
+			var tid = this.getAttribute("data-id");//learning主键
+			tquestionid += tid + ",";
 		})
 		/* 应用题 */
-		$('body').on('click','[name=yingyong]',function(){
-				var yid = this.getAttribute("data-id");//learning主键
-				yquestionid+=yid+",";
+		$('body').on('click', '[name=yingyong]', function() {
+			var yid = this.getAttribute("data-id");//learning主键
+			yquestionid += yid + ",";
 		})
-		
+
 		$(".cp_god").click(function() {
 			/* 这是添加的数据 */
-			var name=$("#cp_name").val();
-			var total=100;
-			var softtypeid=$('#defaultSelects option:selected').val();
-			cquestionid=cquestionid.substring(0, cquestionid.length - 1);
-			yquestionid=yquestionid.substring(0, yquestionid.length - 1);
-			tquestionid=tquestionid.substring(0, tquestionid.length - 1);
-			var uid=8;
-			var cc={"Name":name,"total":total,"softtypeid":softtypeid,"cquestionid":cquestionid,"yquestionid":yquestionid,"tquestionid":tquestionid,"uid":uid}
+			var name = $("#cp_name").val();
+			var total = 100;
+			var softtypeid = $('#defaultSelects option:selected').val();
+			cquestionid = cquestionid.substring(0, cquestionid.length - 1);
+			yquestionid = yquestionid.substring(0, yquestionid.length - 1);
+			tquestionid = tquestionid.substring(0, tquestionid.length - 1);
+			var uid = 8;
+			var cc = {
+				"Name" : name,
+				"total" : total,
+				"softtypeid" : softtypeid,
+				"cquestionid" : cquestionid,
+				"yquestionid" : yquestionid,
+				"tquestionid" : tquestionid,
+				"uid" : uid
+			}
 			$.ajax({
-				data:cc,
-				type:"post",
-				url:"/insertTemplate",
-				async:true,
+				data : cc,
+				type : "post",
+				url : "/insertTemplate",
+				async : true,
 				success : function(data) {
-					if(data>0){
+					if (data > 0) {
 						alert("添加成功")
-					}else{
+					} else {
 						alert("添加失败")
 					}
 				}
-			}); 
-			
+			});
 		})
 		$(".cp_bot").click(function() {
+			var qid=$("#section").val();
 			/*填空题*/
 			$.ajax({
-				data:{qid:1},
-				type:"post",
-				url:"/queryCquestion",
+				data : {
+					qid : qid
+				},
+				type : "post",
+				url : "/queryCquestion",
 				success : function(data) {
 					console.log(data)
-					v.list=data
+					v.list = data
 				}
-			}); 
+			});
 			/* 填空题 */
 			$.ajax({
-				data:{qid:1},
-				type:"post",
-				url:"/queryTquestion",
-				async:true,
+				data : {
+					qid : qid
+				},
+				type : "post",
+				url : "/queryTquestion",
+				async : true,
 				success : function(data) {
-					v.list1=data
+					v.list1 = data
 				}
-			}); 
+			});
 			/*应用题*/
-			 $.ajax({
-				data:{qid:1},
-				type:"post",
-				url:"/queryYquestion",
-				async:true,
+			$.ajax({
+				data : {
+					qid : qid
+				},
+				type : "post",
+				url : "/queryYquestion",
+				async : true,
 				success : function(data) {
-					v.list2=data
+					v.list2 = data
 				}
-			}); 
-			 
+			});
+
 		})
-		
+
 	})
-	
 </script>

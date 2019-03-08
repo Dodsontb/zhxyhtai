@@ -18,4 +18,12 @@ public interface RecordMapper {
     int updateByPrimaryKey(Record record);
     
     int insertxuan(List<Record> record);
+    
+    int updata_scorex(Record record);
+    
+    int updata_scoret(Record record);
+    
+    int updata_scorey(Record record);
+    
+    List<Record> selectxuan(Record record);
 }

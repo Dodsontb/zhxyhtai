@@ -20,5 +20,25 @@ public class learningserviceimpl implements learningservice{
 		// TODO Auto-generated method stub
 		return lm.cp_selectBycid(cid, templateid);
 	}
+	@Override
+	public Learning sumupdate(Learning learning) {
+		// TODO Auto-generated method stub
+		return lm.sumupdate(learning);
+	}
+	@Override
+	public int updateStatuslearning(Integer uid,Integer templateid) {
+		// TODO Auto-generated method stub
+		return lm.updateStatuslearning(uid,templateid);
+	}
+	@Override
+	public int insertSelective(Learning learning) {
+		// TODO Auto-generated method stub
+		return lm.insertSelective(learning);
+	}
+	@Override
+	public List<Learning> selectstulearning(int uid) {
+		// TODO Auto-generated method stub
+		return lm.selectstulearning(uid);
+	}
 
 }

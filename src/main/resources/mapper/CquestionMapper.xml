@@ -17,6 +17,7 @@
     <result column="name3" jdbcType="VARCHAR" property="name3" />
     <result column="name4" jdbcType="VARCHAR" property="name4" />
     <result column="name5" jdbcType="VARCHAR" property="name5" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     id, question, answer, correct, Qid, uid, status, time, difficulty, frequency, name1, 
@@ -216,4 +217,9 @@
   <update id="updatefrequency" parameterType="com.zhxy.domain.Cquestion">
   	UPDATE `cquestion` SET frequency=`frequency`+1 WHERE id=#{id}
   </update>
+  <select id="self_motion" resultMap="BaseResultMap">
+  	SELECT record.`id`,cquestion.`correct`,record.`Result` as name1 FROM cquestion 
+	INNER JOIN record ON cquestion.`id`=record.tid AND record.`Sid`=#{sid} AND record.`cid`=1
+	WHERE cquestion.`id`=#{tid} 
+  </select>
 </mapper>

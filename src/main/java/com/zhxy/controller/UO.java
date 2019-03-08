@@ -1,5 +1,8 @@
 package com.zhxy.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.zhxy.domain.CpUser;
+import com.zhxy.domain.Section;
+import com.zhxy.domain.StuClazz;
+import com.zhxy.mapper.StuClazzMapper;
+import com.zhxy.service.SectionService;
 import com.zhxy.service.cpUserservice;
 
 @Controller
@@ -18,6 +25,10 @@ public class UO {
 	
 	@Autowired
 	cpUserservice cus;
+	@Autowired
+	SectionService sectionService;
+	@Autowired
+	StuClazzMapper sm;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -30,13 +41,24 @@ public class UO {
 	}
 	
 	@RequestMapping("/typo")
-	public String typo() {
-		return "typo";
+	public String typo(Integer templateid,Integer uid,HttpSession session) {
+		session.setAttribute("templateid", templateid);
+		session.setAttribute("uid", uid);
+		return "redirect:typo";
+	}
+	
+	@RequestMapping("/correct")
+	public String correct() {
+		return "correct";
 	}
 	
 	@RequestMapping("/questions")
 	public String questions() {
 		return "questions";
+	}
+	@RequestMapping("/stu_ling")
+	public String stu_ling() {
+		return "stu_ling";
 	}
 	
 	@RequestMapping("/bbb")
@@ -71,6 +93,7 @@ public class UO {
 	}
 	//后台获取sission对象
 	@RequestMapping("/getcpusersission")
+	@ResponseBody
 	public CpUser getsission(HttpSession session) {
 		System.out.println("静茹");
 		CpUser u=(CpUser) session.getAttribute("user");
@@ -82,6 +105,18 @@ public class UO {
 	public String cp_select(String templateid,Model model) {
 		model.addAttribute("templateid",templateid);
 		return "cp_select";
+	}
+	
+	@RequestMapping("querySection")
+	@ResponseBody
+	public List<Section> querySections(Integer gid,Integer mid,Integer cid){
+		return sectionService.query(gid, mid, cid);
+	}
+	//根据班级id查询所有学生
+	@RequestMapping("clazzbysid")
+	@ResponseBody
+	public List<StuClazz> clazzbysid(Integer cid){
+		return sm.clazzbysid(cid);
 	}
 	
 }

@@ -8,7 +8,7 @@
     <result column="Sid" jdbcType="INTEGER" property="sid" />
     <result column="tid" jdbcType="INTEGER" property="tid" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
-    <result column="Score" jdbcType="INTEGER" property="score" />
+    <result column="Score"  property="score" />
     <result column="Status" jdbcType="INTEGER" property="status" />
     <result column="name1" jdbcType="VARCHAR" property="name1" />
     <result column="name2" jdbcType="VARCHAR" property="name2" />
@@ -187,10 +187,11 @@
   </update>
   <select id="selectxuan" resultMap="BaseResultMap">
 	SELECT * FROM `record` WHERE `templateid`=#{templateid} AND Sid=#{sid} AND cid=#{cid}
+	<if test="tid != null"> AND tid=#{tid}</if>
   </select>
-  <insert id="insertxuan">
+  <insert id="insertxuan" >
 		insert into
-		record(templateid,cid,tid,sid,result,name1,name2,name3)
+		record(templateid,cid,tid,sid,score,result,name1,name2)
 		values
 		<foreach collection="list" item="s" index="index"
 			separator=",">
@@ -199,11 +200,25 @@
 			#{s.cid},
 			#{s.tid},
 			#{s.sid},
+			#{s.score},
 			#{s.result},
 			#{s.name1},
-			now(),
-			#{s.name3}
+			now()
 			)
 		</foreach>
 	</insert>
+	<!-- 选择题 -->
+	<update id="updata_scorex" parameterType="com.zhxy.domain.Record">
+		UPDATE `record` SET score='0' WHERE tid=#{tid} AND templateid=#{templateid} AND cid=1 AND sid=#{sid}
+	</update>
+	<!-- 填空题 -->
+	<update id="updata_scoret" parameterType="com.zhxy.domain.Record">
+		UPDATE `record` SET score='0' WHERE tid=#{tid} AND templateid=#{templateid} AND cid=2 AND sid=#{sid}
+	</update>
+	<!-- 应用题 -->
+	<update id="updata_scorey" parameterType="com.zhxy.domain.Record">
+		UPDATE `record` SET score='0' WHERE tid=#{tid} AND templateid=#{templateid} AND cid=3 AND sid=#{sid}
+	</update>
+	
+	
 </mapper>

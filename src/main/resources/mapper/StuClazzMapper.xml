@@ -149,4 +149,8 @@
       name5 = #{name5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 根据班级id查询学生id -->
+  <select id="clazzbysid" resultMap="BaseResultMap">
+  	SELECT sid FROM `stu_clazz` WHERE cid =1
+  </select>
 </mapper>

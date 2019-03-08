@@ -166,10 +166,13 @@ function getNowFormatDate() {
             + seperator2 + date.getSeconds();
     return currentdate;
 }
+var id=sission.getAttribute("templateid");
+var sid=sission.getAttribute("uid");//后台获取学生id
 $(function() {
+	alert(id)
 	/* 选择题 */
 	$.ajax({
-		data:{id:25},
+		data:{id:id},
 		type:"post",
 		url:"/cp_querycquestion",
 		success : function(data) {
@@ -189,7 +192,7 @@ $(function() {
 	}); 
 	/* 填空题 */
 	$.ajax({
-		data:{id:25},
+		data:{id:id},
 		type:"post",
 		url:"/cp_querytquestion",
 		success : function(data) {
@@ -198,7 +201,7 @@ $(function() {
 	});
 	/* 应用题 */
 	$.ajax({
-		data:{id:25},
+		data:{id:id},
 		type:"post",
 		url:"/cp_queryyquestion",
 		success : function(data) {
@@ -210,6 +213,20 @@ $(function() {
 		xuanze();
 		tiankong();
 		yingyong();
+		var uid=1;//学生id
+		//updateStatuslearning
+		var templateid=v.list.id;//模板id
+		$.ajax({
+			data:{
+				uid:uid,
+				templateid:templateid
+				},
+			type:"post",
+			url:"/updateStatuslearning",
+			success : function(data) {
+				
+			}
+		});
 	})
 })
 //点击按钮根据
@@ -228,15 +245,13 @@ $(function() {
 function xuanze(){
 	var name1=getNowFormatDate();
 	var xuan="";
-	var sid=1;
 	var sum=0;
 	var templateid=v.list.id;//模板id
-	var cid="";//题目类型id
 	var record=[];
 	$(".form-horizontal").each(function(){
 		++sum;
 	})
-	var name3=50/sum;
+	var score=50/sum;
 	$(".form-horizontal").each(function(){
 		//添加每题多少分
 		var id=$(this).find("label").attr("data-id");
@@ -247,12 +262,13 @@ function xuanze(){
 				cid:1,
 				sid:sid,
 				name1:name1,
-				name3:name3
+				score:score
 		};
 		/* var str="record[0].tid="+tid+"record[0].id="+id
 		str+="record[1].tid="+tid+"record[1].id="+id */
 		$(this).find(":checked").each(function(){
 			var val=$(this).parent().next().find(":text").val();
+			console.log(val)
 			result+=val+",";
 		});
 		t.result=result.substring(0,result.length-1);
@@ -275,24 +291,23 @@ function tiankong(){
 	var name1=getNowFormatDate();
 	var tian="";
 	var sum=0;
-	var sid=1;
 	var templateid=v.list.id;//模板id
 	var cid="";//题目类型id
 	var list2=[];
 	$(".cp-horizontal").each(function(){
 		++sum;
 	})
-	var name3=20/sum;
+	var score=20/sum;
 	$(".cp-horizontal").each(function(){
 		var id=$(this).find("textarea").attr("data-id");
 		var result="";
 		var t1={
-				tid:id,
+				tid:parseInt(id),
 				templateid:templateid,
 				cid:2,
 				sid:sid,
 				name1:name1,
-				name3:name3
+				score:score
 		};
 		$(this).find(".cp_xdaan").each(function(){
 			var val1=$(this).val();
@@ -317,7 +332,6 @@ function tiankong(){
 function yingyong(){
 	var name1=getNowFormatDate();
 	var ying="";
-	var sid=1;
 	var sum=0;
 	var templateid=v.list.id;//模板id
 	var cid="";//题目类型id
@@ -325,18 +339,18 @@ function yingyong(){
 	$(".tt-horizontal").each(function(){
 		++sum;
 	})
-	var name3=30/sum;
+	var score=30/sum;
 	$(".tt-horizontal").each(function(){
 		var id=$(this).find("textarea").attr("data-id");
 		var result=$(this).find("textarea").last().val();
 		var t={
-				tid:id,
+				tid:parseInt(id),
 				templateid:templateid,
 				cid:3,
 				sid:sid,
 				result:result,
 				name1:name1,
-				name3:name3
+				score:score
 		};
 		list3.push(t);
 	});

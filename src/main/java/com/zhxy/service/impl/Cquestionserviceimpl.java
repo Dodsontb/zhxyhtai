@@ -31,5 +31,9 @@ public class Cquestionserviceimpl implements Cquestionservice{
 		// TODO Auto-generated method stub
 		return ct.updatefrequency(id);
 	}
+	@Override
+	public Cquestion self_motion(Integer sid, Integer tid) {
+		return ct.self_motion(sid, tid);
+	}
 
 }
