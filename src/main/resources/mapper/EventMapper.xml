@@ -6,6 +6,8 @@
 		<result property="content" column="content" />
 		<result property="great" column="great" />
 		<result property="roomid" column="rid"/>
+		<result property="finish" column="finish" />
+		<result property="gid" column="gid" />
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Event" extends="event"
 		id="detailEvent">
@@ -36,5 +38,20 @@
 	<select id="allEvent" resultMap="event">
 		select *
 		from event
+		where visible=true
+	</select>
+	<select id="finishEvent" resultMap="event">
+		select *
+		from event
+		where finish=true and gid=(select gradeId from clazz where id=#{id})
+	</select>
+	<insert id="addFinish">
+		insert into class_calendar(cid,rid,eid,date,ap)
+		value (#{id},#{event.roomid},#{event.id},#{date},#{event.aP})
+	</insert>
+	<select id="hasFinishTest" resultType="boolean">
+		select case when (select count(0) from class_calendar where cid=#{id} and eid in (select id from event where finish=true and gid =(select gradeId from clazz where id=#{id})) )>0 then true
+					else false
+					end
 	</select>
 </mapper>

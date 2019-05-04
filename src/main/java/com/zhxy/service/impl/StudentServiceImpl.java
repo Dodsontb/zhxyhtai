@@ -86,4 +86,12 @@ public class StudentServiceImpl implements StudentService{
 		
 	}
 
+	@Override
+	public PageInfo<Student> notInThis(int page, int cid, List<Student> list) {
+		// TODO Auto-generated method stub
+		Page<Student> pageInfo=PageHelper.startPage(page, 10);
+		studentMapper.notInThis(list, cid);
+		return pageInfo.toPageInfo();
+	}
+
 }

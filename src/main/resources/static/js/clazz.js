@@ -12,11 +12,59 @@ var vue = new Vue({
 		clazzInfo: {},
 		clazz: null,
 		plans: [],
-		nHide:false
+		nHide:false,
+		plus:false,
+		freeInfo : {
+			list : []
+		},
+		stuInfo : {
+			list : []
+		},remove:false
+	},methods : {
+		stupage : function(i) {
+			$("#stuPond").fadeOut(300);
+			$("#stuPond").fadeIn(500);
+			setTimeout(function(){
+				queryStu(i)
+			},300);
+		},
+		freepage : function(i) {
+			$("#freePond").fadeOut(300);
+			$("#freePond").fadeIn(500);
+			setTimeout(function(){
+				frees(i);
+			},300);
+		}
 	}
 });
 
 queryClazz(1);
+
+function queryStu(i) {
+	$.ajax({
+		url : URL + "page/finishCore",
+		data : {
+			page : i,
+			cid : cid
+		},
+		success : function(e) {
+			vue.stuInfo = e;
+		}
+	});
+}
+
+function frees(i) {
+	$.ajax({
+		url : URL + "page/finishFail",
+		data : {
+			page : i,
+			cid : cid
+		},
+		success : function(e) {
+			vue.freeInfo = e;
+		}
+	});
+}
 
 function queryClazz(i){
 	$.ajax({
@@ -157,4 +205,23 @@ $("#content").on("click",".im-close",function(){
 		$("#clazz-info").hide();
 		$("#clazz-div").fadeIn();
 	},1000);
+});
+
+$("#content").on("click","#finish",function(){
+	if($("#pond").is(":visible")){
+		$("#pond").slideUp(400);
+		$("#students").show(400);		
+	}else{
+		$.ajax({
+			url: URL +"finishBegin",
+			data:{
+				id:cid
+			},success:function(){
+				$("#pond").show(400);
+				$("#students").slideUp(400);
+				queryStu(1);
+				frees(1);
+			}
+		});
+	}
 });

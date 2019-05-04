@@ -20,4 +20,10 @@ public interface EventMapper {
 	List<Event> allEvent();
 	
 	List<People> peoples(int id);
+	
+	void addFinish(@Param("id")int id,@Param("date")Date date,@Param("event")Event event);
+	
+	Event finishEvent(int id);
+	
+	boolean hasFinishTest(int id);
 }

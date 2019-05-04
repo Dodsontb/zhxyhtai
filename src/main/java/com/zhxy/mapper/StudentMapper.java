@@ -19,4 +19,6 @@ public interface StudentMapper {
 	List<Student> querys(@Param("lists")List<Student> lists,@Param("mid")Integer mid);
 
 	List<Student> queryAll();
+	
+	List<Student> notInThis(@Param("list")List<Student> list,@Param("cid")int id);
 }

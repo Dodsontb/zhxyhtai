@@ -20,4 +20,6 @@ public interface StudentService {
 	PageInfo<Student> query(int page,int size);
 	
 	void stuNo(List<Student> students);
+	
+	PageInfo<Student> notInThis(int page,int cid,List<Student> list);
 }

@@ -1,6 +1,7 @@
 package com.zhxy.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +106,18 @@ public class PeopleServiceImpl implements PeopleService{
 		}
 		peopleMapper.updateCurr(cid, lists);;
 		return peopleMapper.queryTeacher(cid);
+	}
+
+	@Override
+	public Integer tid(int id, Date date) {
+		// TODO Auto-generated method stub
+		return peopleMapper.tid(id, date);
+	}
+
+	@Override
+	public People nowTeacher(int id) {
+		// TODO Auto-generated method stub
+		return peopleMapper.nowTeacher(id);
 	}
 
 }

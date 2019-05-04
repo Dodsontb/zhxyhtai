@@ -25,6 +25,8 @@ import com.zhxy.mapper.EventMapper;
 import com.zhxy.mapper.PeopleMapper;
 import com.zhxy.mapper.PlanMapper;
 import com.zhxy.mapper.RoomMapper;
+import com.zhxy.service.CurrService;
+import com.zhxy.service.EventService;
 import com.zhxy.service.PeopleService;
 import com.zhxy.service.PlanService;
 import com.zhxy.utils.MyUtils;
@@ -46,6 +48,10 @@ public class PlanServiceImpl implements PlanService {
 	PeopleMapper peopleMapper;
 	@Autowired
 	PeopleService peopleService;
+	@Autowired
+	CurrService currservice;
+	@Autowired
+	EventService eventService;
 
 	@Override
 	public Plan existPlan(Date date, Room room, boolean ap) {
@@ -88,9 +94,11 @@ public class PlanServiceImpl implements PlanService {
 				}
 				boolean isStudy = isStudyByOnself(tempClazz, begin, end);
 				if (!isStudy && tempClazz != null) {
-					Room room = findRoom(false, tempClazz, new People(), day);
-					addPlan(new Plan(tempClazz, room, day, false, false, false));
-					addPlan(new Plan(tempClazz, room, day, true, false, false));
+					if(tempClazz.getWeekNum()<5 && notHaveTest(tempClazz.getId(), day)) {
+						Room room = findRoom(false, tempClazz, new People(), day);
+						addPlan(new Plan(tempClazz, room, day, false, false, false));
+						addPlan(new Plan(tempClazz, room, day, true, false, false));						
+					}
 				}
 				for (Clazz clazz : dayClazzs) {
 					logger.info(".................");
@@ -103,12 +111,25 @@ public class PlanServiceImpl implements PlanService {
 						addPlan(new Plan(clazz, studyRoom, day, ap, false, false));
 						addPlan(new Plan(clazz, studyRoom, day, !ap, false, false));
 						continue;
+					}else if(clazz.getWeekNum()<5) {
+						if(eventService.hasFinishTest(clazz.getId())) {
+							if(notHaveTest(clazz.getId(), day)) {
+								logger.info("一天自习");
+								addPlan(new Plan(clazz, studyRoom, day, ap, false, false));
+								addPlan(new Plan(clazz, studyRoom, day, !ap, false, false));
+							}
+							continue;
+						}
 					}
 					if (studyRoom != null) {
 						ap = studyRoom.getAp() == null ? ap : studyRoom.getAp();
 						if (clazz.getWeekNum() < 4) {
+							if(clazzMapper.isClazzBusy(day, clazz.getId(), ap)) {
+								logger.info(clazz.getName()+" "+MyUtils.format(day)+"已有安排");
+								continue;
+							}
 							if (peopleMapper.isPlanBusy(teacher, day, ap) == null
-									&& peopleMapper.isEventBusy(teacher, day, ap) == null) {
+									&& peopleMapper.isEventBusy(teacher, day, ap) == null) {								
 								logger.info("上课");
 								addPlan(new Plan(clazz, studyRoom, day, ap, true, false));
 							} else {
@@ -130,7 +151,17 @@ public class PlanServiceImpl implements PlanService {
 	public void autoPlan() {
 		// TODO Auto-generated method stub
 		logger.info("<<<<<<<<<<<<<<<<<<< · 开始排课");
-		auto(new Date());
+		Date date = new Date();
+		if(MyUtils.isWeekDay(date)) {
+			date=MyUtils.nextWeekMonday(date);
+		}
+		Date maxdate=maxDate();
+		if (null != maxdate) {
+			if (maxdate.getTime() > new Date().getTime()) {
+				date=MyUtils.nextWeekMonday(maxdate);
+			}
+		}
+		auto(date);
 	}
 
 	public Room findRoom(boolean study, Clazz clazz, People teacher, Date day) {
@@ -183,10 +214,25 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public int addPlan(Plan plan) {
+	public void addPlan(Plan plan) {
 		// TODO Auto-generated method stub
+		if(clazzMapper.isClazzBusy(plan.getDate(), plan.getClazz().getId(), plan.isAp())) {
+			return;
+		}
 		plan.setAdvance(true);
-		return planMapper.addPlan(plan);
+		Clazz clazz = plan.getClazz();
+		if(plan.isStudy()) {
+			currservice.updateNowCurrStart(clazz.getId(), plan.getDate());
+			Integer cid = currservice.nowId(clazz.getId(), plan.getDate());
+			Integer tid=peopleService.tid(clazz.getId(), plan.getDate());
+			clazz.setCid(cid);
+			clazz.setTid(tid);			
+			if (cid == null) {
+				plan.setStudy(false);
+			}
+		}
+		planMapper.addPlan(plan);
+		currservice.updateNowCurrEnd(clazz.getId(), plan.getDate());
 	}
 
 	public Boolean hasEvent(Clazz clazz, Date date) {
@@ -309,8 +355,7 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public Date maxDate() {
 		// TODO Auto-generated method stub
-		Date date = planMapper.maxdate();
-		return null == date ? new Date() : date;
+		return planMapper.maxDate();
 	}
 
 	@Override
@@ -349,6 +394,21 @@ public class PlanServiceImpl implements PlanService {
 			list.add(clazz);
 		}
 		return list;
+	}
+
+	@Override
+	public void addFinishTest(int id, Date date) {
+		// TODO Auto-generated method stub
+		Date testDate=MyUtils.dayAfter(date, 7);
+		Event event=eventMapper.finishEvent(id);
+		event.setaP(false);
+		eventMapper.addFinish(id, testDate, event);
+	}
+
+	@Override
+	public boolean notHaveTest(int id, Date date) {
+		// TODO Auto-generated method stub
+		return planMapper.notHaveTest(id,date);
 	}
 
 }

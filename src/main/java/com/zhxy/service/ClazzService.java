@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.ClazzInfo;
+import com.zhxy.domain.ClazzTest;
 import com.zhxy.domain.MyNotice;
 
 public interface ClazzService {
@@ -32,4 +33,7 @@ public interface ClazzService {
 	PageInfo<MyNotice> queryNotices(int id,int page);
 	
 	void appendClazz(ClazzInfo clazzInfo);
+
+	ClazzTest finishTest(int id);
+	
 }

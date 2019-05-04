@@ -18,9 +18,11 @@
 			javaType="com.zhxy.domain.Grade"
 			select="com.zhxy.mapper.GradeMapper.queryById"></association>
 	</resultMap>
-	<resultMap type="com.zhxy.domain.Curriculum" extends="curr2" id="spe">
+	<resultMap type="com.zhxy.domain.Curriculum" extends="curr2"
+		id="spe">
 		<result property="check" column="check" />
-		<association property="lists" column="{vid=vid,cid=id}" javaType="list" select="com.zhxy.mapper.SectionMapper.allSec"></association>
+		<association property="lists" column="{vid=vid,cid=id}"
+			javaType="list" select="com.zhxy.mapper.SectionMapper.allSec"></association>
 	</resultMap>
 	<resultMap type="com.zhxy.domain.Curriculum" extends="curr2"
 		id="curriculum">
@@ -38,14 +40,22 @@
 		<association property="lists" column="vid=vid,cid=id"
 			javaType="list" select="com.zhxy.mapper.SectionMapper.restSection"></association>
 	</resultMap>
-	<resultMap type="com.zhxy.domain.Curriculum" extends="curr2" id="version">
-		<association property="teacher" column="id" javaType="list" select="com.zhxy.mapper.PeopleMapper.teacher"></association>
+	<resultMap type="com.zhxy.domain.Curriculum" extends="curr2"
+		id="version">
+		<association property="teacher" column="id"
+			javaType="list" select="com.zhxy.mapper.PeopleMapper.teacher"></association>
 	</resultMap>
 	<select id="queryById" resultMap="curriculum">
 		select *,null vid
 		from
 		curriculum
 		where id=#{id}
+	</select>
+	<select id="queryPlanCurr" resultMap="curr">
+		select *
+		from curriculum
+		where id = (select cuid from plan where cid=#{id} and
+		`date`=date(#{date}) and study is true)
 	</select>
 	<select id="g-c" resultMap="ver">
 		select *,#{vid} vid,(select hour from
@@ -54,12 +64,14 @@
 		version_curr where vid=#{vid} and cid=c.id) vnum,
 		(select resthour from
 		version_curr where vid=#{vid} and cid=c.id) resthour
-		from curriculum as c
+		from curriculum as
+		c
 		where id in (
 		select cid from
 		version_curr where
 		vid=#{vid}
-		) and mid =#{mid} and gradeId=#{gid}
+		) and mid
+		=#{mid} and gradeId=#{gid}
 	</select>
 	<select id="curriculums" resultMap="curr">
 		select *
@@ -166,16 +178,19 @@
 	<select id="restCurr" resultMap="restcurr">
 		select *,#{vid} vid,
 		num-(select num from
-		version_curr where vid=#{vid} and cid=c.id) vnum,
+		version_curr where vid=#{vid}
+		and cid=c.id) vnum,
 		(select resthour from
-		version_curr where vid=#{vid} and cid=c.id) resthour
+		version_curr where vid=#{vid}
+		and cid=c.id) resthour
 		from curriculum as c
 		<where>
 			<if test="vid!=null">
 				and id in (
 				select cid
 				from curr_section
-				where sid not in (select sid from version_sec where vid=#{vid})
+				where sid not in
+				(select sid from version_sec where vid=#{vid})
 				)
 			</if>
 			<if test="gid!=null">
@@ -188,29 +203,93 @@
 	</select>
 	<select id="allCurr" resultMap="spe">
 		select *,#{vid} vid,case
-							when (select num from version_curr where cid=curriculum.id and vid=#{vid})=num then true
-							else false
-							end `check`
+		when (select num from version_curr where cid=curriculum.id and
+		vid=#{vid})=num then true
+		else false
+		end `check`
 		from curriculum
 	</select>
 	<select id="versionCurriculums" resultMap="version">
 		select *
 		from curriculum
-		where id in (select cid from version_curr where vid=#{vid}) and gradeId=#{gid} <if test="mid"> and mid=#{mid}</if>
+		where id in (select cid from version_curr where
+		vid=#{vid}) and gradeId=#{gid}
+		<if test="mid"> and mid=#{mid}</if>
 	</select>
 	<select id="existCurr" resultType="boolean">
-		select case 
-			   when (select count(0) from version_curr where cid in (select id from curriculum where gradeId=#{gid} <if test="mid!=null">and mid=#{mid}</if> ) and vid=#{vid})>0 then true
-			   else false
-			   end
+		select case
+		when (select count(0) from version_curr where cid in (select id from
+		curriculum where gradeId=#{gid}
+		<if test="mid!=null">and mid=#{mid}</if>
+		) and vid=#{vid})>0 then true
+		else false
+		end
 	</select>
 	<delete id="delCurr">
 		delete from teacher_curr where cid=#{cid}
 	</delete>
 	<select id="finish" resultType="boolean">
 		select case
-			   when (select count(0)*2 from plan where cid=#{cid} and study=true and cuid=(select currId from clazz where id=#{cid})) >=(select hour from version_curr where vid=(select vid from clazz where id=#{cid}) and cid=(select currId from clazz where id=#{cid})) then true
-			   else false
-			   end
+		when (select count(0)*2 from plan where cid=#{id} and study=true and
+		cuid=#{cid}) >=(select hour from version_curr where vid=(select vid
+		from clazz where id=#{id}) and cid=#{cid}) then true
+		else false
+		end
+	</select>
+	<select id="nextCurr" resultType="Integer">
+		select cuid
+		from teacher_history
+		where cid=#{id} and (`end` is null or `end`>=date(#{date})) and (`begin` is null or `begin`>=date(#{date}) )
+		limit 1
+	</select>
+	<select id="nowCurr" resultType="Integer">
+		select cuid
+		from teacher_history
+		where begin &lt;= date(#{date}) and (`end` is null or `end`>=date(#{date}) ) and cid=#{id}
+		limit 1
+	</select>
+	<update id="beginCurr">
+		update teacher_history
+		set begin=#{date}
+		where
+		cid=#{id} and cuid=#{cid}
+	</update>
+	<update id="endCurr">
+		update teacher_history
+		set end=#{date}
+		where cid=#{id}
+		and cuid=#{cid}
+	</update>
+	<update id="updateClazzCurr">
+		update clazz
+		set currId=#{cid}
+		where id=#{id}
+	</update>
+	<update id="clazzFinsh">
+		update clazz
+		set finish=true
+		where id=#{id}
+	</update>
+	<select id="clazzNow" resultType="Integer">
+		select cuid
+		from teacher_history
+		where cid=#{id} and (`end` is null or `end` >= now() ) and (`begin` &lt;=now() or `begin`
+		is null)
+		limit 1
+	</select>
+	<select id="clazzNowCurr" resultMap="curr2">
+		select *
+		from curriculum
+		where id = (select cuid
+		from teacher_history
+		where cid=#{id} and (`end` is null or `end` >= date(now()) ) and (`begin` &lt;=date(now()) or `begin`
+		is null)
+		limit 1)
+	</select>
+	<select id="beginIsNull" resultType="boolean">
+	SELECT CASE  WHEN (SELECT `begin`
+					   FROM teacher_history
+					   WHERE cid=#{id} AND cuid=#{cid}) IS  NULL THEN TRUE
+					   ELSE FALSE END
 	</select>
 </mapper>

@@ -10,4 +10,6 @@ public interface EventService {
 	void addEvent(InsertEvent event);
 	
 	List<Event> all();
+	
+	boolean hasFinishTest(int id);
 }

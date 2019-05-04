@@ -22,6 +22,8 @@ public class Event {
 	private boolean study;
 	private List<People> peoples;
 	private String peoplesStr;
+	private boolean finish;
+	private int gid;
 
 	public int getId() {
 		return id;
@@ -139,6 +141,22 @@ public class Event {
 
 	public void setAllcontent(String allcontent) {
 		this.allcontent = allcontent;
+	}
+
+	public boolean isFinish() {
+		return finish;
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+
+	public int getGid() {
+		return gid;
+	}
+
+	public void setGid(int gid) {
+		this.gid = gid;
 	}
 	
 }

@@ -31,6 +31,7 @@ function cal(str, type) {
 		},
 		success: function(data) {
 			vue.calendar = data;
+			console.log(data);
 			calendar = $("#calendar");
 		},
 		error: function() {
@@ -92,6 +93,18 @@ $("#content").on("click",".cancelAuto",function(){
 			vue.calendar = data;
 			vue.exist=false;
 			calendar = $("#calendar");
+		},
+		error: function() {
+			alert("连接超时");
+		}
+	});	
+});
+
+$("#content").on("click",".push",function(){
+	$.ajax({
+		url: URL + "pushAuto",
+		success: function(data) {
+			vue.exist=false;
 		},
 		error: function() {
 			alert("连接超时");

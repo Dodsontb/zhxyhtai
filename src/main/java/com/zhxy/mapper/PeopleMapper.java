@@ -41,4 +41,8 @@ public interface PeopleMapper {
 	List<People> queryTeacher(int cid);
 	
 	void updateCurr(@Param("cid")int cid,@Param("list")Integer[] lists);
+	
+	Integer tid(@Param("id")int id,@Param("date")Date date);
+	
+	People nowTeacher(int id);
 }

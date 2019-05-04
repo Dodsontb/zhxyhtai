@@ -31,4 +31,10 @@ public class EventServiceImpl implements EventService{
 		// TODO Auto-generated method stub
 		return eventMapper.allEvent();
 	}
+
+	@Override
+	public boolean hasFinishTest(int id) {
+		// TODO Auto-generated method stub
+		return eventMapper.hasFinishTest(id);
+	}
 }

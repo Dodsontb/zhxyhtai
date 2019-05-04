@@ -23,6 +23,8 @@ public class Student {
 	private int late;
 
 	private boolean checked;
+	
+	private int core;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -109,5 +111,13 @@ public class Student {
 
 	public void setLate(int late) {
 		this.late = late;
+	}
+
+	public int getCore() {
+		return core;
+	}
+
+	public void setCore(int core) {
+		this.core = core;
 	}
 }

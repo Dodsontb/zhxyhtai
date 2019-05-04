@@ -1,5 +1,6 @@
 package com.zhxy.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -43,5 +44,23 @@ public interface CurriculumMapper {
 
 	void delCurr(int cid);
 	
-	boolean finish(int cid);
+	boolean finish(@Param("id")int id,@Param("cid")Integer cid);
+
+	Integer nowCurr(@Param("id")int id,@Param("date")Date date);
+
+	Integer nextCurr(@Param("id")int id,@Param("date")Date date);
+
+	void clazzFinsh(int id);
+	
+	void updateClazzCurr(@Param("id")int id,@Param("cid")int cid);
+
+	void beginCurr(@Param("id")int id,@Param("cid")int cid,@Param("date")Date date);
+	
+	void endCurr(@Param("id")int id,@Param("cid")int cid,@Param("date")Date date);
+	
+	boolean beginIsNull(@Param("id")int id,@Param("cid")int cid);
+
+	Integer clazzNow(int id);
+	
+	Curriculum clazzNowCurr(int id);
 }

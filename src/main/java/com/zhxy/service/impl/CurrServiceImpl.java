@@ -1,5 +1,6 @@
 package com.zhxy.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import com.zhxy.domain.Curriculum;
 import com.zhxy.domain.Section;
 import com.zhxy.mapper.CurriculumMapper;
 import com.zhxy.service.CurrService;
+import com.zhxy.service.EventService;
 import com.zhxy.service.PeopleService;
+import com.zhxy.service.PlanService;
 import com.zhxy.service.SectionService;
 import com.zhxy.service.VersionService;
 
@@ -26,6 +29,10 @@ public class CurrServiceImpl implements CurrService{
 	VersionService versionService;
 	@Autowired
 	PeopleService peopleService;
+	@Autowired
+	PlanService planService;
+	@Autowired
+	EventService eventService;
 	
 	@Override
 	public List<Curriculum> queryCurriculums(int mid, int gid) {
@@ -130,9 +137,53 @@ public class CurrServiceImpl implements CurrService{
 	}
 
 	@Override
-	public void updateNowCurr(int id) {
+	public Integer nextCurr(int id,Date date) {
 		// TODO Auto-generated method stub
-		
+		return curriculumMapper.nextCurr(id,date);
+	}
+
+	@Override
+	public Integer nowId(int id,Date date) {
+		// TODO Auto-generated method stub
+		return curriculumMapper.nowCurr(id,date);
+	}
+
+	@Override
+	public Integer nowId(int id) {
+		// TODO Auto-generated method stub
+		return curriculumMapper.clazzNow(id);
+	}
+
+	@Override
+	public void updateNowCurrStart(int id, Date date) {
+		// TODO Auto-generated method stub
+		Integer nowCid=nowId(id, date);
+		if(nowCid==null) {
+			nowCid=nextCurr(id, date);
+		}
+		if(nowCid!=null) {
+			if(curriculumMapper.beginIsNull(id, nowCid)) {
+				curriculumMapper.beginCurr(id, nowCid, date);			
+			}			
+		}
+	}
+
+	@Override
+	public void updateNowCurrEnd(int id, Date date) {
+		// TODO Auto-generated method stub
+		Integer nowCid=nowId(id,date);
+		if(nowCid!=null) {
+			if(curriculumMapper.finish(id, nowCid)) {
+				curriculumMapper.endCurr(id, nowCid, date);
+			}
+			nowCid=nextCurr(id, date);
+			if(nowCid==null) {
+				if(eventService.hasFinishTest(id)) {
+					return;
+				}
+				planService.addFinishTest(id, date);
+			}
+		}
 	}
 	
 }

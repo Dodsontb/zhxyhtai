@@ -15,9 +15,12 @@ public class Clazz implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
+	private Integer cid;
+	private Integer tid;
 	private String name;
 	private Grade grade;
 	private People teacher;
+	private People nowTeacher;
 	private People ban;
 	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8") 
@@ -25,6 +28,7 @@ public class Clazz implements Serializable {
 	private Version version;
 	private Student monitor;
 	private Curriculum curr;
+	private Curriculum nowCurr;
 	private int planNum;
 	private int weekNum;
 	private int num;
@@ -35,6 +39,7 @@ public class Clazz implements Serializable {
 	private List<Student> students;
 	private List<Plan> plans;
 	private Event event;
+	private boolean finish;
 	
 	public int getId() {
 		return id;
@@ -71,6 +76,8 @@ public class Clazz implements Serializable {
 		this.name="";
 		this.curr=new Curriculum();
 		this.teacher=new People();
+		this.tid=null;
+		this.cid=null;
 	}
 	public Clazz(Clazz clazz) {
 		// TODO Auto-generated constructor stub
@@ -172,4 +179,35 @@ public class Clazz implements Serializable {
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
+	public Integer getCid() {
+		return cid;
+	}
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
+	public Curriculum getNowCurr() {
+		return nowCurr;
+	}
+	public void setNowCurr(Curriculum nowCurr) {
+		this.nowCurr = nowCurr;
+	}
+	public Integer getTid() {
+		return tid;
+	}
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
+	public People getNowTeacher() {
+		return nowTeacher;
+	}
+	public void setNowTeacher(People nowTeacher) {
+		this.nowTeacher = nowTeacher;
+	}
+	public boolean isFinish() {
+		return finish;
+	}
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+	
 }

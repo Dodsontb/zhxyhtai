@@ -83,8 +83,7 @@
 		where
 		id in (
 		select roomid from plan where `date`=date(#{day}) and cid in (
-		select id from clazz
-		where teacherId=#{teacher.id} )
+		select cid from teacher_history where pid=#{teacher.id} and (`begin`&lt;=#{day} or `begin` is null) and `end` is null group by cid)
 		) and floor in (select floor from grade_floor where gid=#{clazz.grade.id}) and people >= #{clazz.people}
 		<choose>
 			<when test="study">

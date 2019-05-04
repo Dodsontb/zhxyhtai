@@ -8,6 +8,9 @@
 		<result property="name" column="studentname" />
 		<association property="edu" column="eduid" javaType="com.zhxy.domain.Education" select="com.zhxy.mapper.EducationMapper.queryById"></association>
 	</resultMap>
+	<resultMap type="com.zhxy.domain.Student" extends="stu" id="core">
+		
+	</resultMap>
 	<resultMap type="com.zhxy.domain.Student" extends="stu" id="clazzstu">
 		<result property="late" column="late"/>
 		<result property="join" column="join"/>
@@ -40,6 +43,25 @@
 		where free=false <if test="lists.size>0"> and studentid not in (<foreach collection="lists" item="item" separator=",">#{item.id}</foreach>) </if>
 		and studentid not in (select sid from stu_clazz where inside=true)
 		<if test="mid!=null">and major=#{mid}</if>
+	</select>
+	<select id="finishCore" resultMap="core">
+		select *,(select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) core
+		from cp_student
+		where studentid in (select sid from stu_clazz where cid=#{cid} and inside=true) and (select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) >= 60
+	</select>
+	<select id="finishFaile" resultMap="core">
+		select *,(select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) core
+		from cp_student
+		where studentid in (select sid from stu_clazz where cid=#{cid} and inside=true) and ( (select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) &lt; 60
+		or (select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) is null ) 		
+	</select>
+	<select id="notInThis" resultMap="core">
+		select *,(select total from learning where uid=studentid and templateid in (select id from template where softtypeid=3 and name1 like concat('%',#{cid},'%') )) core
+		from cp_student
+		where studentid in (select sid from stu_clazz where cid=#{cid} and inside=true) 
+		<if test="list.size>0">
+			and studentid not in (<foreach collection="list" item="item" separator=",">#{item.id}</foreach>)		
+		</if>
 	</select>
 	<select id="queryAll" resultMap="stu">
 		select *

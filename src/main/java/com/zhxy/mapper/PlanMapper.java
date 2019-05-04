@@ -70,10 +70,10 @@ public interface PlanMapper {
 	Date maxDate();
 	
 	Date mindate();
-	
-	Date maxdate();
-	
+		
 	List<Plan> classadvPlan(@Param("id")int id,@Param("date")Date date);
 	
 	List<Plan> clazzdatePlan(@Param("id")int id,@Param("date")Date date);
+
+	boolean notHaveTest(@Param("id")int id,@Param("date")Date date);
 }
