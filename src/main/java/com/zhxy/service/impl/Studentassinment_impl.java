@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhxy.domain.AssignmentType;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Grade;
@@ -80,6 +81,12 @@ public class Studentassinment_impl implements Service_Studentassinment{
 	public List<Studentassignment> tuichiquery(String ljxclaname) {
 		// TODO Auto-generated method stub
 		return mapper.tuichiquery(ljxclaname);
+	}
+
+	@Override
+	public List<AssignmentType> typequery() {
+		// TODO Auto-generated method stub
+		return mapper.typequery();
 	}
 
 }

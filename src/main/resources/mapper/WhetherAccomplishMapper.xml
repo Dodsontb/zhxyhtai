@@ -215,9 +215,9 @@
   </delete>
   
   <insert id="pilinsert">
-  		INSERT INTO`whether_accomplish`(`ljxTid`,`ljxYesno`,`ljxUid`) VALUE
+  		INSERT INTO`whether_accomplish`(`ljxTid`,`ljxYesno`,`ljxUid`,`ljxDate`) VALUE
   		<foreach collection ="u" item="user" separator =",">
-  			(#{ljxtid},0,#{user.ljxtuid})
+  			(#{ljxtid},#{ljxYesno},#{user.studentid},now())
   		</foreach>
   </insert>
   

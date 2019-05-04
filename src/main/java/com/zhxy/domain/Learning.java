@@ -9,9 +9,9 @@ public class Learning {
 
     private Integer templateid;
 
-    private Integer total;
+    private double total;
 
-    private Date time;
+    private String time;
 
     private Integer status;
 
@@ -28,8 +28,18 @@ public class Learning {
     private Integer cid;
     
     private String studentname;
+    
+    private String name;
 
-    public String getStudentname() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStudentname() {
 		return studentname;
 	}
 
@@ -69,19 +79,19 @@ public class Learning {
         this.templateid = templateid;
     }
 
-    public Integer getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

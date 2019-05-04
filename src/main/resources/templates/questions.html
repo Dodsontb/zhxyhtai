@@ -38,6 +38,29 @@
     <body>
         <!-- Start #header -->
         <div id="content">
+        	<div>
+				<div id="curr-header">
+					<span> 专业: <select id="major">
+							<option value="all">全部</option>
+							<option v-for="major in majors" :value="major.id">{{major.name}}</option>
+					</select>
+					</span> <span> 年级: <select id="grade">
+							<option value="all">全部</option>
+							<option v-for="grade in grades" :value="grade.id">{{grade.name}}</option>
+					</select>
+					</span>
+					<span> 课程: <select id="curr">
+							<option value="all">全部</option>
+							<option v-for="item in lists" :value="item.id">{{item.ename}}</option>
+					</select>
+					</span>
+					<span> 章节: <select id="section">
+							<option value="all">全部</option>
+							<option v-for="item in sections" :value="item.id">{{item.name}}</option>
+					</select>
+					</span>
+				</div>
+			</div>
         	<div class="form-group">
 				<label for="defaultSelect">类型</label> <select class="form-control form-control" id="topictype" name="rank">
 					<option value="-1" class="cp_select">请选择</option>
@@ -183,6 +206,8 @@
         window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
         </script>
         <script src="assets/js/jquery-ui.js"></script>
+        <script src="js/url.js"></script>
+        <script src="assets/js/vue.js"></script>
         <script>
         window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
         </script>
@@ -190,7 +215,100 @@
     </body>
 </html>
 <script type="text/javascript">
-	var Qid=1;
+var array = "";
+var v = new Vue({
+	el : "#curr-header",
+	data : {
+		list : null,
+		list1 : null,
+		list2 : null,
+		type : null,
+		lists:[],
+		majors : [],
+		grades : [],
+		sections:[]
+	},
+})
+//专业
+$.ajax({
+	url : URL + "allMajor",
+	success : function(e) {
+		v.majors = e;
+	}
+});
+//年级
+$("#major").change(function() {
+	var val = this.value;
+	v.lists = [];
+	v.sections = [];
+	$("#grade").val("all");
+	if (val == "all") {
+		v.grades = [];
+	} else {
+		$.ajax({
+			url : URL + "queryGrade",
+			data : {
+				mid : val
+			},
+			success : function(e) {
+				v.grades = e;
+			}
+		});
+	}
+});
+$("#grade").change(function() {
+	var val = this.value;
+	v.sections = [];
+	$("#curr").val("all");
+	if (val == "all") {
+		v.lists = [];
+	} else{
+		queryCurrs();
+	}
+});
+$("#curr").change(function() {
+	var val = this.value;
+	if (val == "all") {
+		v.sections = [];
+	} else{
+		querySections();
+	}
+});
+
+function querySections(){
+	var mid = $("#major").val();
+	var gid = $("#grade").val();
+	var cid = $("#curr").val();
+	$.ajax({
+		url: "querySection",
+		data:{
+			mid:mid,
+			gid:gid,
+			cid:cid
+		},success:function(e){
+			v.sections=e;
+		}
+	});	
+}
+//查课程
+function queryCurrs() {
+	var mid = $("#major").val() == "all" ? null : $("#major").val();
+	var gid = $("#grade").val() == "all" ? null : $("#grade").val();
+	if (!mid) {
+		gid = null;
+	}
+	$.ajax({
+		url : URL + "currs",
+		data : {
+			mid : mid,
+			gid : gid
+		},
+		success : function(e) {
+			v.lists = e;
+		}
+	});
+}
+/* 选章节 */
 	var uid=1;
 	$(function() {
 		$(".cp_xz").hide()
@@ -224,6 +342,7 @@
 		
 		$(".cp_bot").click(function(){
 			var valu=$("#topictype").val();
+			var qid=$("#section").val();
 			if (valu==1) {
 				var correct="";
 				var checked=$(".panel :checked");
@@ -233,14 +352,13 @@
 					correct+=val+",";
 				});
 				correct = correct.substring(0, correct.length - 1);
-				alert(correct)
 				var question =$(".mask-phone").val()
 				var daan1=$("[name='daan1']").val()
 				var daan2=$("[name='daan2']").val()
 				var daan3=$("[name='daan3']").val()
 				var daan4=$("[name='daan4']").val()
 				var answer=daan1+","+daan2+","+daan3+","+daan4
-				var cc={"question":question,"answer":answer,"correct":correct,"qid":Qid}
+				var cc={"question":question,"answer":answer,"correct":correct,"qid":qid}
 				$.ajax({
 					data:cc,
 					type:"post",
@@ -262,8 +380,7 @@
 					val+=this.value+","
 				});
 				answer=val.substring(0, val.length - 1);
-				var bb={"question":question,"answer":answer,"correct":correct,"qid":Qid}
-				console.log(bb)
+				var bb={"question":question,"answer":answer,"correct":correct,"qid":qid}
 				$.ajax({
 					data:bb,
 					type:"post",
@@ -279,7 +396,7 @@
 			}else if(valu==3){
 				var question=$("#cp_yy").val();
 				var answer=$("#cp_yydaan").val();
-				var aa={"question":question,"answer":answer,"qid":Qid}
+				var aa={"question":question,"answer":answer,"qid":qid}
 				$.ajax({
 					data:aa,
 					type:"post",

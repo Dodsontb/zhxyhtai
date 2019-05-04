@@ -24,7 +24,7 @@ public class Template {
 
     private Date end;
 
-    private Date creation;
+    private String creation;
 
     private String name1;
 
@@ -146,11 +146,11 @@ public class Template {
         this.end = end;
     }
 
-    public Date getCreation() {
+    public String getCreation() {
         return creation;
     }
 
-    public void setCreation(Date creation) {
+    public void setCreation(String creation) {
         this.creation = creation;
     }
 

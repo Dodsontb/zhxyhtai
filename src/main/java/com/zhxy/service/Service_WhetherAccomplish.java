@@ -16,7 +16,7 @@ public interface Service_WhetherAccomplish {
 	List<WhetherAccomplish>whether3(Integer ljxuid);
 	int udatew();
     int deletestu(@Param("ljxtid")Integer ljxtid,@Param("ljxuid")Integer ljxuid);
-    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<CpStudent> u);
+    int pilinsert(@Param("ljxtid")Integer ljxtid,@Param("u")List<CpStudent> u,@Param("ljxYesno")String ljxYesno);
     
     List<TeacherHistory>teacher_history();
 }

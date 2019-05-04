@@ -23,4 +23,10 @@ public interface LearningMapper {
     int updateByPrimaryKey(Learning record);
     
     List<Learning> cp_selectBycid(@Param("cid")Integer cid,@Param("templateid")Integer templateid);
+    
+    Learning sumupdate(Learning learning);
+    
+    int updateStatuslearning(Integer uid,Integer templateid);
+    
+    List<Learning> selectstulearning(int uid);
 }

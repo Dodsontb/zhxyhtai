@@ -30,9 +30,9 @@ public class Templateserviceimpl implements Templateservice{
 		return tm.querybytype(softtypeid);
 	}
 	@Override
-	public List<Template> cp_queryall() {
+	public List<Template> cp_queryall(String name2) {
 		// TODO Auto-generated method stub
-		return tm.cp_queryall();
+		return tm.cp_queryall(name2);
 	}
 	@Override
 	public List<Template> cp_querybyname1(String name1) {
@@ -53,6 +53,16 @@ public class Templateserviceimpl implements Templateservice{
 	public Template cp_queryyquestion(Integer id) {
 		// TODO Auto-generated method stub
 		return tm.cp_queryyquestion(id);
+	}
+	@Override
+	public int updatetemplateid(String end, String name1, int id) {
+		// TODO Auto-generated method stub
+		return tm.updatetemplateid(end, name1, id);
+	}
+	@Override
+	public List<Template> queryfabu(String name2) {
+		// TODO Auto-generated method stub
+		return tm.queryfabu(name2);
 	}
 
 }

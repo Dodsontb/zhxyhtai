@@ -1,4 +1,5 @@
-var URL="http://localhost:8080/ajax/";
+var host=window.location.host;
+var URL="http://"+host+"/ajax/";
 
 $("#iframeSec").hide();
 

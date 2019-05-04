@@ -286,7 +286,7 @@
                             </li>
                             <li><a href="choosing.html"  target="iFrame1"><i class="br-window"></i> 出题</a>
                             </li>
-                            <li><a href="selectTest.html"  target="iFrame1"><i class="im-windows8"></i> 发布考试</a>
+                           <li><a href="selectTest.html"  target="iFrame1"><i class="im-windows8"></i> 发布考试</a>
                             </li>
                             <li><a href="tiles.html" target="iFrame1"><i class="im-windows8"></i> 发布作业</a>
                             </li>
@@ -315,7 +315,6 @@
 							<li><a href="curr.to"><i class="im-table2"></i> 课程管理</a></li>
 						</ul>
 					</li>
-                    
                 </ul>
             </div>
             <!-- End .sidebar-inner -->
@@ -426,7 +425,7 @@
         <div id="content">
                 <!--主体部分-->
                 <div id="iframeSec">
-					<iframe src="login.html" frameborder="0" align="left" width="100%" height="10000000px" scrolling="no" name="iFrame1" ></iframe>
+					<iframe src="" frameborder="0" align="left" width="100%" height="620px" name="iFrame1" ></iframe>
 				</div>
                 <!-- End .outlet -->
             </div>
@@ -483,8 +482,9 @@
 <script src="assets/plugins/ui/calendar/fullcalendar.js"></script>
 <script src="assets/js/jquery.sprFlat.js"></script>
 <script src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/vue.js"></script>
     </body>
-   <!--  <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> -->
+    <!--  <script type="text/javascript" th:src="@{assets/js/jquery.min.js}"></script> -->
 	<script type="text/javascript" th:src="@{assets/js/vue.js}"></script>
 	 <script>
 	 	var v=new Vue({
@@ -506,7 +506,7 @@
 					v.num=v.clist.length;
 				}
 				
-			}); 
+			 }); 
 	 	});
 	 
 	 </script>

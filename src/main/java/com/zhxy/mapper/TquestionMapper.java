@@ -20,4 +20,6 @@ public interface TquestionMapper {
     List<Tquestion> queryTquestion(int qid);
     
     int insertTquestion(Tquestion record);
+    
+    int updateTquestion(int id);
 }

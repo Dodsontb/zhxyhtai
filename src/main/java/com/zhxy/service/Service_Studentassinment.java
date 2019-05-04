@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.zhxy.domain.AssignmentType;
 import com.zhxy.domain.Clazz;
 import com.zhxy.domain.CpStudent;
 import com.zhxy.domain.Grade;
@@ -37,4 +38,6 @@ public interface Service_Studentassinment {
     List<Studentassignment> naljxcla(String ljxTname);
     
     List<Studentassignment> tuichiquery(String ljxclaname);
+    
+    List<AssignmentType> typequery();
 }

@@ -21,7 +21,58 @@
 	(SELECT id FROM `clazz` WHERE POSITION(id IN (SELECT `name1` FROM `template` WHERE id = #{templateid})) != 0)
 	</select>
 	
+	<select id="queryLearningCountBySimpleTid" resultMap="LearningCountBase">
+		CALL learningCount(#{total}*0.6, #{total}, #{name4}, #{id});
+	</select>
 	
+	<resultMap type="com.zhxy.domain.BarChartArisData" id="LearningCountBase">
+		<id property="id" column="tid" javaType="java.lang.Integer"/>
+		<collection property="list1" ofType="String">
+			<result column="scoreRange"/>
+		</collection>
+		<collection property="list2" ofType="Integer" column="tid" select="queryLearningCountById">
+		</collection>
+	</resultMap>
+	
+	<select id="queryLearningCountById" resultType="Integer">
+		select learningCount from `tmp_learningCount` where tid = #{tid}
+	</select>
+	
+	<select id="queryLearningClazzByTemplateId" resultType="com.zhxy.domain.LearningClazzVO">
+		SELECT c.`id`, c.`name`, MAX(l.`total`) maxScore, MIN(l.`total`) minScore,
+		 ROUND(AVG(l.`total`), 1) avgScore, getNearestTemplateStart(c.`id`) nearestTemplateStart FROM `learning` l
+		INNER JOIN `stu_clazz` sc ON sc.`sid` = l.`uid`
+		INNER JOIN `clazz` c ON c.`id` = sc.`cid` AND POSITION(c.`id` IN (SELECT `name1` FROM `template` WHERE `template`.`id` = #{templateId})) != 0
+		WHERE l.`templateid` = #{templateId}
+		GROUP BY c.`id`
+	</select>
+	
+	<select id="queryLearningListByName" resultMap="TemplateListVOBase">
+		SELECT t.*, g.`name` gradeName, c.name className FROM `template` t
+		LEFT JOIN `clazz` c ON POSITION(c.`id` IN t.`name1`) != 0
+		LEFT JOIN `grade` g ON g.`id` = c.`gradeId`
+		WHERE t.`Name` LIKE CONCAT('%', #{param}, '%')
+		OR t.`id` LIKE CONCAT('%', #{param}, '%')
+		OR c.`name` LIKE CONCAT('%', #{param}, '%')
+	</select>
+	
+	<resultMap type="com.zhxy.domain.TemplateListVO" id="TemplateListVOBase">
+		 <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="Name" jdbcType="VARCHAR" property="name" />
+	    <result column="total" jdbcType="INTEGER" property="total" />
+	    <result column="softtypeid" jdbcType="INTEGER" property="softtypeid" />
+	    <result column="cquestionid" jdbcType="VARCHAR" property="cquestionid" />
+	    <result column="yquestionid" jdbcType="VARCHAR" property="yquestionid" />
+	    <result column="tquestionid" jdbcType="VARCHAR" property="tquestionid" />
+	    <result column="start" jdbcType="TIMESTAMP" property="start" />
+	    <result column="uid" jdbcType="INTEGER" property="uid" />
+	    <result column="end" jdbcType="TIMESTAMP" property="end" />
+	    <result column="creation" jdbcType="TIMESTAMP" property="creation" />
+	    <result column="gradeName" jdbcType="VARCHAR" property="gradeName" />
+	    <collection property="className" ofType="java.lang.String">
+	    	<id column="className" />
+	    </collection>
+	</resultMap>
 	
 	<!-- <select id="queryTemplate_exam" resultType="com.zhxy.domain.Template">
 		SELECT * FROM `template`

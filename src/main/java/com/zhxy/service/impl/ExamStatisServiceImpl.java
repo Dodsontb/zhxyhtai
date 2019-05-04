@@ -8,7 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.zhxy.mapper.ExamStatisMapper;
+import com.alibaba.fastjson.JSON;
+import com.zhxy.domain.BarChartArisData;
 import com.zhxy.domain.KSeriesData;
+import com.zhxy.domain.LearningClazzVO;
+import com.zhxy.domain.Template;
+import com.zhxy.domain.TemplateListVO;
 import com.zhxy.service.ExamStatisService;
 
 @Service
@@ -27,7 +32,23 @@ public class ExamStatisServiceImpl implements ExamStatisService{
 		return examMapper.queryKSeriesDataByClassId(classId);
 	}
 	
+	@Override
 	public List<KSeriesData> queryKSeriesDataByTemplateId(Integer templateId){
 		return examMapper.queryKSeriesDataByTemplateId(templateId);
+	}
+	
+	@Override
+	public BarChartArisData queryLearningCountBySimpleTid(Template template) {
+		return examMapper.queryLearningCountBySimpleTid(template);
+	}
+
+	@Override
+	public List<LearningClazzVO> queryLearningClazzByTemplateId(Integer templateId){
+		return examMapper.queryLearningClazzByTemplateId(templateId);
+	}
+	
+	@Override
+	public List<TemplateListVO> queryLearningListByName(String param){
+		return examMapper.queryLearningListByName(param);
 	}
 }

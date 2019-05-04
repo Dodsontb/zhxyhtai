@@ -317,4 +317,9 @@
   		ofType="com.zhxy.domain.AssignmentPutOff"
   		select="com.zhxy.mapper.AssignmentPutOffMapper.tuichiqueryA"></collection>
   </resultMap>
+  
+  <!-- 任务类型 -->
+  <select id="typequery" resultType="com.zhxy.domain.AssignmentType">
+  		SELECT * FROM `assignment_type` 
+  </select>
 </mapper>

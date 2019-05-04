@@ -315,7 +315,7 @@
     SELECT * FROM template WHERE `softtypeid`=#{softtypeid}
   </select>
   <select id="cp_queryall" resultMap="BaseResultMap">
-    SELECT * FROM `template` WHERE name2 = 0
+    SELECT * FROM `template` WHERE name2 =#{name2}
   </select>
   <select id="cp_querybyname1" resultMap="BaseResultMap">
 	SELECT * FROM `template` WHERE name1=#{name1} AND name2 = 0
@@ -338,4 +338,15 @@
 	FROM template a  JOIN  mysql.help_topic b  ON b.help_topic_id &lt; (LENGTH(a.`yquestionid`) - LENGTH(REPLACE(a.`yquestionid`,',',''))+1) WHERE a.id=#{id})
 	WHERE template.id=#{id}
  </select>
+ <select id="queryfabu" resultMap="BaseResultMap">
+    SELECT * FROM `template` WHERE `start` IS NULL 
+    	<if test="name2 != null">
+        and name2 = #{name2}
+      </if>
+
+  </select>
+  
+  <update id="updatetemplateid" parameterType="com.zhxy.domain.Template">
+  		UPDATE `template` SET `start`=NOW(),`end`=#{end},`name1`=#{name1} where Id=#{id}
+  </update>
 </mapper>
